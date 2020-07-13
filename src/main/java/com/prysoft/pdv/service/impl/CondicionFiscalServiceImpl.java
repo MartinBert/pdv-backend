@@ -1,10 +1,10 @@
 package com.prysoft.pdv.service.impl;
 
-import com.prysoft.pdv.dao.CondicionIvaDao;
-import com.prysoft.pdv.dto.CondicionIvaFilter;
+import com.prysoft.pdv.dao.CondicionFiscalDao;
+import com.prysoft.pdv.dto.CondicionFiscalFilter;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.models.CondicionIva;
-import com.prysoft.pdv.service.CondicionIvaService;
+import com.prysoft.pdv.models.CondicionFiscal;
+import com.prysoft.pdv.service.CondicionFiscalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,14 +18,14 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class CondicionIvaServiceImpl extends FilterService<CondicionIva> implements CondicionIvaService {
+public class CondicionFiscalServiceImpl extends FilterService<CondicionFiscal> implements CondicionFiscalService {
 
     @Autowired
-    private CondicionIvaDao dao;
+    private CondicionFiscalDao dao;
 
     @Override
-    public CondicionIva findById(Long id) {
-        Optional<CondicionIva> optional = dao.findById(id);
+    public CondicionFiscal findById(Long id) {
+        Optional<CondicionFiscal> optional = dao.findById(id);
         if(!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
@@ -34,12 +34,12 @@ public class CondicionIvaServiceImpl extends FilterService<CondicionIva> impleme
     }
 
     @Override
-    public Page<CondicionIva> findAll(Pageable page) {
+    public Page<CondicionFiscal> findAll(Pageable page) {
         return dao.findAll(page);
     }
 
     @Override
-    public CondicionIva saveOrUpdate(CondicionIva entity) {
+    public CondicionFiscal saveOrUpdate(CondicionFiscal entity) {
         return dao.save(entity);
     }
 
@@ -49,7 +49,7 @@ public class CondicionIvaServiceImpl extends FilterService<CondicionIva> impleme
     }
 
     @Override
-    public Page<CondicionIva> filter(CondicionIvaFilter filter) {
+    public Page<CondicionFiscal> filter(CondicionFiscalFilter filter) {
         StringBuilder hql = new StringBuilder();
         List<FilterParam> params = new ArrayList<>();
 
@@ -60,7 +60,5 @@ public class CondicionIvaServiceImpl extends FilterService<CondicionIva> impleme
 
         return getPage(hql.toString(), filter.getPage(), filter.getSize(), params);
     }
-
-
 }
 

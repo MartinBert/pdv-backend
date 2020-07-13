@@ -10,6 +10,8 @@ import java.util.ArrayList;
 public interface ProductoService {
     Producto findById(Long id);
 
+    Producto findByCodigoBarra(String codigoBarra);
+
     Page<Producto> findAll(Pageable page);
 
     Producto saveOrUpdate(Producto entity);

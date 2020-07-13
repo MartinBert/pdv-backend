@@ -1,14 +1,18 @@
 package com.prysoft.pdv.models;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToOne;
 import java.io.Serializable;
-import java.util.Set;
 
 @MappedSuperclass
 public class Persona implements Serializable {
 
     private int tipoPersona; //1-Fisica , 2-Juridica
-    private int condicionIva; //1-Responsable Inscripto, 2-Monotributista, 3-Particular
+
+    @OneToOne
+    private CondicionFiscal condicionIva; //1-Responsable Inscripto, 2-Monotributista, 3-Particular
+
     private String nombre;
     private String razonSocial;
     private String cuit;
@@ -24,12 +28,12 @@ public class Persona implements Serializable {
 
     }
 
-    public Persona(int tipoPersona, int condicionIva,
-                    String nombre, String razonSocial,
-                    String cuit, String direccion,
-                    String email, String telefono,
-                    String telefonoAlternativo, String nombreContacto,
-                    String pais, String estado, String region)
+    public Persona(int tipoPersona, CondicionFiscal condicionIva,
+                   String nombre, String razonSocial,
+                   String cuit, String direccion,
+                   String email, String telefono,
+                   String telefonoAlternativo, String nombreContacto,
+                   String pais, String estado, String region)
     {
         this.tipoPersona = tipoPersona;
         this.condicionIva = condicionIva;
@@ -56,11 +60,11 @@ public class Persona implements Serializable {
     }
 
     @Column(name="condicionIva", unique = true, nullable = false)
-    public int getCondicionIva() {
+    public CondicionFiscal getCondicionIva() {
         return this.condicionIva;
     }
 
-    public void setCondicionIva(int condicionIva) {
+    public void setCondicionIva(CondicionFiscal condicionIva) {
         this.condicionIva = condicionIva;
     }
 

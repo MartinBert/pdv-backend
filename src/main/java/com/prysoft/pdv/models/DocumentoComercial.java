@@ -1,6 +1,7 @@
 package com.prysoft.pdv.models;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "documentos_comerciales")
@@ -9,11 +10,9 @@ public class DocumentoComercial {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
-    private boolean tipo; //1 fiscal, 2 no-fiscal
+    private String codigoDocumento;
+    private boolean tipo;
     private boolean activo;
-    @ManyToOne
-    @JoinColumn(name = "idDocumento", nullable = false)
-    private DocumentoComercial documento;
 
     public Long getId() {
         return id;
@@ -29,6 +28,14 @@ public class DocumentoComercial {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getCodigoDocumento() {
+        return codigoDocumento;
+    }
+
+    public void setCodigoDocumento(String codigoDocumento) {
+        this.codigoDocumento = codigoDocumento;
     }
 
     public boolean isTipo() {
@@ -47,22 +54,14 @@ public class DocumentoComercial {
         this.activo = activo;
     }
 
-    public DocumentoComercial getDocumento() {
-        return documento;
-    }
-
-    public void setDocumento(DocumentoComercial documento) {
-        this.documento = documento;
-    }
-
     @Override
     public String toString() {
         return "DocumentoComercial{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
+                ", codigoDocumento='" + codigoDocumento + '\'' +
                 ", tipo=" + tipo +
                 ", activo=" + activo +
-                ", documento=" + documento +
                 '}';
     }
 }

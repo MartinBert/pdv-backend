@@ -30,6 +30,11 @@ public class ProductoController {
         return service.findById(id);
     }
 
+    @GetMapping(value = "/codb/{codigoBarra}")
+    Producto findByCodigoBarra(@PathVariable String codigoBarra) {
+        return service.findByCodigoBarra(codigoBarra);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     Producto save(@RequestBody Producto entity) { return service.saveOrUpdate(entity); }

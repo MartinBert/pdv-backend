@@ -21,26 +21,35 @@ public class Producto implements Serializable {
     private double costoNeto;
     private double ganancia;
     private double precioSinIva;
-    private double precioTotal;
     private int estado;
+    private double precioTotal;
+
+    @OneToMany(mappedBy = "ventap")
+    private Set<Venta> ventaInfo;
+
     @OneToOne
-    private Marca marca;
+    private com.prysoft.pdv.models.Marca marca;
+
     @OneToMany(mappedBy = "producto")
-    private Set<ProductoVariacion> variaciones;
+    private Set<com.prysoft.pdv.models.ProductoVariacion> variaciones;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "productos_distribuidores",
             joinColumns =  @JoinColumn(name = "id_producto"),
             inverseJoinColumns = @JoinColumn(name = "id_distribuidor"))
     private Set<Distribuidor> distribuidores;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "productos_depositos",
             joinColumns =  @JoinColumn(name = "id_producto"),
             inverseJoinColumns = @JoinColumn(name = "id_deposito"))
-    private Set<Deposito> depositos;
+    private Set<com.prysoft.pdv.models.Deposito> depositos;
+
     @OneToMany(mappedBy = "producto")
     private Set<Stock> stocks;
+
     @OneToOne
-    private Rubro rubro;
+    private com.prysoft.pdv.models.Rubro rubro;
 
     public Long getId() {
         return id;
@@ -138,6 +147,14 @@ public class Producto implements Serializable {
         this.precioSinIva = precioSinIva;
     }
 
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
     public double getPrecioTotal() {
         return precioTotal;
     }
@@ -146,12 +163,12 @@ public class Producto implements Serializable {
         this.precioTotal = precioTotal;
     }
 
-    public int getEstado() {
-        return estado;
+    public Set<Venta> getVentaInfo() {
+        return ventaInfo;
     }
 
-    public void setEstado(int estado) {
-        this.estado = estado;
+    public void setVentaInfo(Set<Venta> ventaInfo) {
+        this.ventaInfo = ventaInfo;
     }
 
     public Marca getMarca() {
@@ -178,6 +195,14 @@ public class Producto implements Serializable {
         this.distribuidores = distribuidores;
     }
 
+    public Set<Deposito> getDepositos() {
+        return depositos;
+    }
+
+    public void setDepositos(Set<Deposito> depositos) {
+        this.depositos = depositos;
+    }
+
     public Set<Stock> getStocks() {
         return stocks;
     }
@@ -194,11 +219,30 @@ public class Producto implements Serializable {
         this.rubro = rubro;
     }
 
-    public Set<Deposito> getDepositos() {
-        return depositos;
-    }
-
-    public void setDepositos(Set<Deposito> depositos) {
-        this.depositos = depositos;
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", codigoBarra='" + codigoBarra + '\'' +
+                ", codigoProducto='" + codigoProducto + '\'' +
+                ", precioCosto=" + precioCosto +
+                ", propiedad=" + propiedad +
+                ", ivaVenta=" + ivaVenta +
+                ", costoBruto=" + costoBruto +
+                ", ivaCompra=" + ivaCompra +
+                ", costoNeto=" + costoNeto +
+                ", ganancia=" + ganancia +
+                ", precioSinIva=" + precioSinIva +
+                ", estado=" + estado +
+                ", precioTotal=" + precioTotal +
+                ", ventaInfo=" + ventaInfo +
+                ", marca=" + marca +
+                ", variaciones=" + variaciones +
+                ", distribuidores=" + distribuidores +
+                ", depositos=" + depositos +
+                ", stocks=" + stocks +
+                ", rubro=" + rubro +
+                '}';
     }
 }

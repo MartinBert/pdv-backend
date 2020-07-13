@@ -1,8 +1,8 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.CondicionIvaFilter;
-import com.prysoft.pdv.models.CondicionIva;
-import com.prysoft.pdv.service.CondicionIvaService;
+import com.prysoft.pdv.dto.CondicionFiscalFilter;
+import com.prysoft.pdv.models.CondicionFiscal;
+import com.prysoft.pdv.service.CondicionFiscalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,29 +10,29 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/{tenantid}/api/condiciones-iva")
-public class CondicionIvaController {
+@RequestMapping(value = "/{tenantid}/api/condicionesFiscales")
+public class CondicionFiscalController {
     @Autowired
-    private CondicionIvaService service;
+    private CondicionFiscalService service;
 
     @GetMapping
-    Page<CondicionIva> findAll(Pageable page) {
+    Page<CondicionFiscal> findAll(Pageable page) {
         return service.findAll(page);
     }
 
     @GetMapping(value = "/{id}")
-    CondicionIva findById(@PathVariable long id) {
+    CondicionFiscal findById(@PathVariable long id) {
         return service.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    CondicionIva save(@RequestBody CondicionIva entity) {
+    CondicionFiscal save(@RequestBody CondicionFiscal entity) {
         return service.saveOrUpdate(entity);
     }
 
     @PutMapping
-    CondicionIva update(@RequestBody CondicionIva entity) {
+    CondicionFiscal update(@RequestBody CondicionFiscal entity) {
         return service.saveOrUpdate(entity);
     }
 
@@ -43,7 +43,7 @@ public class CondicionIvaController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<CondicionIva> filter(@RequestBody CondicionIvaFilter filter) {
+    public Page<CondicionFiscal> filter(@RequestBody CondicionFiscalFilter filter) {
         return service.filter(filter);
     }
 }
