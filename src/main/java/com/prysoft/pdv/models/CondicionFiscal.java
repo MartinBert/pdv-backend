@@ -10,7 +10,6 @@ public class CondicionFiscal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
-    private String tipoDocumento;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "condiciones_documentos",
@@ -34,14 +33,6 @@ public class CondicionFiscal {
         this.nombre = nombre;
     }
 
-    public String getTipoDocumento() {
-        return tipoDocumento;
-    }
-
-    public void setTipoDocumento(String tipoDocumento) {
-        this.tipoDocumento = tipoDocumento;
-    }
-
     public Set<DocumentoComercial> getDocumentos() {
         return documentos;
     }
@@ -55,7 +46,6 @@ public class CondicionFiscal {
         return "CondicionFiscal{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
-                ", tipoDocumento='" + tipoDocumento + '\'' +
                 ", documentos=" + documentos +
                 '}';
     }

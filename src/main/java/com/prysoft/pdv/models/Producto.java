@@ -24,9 +24,6 @@ public class Producto implements Serializable {
     private int estado;
     private double precioTotal;
 
-    @OneToMany(mappedBy = "ventap")
-    private Set<Venta> ventaInfo;
-
     @OneToOne
     private com.prysoft.pdv.models.Marca marca;
 
@@ -163,14 +160,6 @@ public class Producto implements Serializable {
         this.precioTotal = precioTotal;
     }
 
-    public Set<Venta> getVentaInfo() {
-        return ventaInfo;
-    }
-
-    public void setVentaInfo(Set<Venta> ventaInfo) {
-        this.ventaInfo = ventaInfo;
-    }
-
     public Marca getMarca() {
         return marca;
     }
@@ -236,7 +225,6 @@ public class Producto implements Serializable {
                 ", precioSinIva=" + precioSinIva +
                 ", estado=" + estado +
                 ", precioTotal=" + precioTotal +
-                ", ventaInfo=" + ventaInfo +
                 ", marca=" + marca +
                 ", variaciones=" + variaciones +
                 ", distribuidores=" + distribuidores +

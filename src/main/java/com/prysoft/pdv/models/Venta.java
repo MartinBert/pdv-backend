@@ -2,6 +2,7 @@ package com.prysoft.pdv.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name="ventas")
@@ -10,9 +11,11 @@ public class Venta implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name="producto_id", nullable=false)
-    private Producto ventap;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "ventas_productos",
+            joinColumns =  @JoinColumn(name = "id_venta"),
+            inverseJoinColumns = @JoinColumn(name = "id_producto"))
+    private Set<Producto> productos;
 
     @OneToOne
     private Cliente cliente;
@@ -22,6 +25,9 @@ public class Venta implements Serializable {
     @OneToOne
     private DocumentoComercial documento;
 
+    @OneToMany(mappedBy = "venta")
+    private Set<MedioPago> mediosPago;
+
     public Long getId() {
         return id;
     }
@@ -30,12 +36,12 @@ public class Venta implements Serializable {
         this.id = id;
     }
 
-    public Producto getVentap() {
-        return ventap;
+    public Set<Producto> getProductos() {
+        return productos;
     }
 
-    public void setVentap(Producto ventap) {
-        this.ventap = ventap;
+    public void setProductos(Set<Producto> productos) {
+        this.productos = productos;
     }
 
     public Cliente getCliente() {
@@ -62,14 +68,23 @@ public class Venta implements Serializable {
         this.documento = documento;
     }
 
+    public Set<MedioPago> getMediosPago() {
+        return mediosPago;
+    }
+
+    public void setMediosPago(Set<MedioPago> mediosPago) {
+        this.mediosPago = mediosPago;
+    }
+
     @Override
     public String toString() {
         return "Venta{" +
                 "id=" + id +
-                ", ventap=" + ventap +
+                ", productos=" + productos +
                 ", cliente=" + cliente +
                 ", cantidadUnidades=" + cantidadUnidades +
                 ", documento=" + documento +
+                ", mediosPago=" + mediosPago +
                 '}';
     }
 }
