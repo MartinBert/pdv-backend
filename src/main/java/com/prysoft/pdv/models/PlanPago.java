@@ -8,7 +8,8 @@ public class PlanPago {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String cuota;
+    private String nombre;
+    private int cuotas;
     private double porcentaje;
 
     public Long getId() {
@@ -19,12 +20,20 @@ public class PlanPago {
         this.id = id;
     }
 
-    public String getCuota() {
-        return cuota;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setCuota(String cuota) {
-        this.cuota = cuota;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getCuotas() {
+        return cuotas;
+    }
+
+    public void setCuotas(int cuotas) {
+        this.cuotas = cuotas;
     }
 
     public double getPorcentaje() {
@@ -39,7 +48,8 @@ public class PlanPago {
     public String toString() {
         return "PlanPago{" +
                 "id=" + id +
-                ", cuota='" + cuota + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", cuotas='" + cuotas + '\'' +
                 ", porcentaje=" + porcentaje +
                 '}';
     }
