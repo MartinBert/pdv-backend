@@ -2,10 +2,8 @@ package com.prysoft.pdv.controller;
 
 
 import com.prysoft.pdv.dto.ProductoFilter;
-import com.prysoft.pdv.models.Distribuidor;
-import com.prysoft.pdv.models.Producto;
+import com.prysoft.pdv.models.*;
 import com.prysoft.pdv.service.ProductoService;
-import com.prysoft.pdv.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/{tenantid}/api/productos")
@@ -37,7 +36,8 @@ public class ProductoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    Producto save(@RequestBody Producto entity) { return service.saveOrUpdate(entity); }
+    Producto save(@RequestBody Producto entity) { Producto obj = service.saveOrUpdate(entity);
+        return obj;}
 
     @PostMapping(value = "/filter")
     public Page<Producto> filter(@RequestBody ProductoFilter filter) {

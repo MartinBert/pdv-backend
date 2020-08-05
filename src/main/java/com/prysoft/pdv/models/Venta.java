@@ -28,6 +28,9 @@ public class Venta implements Serializable {
     @OneToMany(mappedBy = "venta")
     private Set<MedioPago> mediosPago;
 
+    @OneToOne
+    private PlanPago planPago;
+
     public Long getId() {
         return id;
     }
@@ -76,6 +79,14 @@ public class Venta implements Serializable {
         this.mediosPago = mediosPago;
     }
 
+    public PlanPago getPlanPago() {
+        return planPago;
+    }
+
+    public void setPlanPago(PlanPago planPago) {
+        this.planPago = planPago;
+    }
+
     @Override
     public String toString() {
         return "Venta{" +
@@ -85,6 +96,7 @@ public class Venta implements Serializable {
                 ", cantidadUnidades=" + cantidadUnidades +
                 ", documento=" + documento +
                 ", mediosPago=" + mediosPago +
+                ", planPago=" + planPago +
                 '}';
     }
 }
