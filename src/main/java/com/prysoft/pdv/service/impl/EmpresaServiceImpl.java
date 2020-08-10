@@ -1,11 +1,12 @@
 package com.prysoft.pdv.service.impl;
 
-import com.prysoft.pdv.dao.DocumentoComercialDao;
-import com.prysoft.pdv.dto.DocumentoComercialFilter;
+import com.prysoft.pdv.dao.CondicionFiscalDao;
+import com.prysoft.pdv.dao.EmpresaDao;
+import com.prysoft.pdv.dto.EmpresaFilter;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.models.DocumentoComercial;
-import com.prysoft.pdv.models.Producto;
-import com.prysoft.pdv.service.DocumentoComercialService;
+import com.prysoft.pdv.models.CondicionFiscal;
+import com.prysoft.pdv.models.Empresa;
+import com.prysoft.pdv.service.EmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,19 +15,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @Transactional
-public class DocumentoComercialServiceImpl extends FilterService<DocumentoComercial> implements DocumentoComercialService {
+public class EmpresaServiceImpl extends FilterService<Empresa> implements EmpresaService {
 
     @Autowired
-    private DocumentoComercialDao dao;
+    private EmpresaDao dao;
+
+    @Autowired
+    private CondicionFiscalDao daoc;
 
     @Override
-    public DocumentoComercial findById(Long id) {
-        Optional<DocumentoComercial> optional = dao.findById(id);
+    public Empresa findById(Long id) {
+        Optional<Empresa> optional = dao.findById(id);
         if(!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
@@ -35,12 +40,21 @@ public class DocumentoComercialServiceImpl extends FilterService<DocumentoComerc
     }
 
     @Override
-    public Page<DocumentoComercial> findAll(Pageable page) {
-        return dao.findAll(page);
-    }
+    public Page<Empresa> findAll(Pageable page) { return dao.findAll(page); }
 
     @Override
-    public DocumentoComercial saveOrUpdate(DocumentoComercial entity) {
+    public List<Object> findAllCondition() {
+        List<Object> condiciones = new LinkedList<>();
+        Iterable<CondicionFiscal> lista = daoc.findAll();
+        for (CondicionFiscal o:lista){
+            if (o.getId() != 3){
+                condiciones.add(o);
+            }
+        }
+        return condiciones;}
+
+    @Override
+    public Empresa saveOrUpdate(Empresa entity) {
         return dao.save(entity);
     }
 
@@ -50,7 +64,7 @@ public class DocumentoComercialServiceImpl extends FilterService<DocumentoComerc
     }
 
     @Override
-    public Page<DocumentoComercial> filter(DocumentoComercialFilter filter) {
+    public Page<Empresa> filter(EmpresaFilter filter) {
         StringBuilder hql = new StringBuilder();
         List<FilterParam> params = new ArrayList<>();
 
@@ -62,12 +76,6 @@ public class DocumentoComercialServiceImpl extends FilterService<DocumentoComerc
         return getPage(hql.toString(), filter.getPage(), filter.getSize(), params);
     }
 
-    @Override
-    public Iterable<DocumentoComercial> saveAll(ArrayList<DocumentoComercial> entities) {
-        return dao.saveAll(entities);
-    }
-
 
 }
-
 

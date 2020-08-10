@@ -1,7 +1,6 @@
 package com.prysoft.pdv.models;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "documentos_comerciales")

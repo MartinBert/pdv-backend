@@ -2,12 +2,15 @@ package com.prysoft.pdv.controller;
 
 import com.prysoft.pdv.dto.DocumentoComercialFilter;
 import com.prysoft.pdv.models.DocumentoComercial;
+import com.prysoft.pdv.models.Producto;
 import com.prysoft.pdv.service.DocumentoComercialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping(value = "/{tenantid}/api/documentosComerciales")
@@ -45,6 +48,11 @@ public class DocumentoComercialController {
     @PostMapping(value = "/filter")
     public Page<DocumentoComercial> filter(@RequestBody DocumentoComercialFilter filter) {
         return service.filter(filter);
+    }
+
+    @PostMapping(value = "/saveAll")
+    Iterable<DocumentoComercial> saveAll(@RequestBody ArrayList<DocumentoComercial> entities) {
+        return  service.saveAll(entities);
     }
 }
 
