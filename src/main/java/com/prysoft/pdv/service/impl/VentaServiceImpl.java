@@ -1,6 +1,6 @@
 package com.prysoft.pdv.service.impl;
 
-import com.prysoft.pdv.dao.ClienteDao;
+import com.prysoft.pdv.controller.VentaController;
 import com.prysoft.pdv.dao.VentaDao;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.VentaFilter;
@@ -20,6 +20,8 @@ import java.util.Optional;
 @Service
 @Transactional
 public class VentaServiceImpl extends FilterService<Venta> implements VentaService {
+
+    private List<Integer> lista;
 
     @Autowired
     private VentaDao dao;
