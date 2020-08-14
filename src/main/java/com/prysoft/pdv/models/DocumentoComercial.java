@@ -1,16 +1,18 @@
 package com.prysoft.pdv.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "documentos_comerciales")
-public class DocumentoComercial {
+public class DocumentoComercial implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
     private String codigoDocumento;
     private boolean tipo;
+    private int ivaCat;
     private boolean activo;
 
     public Long getId() {
@@ -45,6 +47,14 @@ public class DocumentoComercial {
         this.tipo = tipo;
     }
 
+    public int getIvaCat() {
+        return ivaCat;
+    }
+
+    public void setIvaCat(int ivaCat) {
+        this.ivaCat = ivaCat;
+    }
+
     public boolean isActivo() {
         return activo;
     }
@@ -60,6 +70,7 @@ public class DocumentoComercial {
                 ", nombre='" + nombre + '\'' +
                 ", codigoDocumento='" + codigoDocumento + '\'' +
                 ", tipo=" + tipo +
+                ", ivaCat=" + ivaCat +
                 ", activo=" + activo +
                 '}';
     }

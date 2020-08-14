@@ -13,9 +13,11 @@ public class Stock implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
     @JsonBackReference
     private Producto producto;
+
     @ManyToOne
     private Deposito deposito;
     private double cantidad;
