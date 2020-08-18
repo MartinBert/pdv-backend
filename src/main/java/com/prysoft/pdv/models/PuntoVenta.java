@@ -16,8 +16,8 @@ public class PuntoVenta implements Serializable {
 
     @ManyToOne
     @JsonBackReference
-    @JoinColumn(name="empresa_id", nullable=false)
-    private Empresa empresa;
+    @JoinColumn(name="sucursal_id", nullable=false)
+    private Sucursal sucursal;
 
     public Long getId() {
         return id;
@@ -43,12 +43,12 @@ public class PuntoVenta implements Serializable {
         this.nombre = nombre;
     }
 
-    public Empresa getEmpresa() {
-        return empresa;
+    public Sucursal getSucursal() {
+        return sucursal;
     }
 
-    public void setEmpresa(Empresa empresa) {
-        this.empresa = empresa;
+    public void setSucursal(Sucursal sucursal) {
+        this.sucursal = sucursal;
     }
 
     @Override
@@ -57,7 +57,7 @@ public class PuntoVenta implements Serializable {
                 "id=" + id +
                 ", idFiscal=" + idFiscal +
                 ", nombre='" + nombre + '\'' +
-                ", empresa=" + empresa +
+                ", sucursal=" + sucursal +
                 '}';
     }
 }

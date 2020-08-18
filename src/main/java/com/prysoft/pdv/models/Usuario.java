@@ -1,7 +1,6 @@
 package com.prysoft.pdv.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -19,8 +18,21 @@ public class Usuario  implements UserDetails, Serializable {
     private String nombre;
     private String username;
     private String password;
+
     @OneToOne
     private Perfil perfil;
+
+    @OneToOne
+    @JoinColumn(name = "empresa_id")
+    private Empresa empresa;
+
+    @OneToOne
+    @JoinColumn(name = "sucursal_id")
+    private Sucursal sucursal;
+
+    @OneToOne
+    @JoinColumn(name = "punto_venta_id")
+    private PuntoVenta puntoVenta;
 
     public Long getId() {
         return id;
@@ -30,10 +42,15 @@ public class Usuario  implements UserDetails, Serializable {
         this.id = id;
     }
 
-    public String getNombre() { return nombre; }
+    public String getNombre() {
+        return nombre;
+    }
 
-    public void setNombre(String nombre) { this.nombre = nombre; }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
+    @Override
     public String getUsername() {
         return username;
     }
@@ -42,6 +59,7 @@ public class Usuario  implements UserDetails, Serializable {
         this.username = username;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
@@ -50,9 +68,51 @@ public class Usuario  implements UserDetails, Serializable {
         this.password = password;
     }
 
-    public Perfil getPerfil() { return perfil; }
+    public Perfil getPerfil() {
+        return perfil;
+    }
 
-    public void setPerfil(Perfil perfil) { this.perfil = perfil; }
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public Sucursal getSucursal() {
+        return sucursal;
+    }
+
+    public void setSucursal(Sucursal sucursal) {
+        this.sucursal = sucursal;
+    }
+
+    public PuntoVenta getPuntoVenta() {
+        return puntoVenta;
+    }
+
+    public void setPuntoVenta(PuntoVenta puntoVenta) {
+        this.puntoVenta = puntoVenta;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", perfil=" + perfil +
+                ", empresa=" + empresa +
+                ", sucursal=" + sucursal +
+                ", puntoVenta=" + puntoVenta +
+                '}';
+    }
 
     @JsonIgnore
     @Override

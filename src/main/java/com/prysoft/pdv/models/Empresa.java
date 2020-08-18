@@ -6,13 +6,20 @@ import java.util.Set;
 
 @Entity
 @Table(name = "empresas")
-public class Empresa extends Persona implements Serializable {
+public class Empresa implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToOne
+    private CondicionFiscal condicionIva; //1-Responsable Inscripto, 2-Monotributista
+
     @OneToMany(mappedBy = "empresa")
-    private Set<PuntoVenta> puntosVenta;
+    private Set<Sucursal> sucursales;
+
+    private String alias;
+    private String razonSocial;
+    private String cuit;
 
     public Long getId() {
         return id;
@@ -22,19 +29,55 @@ public class Empresa extends Persona implements Serializable {
         this.id = id;
     }
 
-    public Set<PuntoVenta> getPuntosVenta() {
-        return puntosVenta;
+    public CondicionFiscal getCondicionIva() {
+        return condicionIva;
     }
 
-    public void setPuntosVenta(Set<PuntoVenta> puntosVenta) {
-        this.puntosVenta = puntosVenta;
+    public void setCondicionIva(CondicionFiscal condicionIva) {
+        this.condicionIva = condicionIva;
+    }
+
+    public Set<Sucursal> getSucursales() {
+        return sucursales;
+    }
+
+    public void setSucursales(Set<Sucursal> sucursales) {
+        this.sucursales = sucursales;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
+    public String getRazonSocial() {
+        return razonSocial;
+    }
+
+    public void setRazonSocial(String razonSocial) {
+        this.razonSocial = razonSocial;
+    }
+
+    public String getCuit() {
+        return cuit;
+    }
+
+    public void setCuit(String cuit) {
+        this.cuit = cuit;
     }
 
     @Override
     public String toString() {
         return "Empresa{" +
                 "id=" + id +
-                ", puntosVenta=" + puntosVenta +
+                ", condicionIva=" + condicionIva +
+                ", sucursales=" + sucursales +
+                ", alias='" + alias + '\'' +
+                ", razonSocial='" + razonSocial + '\'' +
+                ", cuit='" + cuit + '\'' +
                 '}';
     }
 }
