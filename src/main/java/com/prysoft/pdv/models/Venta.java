@@ -31,6 +31,8 @@ public class Venta implements Serializable {
     @OneToOne
     private PlanPago planPago;
 
+    @OneToOne Empresa empresa;
+
     public Long getId() {
         return id;
     }
@@ -87,6 +89,14 @@ public class Venta implements Serializable {
         this.planPago = planPago;
     }
 
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
     @Override
     public String toString() {
         return "Venta{" +
@@ -97,6 +107,7 @@ public class Venta implements Serializable {
                 ", documento=" + documento +
                 ", mediosPago=" + mediosPago +
                 ", planPago=" + planPago +
+                ", empresa=" + empresa +
                 '}';
     }
 }
