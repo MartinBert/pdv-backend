@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Set;
 
 @RestController
@@ -45,9 +46,7 @@ public class ProductoController {
     }
 
     @PostMapping(value = "/saveAll")
-    Iterable<Producto> saveAll(@RequestBody ArrayList<Producto> entities) {
-        return  service.saveAll(entities);
-    }
+    Iterable<Producto> saveAll(@RequestBody ArrayList<Producto> entities) { return service.saveAll(entities); }
 
     @PutMapping
     Producto update(@RequestBody Producto entity) {
