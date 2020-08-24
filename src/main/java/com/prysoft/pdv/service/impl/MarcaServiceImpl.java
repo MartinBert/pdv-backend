@@ -4,6 +4,7 @@ import com.prysoft.pdv.dao.MarcaDao;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.MarcaFilter;
 import com.prysoft.pdv.models.Marca;
+import com.prysoft.pdv.models.Producto;
 import com.prysoft.pdv.service.MarcaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -40,6 +41,11 @@ public class MarcaServiceImpl extends FilterService<Marca> implements MarcaServi
     @Override
     public Marca saveOrUpdate(Marca entity) {
         return dao.save(entity);
+    }
+
+    @Override
+    public Iterable<Marca> saveAll(ArrayList<Marca> entities) {
+        return dao.saveAll(entities);
     }
 
     @Override

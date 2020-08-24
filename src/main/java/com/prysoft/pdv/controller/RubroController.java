@@ -1,6 +1,7 @@
 package com.prysoft.pdv.controller;
 
 import com.prysoft.pdv.dto.RubroFilter;
+import com.prysoft.pdv.models.Marca;
 import com.prysoft.pdv.models.Rubro;
 import com.prysoft.pdv.service.RubroService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping(value = "/{tenantid}/api/rubros")
@@ -30,6 +33,9 @@ public class RubroController {
     Rubro save(@RequestBody Rubro entity) {
         return service.saveOrUpdate(entity);
     }
+
+    @PostMapping(value = "/saveAll")
+    Iterable<Rubro> saveAll(@RequestBody ArrayList<Rubro> entities) { return service.saveAll(entities); }
 
     @PutMapping
     Rubro update(@RequestBody Rubro entity) {

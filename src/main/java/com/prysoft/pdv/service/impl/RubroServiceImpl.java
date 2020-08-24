@@ -3,7 +3,6 @@ package com.prysoft.pdv.service.impl;
 import com.prysoft.pdv.dao.RubroDao;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.RubroFilter;
-import com.prysoft.pdv.models.Perfil;
 import com.prysoft.pdv.models.Rubro;
 import com.prysoft.pdv.service.RubroService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +40,11 @@ public class RubroServiceImpl extends FilterService<Rubro> implements RubroServi
     @Override
     public Rubro saveOrUpdate(Rubro entity) {
         return dao.save(entity);
+    }
+
+    @Override
+    public Iterable<Rubro> saveAll(ArrayList<Rubro> entities) {
+        return dao.saveAll(entities);
     }
 
     @Override

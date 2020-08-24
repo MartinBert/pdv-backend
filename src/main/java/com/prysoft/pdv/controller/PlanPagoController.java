@@ -1,6 +1,7 @@
 package com.prysoft.pdv.controller;
 
 import com.prysoft.pdv.dto.PlanPagoFilter;
+import com.prysoft.pdv.models.Marca;
 import com.prysoft.pdv.models.PlanPago;
 import com.prysoft.pdv.service.PlanPagoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping(value = "/{tenantid}/api/planesPago")
@@ -30,6 +33,9 @@ public class PlanPagoController {
     PlanPago save(@RequestBody PlanPago entity) {
         return service.saveOrUpdate(entity);
     }
+
+    @PostMapping(value = "/saveAll")
+    Iterable<PlanPago> saveAll(@RequestBody ArrayList<PlanPago> entities) { return service.saveAll(entities); }
 
     @PutMapping
     PlanPago update(@RequestBody PlanPago entity) {

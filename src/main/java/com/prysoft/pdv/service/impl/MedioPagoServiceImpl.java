@@ -43,6 +43,11 @@ public class MedioPagoServiceImpl extends FilterService<MedioPago> implements Me
     }
 
     @Override
+    public Iterable<MedioPago> saveAll(ArrayList<MedioPago> entities) {
+        return dao.saveAll(entities);
+    }
+
+    @Override
     public void delete(Long id) {
         dao.deleteById(id);
     }

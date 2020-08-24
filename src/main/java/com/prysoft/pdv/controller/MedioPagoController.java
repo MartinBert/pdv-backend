@@ -2,12 +2,15 @@ package com.prysoft.pdv.controller;
 
 import com.prysoft.pdv.dto.MedioPagoFilter;
 import com.prysoft.pdv.models.MedioPago;
+import com.prysoft.pdv.models.Producto;
 import com.prysoft.pdv.service.MedioPagoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping(value = "/{tenantid}/api/mediosPago")
@@ -30,6 +33,9 @@ public class MedioPagoController {
     MedioPago save(@RequestBody MedioPago entity) {
         return service.saveOrUpdate(entity);
     }
+
+    @PostMapping(value = "/saveAll")
+    Iterable<MedioPago> saveAll(@RequestBody ArrayList<MedioPago> entities) { return service.saveAll(entities); }
 
     @PutMapping
     MedioPago update(@RequestBody MedioPago entity) {

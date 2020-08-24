@@ -3,6 +3,7 @@ package com.prysoft.pdv.service.impl;
 import com.prysoft.pdv.dao.PlanPagoDao;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.PlanPagoFilter;
+import com.prysoft.pdv.models.Marca;
 import com.prysoft.pdv.models.PlanPago;
 import com.prysoft.pdv.service.PlanPagoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,11 @@ public class PlanPagoServiceImpl extends FilterService<PlanPago> implements Plan
     @Override
     public PlanPago saveOrUpdate(PlanPago entity) {
         return dao.save(entity);
+    }
+
+    @Override
+    public Iterable<PlanPago> saveAll(ArrayList<PlanPago> entities) {
+        return dao.saveAll(entities);
     }
 
     @Override
