@@ -1,15 +1,15 @@
 package com.prysoft.pdv.controller;
 
 import com.prysoft.pdv.dto.DepositoFilter;
-import com.prysoft.pdv.dto.DistribuidorFilter;
 import com.prysoft.pdv.models.Deposito;
-import com.prysoft.pdv.models.Distribuidor;
 import com.prysoft.pdv.service.DepositoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping(value = "/{tenantid}/api/depositos")
@@ -32,6 +32,9 @@ public class DepositoController {
     Deposito save(@RequestBody Deposito entity) {
         return service.saveOrUpdate(entity);
     }
+
+    @PostMapping(value = "/saveAll")
+    Iterable<Deposito> saveAll(@RequestBody ArrayList<Deposito> entities) { return service.saveAll(entities); }
 
     @PutMapping
     Deposito update(@RequestBody Deposito entity) {

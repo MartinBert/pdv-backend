@@ -4,7 +4,6 @@ import com.prysoft.pdv.dao.MarcaDao;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.MarcaFilter;
 import com.prysoft.pdv.models.Marca;
-import com.prysoft.pdv.models.Producto;
 import com.prysoft.pdv.service.MarcaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

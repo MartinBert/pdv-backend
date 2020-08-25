@@ -43,6 +43,11 @@ public class DepositoServiceImpl extends FilterService<Deposito> implements Depo
     }
 
     @Override
+    public Iterable<Deposito> saveAll(ArrayList<Deposito> entities) {
+        return dao.saveAll(entities);
+    }
+
+    @Override
     public void delete(Long id) {
         dao.deleteById(id);
     }
