@@ -2,6 +2,7 @@ package com.prysoft.pdv.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -10,6 +11,8 @@ public class Empresa implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Date fechaInicioAct;
+    private int ingBruto;
 
     @OneToOne
     private CondicionFiscal condicionIva; //1-Responsable Inscripto, 2-Monotributista
@@ -27,6 +30,22 @@ public class Empresa implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Date getFechaInicioAct() {
+        return fechaInicioAct;
+    }
+
+    public void setFechaInicioAct(Date fechaInicioAct) {
+        this.fechaInicioAct = fechaInicioAct;
+    }
+
+    public int getIngBruto() {
+        return ingBruto;
+    }
+
+    public void setIngBruto(int ingBruto) {
+        this.ingBruto = ingBruto;
     }
 
     public CondicionFiscal getCondicionIva() {
@@ -73,6 +92,8 @@ public class Empresa implements Serializable {
     public String toString() {
         return "Empresa{" +
                 "id=" + id +
+                ", fechaInicioAct=" + fechaInicioAct +
+                ", ingBruto=" + ingBruto +
                 ", condicionIva=" + condicionIva +
                 ", sucursales=" + sucursales +
                 ", alias='" + alias + '\'' +

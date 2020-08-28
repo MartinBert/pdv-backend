@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -20,6 +21,10 @@ public class Sucursal implements Serializable {
     private String nombreContacto;
     private String provincia;
     private String ciudad;
+    private Date fechaInicioAct;
+    private int ingBruto;
+    private String razonSocial;
+    private String cuit;
 
     @OneToMany(mappedBy = "sucursal")
     private Set<PuntoVenta> puntosVenta;
@@ -101,6 +106,38 @@ public class Sucursal implements Serializable {
         this.ciudad = ciudad;
     }
 
+    public Date getFechaInicioAct() {
+        return fechaInicioAct;
+    }
+
+    public void setFechaInicioAct(Date fechaInicioAct) {
+        this.fechaInicioAct = fechaInicioAct;
+    }
+
+    public int getIngBruto() {
+        return ingBruto;
+    }
+
+    public void setIngBruto(int ingBruto) {
+        this.ingBruto = ingBruto;
+    }
+
+    public String getRazonSocial() {
+        return razonSocial;
+    }
+
+    public void getRazonSocial(String razonSocial) {
+        this.razonSocial = razonSocial;
+    }
+
+    public String getCuit() {
+        return cuit;
+    }
+
+    public void setCuit(String cuit) {
+        this.cuit = cuit;
+    }
+
     public Set<PuntoVenta> getPuntosVenta() {
         return puntosVenta;
     }
@@ -129,6 +166,10 @@ public class Sucursal implements Serializable {
                 ", nombreContacto='" + nombreContacto + '\'' +
                 ", provincia='" + provincia + '\'' +
                 ", ciudad='" + ciudad + '\'' +
+                ", fechaInicioAct=" + fechaInicioAct +
+                ", ingBruto=" + ingBruto +
+                ", razonSocial='" + razonSocial + '\'' +
+                ", cuit='" + cuit + '\'' +
                 ", puntosVenta=" + puntosVenta +
                 ", empresa=" + empresa +
                 '}';
