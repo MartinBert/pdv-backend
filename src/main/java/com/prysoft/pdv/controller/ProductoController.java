@@ -12,7 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 @RestController
@@ -52,10 +52,11 @@ public class ProductoController {
     @PostMapping(value = "/saveAll")
     Iterable<Producto> saveAll(@RequestBody ArrayList<Producto> entities) { return service.saveAll(entities); }
 
-    @GetMapping(value = "/report/{format}")
-    public String generateReport(@PathVariable String format) throws FileNotFoundException, JRException {
-        return reportService.exportReport(format);
+    @GetMapping(value = "/report/{format}/{type}/{tenant}")
+    public String generateReport(@PathVariable String format, @PathVariable String type, @PathVariable String tenant) throws IOException, JRException {
+        return reportService.exportReport(format,type,tenant);
     }
+
     @PutMapping
     Producto update(@RequestBody Producto entity) {
         return service.saveOrUpdate(entity);

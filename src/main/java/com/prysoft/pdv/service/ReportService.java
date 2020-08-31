@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,21 +19,29 @@ public class ReportService {
     @Autowired
     private ProductoDao dao;
 
-    public String exportReport(String reportFormat) throws FileNotFoundException, JRException {
+    private String path = "C:\\Users\\Martin Bertello\\Desktop\\REPORTES\\";
+
+    public String exportReport(String reportFormat, String type,String tenant) throws IOException, JRException {
         List<Producto> productos = (List<Producto>) dao.findAll();
 
-        File file = ResourceUtils.getFile("classpath:Cherry.jrxml");
+        File file = ResourceUtils.getFile("classpath:"+type);
         JasperReport jasperReport= JasperCompileManager.compileReport(file.getAbsolutePath());
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(productos);
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("createdBy", "Java Techie");
         JasperPrint jasperPrint= JasperFillManager.fillReport(jasperReport, parameters, dataSource);
         if(reportFormat.equalsIgnoreCase("html")){
-            JasperExportManager.exportReportToHtmlFile(jasperPrint, "C:\\Users\\Martin Bertello\\Desktop\\REPORTES\\product.html");
+            JasperExportManager.exportReportToHtmlFile(jasperPrint, path+"product.html");
         }
         if(reportFormat.equalsIgnoreCase("pdf")){
-            JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\Martin Bertello\\Desktop\\REPORTES\\product.pdf");
+            File carpeta = new File(path);
+            File[] list = carpeta.listFiles();
+            if(list.length == 0){
+                JasperExportManager.exportReportToPdfFile(jasperPrint, path+"ListaProductos.pdf");
+            }else{
+                JasperExportManager.exportReportToPdfFile(jasperPrint, path+"ListaProductos"+list.length+".pdf");
+            }
         }
-        return "Report generated in C://Users";
+        return "Report generated in C:/Users/Martin Bertello/Desktop/REPORTES";
     }
 }

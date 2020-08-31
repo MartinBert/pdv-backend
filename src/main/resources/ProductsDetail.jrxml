@@ -76,7 +76,7 @@
 		</groupHeader>
 	</group>
 	<group name="codigoProducto">
-		<groupExpression><![CDATA[$F{codigoProducto}]]></groupExpression>
+		<groupExpression>$F{codigoProducto}</groupExpression>
 	</group>
 	<group name="costoBruto">
 		<groupExpression><![CDATA[$F{costoBruto}]]></groupExpression>
