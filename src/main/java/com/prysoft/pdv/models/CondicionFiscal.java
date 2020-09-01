@@ -1,11 +1,12 @@
 package com.prysoft.pdv.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table(name = "condiciones_fiscales")
-public class CondicionFiscal {
+public class CondicionFiscal implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

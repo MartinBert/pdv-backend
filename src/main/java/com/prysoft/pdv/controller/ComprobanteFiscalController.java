@@ -3,6 +3,7 @@ package com.prysoft.pdv.controller;
 import com.prysoft.pdv.dto.ComprobanteFiscalFilter;
 import com.prysoft.pdv.models.ComprobanteFiscal;
 import com.prysoft.pdv.service.ComprobanteFiscalService;
+import com.prysoft.pdv.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.*;
 public class ComprobanteFiscalController {
     @Autowired
     private ComprobanteFiscalService service;
+
+    @Autowired
+    private ReportService reportService;
 
     @GetMapping
     Page<ComprobanteFiscal> findAll(Pageable page) {
@@ -28,6 +32,8 @@ public class ComprobanteFiscalController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     ComprobanteFiscal save(@RequestBody ComprobanteFiscal entity) {
+        Long id = entity.getId();
+        reportService.exportRecipes(id);
         return service.saveOrUpdate(entity);
     }
 

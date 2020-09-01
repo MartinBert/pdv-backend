@@ -4,4 +4,5 @@ import com.prysoft.pdv.models.ComprobanteFiscal;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface ComprobanteFiscalDao extends PagingAndSortingRepository<ComprobanteFiscal, Long> {
+    ComprobanteFiscal findById(ComprobanteFiscal entity);
 }

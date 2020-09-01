@@ -3,7 +3,6 @@ package com.prysoft.pdv.models;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 
 @Entity
 @Table(name = "comprobantes_fiscales")
@@ -12,13 +11,13 @@ public class ComprobanteFiscal implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String letra;
-    private int numeroCbte;
-    private Date fechaEmision;
-    private Date fechaVto;
+    private String numeroCbte;
+    private String fechaEmision;
+    private String fechaVto;
     private Boolean condicionVenta;
     private ArrayList<Producto> productos;
-    private int barCode;
-    private int cae;
+    private String barCode;
+    private String cae;
 
     @OneToOne
     private PuntoVenta puntoVenta;
@@ -51,27 +50,27 @@ public class ComprobanteFiscal implements Serializable {
         this.letra = letra;
     }
 
-    public int getNumeroCbte() {
+    public String getNumeroCbte() {
         return numeroCbte;
     }
 
-    public void setNumeroCbte(int numeroCbte) {
+    public void setNumeroCbte(String numeroCbte) {
         this.numeroCbte = numeroCbte;
     }
 
-    public Date getFechaEmision() {
+    public String getFechaEmision() {
         return fechaEmision;
     }
 
-    public void setFechaEmision(Date fechaEmision) {
+    public void setFechaEmision(String fechaEmision) {
         this.fechaEmision = fechaEmision;
     }
 
-    public Date getFechaVto() {
+    public String getFechaVto() {
         return fechaVto;
     }
 
-    public void setFechaVto(Date fechaVto) {
+    public void setFechaVto(String fechaVto) {
         this.fechaVto = fechaVto;
     }
 
@@ -91,19 +90,19 @@ public class ComprobanteFiscal implements Serializable {
         this.productos = productos;
     }
 
-    public int getBarCode() {
+    public String getBarCode() {
         return barCode;
     }
 
-    public void setBarCode(int barCode) {
+    public void setBarCode(String barCode) {
         this.barCode = barCode;
     }
 
-    public int getCae() {
+    public String getCae() {
         return cae;
     }
 
-    public void setCae(int cae) {
+    public void setCae(String cae) {
         this.cae = cae;
     }
 
@@ -152,13 +151,13 @@ public class ComprobanteFiscal implements Serializable {
         return "ComprobanteFiscal{" +
                 "id=" + id +
                 ", letra='" + letra + '\'' +
-                ", numeroCbte=" + numeroCbte +
-                ", fechaEmision=" + fechaEmision +
-                ", fechaVto=" + fechaVto +
+                ", numeroCbte='" + numeroCbte + '\'' +
+                ", fechaEmision='" + fechaEmision + '\'' +
+                ", fechaVto='" + fechaVto + '\'' +
                 ", condicionVenta=" + condicionVenta +
                 ", productos=" + productos +
-                ", barCode=" + barCode +
-                ", cae=" + cae +
+                ", barCode='" + barCode + '\'' +
+                ", cae='" + cae + '\'' +
                 ", puntoVenta=" + puntoVenta +
                 ", sucursal=" + sucursal +
                 ", documentoComercial=" + documentoComercial +

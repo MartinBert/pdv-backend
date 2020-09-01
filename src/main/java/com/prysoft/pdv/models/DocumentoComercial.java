@@ -11,6 +11,7 @@ public class DocumentoComercial implements Serializable {
     private Long id;
     private String nombre;
     private String codigoDocumento;
+    private String letra;
     private boolean tipo;
     private int ivaCat;
     private boolean activo;
@@ -37,6 +38,14 @@ public class DocumentoComercial implements Serializable {
 
     public void setCodigoDocumento(String codigoDocumento) {
         this.codigoDocumento = codigoDocumento;
+    }
+
+    public String getLetra() {
+        return letra;
+    }
+
+    public void setLetra(String letra) {
+        this.letra = letra;
     }
 
     public boolean isTipo() {
@@ -69,6 +78,7 @@ public class DocumentoComercial implements Serializable {
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", codigoDocumento='" + codigoDocumento + '\'' +
+                ", letra='" + letra + '\'' +
                 ", tipo=" + tipo +
                 ", ivaCat=" + ivaCat +
                 ", activo=" + activo +
