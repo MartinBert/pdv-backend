@@ -1,5 +1,6 @@
 package com.prysoft.pdv.service;
 
+import com.prysoft.pdv.dao.ClienteDao;
 import com.prysoft.pdv.dao.ComprobanteFiscalDao;
 import com.prysoft.pdv.dao.ProductoDao;
 import com.prysoft.pdv.models.ComprobanteFiscal;
@@ -7,26 +8,29 @@ import com.prysoft.pdv.models.Producto;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
-@Service
+@RestController
 public class ReportService {
     @Autowired
-    private ProductoDao daoP;
-    private ComprobanteFiscalDao daoCF;
+    private ProductoDao daoProducto;
+
+    @Autowired
+    private ComprobanteFiscalDao daoComprobanteFiscal;
+
+    @Autowired
+    private ClienteDao daoCliente;
 
     private String path = "C:\\Users\\Martin Bertello\\Desktop\\REPORTES\\";
 
     public String exportReport(String reportFormat, String type,String tenant) throws IOException, JRException {
-        List<Producto> productos = (List<Producto>) daoP.findAll();
+        List<Producto> productos = (List<Producto>) daoProducto.findAll();
 
         File file = ResourceUtils.getFile("classpath:"+type);
         JasperReport jasperReport= JasperCompileManager.compileReport(file.getAbsolutePath());
@@ -49,14 +53,24 @@ public class ReportService {
         return "Report generated in C:/Users/Martin Bertello/Desktop/REPORTES";
     }
 
-    public ComprobanteFiscal exportRecipes(Long id){
+    public ComprobanteFiscal exportRecipes(Long id) throws FileNotFoundException, JRException {
+        System.out.println(id);
+        Optional<ComprobanteFiscal> comprobante = daoComprobanteFiscal.findById(id);
 
-        Optional<ComprobanteFiscal> comprobante = daoCF.findById(id);
-        if(comprobante.isPresent()){
-            System.out.println(comprobante);
+        File file = ResourceUtils.getFile("classpath:FacturaElectronicaaa.jrxml");
+        JasperReport jasperReport= JasperCompileManager.compileReport(file.getAbsolutePath());
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(Collections.singleton(comprobante.get()));
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("createdBy", "Martin Bertello");
+        JasperPrint jasperPrint= JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+        File carpeta = new File(path);
+        File[] list = carpeta.listFiles();
+        if(list.length == 0){
+            JasperExportManager.exportReportToPdfFile(jasperPrint, path+"Documento.pdf");
         }else{
-            System.out.println("No se encontró comprobante");
+            JasperExportManager.exportReportToPdfFile(jasperPrint, path+"Documento"+list.length+".pdf");
         }
+
         return null;
     }
 }
