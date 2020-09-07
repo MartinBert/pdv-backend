@@ -66,9 +66,9 @@
 		<property name="com.jaspersoft.studio.field.label" value="id"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="comprobantes_fiscales"/>
 	</field>
-	<field name="bar_code" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="bar_code"/>
-		<property name="com.jaspersoft.studio.field.label" value="bar_code"/>
+	<field name="barCode" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="barCode"/>
+		<property name="com.jaspersoft.studio.field.label" value="barCode"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="comprobantes_fiscales"/>
 	</field>
 	<field name="cae" class="java.lang.String">
@@ -76,19 +76,19 @@
 		<property name="com.jaspersoft.studio.field.label" value="cae"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="comprobantes_fiscales"/>
 	</field>
-	<field name="condicion_venta" class="java.lang.Boolean">
-		<property name="com.jaspersoft.studio.field.name" value="condicion_venta"/>
-		<property name="com.jaspersoft.studio.field.label" value="condicion_venta"/>
+	<field name="condicionVenta" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.name" value="condicionVenta"/>
+		<property name="com.jaspersoft.studio.field.label" value="condicionVenta"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="comprobantes_fiscales"/>
 	</field>
-	<field name="fecha_emision" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="fecha_emision"/>
-		<property name="com.jaspersoft.studio.field.label" value="fecha_emision"/>
+	<field name="fechaEmision" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="fechaEmision"/>
+		<property name="com.jaspersoft.studio.field.label" value="fechaEmision"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="comprobantes_fiscales"/>
 	</field>
-	<field name="fecha_vto" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="fecha_vto"/>
-		<property name="com.jaspersoft.studio.field.label" value="fecha_vto"/>
+	<field name="fechaVto" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="fechaVto"/>
+		<property name="com.jaspersoft.studio.field.label" value="fechaVto"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="comprobantes_fiscales"/>
 	</field>
 	<field name="letra" class="java.lang.String">
@@ -96,39 +96,39 @@
 		<property name="com.jaspersoft.studio.field.label" value="letra"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="comprobantes_fiscales"/>
 	</field>
-	<field name="numero_cbte" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="numero_cbte"/>
-		<property name="com.jaspersoft.studio.field.label" value="numero_cbte"/>
+	<field name="numeroCbte" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="numeroCbte"/>
+		<property name="com.jaspersoft.studio.field.label" value="numeroCbte"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="comprobantes_fiscales"/>
 	</field>
-	<field name="productos" class="byte[]">
+	<field name="productos" class="java.util.ArrayList">
 		<property name="com.jaspersoft.studio.field.name" value="productos"/>
 		<property name="com.jaspersoft.studio.field.label" value="productos"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="comprobantes_fiscales"/>
 	</field>
-	<field name="cliente_id" class="java.lang.Long">
-		<property name="com.jaspersoft.studio.field.name" value="cliente_id"/>
-		<property name="com.jaspersoft.studio.field.label" value="cliente_id"/>
+	<field name="cliente" class="com.prysoft.pdv.models.Cliente">
+		<property name="com.jaspersoft.studio.field.name" value="cliente"/>
+		<property name="com.jaspersoft.studio.field.label" value="cliente"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="comprobantes_fiscales"/>
 	</field>
-	<field name="documento_comercial_id" class="java.lang.Long">
-		<property name="com.jaspersoft.studio.field.name" value="documento_comercial_id"/>
-		<property name="com.jaspersoft.studio.field.label" value="documento_comercial_id"/>
+	<field name="documentoComercial" class="com.prysoft.pdv.models.DocumentoComercial">
+		<property name="com.jaspersoft.studio.field.name" value="documentoComercial"/>
+		<property name="com.jaspersoft.studio.field.label" value="documentoComercial"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="comprobantes_fiscales"/>
 	</field>
-	<field name="empresa_id" class="java.lang.Long">
-		<property name="com.jaspersoft.studio.field.name" value="empresa_id"/>
-		<property name="com.jaspersoft.studio.field.label" value="empresa_id"/>
+	<field name="empresa" class="com.prysoft.pdv.models.Empresa">
+		<property name="com.jaspersoft.studio.field.name" value="empresa"/>
+		<property name="com.jaspersoft.studio.field.label" value="empresa"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="comprobantes_fiscales"/>
 	</field>
-	<field name="punto_venta_id" class="java.lang.Long">
-		<property name="com.jaspersoft.studio.field.name" value="punto_venta_id"/>
-		<property name="com.jaspersoft.studio.field.label" value="punto_venta_id"/>
+	<field name="puntoVenta" class="com.prysoft.pdv.models.PuntoVenta">
+		<property name="com.jaspersoft.studio.field.name" value="puntoVenta"/>
+		<property name="com.jaspersoft.studio.field.label" value="puntoVenta"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="comprobantes_fiscales"/>
 	</field>
-	<field name="sucursal_id" class="java.lang.Long">
-		<property name="com.jaspersoft.studio.field.name" value="sucursal_id"/>
-		<property name="com.jaspersoft.studio.field.label" value="sucursal_id"/>
+	<field name="sucursal" class="com.prysoft.pdv.models.Sucursal">
+		<property name="com.jaspersoft.studio.field.name" value="sucursal"/>
+		<property name="com.jaspersoft.studio.field.label" value="sucursal"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="comprobantes_fiscales"/>
 	</field>
 	<group name="Gruppo1">
@@ -140,44 +140,44 @@
 			</band>
 		</groupFooter>
 	</group>
-	<group name="bar_code">
-		<groupExpression><![CDATA[$F{bar_code}]]></groupExpression>
+	<group name="barCode">
+		<groupExpression><![CDATA[$F{barCode}]]></groupExpression>
 	</group>
 	<group name="cae">
 		<groupExpression><![CDATA[$F{cae}]]></groupExpression>
 	</group>
-	<group name="condicion_venta">
-		<groupExpression><![CDATA[$F{condicion_venta}]]></groupExpression>
+	<group name="condicionVenta">
+		<groupExpression><![CDATA[$F{condicionVenta}]]></groupExpression>
 	</group>
-	<group name="fecha_emision">
-		<groupExpression><![CDATA[$F{fecha_emision}]]></groupExpression>
+	<group name="fechaEmision">
+		<groupExpression><![CDATA[$F{fechaEmision}]]></groupExpression>
 	</group>
-	<group name="fecha_vto">
-		<groupExpression><![CDATA[$F{fecha_vto}]]></groupExpression>
+	<group name="fechaVto">
+		<groupExpression><![CDATA[$F{fechaVto}]]></groupExpression>
 	</group>
 	<group name="letra">
 		<groupExpression><![CDATA[$F{letra}]]></groupExpression>
 	</group>
-	<group name="numero_cbte">
-		<groupExpression><![CDATA[$F{numero_cbte}]]></groupExpression>
+	<group name="numeroCbte">
+		<groupExpression><![CDATA[$F{numeroCbte}]]></groupExpression>
 	</group>
 	<group name="productos">
 		<groupExpression><![CDATA[$F{productos}]]></groupExpression>
 	</group>
-	<group name="cliente_id">
-		<groupExpression><![CDATA[$F{cliente_id}]]></groupExpression>
+	<group name="cliente">
+		<groupExpression><![CDATA[$F{cliente}]]></groupExpression>
 	</group>
-	<group name="documento_comercial_id">
-		<groupExpression><![CDATA[$F{documento_comercial_id}]]></groupExpression>
+	<group name="documentoComercial">
+		<groupExpression><![CDATA[$F{documentoComercial}]]></groupExpression>
 	</group>
-	<group name="empresa_id">
-		<groupExpression><![CDATA[$F{empresa_id}]]></groupExpression>
+	<group name="empresa">
+		<groupExpression><![CDATA[$F{empresa}]]></groupExpression>
 	</group>
-	<group name="punto_venta_id">
-		<groupExpression><![CDATA[$F{punto_venta_id}]]></groupExpression>
+	<group name="puntoVenta">
+		<groupExpression><![CDATA[$F{puntoVenta}]]></groupExpression>
 	</group>
-	<group name="sucursal_id">
-		<groupExpression><![CDATA[$F{sucursal_id}]]></groupExpression>
+	<group name="sucursal">
+		<groupExpression><![CDATA[$F{sucursal}]]></groupExpression>
 	</group>
 	<title>
 		<band height="145" splitType="Stretch">
@@ -200,7 +200,7 @@
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
-				<textFieldExpression><![CDATA[$F{fecha_emision}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{fechaEmision}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="342" y="29" width="80" height="15" uuid="86e17ca7-1dee-4d14-ac2e-2b703f0b0855">
@@ -234,45 +234,45 @@
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
-				<textFieldExpression><![CDATA[$F{empresa_id}.getIngBruto()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{empresa}.getIngBruto()]]></textFieldExpression>
 			</textField>
 			<textField pattern="EEEEE dd MMMMM yyyy">
 				<reportElement x="422" y="45" width="125" height="15" uuid="a81f0e7c-0e7c-4b66-bb2d-877c7a8b1de9">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
-				<textFieldExpression><![CDATA[$F{empresa_id}.getFechaInicioAct()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{empresa}.getFechaInicioAct()]]></textFieldExpression>
 			</textField>
 			<textField pattern="EEEEE dd MMMMM yyyy">
 				<reportElement x="422" y="61" width="125" height="15" uuid="3587ff29-f479-4338-a174-639917561ee8">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
-				<textFieldExpression><![CDATA[$F{empresa_id}.getCuit()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{empresa}.getCuit()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="10" y="14" width="205" height="15" uuid="d9e708e6-cb09-4318-9898-082ac0e2f5cf">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<textFieldExpression><![CDATA[$F{empresa_id}.getRazonSocial()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{empresa}.getRazonSocial()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="10" y="30" width="205" height="15" uuid="c38424cc-8b7b-4b80-8144-31874c99723b">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<textFieldExpression><![CDATA[$F{sucursal_id}.getDireccion()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{sucursal}.getDireccion()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="10" y="46" width="205" height="15" uuid="ede093f2-0727-4bb9-80b6-6ec10ecb1fe9">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<textFieldExpression><![CDATA[$F{sucursal_id}.getCiudad()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{sucursal}.getCiudad()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="10" y="62" width="205" height="15" uuid="480447ff-7bac-437b-86ff-9887e3be5f92">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<textFieldExpression><![CDATA[$F{empresa_id}.getCondicionIva()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{empresa}.getCondicionIva()).getNombre()]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="10" y="84" width="143" height="12" uuid="b10dd583-b06a-4721-a0f0-d8f9344cd1e2"/>
@@ -288,7 +288,7 @@
 				<textElement verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{cliente_id}.getRazonSocial()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{cliente}.getRazonSocial()]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="10" y="104" width="50" height="12" uuid="22b5270b-ce04-4e99-b877-374d766dbf80"/>
@@ -302,14 +302,14 @@
 				<textElement verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{cliente_id}.getDireccion]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{cliente}.getDireccion()]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="40" y="112" width="220" height="12" isRemoveLineWhenBlank="true" uuid="085f5a13-7a7f-4123-86d6-a1239268a5cc"/>
 				<textElement verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{cliente_id}.getCuit]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{cliente}.getCuit()]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="10" y="118" width="30" height="12" uuid="b3be6b7e-4e86-4354-97bc-e2d8bd417677"/>
@@ -337,7 +337,7 @@
 				<textElement verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{cliente_id}.getCondicionIva()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{cliente}.getCondicionIva()).getNombre()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="230" y="0" width="100" height="60" uuid="820f519c-165c-4d42-9339-d2dab309d696"/>
@@ -382,14 +382,11 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="147">
+		<band height="251">
 			<subreport>
-				<reportElement x="-1" y="0" width="556" height="140" uuid="0fc99912-290f-46e3-ac94-7eead721261a"/>
-				<subreportParameter name="REPORT_PARAMETERS_MAP">
-					<subreportParameterExpression><![CDATA[$F{productos}]]></subreportParameterExpression>
-				</subreportParameter>
-				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA["FacturaElectronica.jasper"]]></subreportExpression>
+				<reportElement x="7" y="10" width="546" height="181" uuid="962c9c0d-8086-48c5-8dca-95606a8974a5"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{productos})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["classpath:FacturaElectronicaDetalle.jrxml"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>
@@ -407,7 +404,7 @@
 				<textElement verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{fecha_vto}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{fechaVto}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="443" y="30" width="100" height="12" uuid="6d241409-74dc-427d-a40c-3767bf51e4e6"/>
@@ -428,7 +425,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{bar_code}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{barCode}]]></textFieldExpression>
 			</textField>
 		</band>
 	</lastPageFooter>
