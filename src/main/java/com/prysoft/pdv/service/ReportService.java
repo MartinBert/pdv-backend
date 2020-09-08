@@ -6,7 +6,6 @@ import com.prysoft.pdv.dao.ProductoDao;
 import com.prysoft.pdv.models.ComprobanteFiscal;
 import com.prysoft.pdv.models.Producto;
 import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.data.JRBeanArrayDataSource;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ResourceUtils;
@@ -69,7 +68,7 @@ public class ReportService {
 
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(Collections.singleton(comp));
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("Created by", "Martin Bertello");
+        parameters.put("productos", productos);
         JasperPrint jasperPrint= JasperFillManager.fillReport(jasperReport, parameters, dataSource);
         File carpeta = new File(path);
         File[] list = carpeta.listFiles();
