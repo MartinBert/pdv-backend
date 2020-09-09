@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.14.0.final using JasperReports Library version 6.14.0-2ab0d8625be255bf609c78e1181801213e51db8f  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FacturaElectronica" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Postgres"/>
@@ -58,6 +57,8 @@
 			<![CDATA[]]>
 		</queryString>
 	</subDataset>
+	<parameter name="productos" class="java.util.ArrayList"/>
+	<parameter name="subreportRoute" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT * FROM comprobantes_fiscales]]>
 	</queryString>
@@ -384,9 +385,11 @@
 	<detail>
 		<band height="251">
 			<subreport>
-				<reportElement x="7" y="10" width="546" height="181" uuid="962c9c0d-8086-48c5-8dca-95606a8974a5"/>
-				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{productos})]]></dataSourceExpression>
-				<subreportExpression><![CDATA["classpath:FacturaElectronicaDetalle.jrxml"]]></subreportExpression>
+				<reportElement x="-1" y="0" width="556" height="140" uuid="0fc99912-290f-46e3-ac94-7eead721261a"/>
+				<subreportParameter name="productos">
+					<subreportParameterExpression><![CDATA[$P{productos}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportExpression><![CDATA["FacturaElectronicaDetalle.jrxml"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>

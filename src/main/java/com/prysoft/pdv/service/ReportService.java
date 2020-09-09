@@ -56,19 +56,15 @@ public class ReportService {
     public ComprobanteFiscal exportRecipes(Long id) throws FileNotFoundException, JRException {
         System.out.println(id);
         Optional<ComprobanteFiscal> comprobante = daoComprobanteFiscal.findById(id);
-
         ComprobanteFiscal comp = comprobante.get();
-
         ArrayList<Producto> productos = comp.getProductos();
-
+        String dir = "classpath:FacturaElectronicaDetalle.jrxml";
         File file = ResourceUtils.getFile("classpath:FacturaElectronica.jrxml");
-        File detail = ResourceUtils.getFile("classpath:FacturaElectronicaDetalle.jrxml");
         JasperReport jasperReport= JasperCompileManager.compileReport(file.getAbsolutePath());
-        JasperReport recipeDetail= JasperCompileManager.compileReport(detail.getAbsolutePath());
-
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(Collections.singleton(comp));
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("productos", productos);
+        parameters.put("subreportRoute", dir);
         JasperPrint jasperPrint= JasperFillManager.fillReport(jasperReport, parameters, dataSource);
         File carpeta = new File(path);
         File[] list = carpeta.listFiles();

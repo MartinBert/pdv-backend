@@ -4,9 +4,6 @@
 	<group name="productos">
 		<groupExpression><![CDATA[$P{productos}]]></groupExpression>
 	</group>
-	<background>
-		<band splitType="Stretch"/>
-	</background>
 	<detail>
 		<band height="125" splitType="Stretch">
 			<textField>
@@ -15,7 +12,4 @@
 			</textField>
 		</band>
 	</detail>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>
