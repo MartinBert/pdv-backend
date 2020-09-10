@@ -57,14 +57,12 @@ public class ReportService {
         System.out.println(id);
         Optional<ComprobanteFiscal> comprobante = daoComprobanteFiscal.findById(id);
         ComprobanteFiscal comp = comprobante.get();
-        ArrayList<Producto> productos = comp.getProductos();
-        String dir = "classpath:FacturaElectronicaDetalle.jrxml";
+        List<Producto> productos = comp.getProductos();
         File file = ResourceUtils.getFile("classpath:FacturaElectronica.jrxml");
         JasperReport jasperReport= JasperCompileManager.compileReport(file.getAbsolutePath());
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(Collections.singleton(comp));
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("productos", productos);
-        parameters.put("subreportRoute", dir);
+        parameters.put("SUBREPORT_DATA", productos);
         JasperPrint jasperPrint= JasperFillManager.fillReport(jasperReport, parameters, dataSource);
         File carpeta = new File(path);
         File[] list = carpeta.listFiles();

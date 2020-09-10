@@ -57,8 +57,7 @@
 			<![CDATA[]]>
 		</queryString>
 	</subDataset>
-	<parameter name="productos" class="java.util.ArrayList"/>
-	<parameter name="subreportRoute" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DATA" class="java.util.Collection"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT * FROM comprobantes_fiscales]]>
 	</queryString>
@@ -102,7 +101,7 @@
 		<property name="com.jaspersoft.studio.field.label" value="numeroCbte"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="comprobantes_fiscales"/>
 	</field>
-	<field name="productos" class="java.util.ArrayList">
+	<field name="productos" class="java.util.List">
 		<property name="com.jaspersoft.studio.field.name" value="productos"/>
 		<property name="com.jaspersoft.studio.field.label" value="productos"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="comprobantes_fiscales"/>
@@ -384,13 +383,48 @@
 	</columnHeader>
 	<detail>
 		<band height="251">
-			<subreport>
-				<reportElement x="-1" y="0" width="556" height="140" uuid="0fc99912-290f-46e3-ac94-7eead721261a"/>
-				<subreportParameter name="productos">
-					<subreportParameterExpression><![CDATA[$P{productos}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportExpression><![CDATA["FacturaElectronicaDetalle.jrxml"]]></subreportExpression>
-			</subreport>
+			<componentElement>
+				<reportElement x="30" y="20" width="491" height="181" uuid="8a6ff3ea-6ef6-4aa4-b409-b69216efe15e">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table 1_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table 1_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table 1_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="SUBREPORT_DATA" uuid="70478b87-a56b-4dd9-9cb1-373c20429156">
+						<dataSourceExpression><![CDATA[$P{SUBREPORT_DATA}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="90" uuid="f91be0aa-e66e-4202-aec9-4dace3bce0ac">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:tableFooter style="Table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnFooter style="Table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="Table 1_TD" height="30"/>
+					</jr:column>
+					<jr:column width="140" uuid="4d498591-2e67-492d-b15c-03d194177403">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:tableFooter style="Table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnFooter style="Table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="140" height="30" uuid="b5175aa2-adf1-491d-be5a-57e0b2c35217"/>
+								<text><![CDATA[Nombre]]></text>
+							</staticText>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="2d444866-a99b-4094-8c8d-37fa3badf6bc">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:tableFooter style="Table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnFooter style="Table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="Table 1_TD" height="30"/>
+					</jr:column>
+					<jr:column width="110" uuid="01efca74-ec28-4ce4-aab5-3a7fd7d22a64">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:tableFooter style="Table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnFooter style="Table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="Table 1_TD" height="30"/>
+					</jr:column>
+				</jr:table>
+			</componentElement>
 		</band>
 	</detail>
 	<lastPageFooter>
