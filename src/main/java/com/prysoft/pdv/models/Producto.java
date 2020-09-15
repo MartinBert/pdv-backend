@@ -10,9 +10,16 @@ public class Producto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "nombre", nullable = false, unique = true)
     private String nombre;
+
+    @Column(name = "codigo_barra", nullable = false, unique = true)
     private String codigoBarra;
+
+    @Column(name = "codigo_producto", nullable = false, unique = true)
     private String codigoProducto;
+
     private double precioCosto;
     private int propiedad;
     private double ivaVenta;

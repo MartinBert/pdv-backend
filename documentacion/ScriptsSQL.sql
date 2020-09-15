@@ -16,4 +16,4 @@ INSERT INTO "public"."perfiles_modulos" ("perfil_id","modulos_id") VALUES
 --el password es 'password'
 
 INSERT INTO "public"."usuarios" ("id", "nombre","username", "password","perfil_id") VALUES
-('1', 'Martin','martin', '$2a$10$e59WXLh03j0aZOzBYQNrIRIjlB8sGwLvBL35fecblsW1m',1);
+('1', 'Martin','martin', '$2y$12$XV5dAvr8X92rQVbzViWyB.TQv/fGebULe.M/MEXEbzIE/3ZCIejLK',1);
