@@ -13,7 +13,10 @@ public class Deposito implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
+
+    @Column(name = "direccion", nullable = false, unique = true)
     private String direccion;
+    
     private String telefono;
     @OneToMany(mappedBy = "deposito")
     @JsonBackReference

@@ -11,7 +11,10 @@ public class ComprobanteFiscal implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String letra;
+
+    @Column(name = "numero_cbte", unique = true, nullable = false)
     private String numeroCbte;
+
     private String fechaEmision;
     private String fechaVto;
     private Boolean condicionVenta;
