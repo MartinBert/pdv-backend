@@ -10,6 +10,8 @@ public class Perfil  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "nombre", unique = true, nullable = false)
     private String nombre;
 
     @ManyToMany(cascade= {CascadeType.MERGE})
@@ -26,4 +28,13 @@ public class Perfil  implements Serializable {
     public Set<Modulo> getModulos() { return modulos; }
 
     public void setModulos(Set<Modulo> modulos) { this.modulos = modulos; }
+
+    @Override
+    public String toString() {
+        return "Perfil{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", modulos=" + modulos +
+                '}';
+    }
 }

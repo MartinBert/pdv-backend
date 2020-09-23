@@ -32,10 +32,10 @@ public class Producto implements Serializable {
     private double precioTotal;
 
     @OneToOne
-    private com.prysoft.pdv.models.Marca marca;
+    private Marca marca;
 
     @OneToMany(mappedBy = "producto")
-    private Set<com.prysoft.pdv.models.ProductoVariacion> variaciones;
+    private Set<ProductoVariacion> variaciones;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "productos_distribuidores",
@@ -47,13 +47,13 @@ public class Producto implements Serializable {
     @JoinTable(name = "productos_depositos",
             joinColumns =  @JoinColumn(name = "id_producto"),
             inverseJoinColumns = @JoinColumn(name = "id_deposito"))
-    private Set<com.prysoft.pdv.models.Deposito> depositos;
+    private Set<Deposito> depositos;
 
     @OneToMany(mappedBy = "producto")
     private Set<Stock> stocks;
 
     @OneToOne
-    private com.prysoft.pdv.models.Rubro rubro;
+    private Rubro rubro;
 
     public Long getId() {
         return id;

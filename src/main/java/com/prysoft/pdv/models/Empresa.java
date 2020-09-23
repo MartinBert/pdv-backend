@@ -12,6 +12,8 @@ public class Empresa implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Date fechaInicioAct;
+
+    @Column(name = "ing_bruto", unique = true, nullable = false)
     private int ingBruto;
 
     @OneToOne
@@ -21,7 +23,11 @@ public class Empresa implements Serializable {
     private Set<Sucursal> sucursales;
 
     private String alias;
+
+    @Column(name = "razon_social", unique = true, nullable = false)
     private String razonSocial;
+
+    @Column(name = "cuit", unique = true, nullable = false)
     private String cuit;
 
     public Long getId() {

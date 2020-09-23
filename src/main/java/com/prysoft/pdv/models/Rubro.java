@@ -9,6 +9,8 @@ public class Rubro implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "nombre", unique = true, nullable = false)
     private String nombre;
 
     public Long getId() {
@@ -25,5 +27,13 @@ public class Rubro implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    @Override
+    public String toString() {
+        return "Rubro{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                '}';
     }
 }

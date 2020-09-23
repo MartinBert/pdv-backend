@@ -9,8 +9,13 @@ public class DocumentoComercial implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "nombre", unique = true, nullable = false)
     private String nombre;
+
+    @Column(name = "codigo_documento", unique = true, nullable = false)
     private String codigoDocumento;
+
     private String letra;
     private boolean tipo;
     private int ivaCat;

@@ -13,17 +13,30 @@ public class Sucursal implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "nombre", unique = true, nullable = false)
     private String nombre;
+
+    @Column(name = "direccion", unique = true, nullable = false)
     private String direccion;
+
     private String email;
     private String telefono;
     private String telefonoAlternativo;
     private String nombreContacto;
     private String provincia;
     private String ciudad;
+
+    @Column(name = "fecha_inicio_act", unique = true)
     private Date fechaInicioAct;
+
+    @Column(name = "ing_bruto", unique = true)
     private int ingBruto;
+
+    @Column(name = "razon_social", unique = true)
     private String razonSocial;
+
+    @Column(name = "cuit", unique = true)
     private String cuit;
 
     @OneToMany(mappedBy = "sucursal")
@@ -126,7 +139,7 @@ public class Sucursal implements Serializable {
         return razonSocial;
     }
 
-    public void getRazonSocial(String razonSocial) {
+    public void setRazonSocial(String razonSocial) {
         this.razonSocial = razonSocial;
     }
 

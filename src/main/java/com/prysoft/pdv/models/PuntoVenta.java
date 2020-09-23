@@ -11,7 +11,11 @@ public class PuntoVenta implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "id_fiscal", unique = true, nullable = false)
     private int idFiscal;
+
+    @Column(name = "nombre", unique = true, nullable = false)
     private String nombre;
 
     @ManyToOne

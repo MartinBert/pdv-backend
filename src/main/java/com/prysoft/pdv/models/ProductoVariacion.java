@@ -9,8 +9,12 @@ public class ProductoVariacion implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "nombre", unique = true, nullable = false)
     private String nombre;
+
     private double porcentaje;
+
     @ManyToOne
     @JoinColumn(name="producto_id", nullable=false)
     private Producto producto;
@@ -45,5 +49,15 @@ public class ProductoVariacion implements Serializable {
 
     public void setProducto(Producto producto) {
         this.producto = producto;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductoVariacion{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", porcentaje=" + porcentaje +
+                ", producto=" + producto +
+                '}';
     }
 }

@@ -17,4 +17,11 @@ public class Transportista extends Persona implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "Transportista{" +
+                "id=" + id +
+                '}';
+    }
 }

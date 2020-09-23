@@ -53,4 +53,14 @@ public class Stock implements Serializable {
     public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
     }
+
+    @Override
+    public String toString() {
+        return "Stock{" +
+                "id=" + id +
+                ", producto=" + producto +
+                ", deposito=" + deposito +
+                ", cantidad=" + cantidad +
+                '}';
+    }
 }

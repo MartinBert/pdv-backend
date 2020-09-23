@@ -86,7 +86,7 @@ public class Persona implements Serializable {
         this.razonSocial = razonSocial;
     }
 
-    @Column(name="cuit", nullable = false)
+    @Column(name="cuit", nullable = false, unique = true)
     public String getCuit() {
         return this.cuit;
     }
@@ -167,4 +167,22 @@ public class Persona implements Serializable {
         this.region = region;
     }
 
+    @Override
+    public String toString() {
+        return "Persona{" +
+                "tipoPersona=" + tipoPersona +
+                ", condicionIva=" + condicionIva +
+                ", nombre='" + nombre + '\'' +
+                ", razonSocial='" + razonSocial + '\'' +
+                ", cuit='" + cuit + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", email='" + email + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", telefonoAlternativo='" + telefonoAlternativo + '\'' +
+                ", nombreContacto='" + nombreContacto + '\'' +
+                ", pais='" + pais + '\'' +
+                ", estado='" + estado + '\'' +
+                ", region='" + region + '\'' +
+                '}';
+    }
 }

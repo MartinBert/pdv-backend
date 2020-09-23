@@ -1,14 +1,18 @@
 package com.prysoft.pdv.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "planes_pagos")
-public class PlanPago {
+public class PlanPago implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "nombre", unique = true, nullable = false)
     private String nombre;
+
     private int cuotas;
     private double porcentaje;
 
