@@ -14,7 +14,6 @@ spring:
         ddl-auto: create
     show-sql: false
 
-
 #tenants
 tenants:
   datasources:
