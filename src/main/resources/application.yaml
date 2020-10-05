@@ -32,6 +32,11 @@ tenants:
       driverClassName: org.postgresql.Driver
       username: postgres
       password: 12345
+    test:
+      jdbcUrl: jdbc:postgresql://localhost:5432/test
+      driverClassName: org.postgresql.Driver
+      username: postgres
+      password: 12345
 
 server:
   port: 8000
