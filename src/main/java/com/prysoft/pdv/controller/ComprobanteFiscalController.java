@@ -5,6 +5,8 @@ import com.prysoft.pdv.models.ComprobanteFiscal;
 import com.prysoft.pdv.service.ComprobanteFiscalService;
 import com.prysoft.pdv.service.ReportService;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,6 +26,9 @@ public class ComprobanteFiscalController {
     private ReportService reportService;
 
     private ComprobanteFiscal returnComproabantes(ComprobanteFiscal comprobante) throws FileNotFoundException, JRException, JSONException {
+        JasperPrint reportaso = reportService.generarReporteProductos();
+        JasperViewer viewer = new JasperViewer(reportaso);
+        viewer.setVisible(true);
         return reportService.exportRecipes(comprobante.getId());
     }
 

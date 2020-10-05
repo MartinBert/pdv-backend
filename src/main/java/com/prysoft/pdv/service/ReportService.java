@@ -53,16 +53,21 @@ public class ReportService {
         return "Report generated in C:/Users/Martin Bertello/Desktop/REPORTES";
     }
 
+    public JasperPrint generarReporteProductos() throws JRException, FileNotFoundException {
+        String file = ResourceUtils.getFile("classpath:AllProducts.jasper").getAbsolutePath();
+        JasperPrint reporteLleno = JasperFillManager.fillReport(file, new HashMap<>());
+        return reporteLleno;
+    }
+
     public ComprobanteFiscal exportRecipes(Long id) throws FileNotFoundException, JRException {
-        System.out.println(id);
+
         Optional<ComprobanteFiscal> comprobante = daoComprobanteFiscal.findById(id);
         ComprobanteFiscal comp = comprobante.get();
         List<Producto> productos = comp.getProductos();
-        File file = ResourceUtils.getFile("classpath:/static/FacturaElectronica.jrxml");
+        File file = ResourceUtils.getFile("classpath:FacturaElectronica.jrxml");
         JasperReport jasperReport= JasperCompileManager.compileReport(file.getAbsolutePath());
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(Collections.singleton(comp));
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("SUBREPORT_DATA", productos);
         JasperPrint jasperPrint= JasperFillManager.fillReport(jasperReport, parameters, dataSource);
         File carpeta = new File(path);
         File[] list = carpeta.listFiles();
