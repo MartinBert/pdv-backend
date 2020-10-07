@@ -1,9 +1,7 @@
 package com.prysoft.pdv.controller;
 
 import com.prysoft.pdv.dto.DistribuidorFilter;
-import com.prysoft.pdv.dto.MarcaFilter;
-import com.prysoft.pdv.models.Distribuidor;
-import com.prysoft.pdv.models.Marca;
+import com.prysoft.pdv.models.Proveedor;
 import com.prysoft.pdv.service.DistribuidorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,23 +16,23 @@ public class DistribuidorController {
     private DistribuidorService service;
 
     @GetMapping
-    Page<Distribuidor> findAll(Pageable page) {
+    Page<Proveedor> findAll(Pageable page) {
         return service.findAll(page);
     }
 
     @GetMapping(value = "/{id}")
-    Distribuidor findById(@PathVariable long id) {
+    Proveedor findById(@PathVariable long id) {
         return service.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    Distribuidor save(@RequestBody Distribuidor entity) {
+    Proveedor save(@RequestBody Proveedor entity) {
         return service.saveOrUpdate(entity);
     }
 
     @PutMapping
-    Distribuidor update(@RequestBody Distribuidor entity) {
+    Proveedor update(@RequestBody Proveedor entity) {
         return service.saveOrUpdate(entity);
     }
 
@@ -45,7 +43,7 @@ public class DistribuidorController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<Distribuidor> filter(@RequestBody DistribuidorFilter filter) {
+    public Page<Proveedor> filter(@RequestBody DistribuidorFilter filter) {
         return service.filter(filter);
     }
 }

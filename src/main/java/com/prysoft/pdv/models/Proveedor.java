@@ -5,15 +5,15 @@ import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-@Table(name="transportistas")
-public class Transportista extends Persona implements Serializable {
+@Table(name="distribuidores")
+public class Proveedor extends Persona implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "transportista_sucursal",
-            joinColumns =  @JoinColumn(name = "id_transportista"),
+    @JoinTable(name = "proveedor_sucursal",
+            joinColumns =  @JoinColumn(name = "id_proveedor"),
             inverseJoinColumns = @JoinColumn(name = "id_sucursal"))
     private Set<Sucursal> sucursales;
 
@@ -35,7 +35,7 @@ public class Transportista extends Persona implements Serializable {
 
     @Override
     public String toString() {
-        return "Transportista{" +
+        return "Proveedor{" +
                 "id=" + id +
                 ", sucursales=" + sucursales +
                 '}';

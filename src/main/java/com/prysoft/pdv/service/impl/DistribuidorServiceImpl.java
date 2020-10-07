@@ -3,7 +3,7 @@ package com.prysoft.pdv.service.impl;
 import com.prysoft.pdv.dao.DistribuidorDao;
 import com.prysoft.pdv.dto.DistribuidorFilter;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.models.Distribuidor;
+import com.prysoft.pdv.models.Proveedor;
 import com.prysoft.pdv.service.DistribuidorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,14 +18,14 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class DistribuidorServiceImpl extends FilterService<Distribuidor> implements DistribuidorService{
+public class DistribuidorServiceImpl extends FilterService<Proveedor> implements DistribuidorService{
 
     @Autowired
     private DistribuidorDao dao;
 
     @Override
-    public Distribuidor findById(Long id) {
-        Optional<Distribuidor> optional = dao.findById(id);
+    public Proveedor findById(Long id) {
+        Optional<Proveedor> optional = dao.findById(id);
         if(!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
@@ -34,12 +34,12 @@ public class DistribuidorServiceImpl extends FilterService<Distribuidor> impleme
     }
 
     @Override
-    public Page<Distribuidor> findAll(Pageable page) {
+    public Page<Proveedor> findAll(Pageable page) {
         return dao.findAll(page);
     }
 
     @Override
-    public Distribuidor saveOrUpdate(Distribuidor entity) {
+    public Proveedor saveOrUpdate(Proveedor entity) {
         return dao.save(entity);
     }
 
@@ -49,7 +49,7 @@ public class DistribuidorServiceImpl extends FilterService<Distribuidor> impleme
     }
 
     @Override
-    public Page<Distribuidor> filter(DistribuidorFilter filter) {
+    public Page<Proveedor> filter(DistribuidorFilter filter) {
         StringBuilder hql = new StringBuilder();
         List<FilterParam> params = new ArrayList<>();
 

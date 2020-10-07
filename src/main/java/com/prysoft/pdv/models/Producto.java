@@ -41,7 +41,7 @@ public class Producto implements Serializable {
     @JoinTable(name = "productos_distribuidores",
             joinColumns =  @JoinColumn(name = "id_producto"),
             inverseJoinColumns = @JoinColumn(name = "id_distribuidor"))
-    private Set<Distribuidor> distribuidores;
+    private Set<Proveedor> distribuidores;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "productos_depositos",
@@ -183,11 +183,11 @@ public class Producto implements Serializable {
         this.variaciones = variaciones;
     }
 
-    public Set<Distribuidor> getDistribuidores() {
+    public Set<Proveedor> getDistribuidores() {
         return distribuidores;
     }
 
-    public void setDistribuidores(Set<Distribuidor> distribuidores) {
+    public void setDistribuidores(Set<Proveedor> distribuidores) {
         this.distribuidores = distribuidores;
     }
 

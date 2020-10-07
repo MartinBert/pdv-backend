@@ -1,8 +1,6 @@
 package com.prysoft.pdv.models;
 
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @MappedSuperclass
@@ -11,7 +9,7 @@ public class Persona implements Serializable {
     private int tipoPersona; //1-Fisica , 2-Juridica
 
     @OneToOne
-    private CondicionFiscal condicionIva; //1-Responsable Inscripto, 2-Monotributista, 3-Particular
+    private CondicionFiscal condicionIva; //1-Responsable Inscripto, 2-Monotributista, 3-Consumidor Final
 
     private String nombre;
     private String razonSocial;
