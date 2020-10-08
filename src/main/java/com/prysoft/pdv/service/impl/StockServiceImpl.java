@@ -1,7 +1,6 @@
 package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.StockDao;
-import com.prysoft.pdv.models.Producto;
 import com.prysoft.pdv.models.Stock;
 import com.prysoft.pdv.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +41,19 @@ public class StockServiceImpl implements StockService {
 
     @Override
     public Iterable<Stock> saveAll(ArrayList<Stock> entities) {
-        return dao.saveAll(entities);
+
+        for (Stock stock: entities){
+           Optional<Stock> obj = dao.findByAlgorim(stock.getAlgorim());
+           if(obj.isPresent()){
+               stock.setId(obj.get().getId());
+               stock.setCantidad(stock.getCantidad() + obj.get().getCantidad());
+               dao.save(stock);
+           }else{
+               dao.save(stock);
+           }
+        }
+
+        return null;
     }
 
     @Override

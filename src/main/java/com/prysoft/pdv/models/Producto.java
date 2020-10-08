@@ -1,5 +1,7 @@
 package com.prysoft.pdv.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
@@ -50,6 +52,7 @@ public class Producto implements Serializable {
     private Set<Deposito> depositos;
 
     @OneToMany(mappedBy = "producto")
+    @JsonBackReference
     private Set<Stock> stocks;
 
     @OneToOne

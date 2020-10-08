@@ -1,11 +1,7 @@
 package com.prysoft.pdv.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
 
 @Entity
 @Table(name = "stocks")
@@ -15,12 +11,16 @@ public class Stock implements Serializable {
     private Long id;
 
     @ManyToOne
-    @JsonBackReference
     private Producto producto;
 
     @ManyToOne
     private Deposito deposito;
+
+    @OneToOne Sucursal sucursal;
+
     private double cantidad;
+
+    private String algorim;
 
     public Long getId() {
         return id;
@@ -54,6 +54,22 @@ public class Stock implements Serializable {
         this.cantidad = cantidad;
     }
 
+    public Sucursal getSucursal() {
+        return sucursal;
+    }
+
+    public void setSucursal(Sucursal sucursal) {
+        this.sucursal = sucursal;
+    }
+
+    public String getAlgorim() {
+        return algorim;
+    }
+
+    public void setAlgorim(String algorim) {
+        this.algorim = algorim;
+    }
+
     @Override
     public String toString() {
         return "Stock{" +
@@ -61,6 +77,8 @@ public class Stock implements Serializable {
                 ", producto=" + producto +
                 ", deposito=" + deposito +
                 ", cantidad=" + cantidad +
+                ", sucursal=" + sucursal +
+                ", algorim=" + algorim +
                 '}';
     }
 }

@@ -1,6 +1,5 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.models.Producto;
 import com.prysoft.pdv.models.Stock;
 import com.prysoft.pdv.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
