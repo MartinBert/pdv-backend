@@ -2,9 +2,13 @@ package com.prysoft.pdv.service;
 
 import com.prysoft.pdv.dto.ProductoFilter;
 import com.prysoft.pdv.models.Producto;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperPrint;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface ProductoService {
@@ -19,6 +23,8 @@ public interface ProductoService {
     Iterable<Producto> saveAll(ArrayList<Producto> entities);
 
     Page<Producto> filter(ProductoFilter filter);
+
+    JasperPrint generalReport(String tenant) throws JRException, IOException, SQLException;
 
     void delete(Long id);
 }

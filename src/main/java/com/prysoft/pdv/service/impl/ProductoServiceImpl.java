@@ -5,20 +5,33 @@ import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.ProductoFilter;
 import com.prysoft.pdv.models.Producto;
 import com.prysoft.pdv.service.ProductoService;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.*;
 
 @Service
 @Transactional
-public class ProductoServiceImpl extends FilterService<Producto> implements ProductoService {
+public class ProductoServiceImpl extends FilterService<Producto> implements ProductoService  {
+
     @Autowired
     private ProductoDao dao;
 
@@ -87,5 +100,15 @@ public class ProductoServiceImpl extends FilterService<Producto> implements Prod
         }
 
         return getPage(hql.toString(), filter.getPage(), filter.getSize(), params);
+    }
+
+    @Override
+    public JasperPrint generalReport(String tenant) throws JRException, IOException, SQLException {
+        Connection conn = DriverManager.getConnection(new String("jdbc:postgresql://localhost:5432/"+tenant),new String("postgres"),new String("12345"));
+        Path currentRelativePath = Paths.get("","reports","AllProducts.jasper");
+        String path = currentRelativePath.toRealPath().toString();
+
+        JasperPrint reporte = JasperFillManager.fillReport(path,new HashMap<>(),conn);
+        return reporte;
     }
 }
