@@ -3,7 +3,9 @@ package com.prysoft.pdv.service.impl;
 import com.prysoft.pdv.dao.DepositoDao;
 import com.prysoft.pdv.dto.DepositoFilter;
 import com.prysoft.pdv.dto.FilterParam;
+import com.prysoft.pdv.dto.StockFilter;
 import com.prysoft.pdv.models.Deposito;
+import com.prysoft.pdv.models.Stock;
 import com.prysoft.pdv.service.DepositoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -63,5 +65,14 @@ public class DepositoServiceImpl extends FilterService<Deposito> implements Depo
                 .append("%')");
 
         return getPage(hql.toString(), filter.getPage(), filter.getSize(), params);
+    }
+
+    @Override
+    public Page<Deposito> filterDepositos(String id) {
+        List<FilterParam> params = new ArrayList<>();
+
+        String hql = "WHERE (c.sucursales.id) = ('"+id+"')";
+
+        return getPage(hql, 0, 1000000, params);
     }
 }

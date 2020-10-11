@@ -19,7 +19,11 @@ public class Deposito implements Serializable{
     @Column(name = "direccion", unique = true, nullable = false)
     private String direccion;
 
+    @ManyToOne
+    private Sucursal sucursales;
+
     private String telefono;
+
     @OneToMany(mappedBy = "deposito")
     @JsonBackReference
     private Set<Stock> stock;
@@ -48,6 +52,14 @@ public class Deposito implements Serializable{
         this.direccion = direccion;
     }
 
+    public Sucursal getSucursales() {
+        return sucursales;
+    }
+
+    public void setSucursales(Sucursal sucursales) {
+        this.sucursales = sucursales;
+    }
+
     public String getTelefono() {
         return telefono;
     }
@@ -70,6 +82,7 @@ public class Deposito implements Serializable{
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", direccion='" + direccion + '\'' +
+                ", sucursales=" + sucursales +
                 ", telefono='" + telefono + '\'' +
                 ", stock=" + stock +
                 '}';

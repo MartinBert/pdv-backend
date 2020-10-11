@@ -19,5 +19,7 @@ public interface DepositoService {
 
     Page<Deposito> filter(DepositoFilter filter);
 
+    Page<Deposito> filterDepositos(String id);
+
     void delete(Long id);
 }

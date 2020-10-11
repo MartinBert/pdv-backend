@@ -45,6 +45,10 @@ public class Sucursal implements Serializable {
     @OneToMany(mappedBy = "sucursal")
     private Set<PuntoVenta> puntosVenta;
 
+    @OneToMany(mappedBy = "sucursales")
+    @JsonBackReference(value = "depositos")
+    private Set<Deposito> depositos;
+
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name="empresa_id", nullable=false)
@@ -54,7 +58,7 @@ public class Sucursal implements Serializable {
         return id;
     }
 
-    public void setId() {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -170,6 +174,14 @@ public class Sucursal implements Serializable {
         this.puntosVenta = puntosVenta;
     }
 
+    public Set<Deposito> getDepositos() {
+        return depositos;
+    }
+
+    public void setDepositos(Set<Deposito> depositos) {
+        this.depositos = depositos;
+    }
+
     public Empresa getEmpresa() {
         return empresa;
     }
@@ -196,6 +208,7 @@ public class Sucursal implements Serializable {
                 ", razonSocial='" + razonSocial + '\'' +
                 ", cuit='" + cuit + '\'' +
                 ", puntosVenta=" + puntosVenta +
+                ", depositos=" + depositos +
                 ", empresa=" + empresa +
                 '}';
     }
