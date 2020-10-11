@@ -9,18 +9,13 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.persistence.EntityNotFoundException;
-import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
@@ -38,7 +33,7 @@ public class ProductoServiceImpl extends FilterService<Producto> implements Prod
     @Override
     public Producto findById(Long id) {
         Optional<Producto> optional = dao.findById(id);
-        if(!optional.isPresent()) {
+        if(optional.isEmpty()) {
             throw new EntityNotFoundException();
         }
 
@@ -48,7 +43,7 @@ public class ProductoServiceImpl extends FilterService<Producto> implements Prod
     @Override
     public Producto findByCodigoBarra(String codigoBarra) {
         Optional<Producto> optional = dao.findByCodigoBarra(codigoBarra);
-        if(!optional.isPresent()) {
+        if(optional.isEmpty()) {
             throw new EntityNotFoundException("No existe producto con ese código de barras");
         }
 
@@ -77,34 +72,25 @@ public class ProductoServiceImpl extends FilterService<Producto> implements Prod
 
     @Override
     public Page<Producto> filter(ProductoFilter filter) {
-        StringBuilder hql = new StringBuilder();
+
         List<FilterParam> params = new ArrayList<>();
 
-        hql
-                .append("WHERE LOWER(c.nombre) LIKE LOWER('")
-                .append(filter.getNombre())
-                .append("%')");
+        String hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filter.getNombre()+"%')";
 
         if(filter.getCodigoBarra() != null && filter.getCodigoBarra().trim().length() > 0) {
-            hql
-                    .append(" OR LOWER(c.codigoBarra) LIKE LOWER('")
-                    .append(filter.getCodigoBarra())
-                    .append("%')");
+            hql = " OR LOWER(c.codigoBarra) LIKE LOWER('"+filter.getCodigoBarra()+"%')";
         }
 
         if(filter.getCodigoProducto() != null && filter.getCodigoProducto().trim().length() > 0) {
-            hql
-                    .append(" OR LOWER(c.codigoProducto) LIKE LOWER('")
-                    .append(filter.getCodigoProducto())
-                    .append("%')");
+            hql = " OR LOWER(c.codigoProducto) LIKE LOWER('"+filter.getCodigoProducto()+"%')";
         }
 
-        return getPage(hql.toString(), filter.getPage(), filter.getSize(), params);
+        return getPage(hql, filter.getPage(), filter.getSize(), params);
     }
 
     @Override
     public JasperPrint generalReport(String tenant) throws JRException, IOException, SQLException {
-        Connection conn = DriverManager.getConnection(new String("jdbc:postgresql://localhost:5432/"+tenant),new String("postgres"),new String("12345"));
+        Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/"+tenant,"postgres","12345");
         Path currentRelativePath = Paths.get("","reports","AllProducts.jasper");
         String path = currentRelativePath.toRealPath().toString();
 

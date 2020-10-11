@@ -1,6 +1,8 @@
 package com.prysoft.pdv.controller;
 
+import com.prysoft.pdv.dto.StockFilter;
 import com.prysoft.pdv.models.Stock;
+import com.prysoft.pdv.models.Sucursal;
 import com.prysoft.pdv.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -32,6 +34,9 @@ public class StockController {
     Stock save(@RequestBody Stock entity) {
         return service.saveOrUpdate(entity);
     }
+
+    @PostMapping(value = "/getForSucursal")
+    Page<Stock> getStockForSucursal(@RequestBody StockFilter filter) {return service.filter(filter);}
 
     @PostMapping(value = "/saveAll")
     Iterable<Stock> saveAll(@RequestBody ArrayList<Stock> entities) {

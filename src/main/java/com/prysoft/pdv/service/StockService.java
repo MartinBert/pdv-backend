@@ -1,5 +1,6 @@
 package com.prysoft.pdv.service;
 
+import com.prysoft.pdv.dto.StockFilter;
 import com.prysoft.pdv.models.Stock;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +15,8 @@ public interface StockService {
     Stock saveOrUpdate(Stock entity);
 
     Iterable<Stock> saveAll(ArrayList<Stock> entities);
+
+    Page<Stock> filter(StockFilter filter);
 
     void delete(Long id);
 }

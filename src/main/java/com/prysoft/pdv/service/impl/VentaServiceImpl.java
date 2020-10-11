@@ -19,6 +19,9 @@ import javax.persistence.EntityNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +39,7 @@ public class VentaServiceImpl extends FilterService<Venta> implements VentaServi
     @Override
     public Venta findById(Long id) {
         Optional<Venta> optional = dao.findById(id);
-        if(!optional.isPresent()) {
+        if(optional.isEmpty()) {
             throw new EntityNotFoundException();
         }
 
@@ -72,9 +75,11 @@ public class VentaServiceImpl extends FilterService<Venta> implements VentaServi
     }
 
     @Override
-    public JasperPrint closeSaleReport(ComprobanteFiscal request) throws IOException, JRException {
+    public JasperPrint closeSaleReport(ComprobanteFiscal request) throws IOException, JRException, SQLException {
         Path currentRelativePath = Paths.get("","reports","FacturaElectronica.jasper");
         String path = currentRelativePath.toRealPath().toString();
+
+        Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/pdv","postgres","12345");
 
         String letra = request.getLetra();
         String barCode = request.getBarCode();
@@ -89,7 +94,7 @@ public class VentaServiceImpl extends FilterService<Venta> implements VentaServi
         parameters.put("fechaVto", fechaVto);
         parameters.put("cae", cae);
 
-        JasperPrint reporte = JasperFillManager.fillReport(path, parameters);
+        JasperPrint reporte = JasperFillManager.fillReport(path, parameters,conn);
         return null;
     }
 }

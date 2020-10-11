@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public interface VentaService {
 
@@ -20,7 +21,7 @@ public interface VentaService {
 
     Page<Venta> filter(VentaFilter filter);
 
-    JasperPrint closeSaleReport(ComprobanteFiscal request) throws IOException, JRException;
+    JasperPrint closeSaleReport(ComprobanteFiscal request) throws IOException, JRException, SQLException;
 
     void delete(Long id);
 }

@@ -1,6 +1,9 @@
 package com.prysoft.pdv.service.impl;
 
+import com.fasterxml.jackson.databind.util.ArrayBuilders;
 import com.prysoft.pdv.dao.StockDao;
+import com.prysoft.pdv.dto.FilterParam;
+import com.prysoft.pdv.dto.StockFilter;
 import com.prysoft.pdv.models.Stock;
 import com.prysoft.pdv.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +14,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 @Transactional
-public class StockServiceImpl implements StockService {
+public class StockServiceImpl extends FilterService<Stock> implements StockService {
     @Autowired
     private StockDao dao;
 
@@ -54,6 +58,15 @@ public class StockServiceImpl implements StockService {
         }
 
         return null;
+    }
+
+    @Override
+    public Page<Stock> filter(StockFilter filter) {
+        List<FilterParam> params = new ArrayList<>();
+
+        String hql = "WHERE (c.sucursal.id) = ('"+filter.getSucursal()+"')";
+
+        return getPage(hql , filter.getPage(), filter.getSize(), params);
     }
 
     @Override

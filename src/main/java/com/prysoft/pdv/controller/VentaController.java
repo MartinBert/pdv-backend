@@ -6,6 +6,7 @@ import com.prysoft.pdv.models.Venta;
 import com.prysoft.pdv.service.VentaService;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 @RestController
 @RequestMapping(value = "/{tenantid}/api/ventas")
@@ -53,8 +55,10 @@ public class VentaController {
     }
 
     @PostMapping(value = "/onCloseSaleReport")
-    public JasperPrint onCloseSaleReport(@RequestBody ComprobanteFiscal request) throws IOException, JRException {
+    public JasperPrint onCloseSaleReport(@RequestBody ComprobanteFiscal request) throws IOException, JRException, SQLException {
         JasperPrint closeSaleReport = service.closeSaleReport(request);
+        JasperViewer viewer = new JasperViewer(closeSaleReport, false);
+        viewer.setVisible(true);
         return null;
     }
 }
