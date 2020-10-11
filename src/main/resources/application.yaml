@@ -22,8 +22,8 @@ tenants:
       driverClassName: org.postgresql.Driver
       username: postgres
       password: 12345
-    pdv2:
-      jdbcUrl: jdbc:postgresql://localhost:5432/pdv2
+    servipack:
+      jdbcUrl: jdbc:postgresql://localhost:5432/servipack
       driverClassName: org.postgresql.Driver
       username: postgres
       password: 12345
