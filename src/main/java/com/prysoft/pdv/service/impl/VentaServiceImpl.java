@@ -63,15 +63,11 @@ public class VentaServiceImpl extends FilterService<Venta> implements VentaServi
 
     @Override
     public Page<Venta> filter(VentaFilter filter) {
-        StringBuilder hql = new StringBuilder();
         List<FilterParam> params = new ArrayList<>();
 
-        hql
-                .append("WHERE LOWER(c.nombre) LIKE LOWER('")
-                .append(filter.getNombre())
-                .append("%')");
+        String hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filter.getNombre()+"%')";
 
-        return getPage(hql.toString(), filter.getPage(), filter.getSize(), params);
+        return getPage(hql, filter.getPage(), filter.getSize(), params);
     }
 
     @Override

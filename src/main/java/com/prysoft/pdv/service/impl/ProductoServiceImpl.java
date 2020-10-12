@@ -75,15 +75,7 @@ public class ProductoServiceImpl extends FilterService<Producto> implements Prod
 
         List<FilterParam> params = new ArrayList<>();
 
-        String hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filter.getNombre()+"%')";
-
-        if(filter.getCodigoBarra() != null && filter.getCodigoBarra().trim().length() > 0) {
-            hql = " OR LOWER(c.codigoBarra) LIKE LOWER('"+filter.getCodigoBarra()+"%')";
-        }
-
-        if(filter.getCodigoProducto() != null && filter.getCodigoProducto().trim().length() > 0) {
-            hql = " OR LOWER(c.codigoProducto) LIKE LOWER('"+filter.getCodigoProducto()+"%')";
-        }
+        String hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filter.getNombre()+"%') OR LOWER(c.codigoBarra) LIKE LOWER('"+filter.getCodigoBarra()+"%') OR LOWER(c.codigoProducto) LIKE LOWER('"+filter.getCodigoProducto()+"%')";
 
         return getPage(hql, filter.getPage(), filter.getSize(), params);
     }
