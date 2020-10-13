@@ -3,21 +3,26 @@ package com.prysoft.pdv.controller;
 import com.prysoft.pdv.dto.ProductoFilter;
 import com.prysoft.pdv.models.*;
 import com.prysoft.pdv.service.ProductoService;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.util.JRLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
-import java.io.FileOutputStream;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.OutputStream;
+import java.io.InputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/{tenantid}/api/productos")
@@ -65,14 +70,7 @@ public class ProductoController {
     }
 
     @GetMapping(value = "/generalReport/{tenant}")
-    public JasperPrint generateReport(@PathVariable String tenant) throws JRException, IOException, SQLException {
-
-        String path = System.getProperty("user.home") + "/Desktop/reporte.pdf";
-
-        JasperPrint reporteGeneral = service.generalReport(tenant);
-        OutputStream output = new FileOutputStream(new File(path));
-        JasperExportManager.exportReportToPdfStream(reporteGeneral, output);
-
-        return null;
+    public JasperPrint generateReport(@PathVariable String tenant, HttpServletResponse response) throws JRException, IOException, SQLException {
+        return service.generalReport(tenant, response);
     }
 }

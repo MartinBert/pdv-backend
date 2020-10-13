@@ -5,9 +5,8 @@ import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.ProductoFilter;
 import com.prysoft.pdv.models.Producto;
 import com.prysoft.pdv.service.ProductoService;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.util.JRLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +14,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
@@ -81,12 +83,15 @@ public class ProductoServiceImpl extends FilterService<Producto> implements Prod
     }
 
     @Override
-    public JasperPrint generalReport(String tenant) throws JRException, IOException, SQLException {
-        Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/"+tenant,"postgres","12345");
-        Path currentRelativePath = Paths.get("","reports","AllProducts.jasper");
-        String path = currentRelativePath.toRealPath().toString();
+    public JasperPrint generalReport(String tenant, HttpServletResponse response) throws JRException, IOException, SQLException {
 
-        JasperPrint reporte = JasperFillManager.fillReport(path,new HashMap<>(),conn);
-        return reporte;
+        Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/"+tenant,"postgres","12345");
+        InputStream stream = this.getClass().getResourceAsStream("/reports/AllProducts.jasper");
+        JasperReport report = (JasperReport) JRLoader.loadObject(stream);
+        JasperPrint print = JasperFillManager.fillReport(report,new HashMap<>(),conn);
+        final ServletOutputStream output = response.getOutputStream();
+        JasperExportManager.exportReportToPdfStream(print, output);
+
+        return null;
     }
 }

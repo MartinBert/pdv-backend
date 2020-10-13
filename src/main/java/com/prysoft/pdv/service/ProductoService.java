@@ -7,6 +7,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public interface ProductoService {
 
     Page<Producto> filter(ProductoFilter filter);
 
-    JasperPrint generalReport(String tenant) throws JRException, IOException, SQLException;
-
     void delete(Long id);
+
+    JasperPrint generalReport(String tenant, HttpServletResponse response) throws JRException, IOException, SQLException;
 }
