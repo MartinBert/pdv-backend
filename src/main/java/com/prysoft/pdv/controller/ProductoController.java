@@ -4,16 +4,18 @@ import com.prysoft.pdv.dto.ProductoFilter;
 import com.prysoft.pdv.models.*;
 import com.prysoft.pdv.service.ProductoService;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.view.JasperViewer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URISyntaxException;
+import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -64,9 +66,13 @@ public class ProductoController {
 
     @GetMapping(value = "/generalReport/{tenant}")
     public JasperPrint generateReport(@PathVariable String tenant) throws JRException, IOException, SQLException {
+
+        String path = System.getProperty("user.home") + "/Desktop/reporte.pdf";
+
         JasperPrint reporteGeneral = service.generalReport(tenant);
-        JasperViewer viewer = new JasperViewer(reporteGeneral, false);
-        viewer.setVisible(true);
+        OutputStream output = new FileOutputStream(new File(path));
+        JasperExportManager.exportReportToPdfStream(reporteGeneral, output);
+
         return null;
     }
 }
