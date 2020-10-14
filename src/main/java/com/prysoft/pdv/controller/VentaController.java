@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -54,11 +55,9 @@ public class VentaController {
         return service.filter(filter);
     }
 
-    @PostMapping(value = "/onCloseSaleReport")
-    public JasperPrint onCloseSaleReport(@RequestBody ComprobanteFiscal request) throws IOException, JRException, SQLException {
-        JasperPrint closeSaleReport = service.closeSaleReport(request);
-        JasperViewer viewer = new JasperViewer(closeSaleReport, false);
-        viewer.setVisible(true);
+    @PostMapping(value = "/onCloseSaleReport/{tenant}")
+    public JasperPrint onCloseSaleReport(@RequestBody ComprobanteFiscal request, @PathVariable String tenant, HttpServletResponse response) throws IOException, JRException, SQLException {
+        JasperPrint closeSaleReport = service.closeSaleReport(request, tenant, response);
         return null;
     }
 }

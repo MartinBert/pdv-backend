@@ -8,6 +8,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -21,8 +22,8 @@ public interface VentaService {
 
     Page<Venta> filter(VentaFilter filter);
 
-    JasperPrint closeSaleReport(ComprobanteFiscal request) throws IOException, JRException, SQLException;
-
     void delete(Long id);
+
+    JasperPrint closeSaleReport(ComprobanteFiscal request, String tenant, HttpServletResponse response) throws IOException, JRException, SQLException;
 }
 

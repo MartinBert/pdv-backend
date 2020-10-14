@@ -6,9 +6,9 @@ import com.prysoft.pdv.dto.VentaFilter;
 import com.prysoft.pdv.models.ComprobanteFiscal;
 import com.prysoft.pdv.models.Venta;
 import com.prysoft.pdv.service.VentaService;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,11 +16,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -71,26 +70,22 @@ public class VentaServiceImpl extends FilterService<Venta> implements VentaServi
     }
 
     @Override
-    public JasperPrint closeSaleReport(ComprobanteFiscal request) throws IOException, JRException, SQLException {
-        Path currentRelativePath = Paths.get("","reports","FacturaElectronica.jasper");
-        String path = currentRelativePath.toRealPath().toString();
+    public JasperPrint closeSaleReport(ComprobanteFiscal request, String tenant, HttpServletResponse response) throws IOException, JRException, SQLException {
 
-        Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/pdv","postgres","12345");
+        InputStream stream = this.getClass().getResourceAsStream("/reports/factura_electronica.jasper");
 
-        String letra = request.getLetra();
-        String barCode = request.getBarCode();
-        String fechaEmision = request.getFechaEmision();
-        String fechaVto = request.getFechaVto();
-        String cae = request.getCae();
+        List<ComprobanteFiscal> data = new ArrayList<>();
+        data.add(request);
 
-        HashMap<String, Object> parameters = new HashMap<>();
-        parameters.put("letra", letra);
-        parameters.put("barCode", barCode);
-        parameters.put("fechaEmision", fechaEmision);
-        parameters.put("fechaVto", fechaVto);
-        parameters.put("cae", cae);
+        JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(data);
 
-        JasperPrint reporte = JasperFillManager.fillReport(path, parameters,conn);
+        HashMap<String, Object> params = new HashMap<>();
+
+        JasperReport report = (JasperReport) JRLoader.loadObject(stream);
+        JasperPrint print = JasperFillManager.fillReport(report,params,datasource);
+        final ServletOutputStream output = response.getOutputStream();
+        JasperExportManager.exportReportToPdfStream(print, output);
+
         return null;
     }
 }
