@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
 
 public interface VentaService {
 
@@ -24,6 +25,6 @@ public interface VentaService {
 
     void delete(Long id);
 
-    JasperPrint closeSaleReport(ComprobanteFiscal request, String tenant, HttpServletResponse response) throws IOException, JRException, SQLException;
+    JasperPrint closeSaleReport(ComprobanteFiscal request, String tenant, HttpServletResponse response) throws IOException, JRException, SQLException, ParseException;
 }
 

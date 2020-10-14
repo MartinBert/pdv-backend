@@ -4,6 +4,7 @@ import com.prysoft.pdv.dao.VentaDao;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.VentaFilter;
 import com.prysoft.pdv.models.ComprobanteFiscal;
+import com.prysoft.pdv.models.PrintComprobante;
 import com.prysoft.pdv.models.Venta;
 import com.prysoft.pdv.service.VentaService;
 import net.sf.jasperreports.engine.*;
@@ -20,11 +21,9 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 @Transactional
@@ -70,12 +69,36 @@ public class VentaServiceImpl extends FilterService<Venta> implements VentaServi
     }
 
     @Override
-    public JasperPrint closeSaleReport(ComprobanteFiscal request, String tenant, HttpServletResponse response) throws IOException, JRException, SQLException {
+    public JasperPrint closeSaleReport(ComprobanteFiscal request, String tenant, HttpServletResponse response) throws IOException, JRException, ParseException {
 
-        InputStream stream = this.getClass().getResourceAsStream("/reports/factura_electronica.jasper");
+        InputStream stream = this.getClass().getResourceAsStream("/reports/factura_electronic.jasper");
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        String fechaInicioAct = format.format(request.getSucursal().getFechaInicioAct());
 
-        List<ComprobanteFiscal> data = new ArrayList<>();
-        data.add(request);
+        PrintComprobante comprobante = new PrintComprobante();
+        comprobante.setBarCode(request.getBarCode());
+        comprobante.setCae(request.getCae());
+        comprobante.setFechaEmision(request.getFechaEmision());
+        comprobante.setFechaVto(request.getFechaVto());
+        comprobante.setLetra(request.getLetra());
+        comprobante.setClienteCondicionIva(request.getCliente().getCondicionIva().getNombre());
+        comprobante.setClienteCuit(request.getCliente().getCuit());
+        comprobante.setClienteDireccion(request.getCliente().getDireccion());
+        comprobante.setClienteRazonSocial(request.getCliente().getRazonSocial());
+        comprobante.setCondicionVenta(request.getCondicionVenta());
+        comprobante.setNumeroCbte(request.getNumeroCbte());
+        comprobante.setIdPuntoVenta(request.getPuntoVenta().getIdFiscal());
+        comprobante.setEmpresaCondicionIva(request.getSucursal().getCondicionIva().getNombre());
+        comprobante.setEmpresaCuit(request.getSucursal().getCuit());
+        comprobante.setEmpresaDireccion(request.getSucursal().getDireccion());
+        comprobante.setEmpresaFechaInicioAct(fechaInicioAct);
+        comprobante.setEmpresaRazonSocial(request.getSucursal().getRazonSocial());
+        comprobante.setEmpresaTelefono(request.getSucursal().getTelefono());
+        comprobante.setEmpresaIngBruto(request.getSucursal().getIngBruto());
+        comprobante.setProductos(request.getProductos());
+
+        List<PrintComprobante> data = new ArrayList<>();
+        data.add(comprobante);
 
         JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(data);
 
