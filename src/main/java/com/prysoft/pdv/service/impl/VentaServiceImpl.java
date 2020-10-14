@@ -5,6 +5,7 @@ import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.VentaFilter;
 import com.prysoft.pdv.models.ComprobanteFiscal;
 import com.prysoft.pdv.models.PrintComprobante;
+import com.prysoft.pdv.models.Producto;
 import com.prysoft.pdv.models.Venta;
 import com.prysoft.pdv.service.VentaService;
 import net.sf.jasperreports.engine.*;
@@ -71,7 +72,10 @@ public class VentaServiceImpl extends FilterService<Venta> implements VentaServi
     @Override
     public JasperPrint closeSaleReport(ComprobanteFiscal request, String tenant, HttpServletResponse response) throws IOException, JRException, ParseException {
 
-        InputStream stream = this.getClass().getResourceAsStream("/reports/factura_electronic.jasper");
+        String route = System.getProperty("user.dir")+"\\src\\main\\resources\\reports\\factura_detail.jasper";
+
+        InputStream stream = this.getClass().getResourceAsStream("/reports/factura_electronica.jasper");
+
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         String fechaInicioAct = format.format(request.getSucursal().getFechaInicioAct());
 
@@ -100,9 +104,14 @@ public class VentaServiceImpl extends FilterService<Venta> implements VentaServi
         List<PrintComprobante> data = new ArrayList<>();
         data.add(comprobante);
 
+        List<Producto> dataDetail = comprobante.getProductos();
+        System.out.println(dataDetail);
+
         JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(data);
 
         HashMap<String, Object> params = new HashMap<>();
+        params.put("SUBREPORT_DIR", route);
+        params.put("SUBREPORT_DATA", dataDetail.get(0).getNombre());
 
         JasperReport report = (JasperReport) JRLoader.loadObject(stream);
         JasperPrint print = JasperFillManager.fillReport(report,params,datasource);
