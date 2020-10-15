@@ -23,7 +23,7 @@ public class PrintComprobante implements Serializable {
     private String empresaFechaInicioAct;
     private int empresaIngBruto;
     private String empresaTelefono;
-    private ArrayList<Producto> productos;
+    private ArrayList<PrintComprobanteDetail> productos;
 
     public String getBarCode() {
         return barCode;
@@ -153,11 +153,11 @@ public class PrintComprobante implements Serializable {
         this.empresaTelefono = empresaTelefono;
     }
 
-    public ArrayList<Producto> getProductos() {
+    public ArrayList<PrintComprobanteDetail> getProductos() {
         return productos;
     }
 
-    public void setProductos(ArrayList<Producto> productos) {
+    public void setProductos(ArrayList<PrintComprobanteDetail> productos) {
         this.productos = productos;
     }
 

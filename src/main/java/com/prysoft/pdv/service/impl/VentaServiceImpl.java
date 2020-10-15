@@ -5,7 +5,6 @@ import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.VentaFilter;
 import com.prysoft.pdv.models.ComprobanteFiscal;
 import com.prysoft.pdv.models.PrintComprobante;
-import com.prysoft.pdv.models.Producto;
 import com.prysoft.pdv.models.Venta;
 import com.prysoft.pdv.service.VentaService;
 import net.sf.jasperreports.engine.*;
@@ -104,14 +103,15 @@ public class VentaServiceImpl extends FilterService<Venta> implements VentaServi
         List<PrintComprobante> data = new ArrayList<>();
         data.add(comprobante);
 
-        List<Producto> dataDetail = comprobante.getProductos();
-        System.out.println(dataDetail);
+        System.out.println(comprobante.getProductos());
+
+        JRBeanCollectionDataSource subreportDataSource = new JRBeanCollectionDataSource(comprobante.getProductos());
 
         JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(data);
 
         HashMap<String, Object> params = new HashMap<>();
         params.put("SUBREPORT_DIR", route);
-        params.put("SUBREPORT_DATA", dataDetail.get(0).getNombre());
+        params.put("SUBREPORT_DATA", subreportDataSource);
 
         JasperReport report = (JasperReport) JRLoader.loadObject(stream);
         JasperPrint print = JasperFillManager.fillReport(report,params,datasource);

@@ -18,7 +18,7 @@ public class ComprobanteFiscal implements Serializable {
     private String fechaEmision;
     private String fechaVto;
     private Boolean condicionVenta;
-    private ArrayList<Producto> productos;
+    private ArrayList<PrintComprobanteDetail> productos;
     private String barCode;
     private String cae;
 
@@ -85,11 +85,11 @@ public class ComprobanteFiscal implements Serializable {
         this.condicionVenta = condicionVenta;
     }
 
-    public ArrayList<Producto> getProductos() {
+    public ArrayList<PrintComprobanteDetail> getProductos() {
         return productos;
     }
 
-    public void setProductos(ArrayList<Producto> productos) {
+    public void setProductos(ArrayList<PrintComprobanteDetail> productos) {
         this.productos = productos;
     }
 

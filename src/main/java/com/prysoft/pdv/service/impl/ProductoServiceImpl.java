@@ -84,7 +84,7 @@ public class ProductoServiceImpl extends FilterService<Producto> implements Prod
     public JasperPrint generalReport(String tenant, HttpServletResponse response) throws JRException, IOException, SQLException {
 
         Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/"+tenant,"postgres","12345");
-        InputStream stream = this.getClass().getResourceAsStream("/reports/all_products.jasper");
+        InputStream stream = this.getClass().getResourceAsStream("/reports/AllProducts.jasper");
         JasperReport report = (JasperReport) JRLoader.loadObject(stream);
         JasperPrint print = JasperFillManager.fillReport(report,new HashMap<>(),conn);
         final ServletOutputStream output = response.getOutputStream();
