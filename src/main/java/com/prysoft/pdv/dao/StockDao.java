@@ -1,5 +1,6 @@
 package com.prysoft.pdv.dao;
 
+import com.prysoft.pdv.models.Producto;
 import com.prysoft.pdv.models.Stock;
 import com.prysoft.pdv.models.Sucursal;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -10,4 +11,6 @@ public interface StockDao extends PagingAndSortingRepository<Stock, Long> {
     Optional<Stock> findByAlgorim(String algorim);
 
     Iterable<Stock> findBySucursal(Sucursal sucursal);
+
+    Optional<Stock> findByProductoId(Long p);
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.util.ArrayBuilders;
 import com.prysoft.pdv.dao.StockDao;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.StockFilter;
+import com.prysoft.pdv.models.Producto;
 import com.prysoft.pdv.models.Stock;
 import com.prysoft.pdv.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,11 +67,12 @@ public class StockServiceImpl extends FilterService<Stock> implements StockServi
 
         String hql = "WHERE (c.sucursal.id) = ('"+filter.getSucursal()+"')";
 
-        return getPage(hql , filter.getPage(), filter.getSize(), params);
+        return getPage(hql , 0, 100000, params);
     }
 
     @Override
     public void delete(Long id) {
         dao.deleteById(id);
     }
+
 }
