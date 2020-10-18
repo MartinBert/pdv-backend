@@ -25,6 +25,6 @@ public interface VentaService {
 
     void delete(Long id);
 
-    JasperPrint closeSaleReport(ComprobanteFiscal request, String tenant, HttpServletResponse response) throws IOException, JRException, SQLException, ParseException;
+    JasperPrint closeSaleReport(ComprobanteFiscal request, String tenant, String totalVenta, HttpServletResponse response) throws IOException, JRException, SQLException, ParseException;
 }
 

@@ -55,9 +55,9 @@ public class VentaController {
         return service.filter(filter);
     }
 
-    @PostMapping(value = "/onCloseSaleReport/{tenant}")
-    public JasperPrint onCloseSaleReport(@RequestBody ComprobanteFiscal request, @PathVariable String tenant, HttpServletResponse response) throws IOException, JRException, SQLException, ParseException {
-        JasperPrint closeSaleReport = service.closeSaleReport(request, tenant, response);
+    @PostMapping(value = "/onCloseSaleReport/{tenant}/{totalVenta}")
+    public JasperPrint onCloseSaleReport(@RequestBody ComprobanteFiscal request, @PathVariable String tenant,@PathVariable String totalVenta ,HttpServletResponse response) throws IOException, JRException, SQLException, ParseException {
+        JasperPrint closeSaleReport = service.closeSaleReport(request, tenant, totalVenta,response);
         return null;
     }
 }
