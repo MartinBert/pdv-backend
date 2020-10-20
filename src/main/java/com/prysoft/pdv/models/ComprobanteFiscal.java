@@ -3,6 +3,7 @@ package com.prysoft.pdv.models;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Set;
 
 @Entity
 @Table(name = "comprobantes_fiscales")
@@ -21,6 +22,19 @@ public class ComprobanteFiscal implements Serializable {
     private ArrayList<PrintComprobanteDetail> productos;
     private String barCode;
     private String cae;
+    private Double totalVenta;
+
+    @ManyToMany
+    @JoinTable(name = "comprobantes_medios",
+            joinColumns = @JoinColumn(name = "id_comprobante"),
+            inverseJoinColumns = @JoinColumn(name = "id_medio"))
+    private Set<MedioPago> mediosPago;
+
+    @ManyToMany
+    @JoinTable(name = "comprobantes_planes",
+            joinColumns = @JoinColumn(name = "id_comprobante"),
+            inverseJoinColumns = @JoinColumn(name = "id_plan"))
+    private Set<PlanPago> planesPago;
 
     @OneToOne
     private PuntoVenta puntoVenta;
@@ -109,6 +123,22 @@ public class ComprobanteFiscal implements Serializable {
         this.cae = cae;
     }
 
+    public Double getTotalVenta() {
+        return totalVenta;
+    }
+
+    public void setTotalVenta(Double totalVenta) {
+        this.totalVenta = totalVenta;
+    }
+
+    public Set<MedioPago> getMediosPago() {
+        return mediosPago;
+    }
+
+    public void setMediosPago(Set<MedioPago> mediosPago) {
+        this.mediosPago = mediosPago;
+    }
+
     public PuntoVenta getPuntoVenta() {
         return puntoVenta;
     }
@@ -149,6 +179,14 @@ public class ComprobanteFiscal implements Serializable {
         this.cliente = cliente;
     }
 
+    public Set<PlanPago> getPlanesPago() {
+        return planesPago;
+    }
+
+    public void setPlanesPago(Set<PlanPago> planesPago) {
+        this.planesPago = planesPago;
+    }
+
     @Override
     public String toString() {
         return "ComprobanteFiscal{" +
@@ -161,6 +199,9 @@ public class ComprobanteFiscal implements Serializable {
                 ", productos=" + productos +
                 ", barCode='" + barCode + '\'' +
                 ", cae='" + cae + '\'' +
+                ", totalVenta=" + totalVenta +
+                ", mediosPago=" + mediosPago +
+                ", planesPago=" + planesPago +
                 ", puntoVenta=" + puntoVenta +
                 ", sucursal=" + sucursal +
                 ", documentoComercial=" + documentoComercial +

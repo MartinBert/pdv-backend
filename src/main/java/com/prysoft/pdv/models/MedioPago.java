@@ -14,10 +14,6 @@ public class MedioPago implements Serializable {
     @Column(name = "nombre", unique = true, nullable = false)
     private String nombre;
 
-    @ManyToOne()
-    @JoinColumn(name = "venta_id")
-    private Venta venta;
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "medios_planes",
             joinColumns =  @JoinColumn(name = "id_medio"),
@@ -40,14 +36,6 @@ public class MedioPago implements Serializable {
         this.nombre = nombre;
     }
 
-    public Venta getVenta() {
-        return venta;
-    }
-
-    public void setVenta(Venta venta) {
-        this.venta = venta;
-    }
-
     public Set<PlanPago> getPlanPago() {
         return planPago;
     }
@@ -61,7 +49,6 @@ public class MedioPago implements Serializable {
         return "MedioPago{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
-                ", venta=" + venta +
                 ", planPago=" + planPago +
                 '}';
     }

@@ -1,22 +1,14 @@
 package com.prysoft.pdv.service.impl;
 
-import com.prysoft.pdv.dao.VentaDao;
-import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.VentaFilter;
 import com.prysoft.pdv.models.ComprobanteFiscal;
 import com.prysoft.pdv.models.PrintComprobante;
-import com.prysoft.pdv.models.Venta;
 import com.prysoft.pdv.service.VentaService;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -28,51 +20,11 @@ import java.util.*;
 
 @Service
 @Transactional
-public class VentaServiceImpl extends FilterService<Venta> implements VentaService {
-
-    private List<Integer> lista;
-
-    @Autowired
-    private VentaDao dao;
+public class VentaServiceImpl implements VentaService {
 
     @Override
-    public Venta findById(Long id) {
-        Optional<Venta> optional = dao.findById(id);
-        if(optional.isEmpty()) {
-            throw new EntityNotFoundException();
-        }
+    public JasperPrint closeSaleReport(ComprobanteFiscal request, String tenant, HttpServletResponse response) throws IOException, JRException, ParseException {
 
-        return optional.get();
-    }
-
-    @Override
-    public Page<Venta> findAll(Pageable page) {
-        return dao.findAll(page);
-    }
-
-    @Override
-    public Venta saveOrUpdate(Venta entity) {
-        return dao.save(entity);
-    }
-
-    @Override
-    public void delete(Long id) {
-        dao.deleteById(id);
-    }
-
-    @Override
-    public Page<Venta> filter(VentaFilter filter) {
-        List<FilterParam> params = new ArrayList<>();
-
-        String hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filter.getNombre()+"%')";
-
-        return getPage(hql, filter.getPage(), filter.getSize(), params);
-    }
-
-    @Override
-    public JasperPrint closeSaleReport(ComprobanteFiscal request, String tenant,String totalVenta, HttpServletResponse response) throws IOException, JRException, ParseException {
-
-        System.out.println(totalVenta);
         if(request.getCae() != ""){
             String detailRoute = Paths.get("","src","main","resources", "reports/factura_detail.jasper").toString();
             InputStream stream = this.getClass().getResourceAsStream("/reports/factura_electronica.jasper");
@@ -99,6 +51,7 @@ public class VentaServiceImpl extends FilterService<Venta> implements VentaServi
             comprobante.setEmpresaTelefono(request.getSucursal().getTelefono());
             comprobante.setEmpresaIngBruto(request.getSucursal().getIngBruto());
             comprobante.setProductos(request.getProductos());
+            comprobante.setTotalVenta(request.getTotalVenta());
             List<PrintComprobante> data = new ArrayList<>();
             data.add(comprobante);
             System.out.println(comprobante);
@@ -107,7 +60,7 @@ public class VentaServiceImpl extends FilterService<Venta> implements VentaServi
             HashMap<String, Object> params = new HashMap<>();
             params.put("SUBREPORT_DIR", detailRoute);
             params.put("SUBREPORT_DATA", subreportDataSource);
-            params.put("TOTAL_VENTA", totalVenta);
+            params.put("TOTAL_VENTA", comprobante.getTotalVenta().toString());
             JasperReport report = (JasperReport) JRLoader.loadObject(stream);
             JasperPrint print = JasperFillManager.fillReport(report,params,datasource);
             final ServletOutputStream output = response.getOutputStream();
@@ -145,7 +98,7 @@ public class VentaServiceImpl extends FilterService<Venta> implements VentaServi
             HashMap<String, Object> params = new HashMap<>();
             params.put("SUBREPORT_DIR", detailRoute);
             params.put("SUBREPORT_DATA", subreportDataSource);
-            params.put("TOTAL_VENTA", totalVenta);
+            params.put("TOTAL_VENTA", comprobante.getTotalVenta().toString());
             JasperReport report = (JasperReport) JRLoader.loadObject(stream);
             JasperPrint print = JasperFillManager.fillReport(report,params,datasource);
             final ServletOutputStream output = response.getOutputStream();
