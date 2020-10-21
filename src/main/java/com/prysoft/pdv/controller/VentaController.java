@@ -18,7 +18,7 @@ public class VentaController {
     @Autowired
     private VentaService service;
 
-    @PostMapping(value = "/onCloseSaleReport/{tenant}/{totalVenta}")
+    @PostMapping(value = "/onCloseSaleReport/{tenant}")
     public JasperPrint onCloseSaleReport(@RequestBody ComprobanteFiscal request, @PathVariable String tenant, HttpServletResponse response) throws IOException, JRException, SQLException, ParseException {
         JasperPrint closeSaleReport = service.closeSaleReport(request, tenant, response);
         return null;
