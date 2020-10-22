@@ -30,16 +30,16 @@ public class Sucursal implements Serializable {
     private String provincia;
     private String ciudad;
 
-    @Column(name = "fecha_inicio_act", unique = true)
+    @Column(name = "fecha_inicio_act")
     private Date fechaInicioAct;
 
-    @Column(name = "ing_bruto", unique = true)
+    @Column(name = "ing_bruto")
     private int ingBruto;
 
-    @Column(name = "razon_social", unique = true)
+    @Column(name = "razon_social")
     private String razonSocial;
 
-    @Column(name = "cuit", unique = true)
+    @Column(name = "cuit")
     private String cuit;
 
     @OneToMany(mappedBy = "sucursal")
