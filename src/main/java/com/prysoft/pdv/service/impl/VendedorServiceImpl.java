@@ -2,7 +2,6 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.VendedorDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.VendedorFilter;
 import com.prysoft.pdv.models.Vendedor;
 import com.prysoft.pdv.service.VendedorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,17 +48,9 @@ public class VendedorServiceImpl extends FilterService<Vendedor> implements Vend
     }
 
     @Override
-    public Page<Vendedor> filter(VendedorFilter filter) {
-        StringBuilder hql = new StringBuilder();
+    public Page<Vendedor> filter(Long filter, int page, int size) {
         List<FilterParam> params = new ArrayList<>();
-
-        hql
-                .append("WHERE LOWER(c.nombre) LIKE LOWER('")
-                .append(filter.getNombre())
-                .append("%')");
-
-        return getPage(hql.toString(), filter.getPage(), filter.getSize(), params);
+        String hql = "JOIN c.sucursales WHERE (id_sucursal) = ('"+filter+"')";
+        return getPage(hql,page,size,params);
     }
-
-
 }

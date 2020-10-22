@@ -36,8 +36,9 @@ public class DepositoController {
     @PostMapping(value = "/saveAll")
     Iterable<Deposito> saveAll(@RequestBody ArrayList<Deposito> entities) { return service.saveAll(entities); }
 
-    @GetMapping(value = "/getDepositosForSucursal/{id}")
-    Page<Deposito> getDepositosForSucursal(@PathVariable String id) {return service.filterDepositos(id);}
+    @GetMapping(value = "/getDepositosForSucursal/{id}/{page}/{size}")
+    Page<Deposito> getDepositosForSucursal(@PathVariable String id, @PathVariable int page, @PathVariable int size)
+    {return service.filterDepositos(id, page, size);}
 
     @PutMapping
     Deposito update(@RequestBody Deposito entity) {

@@ -1,13 +1,8 @@
 package com.prysoft.pdv.service.impl;
 
-import com.prysoft.pdv.dao.ClienteDao;
 import com.prysoft.pdv.dao.TransportistaDao;
-import com.prysoft.pdv.dto.ClienteFilter;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.TransportistaFilter;
-import com.prysoft.pdv.models.Cliente;
 import com.prysoft.pdv.models.Transportista;
-import com.prysoft.pdv.service.ClienteService;
 import com.prysoft.pdv.service.TransportistaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -53,16 +48,10 @@ public class TransportistaServiceImpl extends FilterService<Transportista> imple
     }
 
     @Override
-    public Page<Transportista> filter(TransportistaFilter filter) {
-        StringBuilder hql = new StringBuilder();
+    public Page<Transportista> filter(Long filter, int page, int size) {
         List<FilterParam> params = new ArrayList<>();
-
-        hql
-                .append("WHERE LOWER(c.nombre) LIKE LOWER('")
-                .append(filter.getNombre())
-                .append("%')");
-
-        return getPage(hql.toString(), filter.getPage(), filter.getSize(), params);
+        String hql = "JOIN c.sucursales WHERE (id_sucursal) = ('"+filter+"')";
+        return getPage(hql,page,size,params);
     }
 
 

@@ -1,10 +1,12 @@
 package com.prysoft.pdv.controller;
 
+import com.prysoft.pdv.dto.ComprobanteFiscalFilter;
 import com.prysoft.pdv.models.ComprobanteFiscal;
 import com.prysoft.pdv.service.VentaService;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperPrint;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -23,4 +25,9 @@ public class VentaController {
         JasperPrint closeSaleReport = service.closeSaleReport(request, tenant, response);
         return null;
     }
+
+    @PostMapping(value = "/getForSucursal/{page}/{size}")
+    Page<ComprobanteFiscal> getStockForSucursal(@RequestBody ComprobanteFiscalFilter filter, @PathVariable int page, @PathVariable int size)
+    {return service.filter(filter,page,size);}
+
 }

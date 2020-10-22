@@ -68,11 +68,13 @@ public class DepositoServiceImpl extends FilterService<Deposito> implements Depo
     }
 
     @Override
-    public Page<Deposito> filterDepositos(String id) {
+    public Page<Deposito> filterDepositos(String id, int page, int size) {
         List<FilterParam> params = new ArrayList<>();
 
         String hql = "WHERE (c.sucursales.id) = ('"+id+"')";
 
-        return getPage(hql, 0, 1000000, params);
+        System.out.println(getPage(hql, page, size, params).getTotalPages());
+
+        return getPage(hql, page, size, params);
     }
 }

@@ -1,7 +1,6 @@
 package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.ClienteDao;
-import com.prysoft.pdv.dto.ClienteFilter;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.models.Cliente;
 import com.prysoft.pdv.service.ClienteService;
@@ -39,27 +38,17 @@ public class ClienteServiceImpl extends FilterService<Cliente> implements Client
     }
 
     @Override
-    public Cliente saveOrUpdate(Cliente entity) {
-        return dao.save(entity);
+    public Cliente saveOrUpdate(Cliente entity) {return dao.save(entity);}
+
+    @Override
+    public Page<Cliente> filter(Long filter, int page, int size) {
+        List<FilterParam> params = new ArrayList<>();
+        String hql = "JOIN c.sucursales WHERE (id_sucursal) = ('"+filter+"')";
+        return getPage(hql,page,size,params);
     }
 
     @Override
     public void delete(Long id) {
         dao.deleteById(id);
     }
-
-    @Override
-    public Page<Cliente> filter(ClienteFilter filter) {
-        StringBuilder hql = new StringBuilder();
-        List<FilterParam> params = new ArrayList<>();
-
-        hql
-                .append("WHERE LOWER(c.nombre) LIKE LOWER('")
-                .append(filter.getNombre())
-                .append("%')");
-
-        return getPage(hql.toString(), filter.getPage(), filter.getSize(), params);
-    }
-
-
 }

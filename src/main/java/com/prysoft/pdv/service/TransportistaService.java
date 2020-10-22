@@ -1,6 +1,5 @@
 package com.prysoft.pdv.service;
 
-import com.prysoft.pdv.dto.TransportistaFilter;
 import com.prysoft.pdv.models.Transportista;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,7 +12,7 @@ public interface TransportistaService {
 
     Transportista saveOrUpdate(Transportista entity);
 
-    Page<Transportista> filter(TransportistaFilter filter);
+    Page<Transportista> filter(Long filter, int page, int size);
 
     void delete(Long id);
 }

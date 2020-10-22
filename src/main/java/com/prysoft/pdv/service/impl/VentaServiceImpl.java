@@ -1,11 +1,14 @@
 package com.prysoft.pdv.service.impl;
 
+import com.prysoft.pdv.dto.ComprobanteFiscalFilter;
+import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.models.ComprobanteFiscal;
 import com.prysoft.pdv.models.PrintComprobante;
 import com.prysoft.pdv.service.VentaService;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +23,7 @@ import java.util.*;
 
 @Service
 @Transactional
-public class VentaServiceImpl implements VentaService {
+public class VentaServiceImpl extends FilterService<ComprobanteFiscal> implements VentaService {
 
     @Override
     public JasperPrint closeSaleReport(ComprobanteFiscal request, String tenant, HttpServletResponse response) throws IOException, JRException, ParseException {
@@ -106,6 +109,13 @@ public class VentaServiceImpl implements VentaService {
         }
 
         return null;
+    }
+
+    @Override
+    public Page<ComprobanteFiscal> filter(ComprobanteFiscalFilter filter, int page, int size) {
+        List<FilterParam> params = new ArrayList<>();
+        String hql = "WHERE (c.sucursal.id) = ('"+filter.getSucursal()+"')";
+        return getPage(hql , page, size, params);
     }
 }
 

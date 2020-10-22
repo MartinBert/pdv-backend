@@ -51,9 +51,7 @@ public class ProductoServiceImpl extends FilterService<Producto> implements Prod
     }
 
     @Override
-    public Page<Producto> findAll(Pageable page) {
-        return dao.findAll(page);
-    }
+    public Page<Producto> findAll(Pageable page) {return dao.findAll(page);}
 
     @Override
     public Producto saveOrUpdate(Producto entity) {

@@ -1,7 +1,6 @@
 package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.DistribuidorDao;
-import com.prysoft.pdv.dto.DistribuidorFilter;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.models.Proveedor;
 import com.prysoft.pdv.service.DistribuidorService;
@@ -49,16 +48,10 @@ public class DistribuidorServiceImpl extends FilterService<Proveedor> implements
     }
 
     @Override
-    public Page<Proveedor> filter(DistribuidorFilter filter) {
-        StringBuilder hql = new StringBuilder();
+    public Page<Proveedor> filter(Long filter, int page, int size) {
         List<FilterParam> params = new ArrayList<>();
-
-        hql
-                .append("WHERE LOWER(c.razonSocial) LIKE LOWER('")
-                .append(filter.getRazonSocial())
-                .append("%')");
-
-        return getPage(hql.toString(), filter.getPage(), filter.getSize(), params);
+        String hql = "JOIN c.sucursales WHERE (id_sucursal) = ('"+filter+"')";
+        return getPage(hql,page,size,params);
     }
 
 

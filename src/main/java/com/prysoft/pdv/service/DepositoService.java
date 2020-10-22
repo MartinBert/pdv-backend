@@ -19,7 +19,7 @@ public interface DepositoService {
 
     Page<Deposito> filter(DepositoFilter filter);
 
-    Page<Deposito> filterDepositos(String id);
+    Page<Deposito> filterDepositos(String id, int page, int size);
 
     void delete(Long id);
 }
