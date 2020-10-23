@@ -7,7 +7,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 public class PdvApplication {
 	public static void main(String[] args) {
 		SpringApplicationBuilder builder = new SpringApplicationBuilder(PdvApplication.class);
-		builder.headless(false);
+		builder.headless(true);
 		builder.run(args);
 	}
 }
