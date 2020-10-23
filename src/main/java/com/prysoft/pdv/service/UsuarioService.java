@@ -17,6 +17,8 @@ public interface UsuarioService {
 
     Page<Usuario> filter(UsuarioFilter filter);
 
+    Page<Usuario> filterBySucursal(String filterParam, Long id, int page, int size);
+
     void delete(Long id);
 
 }

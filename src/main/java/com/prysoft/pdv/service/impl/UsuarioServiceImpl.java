@@ -2,9 +2,7 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.UsuarioDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.RubroFilter;
 import com.prysoft.pdv.dto.UsuarioFilter;
-import com.prysoft.pdv.models.Rubro;
 import com.prysoft.pdv.models.Usuario;
 import com.prysoft.pdv.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,5 +88,16 @@ public class UsuarioServiceImpl extends FilterService<Usuario> implements Usuari
                 .append("%')");
 
         return getPage(hql.toString(), filter.getPage(), filter.getSize(), params);
+    }
+
+    @Override
+    public Page<Usuario> filterBySucursal(String filterParam, Long id, int page, int size) {
+        List<FilterParam> params = new ArrayList<>();
+
+        String hql = "WHERE ("+filterParam+") = ('"+id+"')";
+
+        System.out.println(getPage(hql, page, size, params));
+
+        return getPage(hql, page, size, params);
     }
 }

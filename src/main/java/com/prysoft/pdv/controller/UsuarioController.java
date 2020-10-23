@@ -1,9 +1,7 @@
 package com.prysoft.pdv.controller;
 
 import com.prysoft.pdv.config.Constants;
-import com.prysoft.pdv.dto.RubroFilter;
 import com.prysoft.pdv.dto.UsuarioFilter;
-import com.prysoft.pdv.models.Rubro;
 import com.prysoft.pdv.models.Usuario;
 import com.prysoft.pdv.service.UsuarioService;
 import io.jsonwebtoken.Claims;
@@ -20,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping(value = "/{tenantid}/api/usuarios")
-// Todos los controladores deben tener el tenant en primer lugar
 public class UsuarioController {
     @Autowired
     private UsuarioService service;
@@ -70,5 +67,10 @@ public class UsuarioController {
     @PostMapping(value = "/filter")
     public Page<Usuario> filter(@RequestBody UsuarioFilter filter) {
         return service.filter(filter);
+    }
+
+    @GetMapping (value = "/getBySucursal/{filterParam}/{id}/{page}/{size}")
+    Page<Usuario> filterBySucursal(@PathVariable String filterParam, @PathVariable Long id, @PathVariable int page, @PathVariable int size) {
+        return service.filterBySucursal(filterParam,id,page,size);
     }
 }
