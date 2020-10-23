@@ -13,7 +13,7 @@ public class ComprobanteFiscal implements Serializable {
     private Long id;
     private String letra;
 
-    @Column(name = "numero_cbte", unique = true, nullable = false)
+    @Column(name = "numero_cbte", nullable = false)
     private String numeroCbte;
 
     private String fechaEmision;
@@ -23,6 +23,7 @@ public class ComprobanteFiscal implements Serializable {
     private String barCode;
     private String cae;
     private Double totalVenta;
+    private String nombreDocumento;
 
     @ManyToMany
     @JoinTable(name = "comprobantes_medios",
@@ -187,6 +188,14 @@ public class ComprobanteFiscal implements Serializable {
         this.planesPago = planesPago;
     }
 
+    public String getNombreDocumento() {
+        return nombreDocumento;
+    }
+
+    public void setNombreDocumento(String nombreDocumento) {
+        this.nombreDocumento = nombreDocumento;
+    }
+
     @Override
     public String toString() {
         return "ComprobanteFiscal{" +
@@ -200,6 +209,7 @@ public class ComprobanteFiscal implements Serializable {
                 ", barCode='" + barCode + '\'' +
                 ", cae='" + cae + '\'' +
                 ", totalVenta=" + totalVenta +
+                ", nombreDocumento='" + nombreDocumento + '\'' +
                 ", mediosPago=" + mediosPago +
                 ", planesPago=" + planesPago +
                 ", puntoVenta=" + puntoVenta +

@@ -25,6 +25,7 @@ public class PrintComprobante implements Serializable {
     private String empresaTelefono;
     private ArrayList<PrintComprobanteDetail> productos;
     private Double totalVenta;
+    private String nombreDocumento;
 
     public String getBarCode() {
         return barCode;
@@ -194,6 +195,14 @@ public class PrintComprobante implements Serializable {
         this.totalVenta = totalVenta;
     }
 
+    public String getNombreDocumento() {
+        return nombreDocumento;
+    }
+
+    public void setNombreDocumento(String nombreDocumento) {
+        this.nombreDocumento = nombreDocumento;
+    }
+
     @Override
     public String toString() {
         return "PrintComprobante{" +
@@ -213,11 +222,12 @@ public class PrintComprobante implements Serializable {
                 ", empresaCuit='" + empresaCuit + '\'' +
                 ", empresaDireccion='" + empresaDireccion + '\'' +
                 ", empresaRazonSocial='" + empresaRazonSocial + '\'' +
-                ", empresaFechaInicioAct=" + empresaFechaInicioAct +
+                ", empresaFechaInicioAct='" + empresaFechaInicioAct + '\'' +
                 ", empresaIngBruto=" + empresaIngBruto +
                 ", empresaTelefono='" + empresaTelefono + '\'' +
-                ", productos=" + productos + '\'' +
+                ", productos=" + productos +
                 ", totalVenta=" + totalVenta +
+                ", nombreDocumento='" + nombreDocumento + '\'' +
                 '}';
     }
 }

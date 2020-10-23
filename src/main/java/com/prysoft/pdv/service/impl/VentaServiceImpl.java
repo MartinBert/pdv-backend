@@ -55,9 +55,9 @@ public class VentaServiceImpl extends FilterService<ComprobanteFiscal> implement
             comprobante.setEmpresaIngBruto(request.getSucursal().getIngBruto());
             comprobante.setProductos(request.getProductos());
             comprobante.setTotalVenta(request.getTotalVenta());
+            comprobante.setNombreDocumento(request.getNombreDocumento());
             List<PrintComprobante> data = new ArrayList<>();
             data.add(comprobante);
-            System.out.println(comprobante);
             JRBeanCollectionDataSource subreportDataSource = new JRBeanCollectionDataSource(comprobante.getProductos());
             JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(data);
             HashMap<String, Object> params = new HashMap<>();
@@ -69,7 +69,7 @@ public class VentaServiceImpl extends FilterService<ComprobanteFiscal> implement
             final ServletOutputStream output = response.getOutputStream();
             JasperExportManager.exportReportToPdfStream(print, output);
         }else{
-            String detailRoute = Paths.get("","src","main","resources","reports", "ticket_detail.jasper").toString();
+            String detailRoute = Paths.get("","src","main","resources", "reports/ticket_detail.jasper").toString();
             InputStream stream = this.getClass().getResourceAsStream("/reports/x_ticket.jasper");
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
             String fechaInicioAct = format.format(request.getSucursal().getFechaInicioAct());
@@ -94,6 +94,8 @@ public class VentaServiceImpl extends FilterService<ComprobanteFiscal> implement
             comprobante.setEmpresaTelefono(request.getSucursal().getTelefono());
             comprobante.setEmpresaIngBruto(request.getSucursal().getIngBruto());
             comprobante.setProductos(request.getProductos());
+            comprobante.setTotalVenta(request.getTotalVenta());
+            comprobante.setNombreDocumento(request.getNombreDocumento());
             List<PrintComprobante> data = new ArrayList<>();
             data.add(comprobante);
             JRBeanCollectionDataSource subreportDataSource = new JRBeanCollectionDataSource(comprobante.getProductos());
