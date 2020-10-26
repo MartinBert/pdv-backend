@@ -2,6 +2,7 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dto.ComprobanteFiscalFilter;
 import com.prysoft.pdv.dto.FilterParam;
+import com.prysoft.pdv.dto.VentaFilter;
 import com.prysoft.pdv.models.ComprobanteFiscal;
 import com.prysoft.pdv.models.PrintComprobante;
 import com.prysoft.pdv.service.VentaService;
@@ -118,6 +119,13 @@ public class VentaServiceImpl extends FilterService<ComprobanteFiscal> implement
         List<FilterParam> params = new ArrayList<>();
         String hql = "WHERE (c.sucursal.id) = ('"+filter.getSucursal()+"')";
         return getPage(hql , page, size, params);
+    }
+
+    @Override
+    public Page<ComprobanteFiscal> filterVentas(VentaFilter request) {
+        List<FilterParam> params = new ArrayList<>();
+        String hql = "WHERE (c.sucursal.id) = ('"+request.getSucursalId()+"') AND (c."+request.getFilterParam()+") = ('"+request.getFilter()+"')";
+        return getPage(hql , request.getPage(), request.getSize(), params);
     }
 }
 

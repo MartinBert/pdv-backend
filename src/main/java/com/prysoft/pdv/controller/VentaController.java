@@ -1,6 +1,7 @@
 package com.prysoft.pdv.controller;
 
 import com.prysoft.pdv.dto.ComprobanteFiscalFilter;
+import com.prysoft.pdv.dto.VentaFilter;
 import com.prysoft.pdv.models.ComprobanteFiscal;
 import com.prysoft.pdv.service.VentaService;
 import net.sf.jasperreports.engine.JRException;
@@ -27,7 +28,13 @@ public class VentaController {
     }
 
     @PostMapping(value = "/getForSucursal/{page}/{size}")
-    Page<ComprobanteFiscal> getStockForSucursal(@RequestBody ComprobanteFiscalFilter filter, @PathVariable int page, @PathVariable int size)
-    {return service.filter(filter,page,size);}
+    Page<ComprobanteFiscal> getStockForSucursal(@RequestBody ComprobanteFiscalFilter filter, @PathVariable int page, @PathVariable int size) {
+        return service.filter(filter,page,size);
+    }
 
+    @PostMapping(value = "/filter")
+    Page<ComprobanteFiscal> filterVentas(@RequestBody VentaFilter request){
+        System.out.println("asdfasdf");
+        return service.filterVentas(request);
+    }
 }
