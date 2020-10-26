@@ -7,9 +7,12 @@ import com.prysoft.pdv.models.Producto;
 import com.prysoft.pdv.service.ProductoService;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.util.JRLoader;
+import org.hibernate.SessionFactory;
+import org.hibernate.engine.query.spi.HQLQueryPlan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.provider.HibernateUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -59,9 +62,13 @@ public class ProductoServiceImpl extends FilterService<Producto> implements Prod
     }
 
     @Override
-    public Iterable<Producto> saveAll(ArrayList<Producto> entities) {
-        Iterable<Producto> productos = dao.findAll();
-        dao.deleteAll(productos);
+    public Iterable<Producto> saveOrUpdateAll(ArrayList<Producto> entities) {
+        for(Producto pr: entities){
+            Optional<Producto> producto = dao.findByCodigoBarra(pr.getCodigoBarra());
+            if(producto.isPresent()){
+                pr.setId(producto.get().getId());
+            }
+        }
 
         return dao.saveAll(entities);
     }

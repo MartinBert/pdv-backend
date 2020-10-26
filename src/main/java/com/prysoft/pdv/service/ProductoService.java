@@ -21,11 +21,12 @@ public interface ProductoService {
 
     Producto saveOrUpdate(Producto entity);
 
-    Iterable<Producto> saveAll(ArrayList<Producto> entities);
+    Iterable<Producto> saveOrUpdateAll(ArrayList<Producto> entities);
 
     Page<Producto> filter(ProductoFilter filter);
 
     void delete(Long id);
 
     JasperPrint generalReport(String tenant, HttpServletResponse response) throws JRException, IOException, SQLException;
+
 }

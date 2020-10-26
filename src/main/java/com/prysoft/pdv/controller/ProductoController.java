@@ -47,7 +47,7 @@ public class ProductoController {
     }
 
     @PostMapping(value = "/saveAll")
-    Iterable<Producto> saveAll(@RequestBody ArrayList<Producto> entities) { return service.saveAll(entities); }
+    Iterable<Producto> saveAll(@RequestBody ArrayList<Producto> entities){ return service.saveOrUpdateAll(entities); }
 
     @PutMapping
     Producto update(@RequestBody Producto entity) {
