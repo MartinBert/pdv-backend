@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface ProductoDao extends PagingAndSortingRepository<Producto, Long> {
     Optional<Producto> findByCodigoBarra(String codigoBarra);
+
 }

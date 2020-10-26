@@ -60,6 +60,9 @@ public class ProductoServiceImpl extends FilterService<Producto> implements Prod
 
     @Override
     public Iterable<Producto> saveAll(ArrayList<Producto> entities) {
+        Iterable<Producto> productos = dao.findAll();
+        dao.deleteAll(productos);
+
         return dao.saveAll(entities);
     }
 
@@ -70,9 +73,7 @@ public class ProductoServiceImpl extends FilterService<Producto> implements Prod
 
     @Override
     public Page<Producto> filter(ProductoFilter filter) {
-
         List<FilterParam> params = new ArrayList<>();
-
         String hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filter.getNombre()+"%') OR LOWER(c.codigoBarra) LIKE LOWER('"+filter.getCodigoBarra()+"%') OR LOWER(c.codigoProducto) LIKE LOWER('"+filter.getCodigoProducto()+"%')";
 
         return getPage(hql, filter.getPage(), filter.getSize(), params);
