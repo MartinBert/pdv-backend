@@ -1,6 +1,5 @@
 package com.prysoft.pdv.dao;
 
-import com.prysoft.pdv.models.Producto;
 import com.prysoft.pdv.models.Stock;
 import com.prysoft.pdv.models.Sucursal;
 import org.springframework.data.repository.PagingAndSortingRepository;

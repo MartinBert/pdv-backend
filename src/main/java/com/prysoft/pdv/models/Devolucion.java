@@ -1,0 +1,70 @@
+package com.prysoft.pdv.models;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+
+@Entity
+@Table(name="devoluciones")
+public class Devolucion implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String fecha;
+    private String descripcion;
+    private ArrayList<PrintComprobanteDetail> productos;
+
+    @OneToOne
+    private ComprobanteFiscal comprobante;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public ComprobanteFiscal getComprobante() {
+        return comprobante;
+    }
+
+    public void setComprobante(ComprobanteFiscal comprobante) {
+        this.comprobante = comprobante;
+    }
+
+    public ArrayList<PrintComprobanteDetail> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(ArrayList<PrintComprobanteDetail> productos) {
+        this.productos = productos;
+    }
+
+    @Override
+    public String toString() {
+        return "Devolucion{" +
+                "id=" + id +
+                ", fecha='" + fecha + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", productos=" + productos +
+                ", comprobante=" + comprobante +
+                '}';
+    }
+}
