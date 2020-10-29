@@ -2,6 +2,7 @@ package com.prysoft.pdv.controller;
 
 import com.prysoft.pdv.dto.MedioPagoFilter;
 import com.prysoft.pdv.models.MedioPago;
+import com.prysoft.pdv.models.PlanPago;
 import com.prysoft.pdv.models.Producto;
 import com.prysoft.pdv.service.MedioPagoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,4 +53,8 @@ public class MedioPagoController {
     public Page<MedioPago> filter(@RequestBody MedioPagoFilter filter) {
         return service.filter(filter);
     }
+
+    @GetMapping(value = "/getMediosForSucursal/{id}/{page}/{size}")
+    Page<MedioPago> getMediosForSucursal(@PathVariable String id, @PathVariable int page, @PathVariable int size)
+    {return service.filterMedios(id, page, size);}
 }

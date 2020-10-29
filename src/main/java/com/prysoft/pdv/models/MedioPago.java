@@ -20,6 +20,9 @@ public class MedioPago implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "id_plan"))
     private Set<PlanPago> planPago;
 
+    @OneToOne
+    private Sucursal sucursal;
+
     public Long getId() {
         return id;
     }
@@ -44,12 +47,21 @@ public class MedioPago implements Serializable {
         this.planPago = planPago;
     }
 
+    public Sucursal getSucursal() {
+        return sucursal;
+    }
+
+    public void setSucursal(Sucursal sucursal) {
+        this.sucursal = sucursal;
+    }
+
     @Override
     public String toString() {
         return "MedioPago{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", planPago=" + planPago +
+                ", sucursal=" + sucursal +
                 '}';
     }
 }

@@ -1,7 +1,7 @@
 package com.prysoft.pdv.controller;
 
 import com.prysoft.pdv.dto.PlanPagoFilter;
-import com.prysoft.pdv.models.Marca;
+import com.prysoft.pdv.models.Deposito;
 import com.prysoft.pdv.models.PlanPago;
 import com.prysoft.pdv.service.PlanPagoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,4 +52,8 @@ public class PlanPagoController {
     public Page<PlanPago> filter(@RequestBody PlanPagoFilter filter) {
         return service.filter(filter);
     }
+
+    @GetMapping(value = "/getPlansForSucursal/{id}/{page}/{size}")
+    Page<PlanPago> getPlansForSucursal(@PathVariable String id, @PathVariable int page, @PathVariable int size)
+    {return service.filterPlans(id, page, size);}
 }

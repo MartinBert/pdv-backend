@@ -21,4 +21,6 @@ public interface MedioPagoService {
 
     void delete(Long id);
 
+    Page<MedioPago> filterMedios(String id, int page, int size);
+
 }

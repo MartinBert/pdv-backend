@@ -3,6 +3,7 @@ package com.prysoft.pdv.service.impl;
 import com.prysoft.pdv.dao.PlanPagoDao;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.PlanPagoFilter;
+import com.prysoft.pdv.models.Deposito;
 import com.prysoft.pdv.models.Marca;
 import com.prysoft.pdv.models.PlanPago;
 import com.prysoft.pdv.service.PlanPagoService;
@@ -64,6 +65,17 @@ public class PlanPagoServiceImpl extends FilterService<PlanPago> implements Plan
                 .append("%')");
 
         return getPage(hql.toString(), filter.getPage(), filter.getSize(), params);
+    }
+
+    @Override
+    public Page<PlanPago> filterPlans(String id, int page, int size) {
+        List<FilterParam> params = new ArrayList<>();
+
+        String hql = "WHERE (c.sucursal.id) = ('"+id+"')";
+
+        System.out.println(getPage(hql, page, size, params).getTotalPages());
+
+        return getPage(hql, page, size, params);
     }
 }
 

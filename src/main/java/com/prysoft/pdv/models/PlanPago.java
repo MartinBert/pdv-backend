@@ -10,11 +10,14 @@ public class PlanPago implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nombre", unique = true, nullable = false)
+    @Column(name = "nombre", nullable = false)
     private String nombre;
 
     private int cuotas;
     private double porcentaje;
+
+    @OneToOne
+    private Sucursal sucursal;
 
     public Long getId() {
         return id;
@@ -48,13 +51,22 @@ public class PlanPago implements Serializable {
         this.porcentaje = porcentaje;
     }
 
+    public Sucursal getSucursal() {
+        return sucursal;
+    }
+
+    public void setSucursal(Sucursal sucursal) {
+        this.sucursal = sucursal;
+    }
+
     @Override
     public String toString() {
         return "PlanPago{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
-                ", cuotas='" + cuotas + '\'' +
+                ", cuotas=" + cuotas +
                 ", porcentaje=" + porcentaje +
+                ", sucursal=" + sucursal +
                 '}';
     }
 }

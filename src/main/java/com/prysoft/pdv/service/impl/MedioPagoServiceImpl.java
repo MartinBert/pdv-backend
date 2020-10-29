@@ -4,6 +4,7 @@ import com.prysoft.pdv.dao.MedioPagoDao;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.MedioPagoFilter;
 import com.prysoft.pdv.models.MedioPago;
+import com.prysoft.pdv.models.PlanPago;
 import com.prysoft.pdv.service.MedioPagoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -63,6 +64,17 @@ public class MedioPagoServiceImpl extends FilterService<MedioPago> implements Me
                 .append("%')");
 
         return getPage(hql.toString(), filter.getPage(), filter.getSize(), params);
+    }
+
+    @Override
+    public Page<MedioPago> filterMedios(String id, int page, int size) {
+        List<FilterParam> params = new ArrayList<>();
+
+        String hql = "WHERE (c.sucursal.id) = ('"+id+"')";
+
+        System.out.println(getPage(hql, page, size, params).getTotalPages());
+
+        return getPage(hql, page, size, params);
     }
 }
 
