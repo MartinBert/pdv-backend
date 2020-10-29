@@ -17,8 +17,8 @@ spring:
 #tenants
 tenants:
   datasources:
-    pdv:
-      jdbcUrl: jdbc:postgresql://localhost:5432/pdv
+    fragancias:
+      jdbcUrl: jdbc:postgresql://localhost:5432/fragancias
       driverClassName: org.postgresql.Driver
       username: postgres
       password: 12345
