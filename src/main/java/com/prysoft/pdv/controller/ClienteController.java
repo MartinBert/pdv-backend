@@ -41,6 +41,6 @@ public class ClienteController {
         service.delete(id);
     }
 
-    @GetMapping(value = "/getForSucursal/{page}/{size}/{filter}")
-    Page<Cliente> getStockForSucursal(@PathVariable Long filter, @PathVariable int page, @PathVariable int size) {return service.filter(filter,page,size);}
+    @GetMapping(value = "/getForSucursal/{filter}/{page}/{size}")
+    Page<Cliente> getClientesForSucursal(@PathVariable Long filter, @PathVariable int page, @PathVariable int size) {return service.filter(filter,page,size);}
 }

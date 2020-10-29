@@ -12,10 +12,18 @@ public class Devolucion implements Serializable {
     private Long id;
     private String fecha;
     private String descripcion;
+    private double totalDevolucion;
+
     private ArrayList<PrintComprobanteDetail> productos;
 
     @OneToOne
     private ComprobanteFiscal comprobante;
+
+    @OneToOne
+    private Empresa empresa;
+
+    @OneToOne
+    private Sucursal sucursal;
 
     public Long getId() {
         return id;
@@ -57,14 +65,41 @@ public class Devolucion implements Serializable {
         this.productos = productos;
     }
 
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public Sucursal getSucursal() {
+        return sucursal;
+    }
+
+    public void setSucursal(Sucursal sucursal) {
+        this.sucursal = sucursal;
+    }
+
+    public double getTotalDevolucion() {
+        return totalDevolucion;
+    }
+
+    public void setTotalDevolucion(double totalDevolucion) {
+        this.totalDevolucion = totalDevolucion;
+    }
+
     @Override
     public String toString() {
         return "Devolucion{" +
                 "id=" + id +
                 ", fecha='" + fecha + '\'' +
                 ", descripcion='" + descripcion + '\'' +
+                ", totalDevolucion=" + totalDevolucion +
                 ", productos=" + productos +
                 ", comprobante=" + comprobante +
+                ", empresa=" + empresa +
+                ", sucursal=" + sucursal +
                 '}';
     }
 }
