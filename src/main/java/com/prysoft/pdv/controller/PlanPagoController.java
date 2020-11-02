@@ -53,7 +53,7 @@ public class PlanPagoController {
         return service.filter(filter);
     }
 
-    @GetMapping(value = "/getPlansForSucursal/{id}/{page}/{size}")
+    @GetMapping(value = "/getForSucursal/{id}/{page}/{size}")
     Page<PlanPago> getPlansForSucursal(@PathVariable String id, @PathVariable int page, @PathVariable int size)
     {return service.filterPlans(id, page, size);}
 }

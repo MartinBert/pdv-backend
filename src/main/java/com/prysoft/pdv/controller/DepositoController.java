@@ -36,7 +36,7 @@ public class DepositoController {
     @PostMapping(value = "/saveAll")
     Iterable<Deposito> saveAll(@RequestBody ArrayList<Deposito> entities) { return service.saveAll(entities); }
 
-    @GetMapping(value = "/getDepositosForSucursal/{id}/{page}/{size}")
+    @GetMapping(value = "/getForSucursal/{id}/{page}/{size}")
     Page<Deposito> getDepositosForSucursal(@PathVariable String id, @PathVariable int page, @PathVariable int size)
     {return service.filterDepositos(id, page, size);}
 

@@ -60,10 +60,10 @@ public class StockServiceImpl extends FilterService<Stock> implements StockServi
     }
 
     @Override
-    public Page<Stock> filter(StockFilter filter, int page, int size) {
+    public Page<Stock> filter(String id, int page, int size) {
         List<FilterParam> params = new ArrayList<>();
 
-        String hql = "WHERE (c.sucursal.id) = ('"+filter.getSucursal()+"')";
+        String hql = "WHERE (c.sucursal.id) = ('"+id+"')";
 
         return getPage(hql , page, size, params);
     }

@@ -54,7 +54,7 @@ public class MedioPagoController {
         return service.filter(filter);
     }
 
-    @GetMapping(value = "/getMediosForSucursal/{id}/{page}/{size}")
+    @GetMapping(value = "/getForSucursal/{id}/{page}/{size}")
     Page<MedioPago> getMediosForSucursal(@PathVariable String id, @PathVariable int page, @PathVariable int size)
     {return service.filterMedios(id, page, size);}
 }

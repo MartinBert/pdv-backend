@@ -34,9 +34,9 @@ public class StockController {
         return service.saveOrUpdate(entity);
     }
 
-    @PostMapping(value = "/getForSucursal/{page}/{size}")
-    Page<Stock> getStockForSucursal(@RequestBody StockFilter filter, @PathVariable int page, @PathVariable int size)
-    {return service.filter(filter,page,size);}
+    @GetMapping(value = "/getForSucursal/{id}/{page}/{size}")
+    Page<Stock> getStockForSucursal(@PathVariable String id, @PathVariable int page, @PathVariable int size)
+    {return service.filter(id,page,size);}
 
     @PostMapping(value = "/saveAll")
     Iterable<Stock> saveAll(@RequestBody ArrayList<Stock> entities) {
