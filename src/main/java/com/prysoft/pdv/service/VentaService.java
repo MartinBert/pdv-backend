@@ -14,7 +14,7 @@ import java.text.ParseException;
 
 public interface VentaService {
     JasperPrint closeSaleReport(ComprobanteFiscal request, String tenant, HttpServletResponse response) throws IOException, JRException, SQLException, ParseException;
-    Page<ComprobanteFiscal> filter(ComprobanteFiscalFilter filter, int page, int size);
+    Page<ComprobanteFiscal> filter(String id, int page, int size);
 
     Page<ComprobanteFiscal> filterVentas(VentaFilter request);
 }

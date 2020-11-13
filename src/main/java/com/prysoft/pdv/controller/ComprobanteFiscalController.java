@@ -25,10 +25,15 @@ public class ComprobanteFiscalController {
         return service.findById(id);
     }
 
+    @GetMapping(value = "cbteNumero/{numero}")
+    ComprobanteFiscal findByNumeroCbte(@PathVariable String numero) {return service.findByNumeroCbte(numero);}
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     ComprobanteFiscal save(@RequestBody ComprobanteFiscal entity) {
-        return service.saveOrUpdate(entity);
+        service.saveOrUpdate(entity);
+        ComprobanteFiscal object = service.saveOrUpdate(entity);
+        return object ;
     }
 
     @PutMapping

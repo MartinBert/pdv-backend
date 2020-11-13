@@ -115,16 +115,16 @@ public class VentaServiceImpl extends FilterService<ComprobanteFiscal> implement
     }
 
     @Override
-    public Page<ComprobanteFiscal> filter(ComprobanteFiscalFilter filter, int page, int size) {
+    public Page<ComprobanteFiscal> filter(String id, int page, int size) {
         List<FilterParam> params = new ArrayList<>();
-        String hql = "WHERE (c.sucursal.id) = ('"+filter.getSucursal()+"')";
+        String hql = "WHERE (c.sucursal.id) = ('"+id+"')";
         return getPage(hql , page, size, params);
     }
 
     @Override
     public Page<ComprobanteFiscal> filterVentas(VentaFilter request) {
         List<FilterParam> params = new ArrayList<>();
-        String hql = "WHERE (c.sucursal.id) = ('"+request.getSucursalId()+"') AND (c."+request.getFilterParam()+") = ('"+request.getFilter()+"')";
+        String hql = "WHERE (c.sucursal.id) = ('"+request.getSucursal()+"') AND (c."+request.getFilterParam()+") = ('"+request.getFilter()+"')";
         return getPage(hql , request.getPage(), request.getSize(), params);
     }
 }

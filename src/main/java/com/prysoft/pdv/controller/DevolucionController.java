@@ -41,6 +41,8 @@ public class DevolucionController {
         service.delete(id);
     }
 
-    @GetMapping(value = "/getForSucursal/{page}/{size}/{filter}")
-    Page<Devolucion> getStockForSucursal(@PathVariable Long filter, @PathVariable int page, @PathVariable int size) {return service.filter(filter,page,size);}
+    @GetMapping(value = "/getForSucursal/{id}/{page}/{size}")
+    Page<Devolucion> getForSucursal(@PathVariable String id, @PathVariable int page, @PathVariable int size) {
+        System.out.println("asdffasdfa");
+        return service.filter(id,page,size);}
 }

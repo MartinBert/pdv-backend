@@ -1,6 +1,5 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.ComprobanteFiscalFilter;
 import com.prysoft.pdv.dto.VentaFilter;
 import com.prysoft.pdv.models.ComprobanteFiscal;
 import com.prysoft.pdv.service.VentaService;
@@ -27,14 +26,13 @@ public class VentaController {
         return null;
     }
 
-    @PostMapping(value = "/getForSucursal/{page}/{size}")
-    Page<ComprobanteFiscal> getStockForSucursal(@RequestBody ComprobanteFiscalFilter filter, @PathVariable int page, @PathVariable int size) {
-        return service.filter(filter,page,size);
+    @GetMapping(value = "/getForSucursal/{id}/{page}/{size}")
+    Page<ComprobanteFiscal> getStockForSucursal(@PathVariable String id, @PathVariable int page, @PathVariable int size) {
+        return service.filter(id,page,size);
     }
 
     @PostMapping(value = "/filter")
     Page<ComprobanteFiscal> filterVentas(@RequestBody VentaFilter request){
-        System.out.println("asdfasdf");
         return service.filterVentas(request);
     }
 }

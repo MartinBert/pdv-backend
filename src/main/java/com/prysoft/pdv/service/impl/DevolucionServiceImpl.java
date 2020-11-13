@@ -41,9 +41,10 @@ public class DevolucionServiceImpl extends FilterService<Devolucion> implements 
     public Devolucion saveOrUpdate(Devolucion entity) {return dao.save(entity);}
 
     @Override
-    public Page<Devolucion> filter(Long filter, int page, int size) {
+    public Page<Devolucion> filter(String id, int page, int size) {
+        System.out.println(id);
         List<FilterParam> params = new ArrayList<>();
-        String hql = "JOIN c.sucursales WHERE (id_sucursal) = ('"+filter+"')";
+        String hql = "JOIN c.sucursal WHERE (sucursal_id) = ('"+id+"')";
         return getPage(hql,page,size,params);
     }
 

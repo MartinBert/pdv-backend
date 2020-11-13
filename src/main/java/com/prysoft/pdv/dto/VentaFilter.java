@@ -3,18 +3,18 @@ package com.prysoft.pdv.dto;
 import java.io.Serializable;
 
 public class VentaFilter implements Serializable {
-    private String sucursalId;
+    private String sucursal;
     private String filterParam;
     private String filter;
     private int page;
     private int size;
 
-    public String getSucursalId() {
-        return sucursalId;
+    public String getSucursal() {
+        return sucursal;
     }
 
-    public void setSucursalId(String sucursalId) {
-        this.sucursalId = sucursalId;
+    public void setSucursal(String sucursal) {
+        this.sucursal = sucursal;
     }
 
     public String getFilterParam() {
@@ -52,11 +52,11 @@ public class VentaFilter implements Serializable {
     @Override
     public String toString() {
         return "VentaFilter{" +
-                "sucursalId='" + sucursalId + '\'' +
+                "sucursal=" + sucursal +
                 ", filterParam='" + filterParam + '\'' +
                 ", filter='" + filter + '\'' +
-                ", page='" + page + '\'' +
-                ", size='" + size + '\'' +
+                ", page=" + page +
+                ", size=" + size +
                 '}';
     }
 }

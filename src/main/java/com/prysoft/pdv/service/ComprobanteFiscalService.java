@@ -9,6 +9,8 @@ public interface ComprobanteFiscalService {
 
     ComprobanteFiscal findById(Long id);
 
+    ComprobanteFiscal findByNumeroCbte(String numero);
+
     Page<ComprobanteFiscal> findAll(Pageable page);
 
     ComprobanteFiscal saveOrUpdate(ComprobanteFiscal entity);

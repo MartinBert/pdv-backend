@@ -16,6 +16,8 @@ public class Devolucion implements Serializable {
 
     private ArrayList<PrintComprobanteDetail> productos;
 
+    private ArrayList<PrintComprobanteDetail> productosSalientes;
+
     @OneToOne
     private ComprobanteFiscal comprobante;
 
@@ -65,6 +67,14 @@ public class Devolucion implements Serializable {
         this.productos = productos;
     }
 
+    public ArrayList<PrintComprobanteDetail> getProductosSalientes() {
+        return productosSalientes;
+    }
+
+    public void setProductosSalientes(ArrayList<PrintComprobanteDetail> productosSalientes) {
+        this.productosSalientes = productosSalientes;
+    }
+
     public Empresa getEmpresa() {
         return empresa;
     }
@@ -97,6 +107,7 @@ public class Devolucion implements Serializable {
                 ", descripcion='" + descripcion + '\'' +
                 ", totalDevolucion=" + totalDevolucion +
                 ", productos=" + productos +
+                ", productosSalientes=" + productosSalientes +
                 ", comprobante=" + comprobante +
                 ", empresa=" + empresa +
                 ", sucursal=" + sucursal +

@@ -12,7 +12,7 @@ public interface DevolucionService {
 
     Devolucion saveOrUpdate(Devolucion entity);
 
-    Page<Devolucion> filter(Long filter, int page, int size);
+    Page<Devolucion> filter(String id, int page, int size);
 
     void delete(Long id);
 }

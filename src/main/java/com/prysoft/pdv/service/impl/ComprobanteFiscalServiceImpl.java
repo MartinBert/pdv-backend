@@ -26,7 +26,17 @@ public class ComprobanteFiscalServiceImpl extends FilterService<ComprobanteFisca
     @Override
     public ComprobanteFiscal findById(Long id) {
         Optional<ComprobanteFiscal> optional = dao.findById(id);
-        if(!optional.isPresent()) {
+        if(optional.isEmpty()) {
+            throw new EntityNotFoundException();
+        }
+
+        return optional.get();
+    }
+
+    @Override
+    public ComprobanteFiscal findByNumeroCbte(String numero) {
+        Optional<ComprobanteFiscal> optional = dao.findByNumeroCbte(numero);
+        if(optional.isEmpty()){
             throw new EntityNotFoundException();
         }
 
