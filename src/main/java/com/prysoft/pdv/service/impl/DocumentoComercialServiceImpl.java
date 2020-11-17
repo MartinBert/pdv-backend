@@ -50,6 +50,22 @@ public class DocumentoComercialServiceImpl extends FilterService<DocumentoComerc
     }
 
     @Override
+    public Iterable<DocumentoComercial> getInvoices() {
+        String[] invoicesCodeArray = new String[]{"001", "006", "011", "081", "082", "111", "9999"};
+        Iterable<DocumentoComercial> allDocuments = dao.findAll();
+        ArrayList<DocumentoComercial> documentList = new ArrayList<>();
+
+        for(DocumentoComercial el: allDocuments){
+            for(String e: invoicesCodeArray){
+                if(el.getCodigoDocumento().equals(e)){
+                    documentList.add(el);
+                }
+            }
+        }
+        return documentList;
+    }
+
+    @Override
     public Page<DocumentoComercial> filter(DocumentoComercialFilter filter) {
         StringBuilder hql = new StringBuilder();
         List<FilterParam> params = new ArrayList<>();

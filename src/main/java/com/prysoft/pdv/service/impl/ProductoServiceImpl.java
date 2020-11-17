@@ -7,12 +7,9 @@ import com.prysoft.pdv.models.Producto;
 import com.prysoft.pdv.service.ProductoService;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.util.JRLoader;
-import org.hibernate.SessionFactory;
-import org.hibernate.engine.query.spi.HQLQueryPlan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.provider.HibernateUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -90,7 +87,7 @@ public class ProductoServiceImpl extends FilterService<Producto> implements Prod
     public JasperPrint generalReport(String tenant, HttpServletResponse response) throws JRException, IOException, SQLException {
 
         Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/"+tenant,"postgres","12345");
-        InputStream stream = this.getClass().getResourceAsStream("/reports/AllProducts.jasper");
+        InputStream stream = this.getClass().getResourceAsStream("/reports/productsReports/AllProducts.jasper");
         JasperReport report = (JasperReport) JRLoader.loadObject(stream);
         JasperPrint print = JasperFillManager.fillReport(report,new HashMap<>(),conn);
         final ServletOutputStream output = response.getOutputStream();

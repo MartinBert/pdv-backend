@@ -2,7 +2,6 @@ package com.prysoft.pdv.service;
 
 import com.prysoft.pdv.dto.DocumentoComercialFilter;
 import com.prysoft.pdv.models.DocumentoComercial;
-import com.prysoft.pdv.models.Producto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -21,4 +20,6 @@ public interface DocumentoComercialService {
     Page<DocumentoComercial> filter(DocumentoComercialFilter filter);
 
     void delete(Long id);
+
+    Iterable<DocumentoComercial> getInvoices();
 }

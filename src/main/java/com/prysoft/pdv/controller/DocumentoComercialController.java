@@ -54,6 +54,11 @@ public class DocumentoComercialController {
     Iterable<DocumentoComercial> saveAll(@RequestBody ArrayList<DocumentoComercial> entities) {
         return  service.saveAll(entities);
     }
+
+    @GetMapping(value = "/invoices")
+    Iterable<DocumentoComercial> getInvoices(){
+        return service.getInvoices();
+    }
 }
 
 
