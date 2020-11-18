@@ -13,4 +13,5 @@ public interface SalesReport {
     JasperPrint closeSaleReport(ComprobanteFiscal request, String tenant, HttpServletResponse response) throws IOException, JRException, SQLException;
     JasperPrint salesForReceiptReport(String tenant, Long id, String receipt, HttpServletResponse response) throws SQLException, JRException, IOException;
     JasperPrint salesForClientReport(String tenant, Long id, Long client, HttpServletResponse response) throws SQLException, JRException, IOException;
+    JasperPrint salesForDateReport(String tenant, Long id, String firstDate, String secondDate, HttpServletResponse response) throws JRException, IOException;
 }

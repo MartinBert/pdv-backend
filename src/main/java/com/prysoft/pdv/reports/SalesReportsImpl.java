@@ -1,10 +1,13 @@
 package com.prysoft.pdv.reports;
 
+import com.prysoft.pdv.dao.ComprobanteFiscalDao;
 import com.prysoft.pdv.models.ComprobanteFiscal;
 import com.prysoft.pdv.models.PrintComprobante;
+import com.prysoft.pdv.print.PrintSalesReport;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,14 +19,20 @@ import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 @Service
 @Transactional
 public class SalesReportsImpl implements SalesReport{
+
+    @Autowired
+    private ComprobanteFiscalDao dao;
+
     @Override
     public JasperPrint allSalesReport(String tenant, Long id, HttpServletResponse response) throws SQLException, JRException, IOException {
 
@@ -65,6 +74,50 @@ public class SalesReportsImpl implements SalesReport{
         params.put("CLIENTE_ID", client);
         JasperReport report = (JasperReport) JRLoader.loadObject(stream);
         JasperPrint print = JasperFillManager.fillReport(report,params,conn);
+        final ServletOutputStream output = response.getOutputStream();
+        JasperExportManager.exportReportToPdfStream(print, output);
+
+        return null;
+    }
+
+    @Override
+    public JasperPrint salesForDateReport(String tenant, Long id, String firstDate, String secondDate,HttpServletResponse response) throws JRException, IOException {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        Iterable<ComprobanteFiscal> receipts = dao.findAll();
+        ArrayList<PrintSalesReport> data = new ArrayList<>();
+        for(ComprobanteFiscal c: receipts){
+            PrintSalesReport detail = new PrintSalesReport();
+            try {
+                Date date = format.parse(c.getFechaEmision());
+                if(date.getTime() >= Double.parseDouble(firstDate) && date.getTime() <= Double.parseDouble(secondDate)){
+                    if(c.getSucursal().getId() == id &&
+                            c.getDocumentoComercial().getCodigoDocumento().equals("001") ||
+                            c.getDocumentoComercial().getCodigoDocumento().equals("006") ||
+                            c.getDocumentoComercial().getCodigoDocumento().equals("011") ||
+                            c.getDocumentoComercial().getCodigoDocumento().equals("081") ||
+                            c.getDocumentoComercial().getCodigoDocumento().equals("082") ||
+                            c.getDocumentoComercial().getCodigoDocumento().equals("111") ||
+                            c.getDocumentoComercial().getCodigoDocumento().equals("9999")){
+                        System.out.println("Sel prro");
+                        detail.setFechaEmision(c.getFechaEmision());
+                        detail.setCliente(c.getCliente().getRazonSocial());
+                        detail.setPuntoVenta(c.getPuntoVenta().getNombre());
+                        detail.setNombreDocumento(c.getNombreDocumento());
+                        detail.setTotalVenta(c.getTotalVenta());
+
+                        data.add(detail);
+                    }
+                }
+            } catch (ParseException e) {
+                System.out.println("Formato de fecha inválido");
+            }
+        }
+
+        InputStream stream = this.getClass().getResourceAsStream("/reports/salesReports/salesForDate.jasper");
+        JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(data);
+        HashMap<String, Object> params = new HashMap<>();
+        JasperReport report = (JasperReport) JRLoader.loadObject(stream);
+        JasperPrint print = JasperFillManager.fillReport(report,params,datasource);
         final ServletOutputStream output = response.getOutputStream();
         JasperExportManager.exportReportToPdfStream(print, output);
 
