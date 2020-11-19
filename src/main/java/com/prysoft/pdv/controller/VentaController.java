@@ -49,6 +49,11 @@ public class VentaController {
         return reports.salesForDateReport(tenant, id, firstDate, secondDate, response);
     }
 
+    @GetMapping(value = "/allSalesGroupBy/{tenant}/{id}/{type}")
+    public JasperPrint allSalesGroupBy(@PathVariable String tenant, @PathVariable Long id, @PathVariable String type, HttpServletResponse response) throws JRException, IOException, SQLException {
+        return reports.allSalesGroupBy(tenant, id, type, response);
+    }
+
     @GetMapping(value = "/getForSucursal/{id}/{page}/{size}")
     Page<ComprobanteFiscal> getStockForSucursal(@PathVariable String id, @PathVariable int page, @PathVariable int size) {
         return service.filter(id,page,size);
