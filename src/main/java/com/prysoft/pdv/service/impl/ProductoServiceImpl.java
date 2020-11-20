@@ -42,12 +42,13 @@ public class ProductoServiceImpl extends FilterService<Producto> implements Prod
 
     @Override
     public Producto findByCodigoBarra(String codigoBarra) {
-        Optional<Producto> optional = dao.findByCodigoBarra(codigoBarra);
-        if(optional.isEmpty()) {
-            throw new EntityNotFoundException("No existe producto con ese código de barras");
+        try{
+            Optional<Producto> optional = dao.findByCodigoBarra(codigoBarra);
+            return optional.get();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
         }
-
-        return optional.get();
+        return null;
     }
 
     @Override

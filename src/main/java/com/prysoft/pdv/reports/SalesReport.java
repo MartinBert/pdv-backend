@@ -14,5 +14,6 @@ public interface SalesReport {
     JasperPrint salesForReceiptReport(String tenant, Long id, String receipt, HttpServletResponse response) throws SQLException, JRException, IOException;
     JasperPrint salesForClientReport(String tenant, Long id, Long client, HttpServletResponse response) throws SQLException, JRException, IOException;
     JasperPrint salesForDateReport(String tenant, Long id, String firstDate, String secondDate, HttpServletResponse response) throws JRException, IOException;
+    JasperPrint salesForMonthReport(String tenant, Long id, String year, String month, HttpServletResponse response) throws JRException, IOException;
     JasperPrint allSalesGroupBy(String tenant, Long id, String type, HttpServletResponse response) throws JRException, IOException, SQLException;
 }

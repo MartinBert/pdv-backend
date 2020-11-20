@@ -128,6 +128,30 @@ public class SalesReportsImpl implements SalesReport{
     }
 
     @Override
+    public JasperPrint salesForMonthReport(String tenant, Long id, String year, String month, HttpServletResponse response) throws JRException, IOException {
+        ArrayList<ComprobanteFiscal> receipts = new ArrayList<>();
+        Iterable<ComprobanteFiscal> allReceipts = dao.findAll();
+        for(ComprobanteFiscal r: allReceipts){
+            if(r.getFechaEmision().substring(3).equals(month.concat("/")+year)){
+                System.out.println("Sel");
+            }
+        }
+        System.out.println(receipts);
+
+//        ArrayList<PrintSalesReport> data = new ArrayList<>();
+//
+//        InputStream stream = this.getClass().getResourceAsStream("/reports/salesReports/salesForDate.jasper");
+//        JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(data);
+//        HashMap<String, Object> params = new HashMap<>();
+//        JasperReport report = (JasperReport) JRLoader.loadObject(stream);
+//        JasperPrint print = JasperFillManager.fillReport(report,params,datasource);
+//        final ServletOutputStream output = response.getOutputStream();
+//        JasperExportManager.exportReportToPdfStream(print, output);
+
+        return null;
+    }
+
+    @Override
     public JasperPrint allSalesGroupBy(String tenant, Long id, String type, HttpServletResponse response) throws JRException, IOException, SQLException {
         Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/"+tenant,"postgres","12345");
         InputStream stream = this.getClass().getResourceAsStream("/reports/salesReports/allSalesGroupBy"+type+".jasper");
