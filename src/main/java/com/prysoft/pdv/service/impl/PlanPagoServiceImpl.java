@@ -73,8 +73,6 @@ public class PlanPagoServiceImpl extends FilterService<PlanPago> implements Plan
 
         String hql = "WHERE (c.sucursal.id) = ('"+id+"')";
 
-        System.out.println(getPage(hql, page, size, params).getTotalPages());
-
         return getPage(hql, page, size, params);
     }
 }

@@ -43,6 +43,5 @@ public class DevolucionController {
 
     @GetMapping(value = "/getForSucursal/{id}/{page}/{size}")
     Page<Devolucion> getForSucursal(@PathVariable String id, @PathVariable int page, @PathVariable int size) {
-        System.out.println("asdffasdfa");
         return service.filter(id,page,size);}
 }

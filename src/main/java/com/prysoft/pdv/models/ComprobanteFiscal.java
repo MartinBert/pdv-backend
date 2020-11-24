@@ -19,7 +19,9 @@ public class ComprobanteFiscal implements Serializable {
     private String fechaEmision;
     private String fechaVto;
     private Boolean condicionVenta;
+
     private ArrayList<PrintComprobanteDetail> productos;
+
     private String barCode;
     private String cae;
     private Double totalVenta;

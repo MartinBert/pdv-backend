@@ -23,7 +23,9 @@ public class PrintComprobante implements Serializable {
     private String empresaFechaInicioAct;
     private int empresaIngBruto;
     private String empresaTelefono;
+
     private ArrayList<PrintComprobanteDetail> productos;
+
     private Double totalVenta;
     private String nombreDocumento;
 

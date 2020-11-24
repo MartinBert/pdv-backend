@@ -54,6 +54,11 @@ public class VentaController {
         return reports.salesForMonthReport(tenant, id, year, month, response);
     }
 
+    @GetMapping(value = "/salesForYearReport/{tenant}/{id}/{year}")
+    public JasperPrint salesForYearReport(@PathVariable String tenant, @PathVariable Long id, @PathVariable String year, HttpServletResponse response) throws JRException, IOException, SQLException {
+        return reports.salesForYearReport(tenant, id, year, response);
+    }
+
     @GetMapping(value = "/allSalesGroupBy/{tenant}/{id}/{type}")
     public JasperPrint allSalesGroupBy(@PathVariable String tenant, @PathVariable Long id, @PathVariable String type, HttpServletResponse response) throws JRException, IOException, SQLException {
         return reports.allSalesGroupBy(tenant, id, type, response);

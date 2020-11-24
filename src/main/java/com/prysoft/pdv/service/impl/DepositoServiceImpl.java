@@ -73,8 +73,6 @@ public class DepositoServiceImpl extends FilterService<Deposito> implements Depo
 
         String hql = "WHERE (c.sucursales.id) = ('"+id+"')";
 
-        System.out.println(getPage(hql, page, size, params).getTotalPages());
-
         return getPage(hql, page, size, params);
     }
 }

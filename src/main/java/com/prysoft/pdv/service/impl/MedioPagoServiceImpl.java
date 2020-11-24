@@ -72,8 +72,6 @@ public class MedioPagoServiceImpl extends FilterService<MedioPago> implements Me
 
         String hql = "WHERE (c.sucursal.id) = ('"+id+"')";
 
-        System.out.println(getPage(hql, page, size, params).getTotalPages());
-
         return getPage(hql, page, size, params);
     }
 }
