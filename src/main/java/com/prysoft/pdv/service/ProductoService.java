@@ -1,6 +1,6 @@
 package com.prysoft.pdv.service;
 
-import com.prysoft.pdv.dto.ProductoFilter;
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.Producto;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -23,7 +23,7 @@ public interface ProductoService {
 
     Iterable<Producto> saveOrUpdateAll(ArrayList<Producto> entities);
 
-    Page<Producto> filter(ProductoFilter filter);
+    Page<Producto> filter(GenericFilter filterParam);
 
     void delete(Long id);
 

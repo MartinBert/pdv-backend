@@ -1,5 +1,6 @@
 package com.prysoft.pdv.controller;
 
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.dto.MedioPagoFilter;
 import com.prysoft.pdv.models.MedioPago;
 import com.prysoft.pdv.models.PlanPago;
@@ -50,11 +51,7 @@ public class MedioPagoController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<MedioPago> filter(@RequestBody MedioPagoFilter filter) {
-        return service.filter(filter);
+    public Page<MedioPago> filter(@RequestBody GenericFilter filterParam) {
+        return service.filter(filterParam);
     }
-
-    @GetMapping(value = "/getForSucursal/{id}/{page}/{size}")
-    Page<MedioPago> getMediosForSucursal(@PathVariable String id, @PathVariable int page, @PathVariable int size)
-    {return service.filterMedios(id, page, size);}
 }

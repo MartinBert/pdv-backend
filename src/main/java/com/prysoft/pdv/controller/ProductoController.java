@@ -1,6 +1,6 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.ProductoFilter;
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.*;
 import com.prysoft.pdv.service.ProductoService;
 import net.sf.jasperreports.engine.*;
@@ -42,8 +42,8 @@ public class ProductoController {
         return obj;}
 
     @PostMapping(value = "/filter")
-    public Page<Producto> filter(@RequestBody ProductoFilter filter) {
-        return service.filter(filter);
+    public Page<Producto> filter(@RequestBody GenericFilter filterParam) {
+        return service.filter(filterParam);
     }
 
     @PostMapping(value = "/saveAll")

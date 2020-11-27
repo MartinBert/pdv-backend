@@ -1,5 +1,6 @@
 package com.prysoft.pdv.controller;
 
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.dto.VentaFilter;
 import com.prysoft.pdv.models.ComprobanteFiscal;
 import com.prysoft.pdv.reports.SalesReport;
@@ -64,13 +65,8 @@ public class VentaController {
         return reports.allSalesGroupBy(tenant, id, type, response);
     }
 
-    @GetMapping(value = "/getForSucursal/{id}/{page}/{size}")
-    Page<ComprobanteFiscal> getStockForSucursal(@PathVariable String id, @PathVariable int page, @PathVariable int size) {
-        return service.filter(id,page,size);
-    }
-
     @PostMapping(value = "/filter")
-    Page<ComprobanteFiscal> filterVentas(@RequestBody VentaFilter request){
-        return service.filterVentas(request);
+    Page<ComprobanteFiscal> filter(@RequestBody GenericFilter filterParam) {
+        return service.filter(filterParam);
     }
 }

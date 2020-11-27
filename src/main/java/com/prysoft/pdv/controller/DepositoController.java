@@ -1,6 +1,7 @@
 package com.prysoft.pdv.controller;
 
 import com.prysoft.pdv.dto.DepositoFilter;
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.Deposito;
 import com.prysoft.pdv.service.DepositoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,10 +37,6 @@ public class DepositoController {
     @PostMapping(value = "/saveAll")
     Iterable<Deposito> saveAll(@RequestBody ArrayList<Deposito> entities) { return service.saveAll(entities); }
 
-    @GetMapping(value = "/getForSucursal/{id}/{page}/{size}")
-    Page<Deposito> getDepositosForSucursal(@PathVariable String id, @PathVariable int page, @PathVariable int size)
-    {return service.filterDepositos(id, page, size);}
-
     @PutMapping
     Deposito update(@RequestBody Deposito entity) {
         return service.saveOrUpdate(entity);
@@ -52,7 +49,7 @@ public class DepositoController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<Deposito> filter(@RequestBody DepositoFilter filter) {
-        return service.filter(filter);
+    public Page<Deposito> filter(@RequestBody GenericFilter filterParam) {
+        return service.filter(filterParam);
     }
 }

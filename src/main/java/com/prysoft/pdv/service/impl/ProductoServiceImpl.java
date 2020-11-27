@@ -2,7 +2,7 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.ProductoDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.ProductoFilter;
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.Producto;
 import com.prysoft.pdv.service.ProductoService;
 import net.sf.jasperreports.engine.*;
@@ -77,11 +77,11 @@ public class ProductoServiceImpl extends FilterService<Producto> implements Prod
     }
 
     @Override
-    public Page<Producto> filter(ProductoFilter filter) {
+    public Page<Producto> filter(GenericFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
-        String hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filter.getNombre()+"%') OR LOWER(c.codigoBarra) LIKE LOWER('"+filter.getCodigoBarra()+"%') OR LOWER(c.codigoProducto) LIKE LOWER('"+filter.getCodigoProducto()+"%')";
+        String hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%') OR LOWER(c.codigoBarra) LIKE LOWER('"+filterParam.getParam()+"%') OR LOWER(c.codigoProducto) LIKE LOWER('"+filterParam.getParam()+"%')";
 
-        return getPage(hql, filter.getPage(), filter.getSize(), params);
+        return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
     }
 
     @Override

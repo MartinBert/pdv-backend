@@ -2,6 +2,7 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.MedioPagoDao;
 import com.prysoft.pdv.dto.FilterParam;
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.dto.MedioPagoFilter;
 import com.prysoft.pdv.models.MedioPago;
 import com.prysoft.pdv.models.PlanPago;
@@ -54,25 +55,12 @@ public class MedioPagoServiceImpl extends FilterService<MedioPago> implements Me
     }
 
     @Override
-    public Page<MedioPago> filter(MedioPagoFilter filter) {
-        StringBuilder hql = new StringBuilder();
+    public Page<MedioPago> filter(GenericFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
 
-        hql
-                .append("WHERE LOWER(c.nombre) LIKE LOWER('")
-                .append(filter.getNombre())
-                .append("%')");
+        String hql = "WHERE (c.sucursal.id) = ('"+filterParam.getId()+"')";
 
-        return getPage(hql.toString(), filter.getPage(), filter.getSize(), params);
-    }
-
-    @Override
-    public Page<MedioPago> filterMedios(String id, int page, int size) {
-        List<FilterParam> params = new ArrayList<>();
-
-        String hql = "WHERE (c.sucursal.id) = ('"+id+"')";
-
-        return getPage(hql, page, size, params);
+        return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
     }
 }
 

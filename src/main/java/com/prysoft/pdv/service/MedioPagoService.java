@@ -1,5 +1,6 @@
 package com.prysoft.pdv.service;
 
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.dto.MedioPagoFilter;
 import com.prysoft.pdv.models.MedioPago;
 import org.springframework.data.domain.Page;
@@ -17,10 +18,8 @@ public interface MedioPagoService {
 
     Iterable<MedioPago> saveAll(ArrayList<MedioPago> entities);
 
-    Page<MedioPago> filter(MedioPagoFilter filter);
+    Page<MedioPago> filter(GenericFilter filterParam);
 
     void delete(Long id);
-
-    Page<MedioPago> filterMedios(String id, int page, int size);
 
 }

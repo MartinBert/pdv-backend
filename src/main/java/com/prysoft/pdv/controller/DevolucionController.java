@@ -1,5 +1,6 @@
 package com.prysoft.pdv.controller;
 
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.Devolucion;
 import com.prysoft.pdv.service.DevolucionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class DevolucionController {
         service.delete(id);
     }
 
-    @GetMapping(value = "/getForSucursal/{id}/{page}/{size}")
-    Page<Devolucion> getForSucursal(@PathVariable String id, @PathVariable int page, @PathVariable int size) {
-        return service.filter(id,page,size);}
+    @PostMapping(value = "/filter")
+    Page<Devolucion> filter(@RequestBody GenericFilter filterParam) {
+        return service.filter(filterParam);}
 }

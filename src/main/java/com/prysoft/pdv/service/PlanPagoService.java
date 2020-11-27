@@ -1,6 +1,6 @@
 package com.prysoft.pdv.service;
 
-import com.prysoft.pdv.dto.PlanPagoFilter;
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.PlanPago;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,9 +17,7 @@ public interface PlanPagoService {
 
     Iterable<PlanPago> saveAll(ArrayList<PlanPago> entities);
 
-    Page<PlanPago> filter(PlanPagoFilter filter);
+    Page<PlanPago> filter(GenericFilter filterParam);
 
     void delete(Long id);
-
-    Page<PlanPago> filterPlans(String id, int page, int size);
 }

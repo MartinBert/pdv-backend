@@ -2,6 +2,7 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.DevolucionDao;
 import com.prysoft.pdv.dto.FilterParam;
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.Devolucion;
 import com.prysoft.pdv.service.DevolucionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,10 +42,10 @@ public class DevolucionServiceImpl extends FilterService<Devolucion> implements 
     public Devolucion saveOrUpdate(Devolucion entity) {return dao.save(entity);}
 
     @Override
-    public Page<Devolucion> filter(String id, int page, int size) {
+    public Page<Devolucion> filter(GenericFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
-        String hql = "JOIN c.sucursal WHERE (sucursal_id) = ('"+id+"')";
-        return getPage(hql,page,size,params);
+        String hql = "JOIN c.sucursal WHERE (sucursal_id) = ('"+filterParam.getId()+"')";
+        return getPage(hql,filterParam.getPage(),filterParam.getSize(),params);
     }
 
     @Override

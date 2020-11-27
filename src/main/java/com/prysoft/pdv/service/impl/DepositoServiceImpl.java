@@ -3,9 +3,8 @@ package com.prysoft.pdv.service.impl;
 import com.prysoft.pdv.dao.DepositoDao;
 import com.prysoft.pdv.dto.DepositoFilter;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.StockFilter;
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.Deposito;
-import com.prysoft.pdv.models.Stock;
 import com.prysoft.pdv.service.DepositoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -55,24 +54,11 @@ public class DepositoServiceImpl extends FilterService<Deposito> implements Depo
     }
 
     @Override
-    public Page<Deposito> filter(DepositoFilter filter) {
-        StringBuilder hql = new StringBuilder();
+    public Page<Deposito> filter(GenericFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
 
-        hql
-                .append("WHERE LOWER(c.nombre) LIKE LOWER('")
-                .append(filter.getNombre())
-                .append("%')");
+        String hql = "WHERE (c.sucursales.id) = ('"+filterParam.getId()+"') AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%')";
 
-        return getPage(hql.toString(), filter.getPage(), filter.getSize(), params);
-    }
-
-    @Override
-    public Page<Deposito> filterDepositos(String id, int page, int size) {
-        List<FilterParam> params = new ArrayList<>();
-
-        String hql = "WHERE (c.sucursales.id) = ('"+id+"')";
-
-        return getPage(hql, page, size, params);
+        return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
     }
 }

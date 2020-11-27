@@ -1,5 +1,6 @@
 package com.prysoft.pdv.controller;
 
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.dto.PlanPagoFilter;
 import com.prysoft.pdv.models.Deposito;
 import com.prysoft.pdv.models.PlanPago;
@@ -49,11 +50,7 @@ public class PlanPagoController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<PlanPago> filter(@RequestBody PlanPagoFilter filter) {
-        return service.filter(filter);
+    public Page<PlanPago> filter(@RequestBody GenericFilter filterParam) {
+        return service.filter(filterParam);
     }
-
-    @GetMapping(value = "/getForSucursal/{id}/{page}/{size}")
-    Page<PlanPago> getPlansForSucursal(@PathVariable String id, @PathVariable int page, @PathVariable int size)
-    {return service.filterPlans(id, page, size);}
 }

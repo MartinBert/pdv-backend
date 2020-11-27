@@ -2,6 +2,7 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.ClienteDao;
 import com.prysoft.pdv.dto.FilterParam;
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.Cliente;
 import com.prysoft.pdv.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,14 +42,22 @@ public class ClienteServiceImpl extends FilterService<Cliente> implements Client
     public Cliente saveOrUpdate(Cliente entity) {return dao.save(entity);}
 
     @Override
-    public Page<Cliente> filter(Long filter, int page, int size) {
-        List<FilterParam> params = new ArrayList<>();
-        String hql = "JOIN c.sucursales WHERE (id_sucursal) = ('"+filter+"')";
-        return getPage(hql,page,size,params);
-    }
-
-    @Override
     public void delete(Long id) {
         dao.deleteById(id);
     }
+
+    @Override
+    public Page<Cliente> filter(GenericFilter filterParam) {
+        List<FilterParam> params = new ArrayList<>();
+        String hql =
+                "JOIN c.sucursales WHERE (id_sucursal) = ('"+filterParam.getId()+"') " +
+                "AND (LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getParam()+"%') " +
+                "OR LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%') " +
+                "OR LOWER(c.direccion) LIKE LOWER('"+filterParam.getParam()+"%') " +
+                "OR LOWER(c.nombreContacto) LIKE LOWER('"+filterParam.getParam()+"%') " +
+                "OR LOWER(c.cuit) LIKE LOWER('"+filterParam.getParam()+"'))";
+
+        return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
+    }
+
 }

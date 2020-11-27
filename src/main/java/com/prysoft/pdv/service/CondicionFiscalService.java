@@ -1,6 +1,6 @@
 package com.prysoft.pdv.service;
 
-import com.prysoft.pdv.dto.CondicionFiscalFilter;
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.CondicionFiscal;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,7 +13,7 @@ public interface CondicionFiscalService {
 
     CondicionFiscal saveOrUpdate(CondicionFiscal entity);
 
-    Page<CondicionFiscal> filter(CondicionFiscalFilter filter);
+    Page<CondicionFiscal> filter(GenericFilter filterParam);
 
     void delete(Long id);
 }
