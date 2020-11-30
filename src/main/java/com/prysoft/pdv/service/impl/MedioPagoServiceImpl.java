@@ -56,9 +56,14 @@ public class MedioPagoServiceImpl extends FilterService<MedioPago> implements Me
 
     @Override
     public Page<MedioPago> filter(GenericFilter filterParam) {
+        String hql;
         List<FilterParam> params = new ArrayList<>();
 
-        String hql = "WHERE (c.sucursal.id) = ('"+filterParam.getId()+"')";
+        if(filterParam.getId() == null){
+            hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%')";
+        }else{
+            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getId()+"') AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%')";
+        }
 
         return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
     }

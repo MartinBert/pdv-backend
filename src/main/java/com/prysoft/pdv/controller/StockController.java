@@ -1,5 +1,7 @@
 package com.prysoft.pdv.controller;
 
+import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.models.ComprobanteFiscal;
 import com.prysoft.pdv.models.Stock;
 import com.prysoft.pdv.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +35,6 @@ public class StockController {
         return service.saveOrUpdate(entity);
     }
 
-    @GetMapping(value = "/getForSucursal/{id}/{page}/{size}")
-    Page<Stock> getStockForSucursal(@PathVariable String id, @PathVariable int page, @PathVariable int size)
-    {return service.filter(id,page,size);}
-
     @PostMapping(value = "/saveAll")
     Iterable<Stock> saveAll(@RequestBody ArrayList<Stock> entities) {
         return  service.saveAll(entities);
@@ -52,4 +50,10 @@ public class StockController {
     void delete(@PathVariable Long id) {
         service.delete(id);
     }
+
+    @PostMapping(value = "/filter")
+    Page<Stock> filter(@RequestBody GenericFilter filterParam) {
+        return service.filter(filterParam);
+    }
+
 }

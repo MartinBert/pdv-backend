@@ -14,12 +14,18 @@ import java.util.*;
 public class VentaServiceImpl extends FilterService<ComprobanteFiscal> implements VentaService {
     @Override
     public Page<ComprobanteFiscal> filter(GenericFilter filterParam) {
-        System.out.println(filterParam);
+        String hql;
         List<FilterParam> params = new ArrayList<>();
-
-        String hql = "WHERE (c.sucursal.id) = ('"+filterParam.getId()+"') " +
-                "AND ((c.totalVenta) = ('"+filterParam.getDoubleParam()+"') " +
-                "OR (c.fechaEmision) LIKE ('"+filterParam.getParam()+"%'))";
+        if(filterParam.getId() == null){
+            hql =
+            "WHERE ((c.totalVenta) = ('"+filterParam.getDoubleParam()+"') " +
+            "OR (c.fechaEmision) LIKE ('"+filterParam.getParam()+"%'))";
+        }else{
+            hql =
+            "WHERE (c.sucursal.id) = ('"+filterParam.getId()+"') " +
+            "AND ((c.totalVenta) = ('"+filterParam.getDoubleParam()+"') " +
+            "OR (c.fechaEmision) LIKE ('"+filterParam.getParam()+"%'))";
+        }
 
         return getPage(hql , filterParam.getPage(), filterParam.getSize(), params);
     }

@@ -48,14 +48,25 @@ public class ClienteServiceImpl extends FilterService<Cliente> implements Client
 
     @Override
     public Page<Cliente> filter(GenericFilter filterParam) {
+        String hql;
         List<FilterParam> params = new ArrayList<>();
-        String hql =
-                "JOIN c.sucursales WHERE (id_sucursal) = ('"+filterParam.getId()+"') " +
-                "AND (LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getParam()+"%') " +
-                "OR LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%') " +
-                "OR LOWER(c.direccion) LIKE LOWER('"+filterParam.getParam()+"%') " +
-                "OR LOWER(c.nombreContacto) LIKE LOWER('"+filterParam.getParam()+"%') " +
-                "OR LOWER(c.cuit) LIKE LOWER('"+filterParam.getParam()+"'))";
+
+        if(filterParam.getId() == null){
+            hql =
+            "WHERE (LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getParam()+"%') " +
+            "OR LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%') " +
+            "OR LOWER(c.direccion) LIKE LOWER('"+filterParam.getParam()+"%') " +
+            "OR LOWER(c.nombreContacto) LIKE LOWER('"+filterParam.getParam()+"%') " +
+            "OR LOWER(c.cuit) LIKE LOWER('"+filterParam.getParam()+"%'))";
+        }else{
+            hql =
+            "JOIN c.sucursales WHERE (id_sucursal) = ('"+filterParam.getId()+"') " +
+            "AND (LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getParam()+"%') " +
+            "OR LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%') " +
+            "OR LOWER(c.direccion) LIKE LOWER('"+filterParam.getParam()+"%') " +
+            "OR LOWER(c.nombreContacto) LIKE LOWER('"+filterParam.getParam()+"%') " +
+            "OR LOWER(c.cuit) LIKE LOWER('"+filterParam.getParam()+"%'))";
+        }
 
         return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
     }

@@ -61,12 +61,15 @@ public class ProductoServiceImpl extends FilterService<Producto> implements Prod
 
     @Override
     public Iterable<Producto> saveOrUpdateAll(ArrayList<Producto> entities) {
-        for(Producto pr: entities){
-            Optional<Producto> producto = dao.findByCodigoBarra(pr.getCodigoBarra());
-            if(producto.isPresent()){
-                pr.setId(producto.get().getId());
-            }
-        }
+        Iterable<Producto> productos = dao.findAll();
+        productos.forEach((Producto el) -> {
+            entities.forEach((Producto e) -> {
+                if(el.getCodigoBarra().equals(e.getCodigoBarra())){
+                    e.setId(el.getId());
+                    System.out.println("Sel");
+                }
+            });
+        });
 
         return dao.saveAll(entities);
     }

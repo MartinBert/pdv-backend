@@ -55,9 +55,14 @@ public class DepositoServiceImpl extends FilterService<Deposito> implements Depo
 
     @Override
     public Page<Deposito> filter(GenericFilter filterParam) {
+        String hql;
         List<FilterParam> params = new ArrayList<>();
 
-        String hql = "WHERE (c.sucursales.id) = ('"+filterParam.getId()+"') AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%')";
+        if(filterParam.getId() == null){
+            hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%')";
+        }else{
+            hql = "WHERE (c.sucursales.id) = ('"+filterParam.getId()+"') AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%')";
+        }
 
         return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
     }

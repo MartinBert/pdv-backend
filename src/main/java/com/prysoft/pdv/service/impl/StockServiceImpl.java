@@ -2,7 +2,7 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.StockDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.StockFilter;
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.Stock;
 import com.prysoft.pdv.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,12 +60,16 @@ public class StockServiceImpl extends FilterService<Stock> implements StockServi
     }
 
     @Override
-    public Page<Stock> filter(String id, int page, int size) {
+    public Page<Stock> filter(GenericFilter filterParam) {
+        String hql;
         List<FilterParam> params = new ArrayList<>();
+        if(filterParam.getId() == null){
+            hql = "WHERE LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getParam()+"%')";
+        }else{
+            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getId()+"') AND LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getParam()+"%')";
+        }
 
-        String hql = "WHERE (c.sucursal.id) = ('"+id+"')";
-
-        return getPage(hql , page, size, params);
+        return getPage(hql , filterParam.getPage(), filterParam.getSize(), params);
     }
 
     @Override
