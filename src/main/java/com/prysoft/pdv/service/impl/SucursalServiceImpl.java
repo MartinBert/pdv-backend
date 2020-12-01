@@ -2,6 +2,7 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.SucursalDao;
 import com.prysoft.pdv.dto.FilterParam;
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.dto.SucursalFilter;
 import com.prysoft.pdv.models.Sucursal;
 import com.prysoft.pdv.service.SucursalService;
@@ -49,16 +50,16 @@ public class SucursalServiceImpl extends FilterService<Sucursal> implements Sucu
     }
 
     @Override
-            public Page<Sucursal> filter(SucursalFilter filter) {
-        StringBuilder hql = new StringBuilder();
+    public Page<Sucursal> filter(GenericFilter filterParam) {
+        String hql;
         List<FilterParam> params = new ArrayList<>();
+        if(filterParam.getId() == null){
+            hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%') OR LOWER(c.direccion) LIKE LOWER('"+filterParam.getParam()+"%')";
+        }else{
+            hql = "WHERE (c.id) = ('"+filterParam.getId()+"') AND (LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%') OR LOWER(c.direccion) LIKE LOWER('"+filterParam.getParam()+"%'))";
+        }
 
-        hql
-                .append("WHERE LOWER(c.alias) LIKE LOWER('")
-                .append(filter.getAlias())
-                .append("%')");
-
-        return getPage(hql.toString(), filter.getPage(), filter.getSize(), params);
+        return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
     }
 
 

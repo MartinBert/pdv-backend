@@ -1,6 +1,6 @@
 package com.prysoft.pdv.service;
 
-import com.prysoft.pdv.dto.PuntoVentaFilter;
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.PuntoVenta;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,7 +13,7 @@ public interface PuntoVentaService {
 
     PuntoVenta saveOrUpdate(PuntoVenta entity);
 
-    Page<PuntoVenta> filter(PuntoVentaFilter filter);
+    Page<PuntoVenta> filter(GenericFilter filterParam);
 
     void delete(Long id);
 }

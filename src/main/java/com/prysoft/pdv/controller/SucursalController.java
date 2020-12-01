@@ -1,6 +1,6 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.SucursalFilter;
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.Sucursal;
 import com.prysoft.pdv.service.SucursalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,7 @@ public class SucursalController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<Sucursal> filter(@RequestBody SucursalFilter filter) {
-        return service.filter(filter);
+    public Page<Sucursal> filter(@RequestBody GenericFilter filterParam) {
+        return service.filter(filterParam);
     }
 }

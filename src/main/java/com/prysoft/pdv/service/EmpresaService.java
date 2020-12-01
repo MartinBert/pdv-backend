@@ -1,6 +1,6 @@
 package com.prysoft.pdv.service;
 
-import com.prysoft.pdv.dto.EmpresaFilter;
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.Empresa;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +17,7 @@ public interface EmpresaService {
 
     Empresa saveOrUpdate(Empresa entity);
 
-    Page<Empresa> filter(EmpresaFilter filter);
+    Page<Empresa> filter(GenericFilter filterParam);
 
     void delete(Long id);
 }

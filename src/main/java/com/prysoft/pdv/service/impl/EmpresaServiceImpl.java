@@ -2,8 +2,8 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.CondicionFiscalDao;
 import com.prysoft.pdv.dao.EmpresaDao;
-import com.prysoft.pdv.dto.EmpresaFilter;
 import com.prysoft.pdv.dto.FilterParam;
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.CondicionFiscal;
 import com.prysoft.pdv.models.Empresa;
 import com.prysoft.pdv.service.EmpresaService;
@@ -64,18 +64,17 @@ public class EmpresaServiceImpl extends FilterService<Empresa> implements Empres
     }
 
     @Override
-    public Page<Empresa> filter(EmpresaFilter filter) {
-        StringBuilder hql = new StringBuilder();
+    public Page<Empresa> filter(GenericFilter filterParam) {
+        String hql;
         List<FilterParam> params = new ArrayList<>();
 
-        hql
-                .append("WHERE LOWER(c.nombre) LIKE LOWER('")
-                .append(filter.getNombre())
-                .append("%')");
+        if(filterParam.getId() == null){
+            hql = "WHERE LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getParam()+"%')";
+        }else{
+            hql = "WHERE (c.id) = ('"+filterParam.getId()+"') AND LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getParam()+"%')";
+        }
 
-        return getPage(hql.toString(), filter.getPage(), filter.getSize(), params);
+        return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
     }
-
-
 }
 

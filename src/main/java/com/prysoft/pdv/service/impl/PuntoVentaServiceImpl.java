@@ -2,7 +2,7 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.PuntoVentaDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.PuntoVentaFilter;
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.PuntoVenta;
 import com.prysoft.pdv.service.PuntoVentaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,16 +49,17 @@ public class PuntoVentaServiceImpl extends FilterService<PuntoVenta> implements 
     }
 
     @Override
-    public Page<PuntoVenta> filter(PuntoVentaFilter filter) {
-        StringBuilder hql = new StringBuilder();
+    public Page<PuntoVenta> filter(GenericFilter filterParam) {
+        String hql;
         List<FilterParam> params = new ArrayList<>();
 
-        hql
-                .append("WHERE LOWER(c.nombre) LIKE LOWER('")
-                .append(filter.getNombre())
-                .append("%')");
+        if(filterParam.getId() == null){
+            hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%')";
+        }else{
+            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getId()+"') AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%')";
+        }
 
-        return getPage(hql.toString(), filter.getPage(), filter.getSize(), params);
+        return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
     }
 
 
