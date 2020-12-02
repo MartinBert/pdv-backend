@@ -1,5 +1,6 @@
 package com.prysoft.pdv.service;
 
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.dto.UsuarioFilter;
 import com.prysoft.pdv.models.Usuario;
 import org.springframework.data.domain.Page;
@@ -15,9 +16,7 @@ public interface UsuarioService {
 
     Usuario saveOrUpdate(Usuario entity);
 
-    Page<Usuario> filter(UsuarioFilter filter);
-
-    Page<Usuario> filterBySucursal(String filterParam, Long id, int page, int size);
+    Page<Usuario> filter(GenericFilter filter);
 
     void delete(Long id);
 

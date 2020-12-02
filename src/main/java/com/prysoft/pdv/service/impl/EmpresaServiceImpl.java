@@ -43,17 +43,6 @@ public class EmpresaServiceImpl extends FilterService<Empresa> implements Empres
     public Page<Empresa> findAll(Pageable page) { return dao.findAll(page); }
 
     @Override
-    public List<Object> findAllCondition() {
-        List<Object> condiciones = new LinkedList<>();
-        Iterable<CondicionFiscal> lista = daoc.findAll();
-        for (CondicionFiscal o:lista){
-            if (o.getId() != 3){
-                condiciones.add(o);
-            }
-        }
-        return condiciones;}
-
-    @Override
     public Empresa saveOrUpdate(Empresa entity) {
         return dao.save(entity);
     }

@@ -1,7 +1,7 @@
 package com.prysoft.pdv.controller;
 
 import com.prysoft.pdv.config.Constants;
-import com.prysoft.pdv.dto.UsuarioFilter;
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.Usuario;
 import com.prysoft.pdv.service.UsuarioService;
 import io.jsonwebtoken.Claims;
@@ -65,12 +65,7 @@ public class UsuarioController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<Usuario> filter(@RequestBody UsuarioFilter filter) {
-        return service.filter(filter);
-    }
-
-    @GetMapping (value = "/getBySucursal/{filterParam}/{id}/{page}/{size}")
-    Page<Usuario> filterBySucursal(@PathVariable String filterParam, @PathVariable Long id, @PathVariable int page, @PathVariable int size) {
-        return service.filterBySucursal(filterParam,id,page,size);
+    public Page<Usuario> filter(@RequestBody GenericFilter filterParam) {
+        return service.filter(filterParam);
     }
 }

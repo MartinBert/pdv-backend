@@ -1,7 +1,6 @@
 package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.CondicionFiscalDao;
-import com.prysoft.pdv.dto.CondicionFiscalFilter;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.CondicionFiscal;

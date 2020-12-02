@@ -13,8 +13,6 @@ public interface EmpresaService {
 
     Page<Empresa> findAll(Pageable page);
 
-    List<Object> findAllCondition();
-
     Empresa saveOrUpdate(Empresa entity);
 
     Page<Empresa> filter(GenericFilter filterParam);

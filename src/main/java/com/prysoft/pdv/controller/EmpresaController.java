@@ -27,9 +27,6 @@ public class EmpresaController {
         return service.findById(id);
     }
 
-    @GetMapping(value = "/conditions")
-    List<Object> findAllCondition() {return service.findAllCondition();}
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     Empresa save(@RequestBody Empresa entity) {

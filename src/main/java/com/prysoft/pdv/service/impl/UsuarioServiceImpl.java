@@ -2,6 +2,7 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.UsuarioDao;
 import com.prysoft.pdv.dto.FilterParam;
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.dto.UsuarioFilter;
 import com.prysoft.pdv.models.Usuario;
 import com.prysoft.pdv.service.UsuarioService;
@@ -78,26 +79,25 @@ public class UsuarioServiceImpl extends FilterService<Usuario> implements Usuari
     }
 
     @Override
-    public Page<Usuario> filter(UsuarioFilter filter) {
-        StringBuilder hql = new StringBuilder();
+    public Page<Usuario> filter(GenericFilter filterParam) {
+        String hql;
         List<FilterParam> params = new ArrayList<>();
+        if(filterParam.getId() == null){
+            hql =
+            "WHERE LOWER(c.sucursal.razonSocial) LIKE LOWER('"+filterParam.getParam()+"%') " +
+            "OR LOWER(c.puntoVenta.nombre) LIKE LOWER('"+filterParam.getParam()+"%') " +
+            "OR LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%') " +
+            "OR LOWER(c.perfil.nombre) LIKE LOWER('"+filterParam.getParam()+"%') " +
+            "OR LOWER(c.empresa.razonSocial) LIKE LOWER('"+filterParam.getParam()+"%')";
+        }else{
+            hql =
+            "WHERE (c.empresa.id) = ('"+filterParam.getId()+"') " +
+            "AND (LOWER(c.sucursal.razonSocial) LIKE LOWER('"+filterParam.getParam()+"%') " +
+            "OR LOWER(c.perfil.nombre) LIKE LOWER('"+filterParam.getParam()+"%') " +
+            "OR LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%') " +
+            "OR LOWER(c.puntoVenta.nombre) LIKE LOWER('"+filterParam.getParam()+"%'))";
+        }
 
-        hql
-                .append("WHERE LOWER(c.nombre) LIKE LOWER('")
-                .append(filter.getNombre())
-                .append("%')");
-
-        return getPage(hql.toString(), filter.getPage(), filter.getSize(), params);
-    }
-
-    @Override
-    public Page<Usuario> filterBySucursal(String filterParam, Long id, int page, int size) {
-        List<FilterParam> params = new ArrayList<>();
-
-        String hql = "WHERE ("+filterParam+") = ('"+id+"')";
-
-        System.out.println(getPage(hql, page, size, params));
-
-        return getPage(hql, page, size, params);
+        return getPage(hql , filterParam.getPage(), filterParam.getSize(), params);
     }
 }
