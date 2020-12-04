@@ -1,30 +1,30 @@
 package com.prysoft.pdv.service.impl;
 
-import com.prysoft.pdv.dao.RubroDao;
+import com.prysoft.pdv.dao.PreguntaFrecuenteDao;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.GenericFilter;
-import com.prysoft.pdv.models.Rubro;
-import com.prysoft.pdv.service.RubroService;
+import com.prysoft.pdv.models.PreguntaFrecuente;
+import com.prysoft.pdv.service.PreguntaFrecuenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @Transactional
-public class RubroServiceImpl extends FilterService<Rubro> implements RubroService {
+public class PreguntaFrecuenteServiceImpl extends FilterService<PreguntaFrecuente> implements PreguntaFrecuenteService {
     @Autowired
-    private RubroDao dao;
+    private PreguntaFrecuenteDao dao;
 
     @Override
-    public Rubro findById(Long id) {
-        Optional<Rubro> optional = dao.findById(id);
+    public PreguntaFrecuente findById(Long id) {
+        Optional<PreguntaFrecuente> optional = dao.findById(id);
         if(!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
@@ -33,19 +33,12 @@ public class RubroServiceImpl extends FilterService<Rubro> implements RubroServi
     }
 
     @Override
-    public Page<Rubro> findAll(Pageable page) {
+    public Page<PreguntaFrecuente> findAll(Pageable page) {
         return dao.findAll(page);
     }
 
     @Override
-    public Rubro saveOrUpdate(Rubro entity) {
-        return dao.save(entity);
-    }
-
-    @Override
-    public Iterable<Rubro> saveAll(ArrayList<Rubro> entities) {
-        return dao.saveAll(entities);
-    }
+    public PreguntaFrecuente saveOrUpdate(PreguntaFrecuente entity) {return dao.save(entity);}
 
     @Override
     public void delete(Long id) {
@@ -53,10 +46,10 @@ public class RubroServiceImpl extends FilterService<Rubro> implements RubroServi
     }
 
     @Override
-    public Page<Rubro> filter(GenericFilter filterParam) {
+    public Page<PreguntaFrecuente> filter(GenericFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
 
-        String hql = "WHERE LOWER(c.nombre) LIKE LOWER ('"+filterParam.getParam()+"%')";
+        String hql = "WHERE LOWER(c.pregunta) LIKE LOWER('"+filterParam.getParam()+"%')";
 
         return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
     }

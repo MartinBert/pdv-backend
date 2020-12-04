@@ -1,10 +1,10 @@
 package com.prysoft.pdv.service.impl;
 
-import com.prysoft.pdv.dao.RubroDao;
+import com.prysoft.pdv.dao.ModuloDao;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.GenericFilter;
-import com.prysoft.pdv.models.Rubro;
-import com.prysoft.pdv.service.RubroService;
+import com.prysoft.pdv.models.Modulo;
+import com.prysoft.pdv.service.ModuloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,13 +18,14 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class RubroServiceImpl extends FilterService<Rubro> implements RubroService {
+public class ModuloServiceImpl extends FilterService<Modulo> implements ModuloService {
+
     @Autowired
-    private RubroDao dao;
+    private ModuloDao dao;
 
     @Override
-    public Rubro findById(Long id) {
-        Optional<Rubro> optional = dao.findById(id);
+    public Modulo findById(Long id) {
+        Optional<Modulo> optional = dao.findById(id);
         if(!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
@@ -33,19 +34,12 @@ public class RubroServiceImpl extends FilterService<Rubro> implements RubroServi
     }
 
     @Override
-    public Page<Rubro> findAll(Pageable page) {
+    public Page<Modulo> findAll(Pageable page) {
         return dao.findAll(page);
     }
 
     @Override
-    public Rubro saveOrUpdate(Rubro entity) {
-        return dao.save(entity);
-    }
-
-    @Override
-    public Iterable<Rubro> saveAll(ArrayList<Rubro> entities) {
-        return dao.saveAll(entities);
-    }
+    public Modulo saveOrUpdate(Modulo entity) {return dao.save(entity);}
 
     @Override
     public void delete(Long id) {
@@ -53,10 +47,10 @@ public class RubroServiceImpl extends FilterService<Rubro> implements RubroServi
     }
 
     @Override
-    public Page<Rubro> filter(GenericFilter filterParam) {
+    public Page<Modulo> filter(GenericFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
 
-        String hql = "WHERE LOWER(c.nombre) LIKE LOWER ('"+filterParam.getParam()+"%')";
+        String hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%')";
 
         return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
     }

@@ -1,6 +1,6 @@
 package com.prysoft.pdv.service;
 
-import com.prysoft.pdv.dto.ComprobanteFiscalFilter;
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.ComprobanteFiscal;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +15,7 @@ public interface ComprobanteFiscalService {
 
     ComprobanteFiscal saveOrUpdate(ComprobanteFiscal entity);
 
-    Page<ComprobanteFiscal> filter(ComprobanteFiscalFilter filter);
+    Page<ComprobanteFiscal> filter(GenericFilter filterParam);
 
     void delete(Long id);
 }

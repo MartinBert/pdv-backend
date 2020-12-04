@@ -1,5 +1,6 @@
 package com.prysoft.pdv.controller;
 
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.Proveedor;
 import com.prysoft.pdv.service.DistribuidorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,8 @@ public class DistribuidorController {
         service.delete(id);
     }
 
-    @GetMapping(value = "/getForSucursal/{page}/{size}/{filter}")
-    Page<Proveedor> getStockForSucursal(@PathVariable Long filter, @PathVariable int page, @PathVariable int size) {return service.filter(filter,page,size);}
+    @PostMapping(value = "/filter")
+    public Page<Proveedor> filter(@RequestBody GenericFilter filterParam) {
+        return service.filter(filterParam);
+    }
 }

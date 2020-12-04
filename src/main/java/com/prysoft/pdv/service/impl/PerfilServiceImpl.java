@@ -2,7 +2,7 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.PerfilDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.PerfilFilter;
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.Perfil;
 import com.prysoft.pdv.service.PerfilService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,16 +48,16 @@ public class PerfilServiceImpl extends FilterService<Perfil> implements PerfilSe
     }
 
     @Override
-    public Page<Perfil> filter(PerfilFilter filter) {
-        StringBuilder hql = new StringBuilder();
+    public Page<Perfil> filter(GenericFilter filterParam) {
+        String hql;
         List<FilterParam> params = new ArrayList<>();
-
-        hql
-                .append("WHERE LOWER(c.nombre) LIKE LOWER('")
-                .append(filter.getNombre())
-                .append("%')");
-
-        return getPage(hql.toString(), filter.getPage(), filter.getSize(), params);
+        if(filterParam.getId() == 1){
+            hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%')";
+        }else{
+            hql = "WHERE (c.id) != ('1') AND (c.nombre) LIKE LOWER('"+filterParam.getParam()+"%')";
+        }
+        
+        return getPage(hql , filterParam.getPage(), filterParam.getSize(), params);
     }
 
 }

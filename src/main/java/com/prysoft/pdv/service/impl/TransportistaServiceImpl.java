@@ -2,6 +2,7 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.TransportistaDao;
 import com.prysoft.pdv.dto.FilterParam;
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.Transportista;
 import com.prysoft.pdv.service.TransportistaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,11 +49,27 @@ public class TransportistaServiceImpl extends FilterService<Transportista> imple
     }
 
     @Override
-    public Page<Transportista> filter(Long filter, int page, int size) {
+    public Page<Transportista> filter(GenericFilter filterParam) {
+        String hql;
         List<FilterParam> params = new ArrayList<>();
-        String hql = "JOIN c.sucursales WHERE (id_sucursal) = ('"+filter+"')";
-        return getPage(hql,page,size,params);
+
+        if(filterParam.getId() == null){
+            hql =
+                    "WHERE (LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getParam()+"%') " +
+                            "OR LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%') " +
+                            "OR LOWER(c.direccion) LIKE LOWER('"+filterParam.getParam()+"%') " +
+                            "OR LOWER(c.nombreContacto) LIKE LOWER('"+filterParam.getParam()+"%') " +
+                            "OR LOWER(c.cuit) LIKE LOWER('"+filterParam.getParam()+"%'))";
+        }else{
+            hql =
+                    "JOIN c.sucursales WHERE (id_sucursal) = ('"+filterParam.getId()+"') " +
+                            "AND (LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getParam()+"%') " +
+                            "OR LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%') " +
+                            "OR LOWER(c.direccion) LIKE LOWER('"+filterParam.getParam()+"%') " +
+                            "OR LOWER(c.nombreContacto) LIKE LOWER('"+filterParam.getParam()+"%') " +
+                            "OR LOWER(c.cuit) LIKE LOWER('"+filterParam.getParam()+"%'))";
+        }
+
+        return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
     }
-
-
 }

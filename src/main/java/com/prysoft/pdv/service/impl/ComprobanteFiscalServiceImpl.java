@@ -1,8 +1,8 @@
 package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.ComprobanteFiscalDao;
-import com.prysoft.pdv.dto.ComprobanteFiscalFilter;
 import com.prysoft.pdv.dto.FilterParam;
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.ComprobanteFiscal;
 import com.prysoft.pdv.service.ComprobanteFiscalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,18 +59,22 @@ public class ComprobanteFiscalServiceImpl extends FilterService<ComprobanteFisca
     }
 
     @Override
-    public Page<ComprobanteFiscal> filter(ComprobanteFiscalFilter filter) {
-        StringBuilder hql = new StringBuilder();
+    public Page<ComprobanteFiscal> filter(GenericFilter filterParam) {
+        String hql;
         List<FilterParam> params = new ArrayList<>();
+        if(filterParam.getId() == null){
+            hql =
+                    "WHERE ((c.totalVenta) = ('"+filterParam.getDoubleParam()+"') " +
+                            "OR (c.fechaEmision) LIKE ('"+filterParam.getParam()+"%'))";
+        }else{
+            hql =
+                    "WHERE (c.sucursal.id) = ('"+filterParam.getId()+"') " +
+                            "AND ((c.totalVenta) = ('"+filterParam.getDoubleParam()+"') " +
+                            "OR (c.fechaEmision) LIKE ('"+filterParam.getParam()+"%') " +
+                            "OR (c.numeroCbte) LIKE ('"+filterParam.getParam()+"%'))";
+        }
 
-        hql
-                .append("WHERE LOWER(c.nombre) LIKE LOWER('")
-                .append(filter.getNombre())
-                .append("%')");
-
-        return getPage(hql.toString(), filter.getPage(), filter.getSize(), params);
+        return getPage(hql , filterParam.getPage(), filterParam.getSize(), params);
     }
-
-
 }
 

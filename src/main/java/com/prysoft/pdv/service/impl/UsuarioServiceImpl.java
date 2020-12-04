@@ -3,7 +3,6 @@ package com.prysoft.pdv.service.impl;
 import com.prysoft.pdv.dao.UsuarioDao;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.GenericFilter;
-import com.prysoft.pdv.dto.UsuarioFilter;
 import com.prysoft.pdv.models.Usuario;
 import com.prysoft.pdv.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,21 +79,18 @@ public class UsuarioServiceImpl extends FilterService<Usuario> implements Usuari
 
     @Override
     public Page<Usuario> filter(GenericFilter filterParam) {
+        System.out.println(filterParam);
         String hql;
         List<FilterParam> params = new ArrayList<>();
         if(filterParam.getId() == null){
             hql =
-            "WHERE LOWER(c.sucursal.razonSocial) LIKE LOWER('"+filterParam.getParam()+"%') " +
-            "OR LOWER(c.puntoVenta.nombre) LIKE LOWER('"+filterParam.getParam()+"%') " +
-            "OR LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%') " +
-            "OR LOWER(c.perfil.nombre) LIKE LOWER('"+filterParam.getParam()+"%') " +
+            "WHERE LOWER(c.perfil.nombre) LIKE LOWER('"+filterParam.getParam()+"%') " +
             "OR LOWER(c.empresa.razonSocial) LIKE LOWER('"+filterParam.getParam()+"%')";
         }else{
             hql =
             "WHERE (c.empresa.id) = ('"+filterParam.getId()+"') " +
             "AND (LOWER(c.sucursal.razonSocial) LIKE LOWER('"+filterParam.getParam()+"%') " +
             "OR LOWER(c.perfil.nombre) LIKE LOWER('"+filterParam.getParam()+"%') " +
-            "OR LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%') " +
             "OR LOWER(c.puntoVenta.nombre) LIKE LOWER('"+filterParam.getParam()+"%'))";
         }
 

@@ -1,43 +1,38 @@
 package com.prysoft.pdv.controller;
 
 import com.prysoft.pdv.dto.GenericFilter;
-import com.prysoft.pdv.models.PlanPago;
-import com.prysoft.pdv.service.PlanPagoService;
+import com.prysoft.pdv.models.PreguntaFrecuente;
+import com.prysoft.pdv.service.PreguntaFrecuenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-
 @RestController
-@RequestMapping(value = "/{tenantid}/api/planesPago")
-public class PlanPagoController {
+@RequestMapping(value = "/{tenantid}/api/preguntasFrecuentes")
+public class PreguntaFrecuenteController {
     @Autowired
-    private PlanPagoService service;
+    private PreguntaFrecuenteService service;
 
     @GetMapping
-    Page<PlanPago> findAll(Pageable page) {
+    Page<PreguntaFrecuente> findAll(Pageable page) {
         return service.findAll(page);
     }
 
     @GetMapping(value = "/{id}")
-    PlanPago findById(@PathVariable long id) {
+    PreguntaFrecuente findById(@PathVariable long id) {
         return service.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    PlanPago save(@RequestBody PlanPago entity) {
+    PreguntaFrecuente save(@RequestBody PreguntaFrecuente entity) {
         return service.saveOrUpdate(entity);
     }
 
-    @PostMapping(value = "/saveAll")
-    Iterable<PlanPago> saveAll(@RequestBody ArrayList<PlanPago> entities) { return service.saveAll(entities); }
-
     @PutMapping
-    PlanPago update(@RequestBody PlanPago entity) {
+    PreguntaFrecuente update(@RequestBody PreguntaFrecuente entity) {
         return service.saveOrUpdate(entity);
     }
 
@@ -48,7 +43,7 @@ public class PlanPagoController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<PlanPago> filter(@RequestBody GenericFilter filterParam) {
+    public Page<PreguntaFrecuente> filter(@RequestBody GenericFilter filterParam) {
         return service.filter(filterParam);
     }
 }

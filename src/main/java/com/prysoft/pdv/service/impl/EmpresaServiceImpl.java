@@ -58,7 +58,7 @@ public class EmpresaServiceImpl extends FilterService<Empresa> implements Empres
         List<FilterParam> params = new ArrayList<>();
 
         if(filterParam.getId() == null){
-            hql = "WHERE LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getParam()+"%')";
+            hql = "";
         }else{
             hql = "WHERE (c.id) = ('"+filterParam.getId()+"') AND LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getParam()+"%')";
         }

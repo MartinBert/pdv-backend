@@ -1,8 +1,7 @@
 package com.prysoft.pdv.service;
 
-import com.prysoft.pdv.dto.MarcaFilter;
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.Marca;
-import com.prysoft.pdv.models.Producto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -17,7 +16,7 @@ public interface MarcaService {
 
     Iterable<Marca> saveAll(ArrayList<Marca> entities);
 
-    Page<Marca> filter(MarcaFilter filter);
+    Page<Marca> filter(GenericFilter filterParam);
 
     void delete(Long id);
 }

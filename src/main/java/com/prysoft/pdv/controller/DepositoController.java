@@ -1,6 +1,5 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.DepositoFilter;
 import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.Deposito;
 import com.prysoft.pdv.service.DepositoService;

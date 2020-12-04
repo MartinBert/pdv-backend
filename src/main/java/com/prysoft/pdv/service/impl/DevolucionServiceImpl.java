@@ -43,8 +43,14 @@ public class DevolucionServiceImpl extends FilterService<Devolucion> implements 
 
     @Override
     public Page<Devolucion> filter(GenericFilter filterParam) {
+        String hql;
         List<FilterParam> params = new ArrayList<>();
-        String hql = "JOIN c.sucursal WHERE (sucursal_id) = ('"+filterParam.getId()+"')";
+        if(filterParam.getId() == null){
+            hql = "";
+        }else{
+            hql = "JOIN c.sucursal WHERE (sucursal_id) = ('"+filterParam.getId()+"')";
+        }
+
         return getPage(hql,filterParam.getPage(),filterParam.getSize(),params);
     }
 

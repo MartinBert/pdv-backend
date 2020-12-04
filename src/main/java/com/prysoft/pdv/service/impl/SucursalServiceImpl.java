@@ -3,7 +3,6 @@ package com.prysoft.pdv.service.impl;
 import com.prysoft.pdv.dao.SucursalDao;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.GenericFilter;
-import com.prysoft.pdv.dto.SucursalFilter;
 import com.prysoft.pdv.models.Sucursal;
 import com.prysoft.pdv.service.SucursalService;
 import org.springframework.beans.factory.annotation.Autowired;

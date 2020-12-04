@@ -1,7 +1,6 @@
 package com.prysoft.pdv.controller;
 
 import com.prysoft.pdv.dto.GenericFilter;
-import com.prysoft.pdv.dto.VentaFilter;
 import com.prysoft.pdv.models.ComprobanteFiscal;
 import com.prysoft.pdv.reports.SalesReport;
 import com.prysoft.pdv.service.VentaService;

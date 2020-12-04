@@ -1,7 +1,6 @@
 package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.DepositoDao;
-import com.prysoft.pdv.dto.DepositoFilter;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.Deposito;

@@ -1,10 +1,7 @@
 package com.prysoft.pdv.controller;
 
 import com.prysoft.pdv.dto.GenericFilter;
-import com.prysoft.pdv.dto.MedioPagoFilter;
 import com.prysoft.pdv.models.MedioPago;
-import com.prysoft.pdv.models.PlanPago;
-import com.prysoft.pdv.models.Producto;
 import com.prysoft.pdv.service.MedioPagoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

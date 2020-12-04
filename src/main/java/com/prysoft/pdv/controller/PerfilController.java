@@ -1,8 +1,6 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.MarcaFilter;
-import com.prysoft.pdv.dto.PerfilFilter;
-import com.prysoft.pdv.models.Marca;
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.Perfil;
 import com.prysoft.pdv.service.PerfilService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +43,7 @@ public class PerfilController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<Perfil> filter(@RequestBody PerfilFilter filter) {
-        return service.filter(filter);
+    public Page<Perfil> filter(@RequestBody GenericFilter filterParam) {
+        return service.filter(filterParam);
     }
 }

@@ -1,8 +1,7 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.DocumentoComercialFilter;
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.DocumentoComercial;
-import com.prysoft.pdv.models.Producto;
 import com.prysoft.pdv.service.DocumentoComercialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -46,8 +45,8 @@ public class DocumentoComercialController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<DocumentoComercial> filter(@RequestBody DocumentoComercialFilter filter) {
-        return service.filter(filter);
+    public Page<DocumentoComercial> filter(@RequestBody GenericFilter filterParam) {
+        return service.filter(filterParam);
     }
 
     @PostMapping(value = "/saveAll")

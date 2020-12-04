@@ -1,43 +1,38 @@
 package com.prysoft.pdv.controller;
 
 import com.prysoft.pdv.dto.GenericFilter;
-import com.prysoft.pdv.models.PlanPago;
-import com.prysoft.pdv.service.PlanPagoService;
+import com.prysoft.pdv.models.Modulo;
+import com.prysoft.pdv.service.ModuloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-
 @RestController
-@RequestMapping(value = "/{tenantid}/api/planesPago")
-public class PlanPagoController {
+@RequestMapping(value = "/{tenantid}/api/modulos")
+public class ModuloController {
     @Autowired
-    private PlanPagoService service;
+    private ModuloService service;
 
     @GetMapping
-    Page<PlanPago> findAll(Pageable page) {
+    Page<Modulo> findAll(Pageable page) {
         return service.findAll(page);
     }
 
     @GetMapping(value = "/{id}")
-    PlanPago findById(@PathVariable long id) {
+    Modulo findById(@PathVariable long id) {
         return service.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    PlanPago save(@RequestBody PlanPago entity) {
+    Modulo save(@RequestBody Modulo entity) {
         return service.saveOrUpdate(entity);
     }
 
-    @PostMapping(value = "/saveAll")
-    Iterable<PlanPago> saveAll(@RequestBody ArrayList<PlanPago> entities) { return service.saveAll(entities); }
-
     @PutMapping
-    PlanPago update(@RequestBody PlanPago entity) {
+    Modulo update(@RequestBody Modulo entity) {
         return service.saveOrUpdate(entity);
     }
 
@@ -48,7 +43,7 @@ public class PlanPagoController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<PlanPago> filter(@RequestBody GenericFilter filterParam) {
+    public Page<Modulo> filter(@RequestBody GenericFilter filterParam) {
         return service.filter(filterParam);
     }
 }

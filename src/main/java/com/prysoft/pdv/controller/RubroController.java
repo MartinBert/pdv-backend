@@ -1,7 +1,6 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.RubroFilter;
-import com.prysoft.pdv.models.Marca;
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.Rubro;
 import com.prysoft.pdv.service.RubroService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +48,7 @@ public class RubroController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<Rubro> filter(@RequestBody RubroFilter filter) {
-        return service.filter(filter);
+    public Page<Rubro> filter(@RequestBody GenericFilter filterParam) {
+        return service.filter(filterParam);
     }
 }

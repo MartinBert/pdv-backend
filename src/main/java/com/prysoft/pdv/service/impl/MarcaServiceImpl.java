@@ -2,7 +2,7 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.MarcaDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.MarcaFilter;
+import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.Marca;
 import com.prysoft.pdv.service.MarcaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,15 +53,11 @@ public class MarcaServiceImpl extends FilterService<Marca> implements MarcaServi
     }
 
     @Override
-    public Page<Marca> filter(MarcaFilter filter) {
-        StringBuilder hql = new StringBuilder();
+    public Page<Marca> filter(GenericFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
 
-        hql
-                .append("WHERE LOWER(c.nombre) LIKE LOWER('")
-                .append(filter.getNombre())
-                .append("%')");
+        String hql = "WHERE LOWER(c.nombre) LIKE LOWER ('"+filterParam.getParam()+"%')";
 
-        return getPage(hql.toString(), filter.getPage(), filter.getSize(), params);
+        return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
     }
 }
