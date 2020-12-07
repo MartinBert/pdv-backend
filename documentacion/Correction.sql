@@ -1,1 +1,2 @@
-DELETE FROM "public"."perfiles_modulos" WHERE (perfil_id,modulos_id) = (2, 18);
+INSERT INTO "public"."modulos" (id,nombre) VALUES (25,'modulos');
+INSERT INTO "public"."perfiles_modulos" (perfil_id, modulos_id) VALUES (1, 25);
