@@ -7,5 +7,6 @@ import org.springframework.data.domain.Page;
 
 public interface VentaService {
     Page<ComprobanteFiscal> filter(GenericFilter filterParam);
+    Page<ComprobanteFiscal> filterNotCloseReceipts(GenericFilter filterParam);
 }
 

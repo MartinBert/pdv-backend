@@ -54,6 +54,8 @@ public class ComprobanteFiscal implements Serializable {
     @OneToOne
     private Cliente cliente;
 
+    private String cerrado;
+
     public Long getId() {
         return id;
     }
@@ -198,6 +200,14 @@ public class ComprobanteFiscal implements Serializable {
         this.nombreDocumento = nombreDocumento;
     }
 
+    public String isCerrado() {
+        return cerrado;
+    }
+
+    public void setCerrado(String cerrado) {
+        this.cerrado = cerrado;
+    }
+
     @Override
     public String toString() {
         return "ComprobanteFiscal{" +
@@ -219,6 +229,7 @@ public class ComprobanteFiscal implements Serializable {
                 ", documentoComercial=" + documentoComercial +
                 ", empresa=" + empresa +
                 ", cliente=" + cliente +
+                ", cerrado='" + cerrado + '\'' +
                 '}';
     }
 }
