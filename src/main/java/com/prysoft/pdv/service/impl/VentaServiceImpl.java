@@ -41,7 +41,7 @@ public class VentaServiceImpl extends FilterService<ComprobanteFiscal> implement
         if(filterParam.getId() == null){
             hql ="";
         }else{
-            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getId()+"') AND (c.cerrado) = ('"+filterParam.getParam()+"')";
+            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getId()+"') AND (c.cerrado) = (null)";
         }
 
         return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
