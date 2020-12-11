@@ -9,6 +9,9 @@ public class Caja implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String descripcion;
+    private String fecha;
+    private double existenciaInicial;
     private double existenciaFisica;
     private double salidasNoContabilizadas;
     private double montoFacturado;
@@ -65,10 +68,37 @@ public class Caja implements Serializable {
         this.sucursal = sucursal;
     }
 
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public double getExistenciaInicial() {
+        return existenciaInicial;
+    }
+
+    public void setExistenciaInicial(double existenciaInicial) {
+        this.existenciaInicial = existenciaInicial;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
     @Override
     public String toString() {
         return "Caja{" +
                 "id=" + id +
+                ", descripcion='" + descripcion + '\'' +
+                ", fecha='" + fecha + '\'' +
+                ", existenciaInicial=" + existenciaInicial +
                 ", existenciaFisica=" + existenciaFisica +
                 ", salidasNoContabilizadas=" + salidasNoContabilizadas +
                 ", montoFacturado=" + montoFacturado +

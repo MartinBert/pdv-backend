@@ -5,6 +5,8 @@ import com.prysoft.pdv.models.ComprobanteFiscal;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.ArrayList;
+
 public interface ComprobanteFiscalService {
 
     ComprobanteFiscal findById(Long id);
@@ -18,4 +20,6 @@ public interface ComprobanteFiscalService {
     Page<ComprobanteFiscal> filter(GenericFilter filterParam);
 
     void delete(Long id);
+
+    Iterable<ComprobanteFiscal> saveOrUpdateAll(ArrayList<ComprobanteFiscal> entities);
 }

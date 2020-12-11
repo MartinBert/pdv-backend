@@ -2,12 +2,15 @@ package com.prysoft.pdv.controller;
 
 import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.ComprobanteFiscal;
+import com.prysoft.pdv.models.Producto;
 import com.prysoft.pdv.service.ComprobanteFiscalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping(value = "/{tenantid}/api/comprobantesFiscales")
@@ -35,6 +38,9 @@ public class ComprobanteFiscalController {
         ComprobanteFiscal object = service.saveOrUpdate(entity);
         return object ;
     }
+
+    @PostMapping(value = "/saveAll")
+    Iterable<ComprobanteFiscal> saveAll(@RequestBody ArrayList<ComprobanteFiscal> entities){ return service.saveOrUpdateAll(entities); }
 
     @PutMapping
     ComprobanteFiscal update(@RequestBody ComprobanteFiscal entity) {

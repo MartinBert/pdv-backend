@@ -59,6 +59,11 @@ public class ComprobanteFiscalServiceImpl extends FilterService<ComprobanteFisca
     }
 
     @Override
+    public Iterable<ComprobanteFiscal> saveOrUpdateAll(ArrayList<ComprobanteFiscal> entities) {
+        return dao.saveAll(entities);
+    }
+
+    @Override
     public Page<ComprobanteFiscal> filter(GenericFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();

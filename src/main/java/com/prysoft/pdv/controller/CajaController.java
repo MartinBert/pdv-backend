@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @RestController
 @RequestMapping(value = "/{tenantid}/api/caja")
 public class CajaController {
@@ -52,7 +54,8 @@ public class CajaController {
     }
 
     @PostMapping(value = "/filterNotCloseReceipts")
-    public Page<ComprobanteFiscal> filterNotCloseReceipts(@RequestBody GenericFilter filterParam) {
+    public ArrayList<ComprobanteFiscal> filterNotCloseReceipts(@RequestBody GenericFilter filterParam) {
+        System.out.println(filterParam);
         return salesService.filterNotCloseReceipts(filterParam);
     }
 }

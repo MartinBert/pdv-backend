@@ -200,7 +200,7 @@ public class ComprobanteFiscal implements Serializable {
         this.nombreDocumento = nombreDocumento;
     }
 
-    public String isCerrado() {
+    public String getCerrado() {
         return cerrado;
     }
 
