@@ -51,6 +51,18 @@ public class Producto implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "id_deposito"))
     private Set<Deposito> depositos;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "productos_propiedades",
+            joinColumns =  @JoinColumn(name = "id_producto"),
+            inverseJoinColumns = @JoinColumn(name = "id_propiedad"))
+    private Set<Propiedad> propiedades;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "productos_atributos",
+            joinColumns =  @JoinColumn(name = "id_producto"),
+            inverseJoinColumns = @JoinColumn(name = "id_atributo"))
+    private Set<Atributo> atributos;
+
     @OneToMany(mappedBy = "producto")
     @JsonBackReference
     private Set<Stock> stocks;
@@ -218,6 +230,22 @@ public class Producto implements Serializable {
         this.rubro = rubro;
     }
 
+    public Set<Propiedad> getPropiedades() {
+        return propiedades;
+    }
+
+    public void setPropiedades(Set<Propiedad> propiedades) {
+        this.propiedades = propiedades;
+    }
+
+    public Set<Atributo> getAtributos() {
+        return atributos;
+    }
+
+    public void setAtributos(Set<Atributo> atributos) {
+        this.atributos = atributos;
+    }
+
     @Override
     public String toString() {
         return "Producto{" +
@@ -239,6 +267,8 @@ public class Producto implements Serializable {
                 ", variaciones=" + variaciones +
                 ", distribuidores=" + distribuidores +
                 ", depositos=" + depositos +
+                ", propiedades=" + propiedades +
+                ", atributos=" + atributos +
                 ", stocks=" + stocks +
                 ", rubro=" + rubro +
                 '}';
