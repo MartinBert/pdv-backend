@@ -28,6 +28,8 @@ public class Deposito implements Serializable{
     @JsonBackReference
     private Set<Stock> stock;
 
+    private String defaultDeposit;
+
     public Long getId() {
         return id;
     }
@@ -76,6 +78,14 @@ public class Deposito implements Serializable{
         this.stock = stock;
     }
 
+    public String getDefaultDeposit() {
+        return defaultDeposit;
+    }
+
+    public void setDefaultDeposit(String defaultDeposit) {
+        this.defaultDeposit = defaultDeposit;
+    }
+
     @Override
     public String toString() {
         return "Deposito{" +
@@ -85,6 +95,7 @@ public class Deposito implements Serializable{
                 ", sucursales=" + sucursales +
                 ", telefono='" + telefono + '\'' +
                 ", stock=" + stock +
+                ", defaultDeposit='" + defaultDeposit + '\'' +
                 '}';
     }
 }

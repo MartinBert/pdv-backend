@@ -22,6 +22,9 @@ public class Stock implements Serializable {
 
     private String algorim;
 
+    @Column(name = "cantidad_minima", nullable = true)
+    private String cantidadMinima;
+
     public Long getId() {
         return id;
     }
@@ -70,15 +73,24 @@ public class Stock implements Serializable {
         this.algorim = algorim;
     }
 
+    public String getCantidadMinima() {
+        return cantidadMinima;
+    }
+
+    public void setCantidadMinima(String cantidadMinima) {
+        this.cantidadMinima = cantidadMinima;
+    }
+
     @Override
     public String toString() {
         return "Stock{" +
                 "id=" + id +
                 ", producto=" + producto +
                 ", deposito=" + deposito +
-                ", cantidad=" + cantidad +
                 ", sucursal=" + sucursal +
-                ", algorim=" + algorim +
+                ", cantidad=" + cantidad +
+                ", algorim='" + algorim + '\'' +
+                ", cantidadMinima='" + cantidadMinima + '\'' +
                 '}';
     }
 }
