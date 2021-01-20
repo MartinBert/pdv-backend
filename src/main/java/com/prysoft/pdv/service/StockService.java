@@ -18,5 +18,7 @@ public interface StockService {
 
     Page<Stock> filter(GenericFilter filterParam);
 
+    Page<Stock> filterStockForDepositId(GenericFilter filterParam);
+
     void delete(Long id);
 }

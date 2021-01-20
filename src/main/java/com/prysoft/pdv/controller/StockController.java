@@ -56,4 +56,9 @@ public class StockController {
         return service.filter(filterParam);
     }
 
+    @PostMapping(value = "/filterStockForDepositId")
+    Page<Stock> filterStockForDepositId(@RequestBody GenericFilter filterParam) {
+        return service.filterStockForDepositId(filterParam);
+    }
+
 }

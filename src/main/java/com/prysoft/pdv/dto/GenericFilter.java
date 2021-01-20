@@ -3,6 +3,7 @@ package com.prysoft.pdv.dto;
 public class GenericFilter extends PageFilter {
     private String param;
     private double doubleParam;
+    private Long idParam;
     private Long id;
     private int page;
     private int size;
@@ -51,11 +52,20 @@ public class GenericFilter extends PageFilter {
         this.doubleParam = doubleParam;
     }
 
+    public Long getIdParam() {
+        return idParam;
+    }
+
+    public void setIdParam(Long idParam) {
+        this.idParam = idParam;
+    }
+
     @Override
     public String toString() {
         return "GenericFilter{" +
                 "param='" + param + '\'' +
                 ", doubleParam=" + doubleParam +
+                ", idParam=" + idParam +
                 ", id=" + id +
                 ", page=" + page +
                 ", size=" + size +
