@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -80,7 +79,11 @@ public class StockServiceImpl extends FilterService<Stock> implements StockServi
         if(filterParam.getId() == null){
             hql = "WHERE LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getParam()+"%')";
         }else{
-            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getId()+"') AND (c.deposito.id) = ('"+filterParam.getIdParam()+"') AND LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getParam()+"%') ";
+            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getId()+"') " +
+                    "AND (c.deposito.id) = ('"+filterParam.getIdParam()+"') " +
+                    "AND (LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getParam()+"%') " +
+                    "OR LOWER(c.producto.codigoBarra) LIKE LOWER('"+filterParam.getParam()+"%') " +
+                    "OR LOWER(c.producto.codigoProducto) LIKE LOWER('"+filterParam.getParam()+"%'))";
         }
 
         return getPage(hql , filterParam.getPage(), filterParam.getSize(), params);
