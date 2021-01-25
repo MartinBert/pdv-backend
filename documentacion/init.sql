@@ -3,7 +3,8 @@ INSERT INTO "public"."modulos" ("id","nombre") VALUES
 (1,'ventas'),(2,'ventasForm'),(3,'productos'),(4,'marcas'),(5,'rubros'),(6,'depositos'),
 (7,'documentos'),(8,'mediosPago'),(9,'planesPago'),(10,'personas'),(11,'clientes'),(12,'vendedores'),
 (13,'distribuidores'),(14,'transportistas'),(15,'relaciones'),(16,'condicionesFiscales'),(17,'usuarios'),(18,'perfiles'),
-(19,'configuraciones'),(20,'empresas'),(21,'sucursales'),(22,'puntosVenta'),(23,'stock'),(24,'devoluciones');
+(19,'configuraciones'),(20,'empresas'),(21,'sucursales'),(22,'puntosVenta'),(23,'stock'),(24,'devoluciones'),(25,'modulos')
+,(26,'soporte'),(27,'preguntasFrecuentes'),(28,'manuales'),(29,'mensajes'),(30,'caja'),(31,'atributos'), (32,'propiedades');
 
 --Perfiles
 INSERT INTO "public"."perfiles" ("id","nombre") VALUES
@@ -11,7 +12,9 @@ INSERT INTO "public"."perfiles" ("id","nombre") VALUES
 
 --Modulos perfiles
 INSERT INTO "public"."perfiles_modulos" ("perfil_id","modulos_id") VALUES
-(1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9),(1,10),(1,11),(1,12),(1,13),(1,14),(1,15),(1,16),(1,17),(1,18),(1,19),(1,20),(1,21),(1,22),(1,23),(1,24),
+(1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9),(1,10),(1,11),(1,12),(1,13),(1,14),
+(1,15),(1,16),(1,17),(1,18),(1,19),(1,20),(1,21),(1,22),(1,23),(1,24),(1,25),(1,26),
+(1,27),(1,28),(1,29),(1,30),(1,31),(1,32),
 (2,1),(2,2),(2,3),(2,4),(2,5),(2,8),(2,9),(2,17),(2,18),(2,19),(2,21),(2,22),(2,24),
 (3,1),(3,2),(3,3),(3,6),(3,8),(3,9),(3,10),(3,11),(3,19),(3,21),(3,22),(3,23),(3,24),
 (4,1),(4,2),(4,24);
