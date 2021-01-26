@@ -56,6 +56,8 @@ INSERT INTO "public"."documentos_comerciales" ("id", "activo", "codigo_documento
 (25,true,'116',2,'B','TIQUE NOTA DE DEBITO B',true),
 (26,true,'117',3,'C','TIQUE NOTA DE DEBITO C',true),
 (27,true,'9999',4,'X','Ticket X',false);
+(28,true,'998',4,'NX','Nota de débito x',false);
+(29,true,'999',4,'NX','Nota de crédito x',false);
 
 --Condiciones Fiscales
 INSERT INTO "public"."condiciones_fiscales" ("id", "nombre") VALUES
