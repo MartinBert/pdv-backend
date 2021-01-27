@@ -32,8 +32,8 @@ tenants:
       driverClassName: org.postgresql.Driver
       username: postgres
       password: 12345
-    test5:
-      jdbcUrl: jdbc:postgresql://localhost:5432/test5
+    test:
+      jdbcUrl: jdbc:postgresql://localhost:5432/test
       driverClassName: org.postgresql.Driver
       username: postgres
       password: 12345
