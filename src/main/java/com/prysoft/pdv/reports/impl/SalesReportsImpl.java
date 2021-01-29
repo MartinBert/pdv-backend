@@ -1,10 +1,11 @@
-package com.prysoft.pdv.reports;
+package com.prysoft.pdv.reports.impl;
 
 import com.prysoft.pdv.dao.ComprobanteFiscalDao;
 import com.prysoft.pdv.helpers.*;
 import com.prysoft.pdv.models.ComprobanteFiscal;
 import com.prysoft.pdv.models.PrintComprobante;
 import com.prysoft.pdv.print.PrintSalesReport;
+import com.prysoft.pdv.reports.SalesReport;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ public class SalesReportsImpl implements SalesReport {
         HashMap<String, Object> params = new HashMap<>();
         params.put("SUCURSAL", id);
 
-        return printHelper.printSalesForConnectionDataBase(tenant, stream, params, response);
+        return printHelper.printWithDatabaseConnection(tenant, stream, params, response);
     }
 
     @Override
@@ -55,7 +56,7 @@ public class SalesReportsImpl implements SalesReport {
         params.put("SUCURSAL", id);
         params.put("CODIGO_DOCUMENTO", receipt);
 
-        return printHelper.printSalesForConnectionDataBase(tenant, stream, params, response);
+        return printHelper.printWithDatabaseConnection(tenant, stream, params, response);
     }
 
     @Override
@@ -66,7 +67,7 @@ public class SalesReportsImpl implements SalesReport {
         params.put("SUCURSAL", id);
         params.put("CLIENTE_ID", client);
 
-        return printHelper.printSalesForConnectionDataBase(tenant, stream, params, response);
+        return printHelper.printWithDatabaseConnection(tenant, stream, params, response);
     }
 
     @Override
@@ -86,7 +87,7 @@ public class SalesReportsImpl implements SalesReport {
         InputStream stream = this.getClass().getResourceAsStream("/reports/salesReports/salesForDate.jasper");
         HashMap<String, Object> params = new HashMap<>();
 
-        return printHelper.printSalesForDataSourceCollection(stream, data, params, response);
+        return printHelper.printWithDataSourceCollection(stream, data, params, response);
     }
 
     @Override
@@ -108,7 +109,7 @@ public class SalesReportsImpl implements SalesReport {
         params.put("YEAR", year);
         params.put("MONTH", dateHelper.getMonthName(month).toUpperCase());
 
-        return printHelper.printSalesForDataSourceCollection(stream, data, params, response);
+        return printHelper.printWithDataSourceCollection(stream, data, params, response);
     }
 
     @Override
@@ -129,7 +130,7 @@ public class SalesReportsImpl implements SalesReport {
         HashMap<String, Object> params = new HashMap<>();
         params.put("YEAR", year);
 
-        return printHelper.printSalesForDataSourceCollection(stream, data, params, response);
+        return printHelper.printWithDataSourceCollection(stream, data, params, response);
     }
 
     @Override
@@ -139,7 +140,7 @@ public class SalesReportsImpl implements SalesReport {
         HashMap<String, Object> params = new HashMap<>();
         params.put("SUCURSAL", id);
 
-        return printHelper.printSalesForConnectionDataBase(tenant, stream, params, response);
+        return printHelper.printWithDatabaseConnection(tenant, stream, params, response);
     }
 
     @Override

@@ -1,15 +1,20 @@
 package com.prysoft.pdv.controller;
 
 import com.prysoft.pdv.dto.GenericFilter;
-import com.prysoft.pdv.models.ComprobanteFiscal;
 import com.prysoft.pdv.models.Stock;
+import com.prysoft.pdv.reports.StocksReport;
 import com.prysoft.pdv.service.StockService;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperPrint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 @RestController
@@ -17,6 +22,9 @@ import java.util.ArrayList;
 public class StockController {
     @Autowired
     private StockService service;
+
+    @Autowired
+    private StocksReport reports;
 
 
     @GetMapping
@@ -59,6 +67,11 @@ public class StockController {
     @PostMapping(value = "/filterStockForDepositId")
     Page<Stock> filterStockForDepositId(@RequestBody GenericFilter filterParam) {
         return service.filterStockForDepositId(filterParam);
+    }
+
+    @GetMapping(value = "/allStocksReport/{tenant}/{id}")
+    public JasperPrint allStocksReport(@PathVariable String tenant, @PathVariable Long id, HttpServletResponse response) throws JRException, IOException, SQLException {
+        return reports.allStocksReport(tenant, id, response);
     }
 
 }

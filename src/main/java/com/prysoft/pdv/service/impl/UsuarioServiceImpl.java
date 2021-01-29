@@ -73,6 +73,27 @@ public class UsuarioServiceImpl extends FilterService<Usuario> implements Usuari
     }
 
     @Override
+    public Usuario update(Usuario entity) {
+        Optional<Usuario> userCoincidence = dao.findById(entity.getId());
+
+        if(userCoincidence.isPresent()){
+            try{
+                Usuario user = userCoincidence.get();
+                System.out.println(user.getPassword());
+                System.out.println(passwordEncoder.encode(entity.getPassword()));
+                if(user.getPassword().equals(passwordEncoder.encode(entity.getPassword()))){
+                    System.out.println("Coincidence");
+                    return saveOrUpdate(entity);
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        return null;
+    }
+
+    @Override
     public void delete(Long id) {
         dao.deleteById(id);
     }
@@ -83,9 +104,7 @@ public class UsuarioServiceImpl extends FilterService<Usuario> implements Usuari
         String hql;
         List<FilterParam> params = new ArrayList<>();
         if(filterParam.getId() == null){
-            hql =
-            "WHERE LOWER(c.perfil.nombre) LIKE LOWER('"+filterParam.getParam()+"%') " +
-            "OR LOWER(c.empresa.razonSocial) LIKE LOWER('"+filterParam.getParam()+"%')";
+            hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%')";
         }else{
             hql =
             "WHERE (c.empresa.id) = ('"+filterParam.getId()+"') " +

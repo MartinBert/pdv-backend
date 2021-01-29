@@ -15,6 +15,8 @@ public interface UsuarioService {
 
     Usuario saveOrUpdate(Usuario entity);
 
+    Usuario update(Usuario entity);
+
     Page<Usuario> filter(GenericFilter filter);
 
     void delete(Long id);

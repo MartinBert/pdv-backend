@@ -57,9 +57,7 @@ public class HistorialMovimientosStockServiceImpl extends FilterService<Historia
             hql = "WHERE LOWER(c.descripcion) LIKE LOWER('"+filterParam.getParam()+"%') OR LOWER(c.fecha) = LOWER('"+filterParam.getParam()+"')";
         }else{
             hql =
-                "WHERE (c.sucursal.id) = ('"+filterParam.getId()+"') " +
-                "AND (LOWER(c.descripcion) LIKE LOWER('"+filterParam.getParam()+"%') " +
-                "OR LOWER(c.fecha) = LOWER('"+filterParam.getParam()+"')) GROUP BY (c.id) ORDER BY (c.id) DESC";
+                "WHERE (c.sucursal.id) = ('"+filterParam.getId()+"') GROUP BY (c.id) ORDER BY (c.id) DESC";
         }
 
         return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);

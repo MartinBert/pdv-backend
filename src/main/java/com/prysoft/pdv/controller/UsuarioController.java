@@ -55,7 +55,7 @@ public class UsuarioController {
 
     @PutMapping
     Usuario update(@RequestBody Usuario entity) {
-        return service.saveOrUpdate(entity);
+        return service.update(entity);
     }
 
     @DeleteMapping(value = "/{id}")

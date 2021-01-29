@@ -22,7 +22,7 @@ import java.util.List;
 @Service
 public class PrintHelper implements Serializable {
 
-    public JasperPrint printSalesForDataSourceCollection(InputStream stream, ArrayList<PrintSalesReport> data, HashMap<String, Object> params, HttpServletResponse response) throws JRException, IOException {
+    public JasperPrint printWithDataSourceCollection(InputStream stream, ArrayList<PrintSalesReport> data, HashMap<String, Object> params, HttpServletResponse response) throws JRException, IOException {
 
         JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(data);
         JasperReport report = (JasperReport) JRLoader.loadObject(stream);
@@ -33,7 +33,7 @@ public class PrintHelper implements Serializable {
         return null;
     }
 
-    public JasperPrint printSalesForConnectionDataBase(String tenant, InputStream stream, HashMap<String, Object> params, HttpServletResponse response) throws SQLException, JRException, IOException {
+    public JasperPrint printWithDatabaseConnection(String tenant, InputStream stream, HashMap<String, Object> params, HttpServletResponse response) throws SQLException, JRException, IOException {
 
         Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/"+tenant,"postgres","12345");
         JasperReport report = (JasperReport) JRLoader.loadObject(stream);
