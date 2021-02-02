@@ -11,6 +11,7 @@ public class Iva implements Serializable {
     private Long id;
     private String nombre;
     private double porcentaje;
+    private boolean tipo;
 
     public Long getId() {
         return id;
@@ -36,12 +37,21 @@ public class Iva implements Serializable {
         this.porcentaje = porcentaje;
     }
 
+    public boolean isTipo() {
+        return tipo;
+    }
+
+    public void setTipo(boolean tipo) {
+        this.tipo = tipo;
+    }
+
     @Override
     public String toString() {
         return "Iva{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", porcentaje=" + porcentaje +
+                ", tipo=" + tipo +
                 '}';
     }
 }
