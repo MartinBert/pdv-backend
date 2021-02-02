@@ -36,6 +36,12 @@ public class Producto implements Serializable {
     @OneToOne
     private Marca marca;
 
+    @OneToOne
+    private Iva ivaComprasObject;
+
+    @OneToOne
+    private Iva ivaVentasObject;
+
     @OneToMany(mappedBy = "producto")
     private Set<ProductoVariacion> variaciones;
 
@@ -246,6 +252,22 @@ public class Producto implements Serializable {
         this.atributos = atributos;
     }
 
+    public Iva getIvaComprasObject() {
+        return ivaComprasObject;
+    }
+
+    public void setIvaComprasObject(Iva ivaComprasObject) {
+        this.ivaComprasObject = ivaComprasObject;
+    }
+
+    public Iva getIvaVentasObject() {
+        return ivaVentasObject;
+    }
+
+    public void setIvaVentasObject(Iva ivaVentasObject) {
+        this.ivaVentasObject = ivaVentasObject;
+    }
+
     @Override
     public String toString() {
         return "Producto{" +
@@ -264,6 +286,8 @@ public class Producto implements Serializable {
                 ", estado=" + estado +
                 ", precioTotal=" + precioTotal +
                 ", marca=" + marca +
+                ", ivaComprasObject=" + ivaComprasObject +
+                ", ivaVentasObject=" + ivaVentasObject +
                 ", variaciones=" + variaciones +
                 ", distribuidores=" + distribuidores +
                 ", depositos=" + depositos +
