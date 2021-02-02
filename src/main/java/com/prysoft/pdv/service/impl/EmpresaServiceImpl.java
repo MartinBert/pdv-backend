@@ -4,7 +4,6 @@ import com.prysoft.pdv.dao.CondicionFiscalDao;
 import com.prysoft.pdv.dao.EmpresaDao;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.GenericFilter;
-import com.prysoft.pdv.models.CondicionFiscal;
 import com.prysoft.pdv.models.Empresa;
 import com.prysoft.pdv.service.EmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,10 +55,10 @@ public class EmpresaServiceImpl extends FilterService<Empresa> implements Empres
         String hql;
         List<FilterParam> params = new ArrayList<>();
 
-        if(filterParam.getId() == null){
+        if(filterParam.getIdParam() == null){
             hql = "";
         }else{
-            hql = "WHERE (c.id) = ('"+filterParam.getId()+"') AND LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getParam()+"%')";
+            hql = "WHERE (c.id) = ('"+filterParam.getIdSucursal()+"') AND LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getStringParam()+"%')";
         }
 
         return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);

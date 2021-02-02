@@ -57,7 +57,7 @@ public class Persona implements Serializable {
         this.tipoPersona = tipoPersona;
     }
 
-    @Column(name="condicionIva", unique = true, nullable = false)
+    @Column(name="condicionIva", nullable = false)
     public CondicionFiscal getCondicionIva() {
         return this.condicionIva;
     }
@@ -84,7 +84,7 @@ public class Persona implements Serializable {
         this.razonSocial = razonSocial;
     }
 
-    @Column(name="cuit", nullable = false, unique = true)
+    @Column(name="cuit", nullable = false)
     public String getCuit() {
         return this.cuit;
     }
@@ -93,7 +93,7 @@ public class Persona implements Serializable {
         this.cuit = cuit;
     }
 
-    @Column(name="direccion", unique = true)
+    @Column(name="direccion")
     public String getDireccion() {
         return this.direccion;
     }
@@ -102,7 +102,7 @@ public class Persona implements Serializable {
         this.direccion = direccion;
     }
 
-    @Column(name="email", unique = true)
+    @Column(name="email")
     public String getEmail() {
         return this.email;
     }

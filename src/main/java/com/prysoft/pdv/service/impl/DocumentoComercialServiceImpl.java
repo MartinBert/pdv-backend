@@ -68,7 +68,7 @@ public class DocumentoComercialServiceImpl extends FilterService<DocumentoComerc
     public Page<DocumentoComercial> filter(GenericFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
 
-        String hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%')";
+        String hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
 
         return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
     }

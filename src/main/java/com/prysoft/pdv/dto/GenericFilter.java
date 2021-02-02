@@ -1,19 +1,20 @@
 package com.prysoft.pdv.dto;
 
 public class GenericFilter extends PageFilter {
-    private String param;
+    private String stringParam;
     private double doubleParam;
     private Long idParam;
-    private Long id;
+    private Long idSucursal;
+    private Long idPerfil;
     private int page;
     private int size;
 
-    public String getParam() {
-        return param;
+    public String getStringParam() {
+        return stringParam;
     }
 
-    public void setParam(String param) {
-        this.param = param;
+    public void setStringParam(String stringParam) {
+        this.stringParam = stringParam;
     }
 
     @Override
@@ -36,12 +37,12 @@ public class GenericFilter extends PageFilter {
         this.size = size;
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdSucursal() {
+        return idSucursal;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdSucursal(Long idSucursal) {
+        this.idSucursal = idSucursal;
     }
 
     public double getDoubleParam() {
@@ -60,13 +61,22 @@ public class GenericFilter extends PageFilter {
         this.idParam = idParam;
     }
 
+    public Long getIdPerfil() {
+        return idPerfil;
+    }
+
+    public void setIdPerfil(Long idPerfil) {
+        this.idPerfil = idPerfil;
+    }
+
     @Override
     public String toString() {
         return "GenericFilter{" +
-                "param='" + param + '\'' +
+                "stringParam='" + stringParam + '\'' +
                 ", doubleParam=" + doubleParam +
                 ", idParam=" + idParam +
-                ", id=" + id +
+                ", idSucursal=" + idSucursal +
+                ", idPerfil=" + idPerfil +
                 ", page=" + page +
                 ", size=" + size +
                 '}';

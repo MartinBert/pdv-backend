@@ -51,10 +51,10 @@ public class PerfilServiceImpl extends FilterService<Perfil> implements PerfilSe
     public Page<Perfil> filter(GenericFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        if(filterParam.getId() == 1){
-            hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%')";
+        if(filterParam.getIdPerfil() == 1){
+            hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
         }else{
-            hql = "WHERE (c.id) != ('1') AND (c.nombre) LIKE LOWER('"+filterParam.getParam()+"%')";
+            hql = "WHERE (c.id) != ('1') AND (c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
         }
         
         return getPage(hql , filterParam.getPage(), filterParam.getSize(), params);

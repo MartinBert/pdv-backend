@@ -52,7 +52,7 @@ public class CondicionFiscalServiceImpl extends FilterService<CondicionFiscal> i
     public Page<CondicionFiscal> filter(GenericFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
 
-        String hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%')";
+        String hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
 
         return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
     }

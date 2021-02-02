@@ -103,14 +103,14 @@ public class UsuarioServiceImpl extends FilterService<Usuario> implements Usuari
         System.out.println(filterParam);
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        if(filterParam.getId() == null){
-            hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%')";
+        if(filterParam.getIdSucursal() == null){
+            hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
         }else{
             hql =
-            "WHERE (c.empresa.id) = ('"+filterParam.getId()+"') " +
-            "AND (LOWER(c.sucursal.razonSocial) LIKE LOWER('"+filterParam.getParam()+"%') " +
-            "OR LOWER(c.perfil.nombre) LIKE LOWER('"+filterParam.getParam()+"%') " +
-            "OR LOWER(c.puntoVenta.nombre) LIKE LOWER('"+filterParam.getParam()+"%'))";
+            "WHERE (c.empresa.id) = ('"+filterParam.getIdSucursal()+"') " +
+            "AND (LOWER(c.sucursal.razonSocial) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
+            "OR LOWER(c.perfil.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
+            "OR LOWER(c.puntoVenta.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%'))";
         }
 
         return getPage(hql , filterParam.getPage(), filterParam.getSize(), params);

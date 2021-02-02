@@ -11,7 +11,7 @@ public class MedioPago implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nombre", unique = true, nullable = false)
+    @Column(name = "nombre", nullable = false)
     private String nombre;
 
     @ManyToMany(fetch = FetchType.EAGER)

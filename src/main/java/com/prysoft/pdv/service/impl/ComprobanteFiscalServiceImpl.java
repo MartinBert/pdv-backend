@@ -67,16 +67,16 @@ public class ComprobanteFiscalServiceImpl extends FilterService<ComprobanteFisca
     public Page<ComprobanteFiscal> filter(GenericFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        if(filterParam.getId() == null){
+        if(filterParam.getIdSucursal() == null){
             hql =
                     "WHERE ((c.totalVenta) = ('"+filterParam.getDoubleParam()+"') " +
-                            "OR (c.fechaEmision) LIKE ('"+filterParam.getParam()+"%'))";
+                            "OR (c.fechaEmision) LIKE ('"+filterParam.getStringParam()+"%'))";
         }else{
             hql =
-                    "WHERE (c.sucursal.id) = ('"+filterParam.getId()+"') " +
+                    "WHERE (c.sucursal.id) = ('"+filterParam.getIdSucursal()+"') " +
                             "AND ((c.totalVenta) = ('"+filterParam.getDoubleParam()+"') " +
-                            "OR (c.fechaEmision) LIKE ('"+filterParam.getParam()+"%') " +
-                            "OR (c.numeroCbte) LIKE ('"+filterParam.getParam()+"%'))";
+                            "OR (c.fechaEmision) LIKE ('"+filterParam.getStringParam()+"%') " +
+                            "OR (c.numeroCbte) LIKE ('"+filterParam.getStringParam()+"%'))";
         }
 
         return getPage(hql , filterParam.getPage(), filterParam.getSize(), params);

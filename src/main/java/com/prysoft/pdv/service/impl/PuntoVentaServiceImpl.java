@@ -53,10 +53,10 @@ public class PuntoVentaServiceImpl extends FilterService<PuntoVenta> implements 
         String hql;
         List<FilterParam> params = new ArrayList<>();
 
-        if(filterParam.getId() == null){
-            hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%')";
+        if(filterParam.getIdSucursal() == null){
+            hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
         }else{
-            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getId()+"') AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%')";
+            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getIdSucursal()+"') AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
         }
 
         return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);

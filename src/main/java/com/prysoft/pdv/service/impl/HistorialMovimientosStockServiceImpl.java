@@ -1,10 +1,8 @@
 package com.prysoft.pdv.service.impl;
 
-import com.prysoft.pdv.dao.ClienteDao;
 import com.prysoft.pdv.dao.HistorialMovimientosStockDao;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.GenericFilter;
-import com.prysoft.pdv.models.Cliente;
 import com.prysoft.pdv.models.HistorialMovimientosStock;
 import com.prysoft.pdv.service.HistorialMovimientosStockService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,11 +51,11 @@ public class HistorialMovimientosStockServiceImpl extends FilterService<Historia
         String hql;
         List<FilterParam> params = new ArrayList<>();
 
-        if(filterParam.getId() == null){
-            hql = "WHERE LOWER(c.descripcion) LIKE LOWER('"+filterParam.getParam()+"%') OR LOWER(c.fecha) = LOWER('"+filterParam.getParam()+"')";
+        if(filterParam.getIdSucursal() == null){
+            hql = "WHERE LOWER(c.descripcion) LIKE LOWER('"+filterParam.getStringParam()+"%') OR LOWER(c.fecha) = LOWER('"+filterParam.getStringParam()+"')";
         }else{
             hql =
-                "WHERE (c.sucursal.id) = ('"+filterParam.getId()+"') GROUP BY (c.id) ORDER BY (c.id) DESC";
+                "WHERE (c.sucursal.id) = ('"+filterParam.getIdSucursal()+"') GROUP BY (c.id) ORDER BY (c.id) DESC";
         }
 
         return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);

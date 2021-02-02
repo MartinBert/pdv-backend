@@ -56,7 +56,7 @@ public class RubroServiceImpl extends FilterService<Rubro> implements RubroServi
     public Page<Rubro> filter(GenericFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
 
-        String hql = "WHERE LOWER(c.nombre) LIKE LOWER ('"+filterParam.getParam()+"%')";
+        String hql = "WHERE LOWER(c.nombre) LIKE LOWER ('"+filterParam.getStringParam()+"%')";
 
         return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
     }

@@ -23,18 +23,18 @@ public class VentaServiceImpl extends FilterService<ComprobanteFiscal> implement
     public Page<ComprobanteFiscal> filter(GenericFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        if(filterParam.getId() == null){
+        if(filterParam.getIdSucursal() == null){
             hql =
             "WHERE ((c.totalVenta) = ('"+filterParam.getDoubleParam()+"') " +
-            "OR (c.fechaEmision) LIKE ('"+filterParam.getParam()+"%') " +
-            "OR (c.cerrado) = ('"+filterParam.getParam()+"'))";
+            "OR (c.fechaEmision) LIKE ('"+filterParam.getStringParam()+"%') " +
+            "OR (c.cerrado) = ('"+filterParam.getStringParam()+"'))";
         }else{
             hql =
-            "WHERE (c.sucursal.id) = ('"+filterParam.getId()+"') " +
+            "WHERE (c.sucursal.id) = ('"+filterParam.getIdSucursal()+"') " +
             "AND ((c.totalVenta) = ('"+filterParam.getDoubleParam()+"') " +
-            "OR (c.fechaEmision) LIKE ('"+filterParam.getParam()+"%') " +
-            "OR (c.numeroCbte) LIKE ('"+filterParam.getParam()+"%') " +
-            "OR (c.cerrado) = ('"+filterParam.getParam()+"'))";
+            "OR (c.fechaEmision) LIKE ('"+filterParam.getStringParam()+"%') " +
+            "OR (c.numeroCbte) LIKE ('"+filterParam.getStringParam()+"%') " +
+            "OR (c.cerrado) = ('"+filterParam.getStringParam()+"'))";
         }
 
         return getPage(hql , filterParam.getPage(), filterParam.getSize(), params);
@@ -46,8 +46,8 @@ public class VentaServiceImpl extends FilterService<ComprobanteFiscal> implement
         ArrayList<ComprobanteFiscal> filteredReceipts = new ArrayList<>();
         comprobantes.forEach((ComprobanteFiscal comprobante) ->
             {
-                if(filterParam.getId() != null){
-                    if(comprobante.getCerrado() == null && comprobante.getSucursal().getId() == filterParam.getId()){
+                if(filterParam.getIdSucursal() != null){
+                    if(comprobante.getCerrado() == null && comprobante.getSucursal().getId() == filterParam.getIdSucursal()){
                         comprobante.getMediosPago().forEach((MedioPago medio) -> {
                             if(medio.getNombre().toLowerCase().equals("efectivo") || medio.getNombre().toLowerCase().equals("contado")){
                                 filteredReceipts.add(comprobante);

@@ -63,10 +63,10 @@ public class StockServiceImpl extends FilterService<Stock> implements StockServi
     public Page<Stock> filter(GenericFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        if(filterParam.getId() == null){
-            hql = "WHERE LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getParam()+"%')";
+        if(filterParam.getIdSucursal() == null){
+            hql = "WHERE LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
         }else{
-            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getId()+"') AND LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getParam()+"%')";
+            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getIdSucursal()+"') AND LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
         }
 
         return getPage(hql , filterParam.getPage(), filterParam.getSize(), params);
@@ -76,14 +76,14 @@ public class StockServiceImpl extends FilterService<Stock> implements StockServi
     public Page<Stock> filterStockForDepositId(GenericFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        if(filterParam.getId() == null){
-            hql = "WHERE LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getParam()+"%')";
+        if(filterParam.getIdSucursal() == null){
+            hql = "WHERE LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
         }else{
-            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getId()+"') " +
+            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getIdSucursal()+"') " +
                     "AND (c.deposito.id) = ('"+filterParam.getIdParam()+"') " +
-                    "AND (LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getParam()+"%') " +
-                    "OR LOWER(c.producto.codigoBarra) LIKE LOWER('"+filterParam.getParam()+"%') " +
-                    "OR LOWER(c.producto.codigoProducto) LIKE LOWER('"+filterParam.getParam()+"%'))";
+                    "AND (LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
+                    "OR LOWER(c.producto.codigoBarra) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
+                    "OR LOWER(c.producto.codigoProducto) LIKE LOWER('"+filterParam.getStringParam()+"%'))";
         }
 
         return getPage(hql , filterParam.getPage(), filterParam.getSize(), params);

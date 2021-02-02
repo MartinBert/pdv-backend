@@ -56,7 +56,7 @@ public class MarcaServiceImpl extends FilterService<Marca> implements MarcaServi
     public Page<Marca> filter(GenericFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
 
-        String hql = "WHERE LOWER(c.nombre) LIKE LOWER ('"+filterParam.getParam()+"%')";
+        String hql = "WHERE LOWER(c.nombre) LIKE LOWER ('"+filterParam.getStringParam()+"%')";
 
         return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
     }

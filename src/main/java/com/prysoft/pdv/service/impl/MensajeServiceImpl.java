@@ -12,9 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,7 +49,7 @@ public class MensajeServiceImpl extends FilterService<Mensaje> implements Mensaj
     public Page<Mensaje> filter(GenericFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
 
-        String hql = "WHERE LOWER(c.nameAndLastName) LIKE LOWER('"+filterParam.getParam()+"%') OR LOWER(c.date) LIKE LOWER('"+filterParam.getParam()+"')";
+        String hql = "WHERE LOWER(c.nameAndLastName) LIKE LOWER('"+filterParam.getStringParam()+"%') OR LOWER(c.date) LIKE LOWER('"+filterParam.getStringParam()+"')";
 
         return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
     }

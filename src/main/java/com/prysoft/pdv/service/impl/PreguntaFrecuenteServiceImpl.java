@@ -49,7 +49,7 @@ public class PreguntaFrecuenteServiceImpl extends FilterService<PreguntaFrecuent
     public Page<PreguntaFrecuente> filter(GenericFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
 
-        String hql = "WHERE LOWER(c.pregunta) LIKE LOWER('"+filterParam.getParam()+"%')";
+        String hql = "WHERE LOWER(c.pregunta) LIKE LOWER('"+filterParam.getStringParam()+"%')";
 
         return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
     }

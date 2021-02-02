@@ -50,7 +50,7 @@ public class PropiedadServiceImpl extends FilterService<Propiedad> implements Pr
         String hql;
         List<FilterParam> params = new ArrayList<>();
 
-        hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%')";
+        hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
 
         return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
     }

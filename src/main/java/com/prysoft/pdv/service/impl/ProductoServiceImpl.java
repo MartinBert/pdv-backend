@@ -83,7 +83,7 @@ public class ProductoServiceImpl extends FilterService<Producto> implements Prod
     public Page<Producto> filter(GenericFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
 
-        String hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%') OR LOWER(c.codigoBarra) LIKE LOWER('"+filterParam.getParam()+"%') OR LOWER(c.codigoProducto) LIKE LOWER('"+filterParam.getParam()+"%')    ";
+        String hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') OR LOWER(c.codigoBarra) LIKE LOWER('"+filterParam.getStringParam()+"%') OR LOWER(c.codigoProducto) LIKE LOWER('"+filterParam.getStringParam()+"%')    ";
 
         return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
     }

@@ -14,10 +14,10 @@ public class Sucursal implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nombre", unique = true, nullable = false)
+    @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @Column(name = "direccion", unique = true, nullable = false)
+    @Column(name = "direccion", nullable = false)
     private String direccion;
 
     @OneToOne

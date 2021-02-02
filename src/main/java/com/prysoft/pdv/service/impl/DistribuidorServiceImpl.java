@@ -53,21 +53,21 @@ public class DistribuidorServiceImpl extends FilterService<Proveedor> implements
         String hql;
         List<FilterParam> params = new ArrayList<>();
 
-        if(filterParam.getId() == null){
+        if(filterParam.getIdSucursal() == null){
             hql =
-                    "WHERE (LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getParam()+"%') " +
-                            "OR LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%') " +
-                            "OR LOWER(c.direccion) LIKE LOWER('"+filterParam.getParam()+"%') " +
-                            "OR LOWER(c.nombreContacto) LIKE LOWER('"+filterParam.getParam()+"%') " +
-                            "OR LOWER(c.cuit) LIKE LOWER('"+filterParam.getParam()+"%'))";
+                    "WHERE (LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
+                            "OR LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
+                            "OR LOWER(c.direccion) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
+                            "OR LOWER(c.nombreContacto) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
+                            "OR LOWER(c.cuit) LIKE LOWER('"+filterParam.getStringParam()+"%'))";
         }else{
             hql =
-                    "JOIN c.sucursales WHERE (id_sucursal) = ('"+filterParam.getId()+"') " +
-                            "AND (LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getParam()+"%') " +
-                            "OR LOWER(c.nombre) LIKE LOWER('"+filterParam.getParam()+"%') " +
-                            "OR LOWER(c.direccion) LIKE LOWER('"+filterParam.getParam()+"%') " +
-                            "OR LOWER(c.nombreContacto) LIKE LOWER('"+filterParam.getParam()+"%') " +
-                            "OR LOWER(c.cuit) LIKE LOWER('"+filterParam.getParam()+"%'))";
+                    "JOIN c.sucursales WHERE (id_sucursal) = ('"+filterParam.getIdSucursal()+"') " +
+                            "AND (LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
+                            "OR LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
+                            "OR LOWER(c.direccion) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
+                            "OR LOWER(c.nombreContacto) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
+                            "OR LOWER(c.cuit) LIKE LOWER('"+filterParam.getStringParam()+"%'))";
         }
 
         return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
