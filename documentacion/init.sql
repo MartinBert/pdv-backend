@@ -72,5 +72,6 @@ INSERT INTO "public"."condiciones_documentos" ("id_condicion", "id_documento") V
 (3,25),(3,26),(3,27),(3,28),(3,29);
 
 INSERT INTO "public"."ivas" ("id", "nombre", "porcentaje") VALUES
-(1,'Iva 21%',21),(2,'Iva 10,5%', 10.5),(3,'Iva 27%',27);
+(1,'Iva 21%',21, false),(2,'Iva 10,5%', 10.5, false),(3,'Iva 27%',27, false),
+(4,'Iva 21%',21, true),(5,'Iva 10,5%', 10.5, true),(6,'Iva 27%',27, true);
 
