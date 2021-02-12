@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +19,9 @@ import java.util.Optional;
 @Service
 @Transactional
 public class PuntoVentaServiceImpl extends FilterService<PuntoVenta> implements PuntoVentaService {
+
+    @PersistenceContext
+    EntityManager entityManager;
 
     @Autowired
     private PuntoVentaDao dao;
@@ -54,14 +57,12 @@ public class PuntoVentaServiceImpl extends FilterService<PuntoVenta> implements 
         List<FilterParam> params = new ArrayList<>();
 
         if(filterParam.getIdSucursal() == null){
-            hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
+            hql = "";
         }else{
             hql = "WHERE (c.sucursal.id) = ('"+filterParam.getIdSucursal()+"') AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
         }
 
         return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
     }
-
-
 }
 

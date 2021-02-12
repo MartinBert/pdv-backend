@@ -1,27 +1,12 @@
-package com.prysoft.pdv.models;
+package com.prysoft.pdv.dto;
 
-import com.fasterxml.jackson.annotation.*;
-
-import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
-@Table(name = "punto_ventas")
-public class PuntoVenta implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PuntoVentaDetail implements Serializable {
     private Long id;
-
-    @Column(name = "id_fiscal", nullable = false)
     private int idFiscal;
-
-    @Column(name = "nombre", nullable = false)
     private String nombre;
-
-    @ManyToOne
-    @JsonBackReference
-    @JoinColumn(name="sucursal_id", nullable=false)
-    private Sucursal sucursal;
+    private String razonSocial;
 
     public Long getId() {
         return id;
@@ -47,21 +32,21 @@ public class PuntoVenta implements Serializable {
         this.nombre = nombre;
     }
 
-    public Sucursal getSucursal() {
-        return sucursal;
+    public String getRazonSocial() {
+        return razonSocial;
     }
 
-    public void setSucursal(Sucursal sucursal) {
-        this.sucursal = sucursal;
+    public void setRazonSocial(String razonSocial) {
+        this.razonSocial = razonSocial;
     }
 
     @Override
     public String toString() {
-        return "PuntoVenta{" +
+        return "PuntoVentaDetail{" +
                 "id=" + id +
                 ", idFiscal=" + idFiscal +
                 ", nombre='" + nombre + '\'' +
-                ", sucursal=" + sucursal +
+                ", razonSocial='" + razonSocial + '\'' +
                 '}';
     }
 }

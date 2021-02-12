@@ -29,12 +29,21 @@ public class VentaServiceImpl extends FilterService<ComprobanteFiscal> implement
             "OR (c.fechaEmision) LIKE ('"+filterParam.getStringParam()+"%') " +
             "OR (c.cerrado) = ('"+filterParam.getStringParam()+"'))";
         }else{
-            hql =
-            "WHERE (c.sucursal.id) = ('"+filterParam.getIdSucursal()+"') " +
-            "AND ((c.totalVenta) = ('"+filterParam.getDoubleParam()+"') " +
-            "OR (c.fechaEmision) LIKE ('"+filterParam.getStringParam()+"%') " +
-            "OR (c.numeroCbte) LIKE ('"+filterParam.getStringParam()+"%') " +
-            "OR (c.cerrado) = ('"+filterParam.getStringParam()+"'))";
+            if(filterParam.getIdParam() != null && filterParam.getIdParam() == 999999999){
+                hql =
+                "WHERE (c.sucursal.id) = ('"+filterParam.getIdSucursal()+"') AND (LOWER(c.documentoComercial.letra) LIKE LOWER('x%') OR LOWER(c.documentoComercial.letra) LIKE LOWER('nx%'))" +
+                "AND ((c.totalVenta) = ('"+filterParam.getDoubleParam()+"') " +
+                "OR (c.fechaEmision) LIKE ('"+filterParam.getStringParam()+"%') " +
+                "OR (c.numeroCbte) LIKE ('"+filterParam.getStringParam()+"%') " +
+                "OR (c.cerrado) = ('"+filterParam.getStringParam()+"'))";
+            }else{
+                hql =
+                "WHERE (c.sucursal.id) = ('"+filterParam.getIdSucursal()+"') AND (LOWER(c.documentoComercial.letra) != ('x') AND LOWER(c.documentoComercial.letra) != ('nx'))" +
+                "AND ((c.totalVenta) = ('"+filterParam.getDoubleParam()+"') " +
+                "OR (c.fechaEmision) LIKE ('"+filterParam.getStringParam()+"%') " +
+                "OR (c.numeroCbte) LIKE ('"+filterParam.getStringParam()+"%') " +
+                "OR (c.cerrado) = ('"+filterParam.getStringParam()+"'))";
+            }
         }
 
         return getPage(hql , filterParam.getPage(), filterParam.getSize(), params);

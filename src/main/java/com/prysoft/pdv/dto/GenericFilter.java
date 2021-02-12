@@ -4,6 +4,7 @@ public class GenericFilter extends PageFilter {
     private String stringParam;
     private double doubleParam;
     private Long idParam;
+    private Long longParam;
     private Long idSucursal;
     private Long idPerfil;
     private int page;
@@ -69,12 +70,21 @@ public class GenericFilter extends PageFilter {
         this.idPerfil = idPerfil;
     }
 
+    public Long getLongParam() {
+        return longParam;
+    }
+
+    public void setLongParam(Long longParam) {
+        this.longParam = longParam;
+    }
+
     @Override
     public String toString() {
         return "GenericFilter{" +
                 "stringParam='" + stringParam + '\'' +
                 ", doubleParam=" + doubleParam +
                 ", idParam=" + idParam +
+                ", longParam=" + longParam +
                 ", idSucursal=" + idSucursal +
                 ", idPerfil=" + idPerfil +
                 ", page=" + page +

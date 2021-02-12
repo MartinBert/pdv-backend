@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -52,6 +52,7 @@ public class SucursalServiceImpl extends FilterService<Sucursal> implements Sucu
     public Page<Sucursal> filter(GenericFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
+
         if(filterParam.getIdSucursal() == null){
             hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') OR LOWER(c.direccion) LIKE LOWER('"+filterParam.getStringParam()+"%')";
         }else{
@@ -60,6 +61,4 @@ public class SucursalServiceImpl extends FilterService<Sucursal> implements Sucu
 
         return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
     }
-
-
 }

@@ -83,10 +83,18 @@ public class ProductoServiceImpl extends FilterService<Producto> implements Prod
     public Page<Producto> filter(GenericFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
         String hql;
-        if(filterParam.getDoubleParam() > 0){
-            hql = "WHERE (c.estado) != 1 AND (LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') OR LOWER(c.codigoBarra) LIKE LOWER('"+filterParam.getStringParam()+"%') OR LOWER(c.codigoProducto) LIKE LOWER('"+filterParam.getStringParam()+"%'))";
+        if(filterParam.getLongParam() != null){
+            if(filterParam.getIdParam() != 999999999){
+                hql = "JOIN c.distribuidores d WHERE (d.id) = ('"+filterParam.getIdParam()+"')";
+            }else{
+                hql = "";
+            }
         }else{
-            hql = "WHERE (c.estado) = 1 AND (LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') OR LOWER(c.codigoBarra) LIKE LOWER('"+filterParam.getStringParam()+"%') OR LOWER(c.codigoProducto) LIKE LOWER('"+filterParam.getStringParam()+"%'))";
+            if(filterParam.getDoubleParam() > 0){
+                hql = "WHERE (c.estado) != 1 AND (LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') OR LOWER(c.codigoBarra) LIKE LOWER('"+filterParam.getStringParam()+"%') OR LOWER(c.codigoProducto) LIKE LOWER('"+filterParam.getStringParam()+"%'))";
+            }else{
+                hql = "WHERE (c.estado) = 1 AND (LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') OR LOWER(c.codigoBarra) LIKE LOWER('"+filterParam.getStringParam()+"%') OR LOWER(c.codigoProducto) LIKE LOWER('"+filterParam.getStringParam()+"%'))";
+            }
         }
 
         return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
