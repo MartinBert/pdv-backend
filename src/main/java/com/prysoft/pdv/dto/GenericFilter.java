@@ -2,6 +2,7 @@ package com.prysoft.pdv.dto;
 
 public class GenericFilter extends PageFilter {
     private String stringParam;
+    private String secondStringParam;
     private double doubleParam;
     private Long idParam;
     private Long longParam;
@@ -78,10 +79,19 @@ public class GenericFilter extends PageFilter {
         this.longParam = longParam;
     }
 
+    public String getSecondStringParam() {
+        return secondStringParam;
+    }
+
+    public void setSecondStringParam(String secondStringParam) {
+        this.secondStringParam = secondStringParam;
+    }
+
     @Override
     public String toString() {
         return "GenericFilter{" +
                 "stringParam='" + stringParam + '\'' +
+                ", secondStringParam='" + secondStringParam + '\'' +
                 ", doubleParam=" + doubleParam +
                 ", idParam=" + idParam +
                 ", longParam=" + longParam +

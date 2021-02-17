@@ -25,7 +25,7 @@ public class StockServiceImpl extends FilterService<Stock> implements StockServi
     @Override
     public Stock findById(Long id) {
         Optional<Stock> optional = dao.findById(id);
-        if(!optional.isPresent()) {
+        if(optional.isEmpty()) {
             throw new EntityNotFoundException();
         }
 
@@ -38,8 +38,22 @@ public class StockServiceImpl extends FilterService<Stock> implements StockServi
     }
 
     @Override
-    public Stock saveOrUpdate(Stock entity) {
+    public Stock save(Stock entity){
         return dao.save(entity);
+    }
+
+    @Override
+    public Stock update(Stock entity) {
+        Optional<Stock> obj = dao.findByAlgorim(entity.getAlgorim());
+        if(obj.isPresent()){
+            dao.delete(entity);
+            entity.setCantidad(entity.getCantidad() + obj.get().getCantidad());
+            entity.setId(obj.get().getId());
+            dao.save(entity);
+        } else {
+            dao.save(entity);
+        }
+        return null;
     }
 
     @Override

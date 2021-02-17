@@ -12,7 +12,9 @@ public interface StockService {
 
     Page<Stock> findAll(Pageable page);
 
-    Stock saveOrUpdate(Stock entity);
+    Stock save(Stock entity);
+
+    Stock update(Stock entity);
 
     Iterable<Stock> saveAll(ArrayList<Stock> entities);
 

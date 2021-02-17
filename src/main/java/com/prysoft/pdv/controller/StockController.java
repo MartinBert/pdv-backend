@@ -40,17 +40,18 @@ public class StockController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     Stock save(@RequestBody Stock entity) {
-        return service.saveOrUpdate(entity);
+        return service.save(entity);
+    }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    Stock update(@RequestBody Stock entity) {
+        return service.update(entity);
     }
 
     @PostMapping(value = "/saveAll")
     Iterable<Stock> saveAll(@RequestBody ArrayList<Stock> entities) {
         return  service.saveAll(entities);
-    }
-
-    @PutMapping
-    Stock update(@RequestBody Stock entity) {
-        return service.saveOrUpdate(entity);
     }
 
     @DeleteMapping(value = "/{id}")
