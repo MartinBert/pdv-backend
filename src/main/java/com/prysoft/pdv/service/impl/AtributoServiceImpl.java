@@ -39,7 +39,25 @@ public class AtributoServiceImpl extends FilterService<Atributo> implements Atri
     }
 
     @Override
-    public Atributo saveOrUpdate(Atributo entity) {return dao.save(entity);}
+    public Atributo saveOrUpdate(Atributo entity) {
+        if(entity.getValor() != null){
+            Optional<Atributo> textAtributeInDatabase = dao.findByValor(entity.getValor());
+            if(textAtributeInDatabase.isPresent()){
+                return null;
+            }else{
+                return dao.save(entity);
+            }
+        }else if(entity.getValorNumerico() != 0){
+            Optional<Atributo> numericAtributeInDatabase = dao.findByValorNumerico(entity.getValorNumerico());
+            if(numericAtributeInDatabase.isPresent()){
+                return null;
+            }else{
+                return dao.save(entity);
+            }
+        }else{
+            return dao.save(entity);
+        }
+    }
 
     @Override
     public void delete(Long id) {
