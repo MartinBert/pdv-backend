@@ -17,8 +17,8 @@ spring:
 #tenants
 tenants:
   datasources:
-    pdv:
-      jdbcUrl: jdbc:postgresql://localhost:5432/pdv
+    fragancias:
+      jdbcUrl: jdbc:postgresql://localhost:5432/fragancias
       driverClassName: org.postgresql.Driver
       username: postgres
       password: 12345
@@ -42,6 +42,10 @@ tenants:
       driverClassName: org.postgresql.Driver
       username: postgres
       password: 12345
-
+    casasonia:
+      jdbcUrl: jdbc:postgresql://localhost:5432/casasonia
+      driverClassName: org.postgresql.Driver
+      username: postgres
+      password: 12345
 server:
   port: 8000
