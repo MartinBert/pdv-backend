@@ -5,8 +5,6 @@ import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.Producto;
 import com.prysoft.pdv.service.ProductoService;
-import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.util.JRLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,13 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.*;
 
 @Service
@@ -98,18 +89,5 @@ public class ProductoServiceImpl extends FilterService<Producto> implements Prod
         }
 
         return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
-    }
-
-    @Override
-    public JasperPrint generalReport(String tenant, HttpServletResponse response) throws JRException, IOException, SQLException {
-
-        Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/"+tenant,"postgres","12345");
-        InputStream stream = this.getClass().getResourceAsStream("/reports/productsReports/AllProducts.jasper");
-        JasperReport report = (JasperReport) JRLoader.loadObject(stream);
-        JasperPrint print = JasperFillManager.fillReport(report,new HashMap<>(),conn);
-        final ServletOutputStream output = response.getOutputStream();
-        JasperExportManager.exportReportToPdfStream(print, output);
-
-        return null;
     }
 }

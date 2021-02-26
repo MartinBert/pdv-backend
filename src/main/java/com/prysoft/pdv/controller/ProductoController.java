@@ -2,6 +2,8 @@ package com.prysoft.pdv.controller;
 
 import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.*;
+import com.prysoft.pdv.print.PrintProductsLabels;
+import com.prysoft.pdv.reports.ProductsReport;
 import com.prysoft.pdv.service.ProductoService;
 import net.sf.jasperreports.engine.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ import java.util.ArrayList;
 public class ProductoController {
     @Autowired
     private ProductoService service;
+
+    @Autowired
+    private ProductsReport reports;
 
     @GetMapping
     Page<Producto> findAll(Pageable page) {
@@ -62,6 +67,11 @@ public class ProductoController {
 
     @GetMapping(value = "/generalReport/{tenant}")
     public JasperPrint generateReport(@PathVariable String tenant, HttpServletResponse response) throws JRException, IOException, SQLException {
-        return service.generalReport(tenant, response);
+        return reports.generalReport(tenant, response);
+    }
+
+    @PostMapping(value = "/labels")
+    public JasperPrint labels(@RequestBody ArrayList<PrintProductsLabels> productos, HttpServletResponse response) throws IOException, JRException {
+        return reports.labels(productos, response);
     }
 }

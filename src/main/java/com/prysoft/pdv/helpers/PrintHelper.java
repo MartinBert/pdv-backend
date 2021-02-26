@@ -1,6 +1,7 @@
 package com.prysoft.pdv.helpers;
 
 import com.prysoft.pdv.models.PrintComprobante;
+import com.prysoft.pdv.print.PrintProductsLabels;
 import com.prysoft.pdv.print.PrintSalesReport;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -22,22 +23,12 @@ import java.util.List;
 @Service
 public class PrintHelper implements Serializable {
 
+    /***** SALES *****/
     public JasperPrint printWithDataSourceCollection(InputStream stream, ArrayList<PrintSalesReport> data, HashMap<String, Object> params, HttpServletResponse response) throws JRException, IOException {
 
         JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(data);
         JasperReport report = (JasperReport) JRLoader.loadObject(stream);
         JasperPrint print = JasperFillManager.fillReport(report,params,datasource);
-        final ServletOutputStream output = response.getOutputStream();
-        JasperExportManager.exportReportToPdfStream(print, output);
-
-        return null;
-    }
-
-    public JasperPrint printWithDatabaseConnection(String tenant, InputStream stream, HashMap<String, Object> params, HttpServletResponse response) throws SQLException, JRException, IOException {
-
-        Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/"+tenant,"postgres","12345");
-        JasperReport report = (JasperReport) JRLoader.loadObject(stream);
-        JasperPrint print = JasperFillManager.fillReport(report,params,conn);
         final ServletOutputStream output = response.getOutputStream();
         JasperExportManager.exportReportToPdfStream(print, output);
 
@@ -54,4 +45,31 @@ public class PrintHelper implements Serializable {
 
         return null;
     }
+    /***** SALES *****/
+
+    /***** PRODUCTS *****/
+    public JasperPrint printLabels(InputStream stream, ArrayList<PrintProductsLabels> data, HashMap<String, Object> params, HttpServletResponse response) throws JRException, IOException {
+
+        JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(data);
+        JasperReport report = (JasperReport) JRLoader.loadObject(stream);
+        JasperPrint print = JasperFillManager.fillReport(report,params,datasource);
+        final ServletOutputStream output = response.getOutputStream();
+        JasperExportManager.exportReportToPdfStream(print, output);
+
+        return null;
+    }
+    /***** PRODUCTS *****/
+
+    /***** GENERIC *****/
+    public JasperPrint printWithDatabaseConnection(String tenant, InputStream stream, HashMap<String, Object> params, HttpServletResponse response) throws SQLException, JRException, IOException {
+
+        Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/"+tenant,"postgres","12345");
+        JasperReport report = (JasperReport) JRLoader.loadObject(stream);
+        JasperPrint print = JasperFillManager.fillReport(report,params,conn);
+        final ServletOutputStream output = response.getOutputStream();
+        JasperExportManager.exportReportToPdfStream(print, output);
+
+        return null;
+    }
+    /***** GENERIC *****/
 }
