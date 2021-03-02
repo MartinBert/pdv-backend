@@ -82,12 +82,20 @@ public class ProductoServiceImpl extends FilterService<Producto> implements Prod
             }
         }else{
             if(filterParam.getDoubleParam() > 0){
-                hql = "WHERE (c.estado) != 1 AND (LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') OR LOWER(c.codigoBarra) LIKE LOWER('"+filterParam.getStringParam()+"%') OR LOWER(c.codigoProducto) LIKE LOWER('"+filterParam.getStringParam()+"%'))";
-            }else{
-                hql = "WHERE (c.estado) = 1 AND (LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') OR LOWER(c.codigoBarra) LIKE LOWER('"+filterParam.getStringParam()+"%') OR LOWER(c.codigoProducto) LIKE LOWER('"+filterParam.getStringParam()+"%'))";
+                    hql = "WHERE (c.estado) != 1 " +
+                    "AND (LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
+                    "OR LOWER(c.codigoBarra) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
+                    "OR LOWER(c.codigoProducto) LIKE LOWER('"+filterParam.getStringParam()+"%')) " +
+                    "AND LOWER(c.marca.nombre) LIKE LOWER('"+filterParam.getThirdStringParam()+"%')";
+                    }else{
+                    hql = "WHERE (c.estado) = 1 " +
+                    "AND (LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
+                    "OR LOWER(c.codigoBarra) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
+                    "OR LOWER(c.codigoProducto) LIKE LOWER('"+filterParam.getStringParam()+"%')) " +
+                    "AND LOWER(c.marca.nombre) LIKE LOWER('"+filterParam.getThirdStringParam()+"%')";
             }
         }
 
-        return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
+        return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 }

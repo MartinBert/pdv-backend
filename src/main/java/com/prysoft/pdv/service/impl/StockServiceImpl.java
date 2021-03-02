@@ -78,12 +78,17 @@ public class StockServiceImpl extends FilterService<Stock> implements StockServi
         String hql;
         List<FilterParam> params = new ArrayList<>();
         if(filterParam.getIdSucursal() == null){
-            hql = "WHERE LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
+            hql = "WHERE LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
+                    "AND LOWER(c.producto.marca.nombre) LIKE LOWER('"+filterParam.getThirdStringParam()+"%')";
         }else{
-            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getIdSucursal()+"') AND LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
+            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getIdSucursal()+"') " +
+                    "AND (LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
+                    "OR LOWER(c.producto.codigoBarra) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
+                    "OR LOWER(c.producto.codigoProducto) LIKE LOWER('"+filterParam.getStringParam()+"%')) " +
+                    "AND LOWER(c.producto.marca.nombre) LIKE LOWER('"+filterParam.getThirdStringParam()+"%')";
         }
 
-        return getPage(hql , filterParam.getPage(), filterParam.getSize(), params);
+        return getPage(hql , filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 
     @Override
@@ -91,16 +96,18 @@ public class StockServiceImpl extends FilterService<Stock> implements StockServi
         String hql;
         List<FilterParam> params = new ArrayList<>();
         if(filterParam.getIdSucursal() == null){
-            hql = "WHERE LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
+            hql = "WHERE (c.deposito.id) = ('"+filterParam.getIdParam()+"') AND LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
+                    "AND LOWER(c.producto.marca.nombre) LIKE LOWER('"+filterParam.getThirdStringParam()+"%')";
         }else{
             hql = "WHERE (c.sucursal.id) = ('"+filterParam.getIdSucursal()+"') " +
                     "AND (c.deposito.id) = ('"+filterParam.getIdParam()+"') " +
                     "AND (LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
                     "OR LOWER(c.producto.codigoBarra) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
-                    "OR LOWER(c.producto.codigoProducto) LIKE LOWER('"+filterParam.getStringParam()+"%'))";
+                    "OR LOWER(c.producto.codigoProducto) LIKE LOWER('"+filterParam.getStringParam()+"%')) " +
+                    "AND LOWER(c.producto.marca.nombre) LIKE LOWER('"+filterParam.getThirdStringParam()+"%')";
         }
 
-        return getPage(hql , filterParam.getPage(), filterParam.getSize(), params);
+        return getPage(hql , filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 
     @Override

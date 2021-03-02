@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class PrintProductsLabels implements Serializable {
     private String nombre;
     private String codigoBarra;
+    private String attributes;
 
     public String getNombre() {
         return nombre;
@@ -22,11 +23,20 @@ public class PrintProductsLabels implements Serializable {
         this.codigoBarra = codigoBarra;
     }
 
+    public String getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(String attributes) {
+        this.attributes = attributes;
+    }
+
     @Override
     public String toString() {
         return "PrintProductsLabels{" +
                 "nombre='" + nombre + '\'' +
                 ", codigoBarra='" + codigoBarra + '\'' +
+                ", atributes='" + attributes + '\'' +
                 '}';
     }
 }

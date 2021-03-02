@@ -3,7 +3,10 @@ package com.prysoft.pdv.dto;
 public class GenericFilter extends PageFilter {
     private String stringParam;
     private String secondStringParam;
+    private String thirdStringParam;
     private double doubleParam;
+    private double secondDoubleParam;
+    private double thirdDoubleParam;
     private Long idParam;
     private Long longParam;
     private Long idSucursal;
@@ -87,12 +90,39 @@ public class GenericFilter extends PageFilter {
         this.secondStringParam = secondStringParam;
     }
 
+    public String getThirdStringParam() {
+        return thirdStringParam;
+    }
+
+    public void setThirdStringParam(String thirdStringParam) {
+        this.thirdStringParam = thirdStringParam;
+    }
+
+    public double getSecondDoubleParam() {
+        return secondDoubleParam;
+    }
+
+    public void setSecondDoubleParam(double secondDoubleParam) {
+        this.secondDoubleParam = secondDoubleParam;
+    }
+
+    public double getThirdDoubleParam() {
+        return thirdDoubleParam;
+    }
+
+    public void setThirdDoubleParam(double thirdDoubleParam) {
+        this.thirdDoubleParam = thirdDoubleParam;
+    }
+
     @Override
     public String toString() {
         return "GenericFilter{" +
                 "stringParam='" + stringParam + '\'' +
                 ", secondStringParam='" + secondStringParam + '\'' +
+                ", thirdStringParam='" + thirdStringParam + '\'' +
                 ", doubleParam=" + doubleParam +
+                ", secondDoubleParam=" + secondDoubleParam +
+                ", thirdDoubleParam=" + thirdDoubleParam +
                 ", idParam=" + idParam +
                 ", longParam=" + longParam +
                 ", idSucursal=" + idSucursal +
