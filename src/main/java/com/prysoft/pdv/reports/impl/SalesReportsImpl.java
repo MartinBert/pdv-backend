@@ -148,9 +148,10 @@ public class SalesReportsImpl implements SalesReport {
 
         if (request.getCae() != "") {
             List<PrintComprobante> data = new ArrayList<>();
-            String detailRoute = Paths.get("", "src", "main", "resources", "reports/receiptsReports/factura_detail.jasper").toString();
-            InputStream stream = this.getClass().getResourceAsStream("/reports/receiptsReports/factura_electronica.jasper");
+            String detailRoute = Paths.get("", "src", "main", "resources", "reports/factura_detail.jasper").toString();
+            InputStream stream = this.getClass().getResourceAsStream("/reports/factura_electronica.jasper");
             PrintComprobante comprobante = printComprobanteHelper.processReceiptForPrint(request);
+            System.out.println(comprobante);
             data.add(comprobante);
             JRBeanCollectionDataSource subreportDataSource = new JRBeanCollectionDataSource(comprobante.getProductos());
             HashMap<String, Object> params = new HashMap<>();
@@ -161,9 +162,10 @@ public class SalesReportsImpl implements SalesReport {
             return printHelper.printOnCloseSale(stream, data, params, response);
         } else {
             List<PrintComprobante> data = new ArrayList<>();
-            String detailRoute = Paths.get("", "src", "main", "resources", "reports/receiptsReports/ticket_detail.jasper").toString();
-            InputStream stream = this.getClass().getResourceAsStream("/reports/receiptsReports/x_ticket.jasper");
+            String detailRoute = Paths.get("", "src", "main", "resources", "reports/ticket_detail.jasper").toString();
+            InputStream stream = this.getClass().getResourceAsStream("/reports/x_ticket.jasper");
             PrintComprobante comprobante = printComprobanteHelper.processReceiptForPrint(request);
+            System.out.println(comprobante);
             data.add(comprobante);
             JRBeanCollectionDataSource subreportDataSource = new JRBeanCollectionDataSource(comprobante.getProductos());
             HashMap<String, Object> params = new HashMap<>();

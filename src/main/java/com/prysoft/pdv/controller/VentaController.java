@@ -25,8 +25,7 @@ public class VentaController {
 
     @PostMapping(value = "/onCloseSaleReport/{tenant}")
     public JasperPrint onCloseSaleReport(@RequestBody ComprobanteFiscal request, @PathVariable String tenant, HttpServletResponse response) throws IOException, JRException, SQLException {
-        JasperPrint closeSaleReport = reports.closeSaleReport(request, tenant, response);
-        return null;
+        return reports.closeSaleReport(request, tenant, response);
     }
 
     @GetMapping(value = "/allSalesReport/{tenant}/{id}")
