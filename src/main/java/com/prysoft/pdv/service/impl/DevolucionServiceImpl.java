@@ -49,9 +49,9 @@ public class DevolucionServiceImpl extends FilterService<Devolucion> implements 
             hql = "";
         }else{
             if(filterParam.getLongParam() != null && filterParam.getLongParam() == 999999999){
-                hql = "WHERE c.sucursal.id = ('"+filterParam.getIdSucursal()+"') AND LOWER(c.comprobante.letra) = LOWER('nx')";
+                hql = "WHERE c.sucursal.id = ('"+filterParam.getIdSucursal()+"')";
             }else{
-                hql = "WHERE c.sucursal.id = ('"+filterParam.getIdSucursal()+"') AND LOWER(c.comprobante.letra) != LOWER('nx')";
+                hql = "WHERE c.sucursal.id = ('"+filterParam.getIdSucursal()+"') AND LOWER(c.comprobante.letra) NOT LIKE LOWER('nx')";
             }
         }
 
