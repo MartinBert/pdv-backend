@@ -57,10 +57,10 @@ public class DepositoServiceImpl extends FilterService<Deposito> implements Depo
         String hql;
         List<FilterParam> params = new ArrayList<>();
 
-        if (filterParam.getIdPerfil() == 1) {
+        if (filterParam.getFourthLongParam() == 1) {
             hql = "WHERE LOWER(c.nombre) LIKE LOWER('" + filterParam.getStringParam() + "%')";
         }else{
-            hql = "WHERE (c.sucursales.id) = ('" + filterParam.getIdSucursal() + "') AND LOWER(c.nombre) LIKE LOWER('" + filterParam.getStringParam() + "%')";
+            hql = "WHERE (c.sucursales.id) = ('" + filterParam.getThirdLongParam() + "') AND LOWER(c.nombre) LIKE LOWER('" + filterParam.getStringParam() + "%')";
         }
 
         return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);

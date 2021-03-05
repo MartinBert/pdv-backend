@@ -51,7 +51,7 @@ public class PerfilServiceImpl extends FilterService<Perfil> implements PerfilSe
     public Page<Perfil> filter(GenericFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        if(filterParam.getIdPerfil() == 1){
+        if(filterParam.getFourthLongParam() == 1){
             hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
         }else{
             hql = "WHERE (c.id) != ('1') AND (c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";

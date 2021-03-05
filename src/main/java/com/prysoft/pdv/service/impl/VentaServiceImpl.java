@@ -23,22 +23,22 @@ public class VentaServiceImpl extends FilterService<ComprobanteFiscal> implement
     public Page<ComprobanteFiscal> filter(GenericFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        if(filterParam.getIdSucursal() == null){
+        if(filterParam.getThirdLongParam() == null){
             hql =
             "WHERE ((c.totalVenta) = ('"+filterParam.getDoubleParam()+"') " +
             "OR (c.fechaEmision) LIKE ('"+filterParam.getStringParam()+"%') " +
             "OR (c.cerrado) = ('"+filterParam.getStringParam()+"'))";
         }else{
-            if(filterParam.getIdParam() != null && filterParam.getIdParam() == 999999999){
+            if(filterParam.getSecondLongParam() != null && filterParam.getSecondLongParam() == 999999999){
                 hql =
-                "WHERE (c.sucursal.id) = ('"+filterParam.getIdSucursal()+"') AND (LOWER(c.documentoComercial.letra) LIKE LOWER('x%') OR LOWER(c.documentoComercial.letra) LIKE LOWER('nx%'))" +
+                "WHERE (c.sucursal.id) = ('"+filterParam.getThirdLongParam()+"') AND (LOWER(c.documentoComercial.letra) LIKE LOWER('x%') OR LOWER(c.documentoComercial.letra) LIKE LOWER('nx%'))" +
                 "AND ((c.totalVenta) = ('"+filterParam.getDoubleParam()+"') " +
                 "OR (c.fechaEmision) LIKE ('"+filterParam.getStringParam()+"%') " +
                 "OR (c.numeroCbte) LIKE ('"+filterParam.getStringParam()+"%') " +
                 "OR (c.cerrado) = ('"+filterParam.getStringParam()+"'))";
             }else{
                 hql =
-                "WHERE (c.sucursal.id) = ('"+filterParam.getIdSucursal()+"') AND (LOWER(c.documentoComercial.letra) != ('x') AND LOWER(c.documentoComercial.letra) != ('nx'))" +
+                "WHERE (c.sucursal.id) = ('"+filterParam.getThirdLongParam()+"') AND (LOWER(c.documentoComercial.letra) != ('x') AND LOWER(c.documentoComercial.letra) != ('nx'))" +
                 "AND ((c.totalVenta) = ('"+filterParam.getDoubleParam()+"') " +
                 "OR (c.fechaEmision) LIKE ('"+filterParam.getStringParam()+"%') " +
                 "OR (c.numeroCbte) LIKE ('"+filterParam.getStringParam()+"%') " +
@@ -55,8 +55,8 @@ public class VentaServiceImpl extends FilterService<ComprobanteFiscal> implement
         ArrayList<ComprobanteFiscal> filteredReceipts = new ArrayList<>();
         comprobantes.forEach((ComprobanteFiscal comprobante) ->
             {
-                if(filterParam.getIdSucursal() != null){
-                    if(comprobante.getCerrado() == null && comprobante.getSucursal().getId() == filterParam.getIdSucursal()){
+                if(filterParam.getThirdLongParam() != null){
+                    if(comprobante.getCerrado() == null && comprobante.getSucursal().getId() == filterParam.getThirdLongParam()){
                         comprobante.getMediosPago().forEach((MedioPago medio) -> {
                             if(medio.getNombre().toLowerCase().equals("efectivo") || medio.getNombre().toLowerCase().equals("contado")){
                                 filteredReceipts.add(comprobante);

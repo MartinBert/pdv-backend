@@ -55,10 +55,10 @@ public class EmpresaServiceImpl extends FilterService<Empresa> implements Empres
         String hql;
         List<FilterParam> params = new ArrayList<>();
 
-        if(filterParam.getIdParam() == null){
+        if(filterParam.getSecondLongParam() == null){
             hql = "";
         }else{
-            hql = "WHERE (c.id) = ('"+filterParam.getIdSucursal()+"') AND LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getStringParam()+"%')";
+            hql = "WHERE (c.id) = ('"+filterParam.getThirdLongParam()+"') AND LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getStringParam()+"%')";
         }
 
         return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);

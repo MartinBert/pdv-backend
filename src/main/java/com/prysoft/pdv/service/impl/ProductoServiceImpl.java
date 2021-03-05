@@ -72,27 +72,31 @@ public class ProductoServiceImpl extends FilterService<Producto> implements Prod
 
     @Override
     public Page<Producto> filter(GenericFilter filterParam) {
+        System.out.println(filterParam);
         List<FilterParam> params = new ArrayList<>();
         String hql;
-        if(filterParam.getLongParam() != null){
-            if(filterParam.getIdParam() != 999999999){
-                hql = "JOIN c.distribuidores d WHERE (d.id) = ('"+filterParam.getIdParam()+"')";
-            }else{
-                hql = "";
-            }
+        if(filterParam.getDoubleParam() > 0){
+                hql = "WHERE (c.estado) != 1 " +
+                "AND (LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
+                "OR LOWER(c.codigoBarra) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
+                "OR LOWER(c.codigoProducto) LIKE LOWER('"+filterParam.getStringParam()+"%')) " +
+                "AND LOWER(c.marca.nombre) LIKE LOWER('"+filterParam.getThirdStringParam()+"%')";
         }else{
-            if(filterParam.getDoubleParam() > 0){
-                    hql = "WHERE (c.estado) != 1 " +
-                    "AND (LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
-                    "OR LOWER(c.codigoBarra) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
-                    "OR LOWER(c.codigoProducto) LIKE LOWER('"+filterParam.getStringParam()+"%')) " +
-                    "AND LOWER(c.marca.nombre) LIKE LOWER('"+filterParam.getThirdStringParam()+"%')";
-                    }else{
-                    hql = "WHERE (c.estado) = 1 " +
-                    "AND (LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
-                    "OR LOWER(c.codigoBarra) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
-                    "OR LOWER(c.codigoProducto) LIKE LOWER('"+filterParam.getStringParam()+"%')) " +
-                    "AND LOWER(c.marca.nombre) LIKE LOWER('"+filterParam.getThirdStringParam()+"%')";
+            if(filterParam.getLongParam() != 0 || filterParam.getSecondLongParam() != 0 || filterParam.getThirdLongParam() != 0){
+                hql = "JOIN c.atributos a WHERE (a.id = '"+filterParam.getLongParam()+"' " +
+                        "OR a.id = ('"+filterParam.getSecondLongParam()+"') " +
+                        "OR a.id = ('"+filterParam.getThirdLongParam()+"')) AND c.estado = 1 " +
+                        "AND (LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
+                        "OR LOWER(c.codigoBarra) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
+                        "OR LOWER(c.codigoProducto) LIKE LOWER('"+filterParam.getStringParam()+"%')) " +
+                        "AND LOWER(c.marca.nombre) LIKE LOWER('"+filterParam.getThirdStringParam()+"%')";
+            }else{
+                hql =
+                        "WHERE (c.estado) = 1 " +
+                        "AND (LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
+                        "OR LOWER(c.codigoBarra) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
+                        "OR LOWER(c.codigoProducto) LIKE LOWER('"+filterParam.getStringParam()+"%')) " +
+                        "AND LOWER(c.marca.nombre) LIKE LOWER('"+filterParam.getThirdStringParam()+"%')";
             }
         }
 

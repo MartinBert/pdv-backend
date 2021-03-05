@@ -51,11 +51,11 @@ public class HistorialMovimientosStockServiceImpl extends FilterService<Historia
         String hql;
         List<FilterParam> params = new ArrayList<>();
 
-        if(filterParam.getIdSucursal() == null){
+        if(filterParam.getThirdLongParam() == null){
             hql = "WHERE LOWER(c.descripcion) LIKE LOWER('"+filterParam.getStringParam()+"%') OR LOWER(c.fecha) = LOWER('"+filterParam.getStringParam()+"')";
         }else{
             hql =
-                "WHERE (c.sucursal.id) = ('"+filterParam.getIdSucursal()+"') GROUP BY (c.id) ORDER BY (c.id) DESC";
+                "WHERE (c.sucursal.id) = ('"+filterParam.getThirdLongParam()+"') GROUP BY (c.id) ORDER BY (c.id) DESC";
         }
 
         return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);

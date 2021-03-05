@@ -57,10 +57,10 @@ public class PlanPagoServiceImpl extends FilterService<PlanPago> implements Plan
         String hql;
         List<FilterParam> params = new ArrayList<>();
 
-        if(filterParam.getIdSucursal() == null){
+        if(filterParam.getThirdLongParam() == null){
             hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
         }else{
-            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getIdSucursal()+"') AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
+            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getThirdLongParam()+"') AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
         }
 
         return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);

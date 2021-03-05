@@ -77,11 +77,11 @@ public class StockServiceImpl extends FilterService<Stock> implements StockServi
     public Page<Stock> filter(GenericFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        if(filterParam.getIdSucursal() == null){
+        if(filterParam.getThirdLongParam() == null){
             hql = "WHERE LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
                     "AND LOWER(c.producto.marca.nombre) LIKE LOWER('"+filterParam.getThirdStringParam()+"%')";
         }else{
-            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getIdSucursal()+"') " +
+            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getThirdLongParam()+"') " +
                     "AND (LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
                     "OR LOWER(c.producto.codigoBarra) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
                     "OR LOWER(c.producto.codigoProducto) LIKE LOWER('"+filterParam.getStringParam()+"%')) " +
@@ -95,12 +95,12 @@ public class StockServiceImpl extends FilterService<Stock> implements StockServi
     public Page<Stock> filterStockForDepositId(GenericFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        if(filterParam.getIdSucursal() == null){
-            hql = "WHERE (c.deposito.id) = ('"+filterParam.getIdParam()+"') AND LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
+        if(filterParam.getThirdLongParam() == null){
+            hql = "WHERE (c.deposito.id) = ('"+filterParam.getSecondLongParam()+"') AND LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
                     "AND LOWER(c.producto.marca.nombre) LIKE LOWER('"+filterParam.getThirdStringParam()+"%')";
         }else{
-            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getIdSucursal()+"') " +
-                    "AND (c.deposito.id) = ('"+filterParam.getIdParam()+"') " +
+            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getThirdLongParam()+"') " +
+                    "AND (c.deposito.id) = ('"+filterParam.getSecondLongParam()+"') " +
                     "AND (LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
                     "OR LOWER(c.producto.codigoBarra) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
                     "OR LOWER(c.producto.codigoProducto) LIKE LOWER('"+filterParam.getStringParam()+"%')) " +

@@ -45,13 +45,13 @@ public class DevolucionServiceImpl extends FilterService<Devolucion> implements 
     public Page<Devolucion> filter(GenericFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        if(filterParam.getIdSucursal() == null){
+        if(filterParam.getThirdLongParam() == null){
             hql = "";
         }else{
             if(filterParam.getLongParam() != null && filterParam.getLongParam() == 999999999){
-                hql = "WHERE c.sucursal.id = ('"+filterParam.getIdSucursal()+"')";
+                hql = "WHERE c.sucursal.id = ('"+filterParam.getThirdLongParam()+"')";
             }else{
-                hql = "WHERE c.sucursal.id = ('"+filterParam.getIdSucursal()+"') AND LOWER(c.comprobante.letra) NOT LIKE LOWER('nx')";
+                hql = "WHERE c.sucursal.id = ('"+filterParam.getThirdLongParam()+"') AND LOWER(c.comprobante.letra) NOT LIKE LOWER('nx')";
             }
         }
 

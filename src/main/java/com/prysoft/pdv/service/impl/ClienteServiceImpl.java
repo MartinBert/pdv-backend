@@ -51,7 +51,7 @@ public class ClienteServiceImpl extends FilterService<Cliente> implements Client
         String hql;
         List<FilterParam> params = new ArrayList<>();
 
-        if(filterParam.getIdSucursal() == null){
+        if(filterParam.getThirdLongParam() == null){
             hql =
             "WHERE (LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
             "OR LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
@@ -60,7 +60,7 @@ public class ClienteServiceImpl extends FilterService<Cliente> implements Client
             "OR LOWER(c.cuit) LIKE LOWER('"+filterParam.getStringParam()+"%'))";
         }else{
             hql =
-            "JOIN c.sucursales WHERE (id_sucursal) = ('"+filterParam.getIdSucursal()+"') " +
+            "JOIN c.sucursales WHERE (id_sucursal) = ('"+filterParam.getThirdLongParam()+"') " +
             "AND (LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
             "OR LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
             "OR LOWER(c.direccion) LIKE LOWER('"+filterParam.getStringParam()+"%') " +

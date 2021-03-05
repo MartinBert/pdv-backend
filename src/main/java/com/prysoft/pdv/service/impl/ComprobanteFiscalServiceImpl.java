@@ -67,13 +67,13 @@ public class ComprobanteFiscalServiceImpl extends FilterService<ComprobanteFisca
     public Page<ComprobanteFiscal> filter(GenericFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        if(filterParam.getIdSucursal() == null){
+        if(filterParam.getThirdLongParam() == null){
             hql =
                     "WHERE ((c.totalVenta) = ('"+filterParam.getDoubleParam()+"') " +
                             "OR (c.fechaEmision) LIKE ('"+filterParam.getStringParam()+"%'))";
         }else{
             hql =
-                    "WHERE (c.sucursal.id) = ('"+filterParam.getIdSucursal()+"') " +
+                    "WHERE (c.sucursal.id) = ('"+filterParam.getThirdLongParam()+"') " +
                             "AND ((c.totalVenta) = ('"+filterParam.getDoubleParam()+"') " +
                             "OR (c.fechaEmision) LIKE ('"+filterParam.getStringParam()+"%') " +
                             "OR (c.numeroCbte) LIKE ('"+filterParam.getStringParam()+"%'))";

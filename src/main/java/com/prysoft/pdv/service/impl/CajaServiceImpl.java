@@ -52,10 +52,10 @@ public class CajaServiceImpl extends FilterService<Caja> implements CajaService 
         String hql;
         List<FilterParam> params = new ArrayList<>();
 
-        if(filterParam.getIdSucursal() == null){
+        if(filterParam.getThirdLongParam() == null){
             hql ="";
         }else{
-            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getIdSucursal()+"')";
+            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getThirdLongParam()+"')";
         }
 
         return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);

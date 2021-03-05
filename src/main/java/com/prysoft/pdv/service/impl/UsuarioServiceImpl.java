@@ -103,11 +103,11 @@ public class UsuarioServiceImpl extends FilterService<Usuario> implements Usuari
         System.out.println(filterParam);
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        if(filterParam.getIdSucursal() == null){
+        if(filterParam.getThirdLongParam() == null){
             hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
         }else{
             hql =
-            "WHERE (c.empresa.id) = ('"+filterParam.getIdSucursal()+"') " +
+            "WHERE (c.empresa.id) = ('"+filterParam.getThirdLongParam()+"') " +
             "AND (LOWER(c.sucursal.razonSocial) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
             "OR LOWER(c.perfil.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
             "OR LOWER(c.puntoVenta.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%'))";

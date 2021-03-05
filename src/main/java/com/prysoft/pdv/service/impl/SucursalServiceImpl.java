@@ -53,10 +53,10 @@ public class SucursalServiceImpl extends FilterService<Sucursal> implements Sucu
         String hql;
         List<FilterParam> params = new ArrayList<>();
 
-        if(filterParam.getIdSucursal() == null){
+        if(filterParam.getThirdLongParam() == null){
             hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') OR LOWER(c.direccion) LIKE LOWER('"+filterParam.getStringParam()+"%')";
         }else{
-            hql = "WHERE (c.id) = ('"+filterParam.getIdSucursal()+"') AND (LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') OR LOWER(c.direccion) LIKE LOWER('"+filterParam.getStringParam()+"%'))";
+            hql = "WHERE (c.id) = ('"+filterParam.getThirdLongParam()+"') AND (LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') OR LOWER(c.direccion) LIKE LOWER('"+filterParam.getStringParam()+"%'))";
         }
 
         return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
