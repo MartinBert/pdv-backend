@@ -2,7 +2,7 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.StockDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.StockFilter;
 import com.prysoft.pdv.models.Stock;
 import com.prysoft.pdv.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,37 +74,40 @@ public class StockServiceImpl extends FilterService<Stock> implements StockServi
     }
 
     @Override
-    public Page<Stock> filter(GenericFilter filterParam) {
+    public Page<Stock> filter(StockFilter filterParam) {
+        System.out.println(filterParam.getProductoPrimerAtributoName());
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        if(filterParam.getThirdLongParam() == null){
-            hql = "WHERE LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
-                    "AND LOWER(c.producto.marca.nombre) LIKE LOWER('"+filterParam.getThirdStringParam()+"%')";
+        if(filterParam.getSucursalId() == null){
+            hql = "WHERE LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getProductoName()+"%') " +
+                    "AND LOWER(c.producto.marca.nombre) LIKE LOWER('"+filterParam.getProductoMarcaName()+"%')";
         }else{
-            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getThirdLongParam()+"') " +
-                    "AND (LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
-                    "OR LOWER(c.producto.codigoBarra) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
-                    "OR LOWER(c.producto.codigoProducto) LIKE LOWER('"+filterParam.getStringParam()+"%')) " +
-                    "AND LOWER(c.producto.marca.nombre) LIKE LOWER('"+filterParam.getThirdStringParam()+"%')";
+            hql = "JOIN c.producto.atributos a WHERE LOWER(a.valor) LIKE LOWER('"+filterParam.getProductoPrimerAtributoName()+"%') " +
+                    "AND (c.sucursal.id) = ('"+filterParam.getSucursalId()+"') " +
+                    "AND LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getProductoName()+"%') " +
+                    "AND LOWER(c.producto.codigoBarra) LIKE LOWER('"+filterParam.getProductoCodigoBarras()+"%') " +
+                    "AND LOWER(c.producto.codigoProducto) LIKE LOWER('"+filterParam.getProductoCodigo()+"%') " +
+                    "AND LOWER(c.producto.marca.nombre) LIKE LOWER('"+filterParam.getProductoMarcaName()+"%')";
         }
 
         return getPage(hql , filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 
     @Override
-    public Page<Stock> filterStockForDepositId(GenericFilter filterParam) {
+    public Page<Stock> filterStockForDepositId(StockFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        if(filterParam.getThirdLongParam() == null){
-            hql = "WHERE (c.deposito.id) = ('"+filterParam.getSecondLongParam()+"') AND LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
-                    "AND LOWER(c.producto.marca.nombre) LIKE LOWER('"+filterParam.getThirdStringParam()+"%')";
+        if(filterParam.getSucursalId() == null){
+            hql = "WHERE (c.deposito.id) = ('"+filterParam.getStockDepositoId()+"') " +
+                    "AND LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getProductoName()+"%') " +
+                    "AND LOWER(c.producto.marca.nombre) LIKE LOWER('"+filterParam.getProductoMarcaName()+"%')";
         }else{
-            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getThirdLongParam()+"') " +
-                    "AND (c.deposito.id) = ('"+filterParam.getSecondLongParam()+"') " +
-                    "AND (LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
-                    "OR LOWER(c.producto.codigoBarra) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
-                    "OR LOWER(c.producto.codigoProducto) LIKE LOWER('"+filterParam.getStringParam()+"%')) " +
-                    "AND LOWER(c.producto.marca.nombre) LIKE LOWER('"+filterParam.getThirdStringParam()+"%')";
+            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getSucursalId()+"') " +
+                    "AND (c.deposito.id) = ('"+filterParam.getStockDepositoId()+"') " +
+                    "AND (LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getProductoName()+"%') " +
+                    "AND LOWER(c.producto.codigoBarra) LIKE LOWER('"+filterParam.getProductoCodigoBarras()+"%') " +
+                    "AND LOWER(c.producto.codigoProducto) LIKE LOWER('"+filterParam.getProductoCodigo()+"%')) " +
+                    "AND LOWER(c.producto.marca.nombre) LIKE LOWER('"+filterParam.getProductoMarcaName()+"%')";
         }
 
         return getPage(hql , filterParam.getPage() - 1, filterParam.getSize(), params);

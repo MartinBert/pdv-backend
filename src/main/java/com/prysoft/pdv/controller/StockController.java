@@ -1,6 +1,6 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.StockFilter;
 import com.prysoft.pdv.models.Stock;
 import com.prysoft.pdv.reports.StocksReport;
 import com.prysoft.pdv.service.StockService;
@@ -61,12 +61,12 @@ public class StockController {
     }
 
     @PostMapping(value = "/filter")
-    Page<Stock> filter(@RequestBody GenericFilter filterParam) {
+    Page<Stock> filter(@RequestBody StockFilter filterParam) {
         return service.filter(filterParam);
     }
 
     @PostMapping(value = "/filterStockForDepositId")
-    Page<Stock> filterStockForDepositId(@RequestBody GenericFilter filterParam) {
+    Page<Stock> filterStockForDepositId(@RequestBody StockFilter filterParam) {
         return service.filterStockForDepositId(filterParam);
     }
 

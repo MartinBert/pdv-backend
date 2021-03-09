@@ -1,6 +1,7 @@
 package com.prysoft.pdv.controller;
 
 import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.VentaFilter;
 import com.prysoft.pdv.models.Caja;
 import com.prysoft.pdv.models.ComprobanteFiscal;
 import com.prysoft.pdv.service.CajaService;
@@ -54,7 +55,7 @@ public class CajaController {
     }
 
     @PostMapping(value = "/filterNotCloseReceipts")
-    public ArrayList<ComprobanteFiscal> filterNotCloseReceipts(@RequestBody GenericFilter filterParam) {
+    public ArrayList<ComprobanteFiscal> filterNotCloseReceipts(@RequestBody VentaFilter filterParam) {
         System.out.println(filterParam);
         return salesService.filterNotCloseReceipts(filterParam);
     }

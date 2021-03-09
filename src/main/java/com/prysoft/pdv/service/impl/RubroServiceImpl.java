@@ -2,7 +2,7 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.RubroDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.RubroFilter;
 import com.prysoft.pdv.models.Rubro;
 import com.prysoft.pdv.service.RubroService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,6 @@ public class RubroServiceImpl extends FilterService<Rubro> implements RubroServi
         if(!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
-
         return optional.get();
     }
 
@@ -53,11 +52,9 @@ public class RubroServiceImpl extends FilterService<Rubro> implements RubroServi
     }
 
     @Override
-    public Page<Rubro> filter(GenericFilter filterParam) {
+    public Page<Rubro> filter(RubroFilter filterParams) {
         List<FilterParam> params = new ArrayList<>();
-
-        String hql = "WHERE LOWER(c.nombre) LIKE LOWER ('"+filterParam.getStringParam()+"%')";
-
-        return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
+        String hql = "WHERE LOWER(c.nombre) LIKE LOWER ('"+filterParams.getRubroName()+"%')";
+        return getPage(hql, filterParams.getPage() - 1, filterParams.getSize(), params);
     }
 }

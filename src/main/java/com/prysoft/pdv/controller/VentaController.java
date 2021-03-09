@@ -1,6 +1,6 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.VentaFilter;
 import com.prysoft.pdv.models.ComprobanteFiscal;
 import com.prysoft.pdv.reports.SalesReport;
 import com.prysoft.pdv.service.VentaService;
@@ -64,7 +64,7 @@ public class VentaController {
     }
 
     @PostMapping(value = "/filter")
-    Page<ComprobanteFiscal> filter(@RequestBody GenericFilter filterParam) {
+    Page<ComprobanteFiscal> filter(@RequestBody VentaFilter filterParam) {
         return service.filter(filterParam);
     }
 }

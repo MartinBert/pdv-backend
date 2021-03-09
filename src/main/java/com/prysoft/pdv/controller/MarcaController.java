@@ -1,6 +1,6 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.MarcaFilter;
 import com.prysoft.pdv.models.Marca;
 import com.prysoft.pdv.service.MarcaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +48,7 @@ public class MarcaController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<Marca> filter(@RequestBody GenericFilter filterParam) {
+    public Page<Marca> filter(@RequestBody MarcaFilter filterParam) {
         return service.filter(filterParam);
     }
 }

@@ -2,7 +2,7 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.MarcaDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.MarcaFilter;
 import com.prysoft.pdv.models.Marca;
 import com.prysoft.pdv.service.MarcaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,6 @@ public class MarcaServiceImpl extends FilterService<Marca> implements MarcaServi
         if(!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
-
         return optional.get();
     }
 
@@ -53,11 +52,9 @@ public class MarcaServiceImpl extends FilterService<Marca> implements MarcaServi
     }
 
     @Override
-    public Page<Marca> filter(GenericFilter filterParam) {
+    public Page<Marca> filter(MarcaFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
-
-        String hql = "WHERE LOWER(c.nombre) LIKE LOWER ('"+filterParam.getStringParam()+"%')";
-
-        return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
+        String hql = "WHERE LOWER(c.nombre) LIKE LOWER ('"+filterParam.getMarcaName()+"%')";
+        return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 }

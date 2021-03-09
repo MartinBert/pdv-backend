@@ -2,7 +2,7 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.ProductoDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.ProductoFilter;
 import com.prysoft.pdv.models.Producto;
 import com.prysoft.pdv.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,32 +71,33 @@ public class ProductoServiceImpl extends FilterService<Producto> implements Prod
     }
 
     @Override
-    public Page<Producto> filter(GenericFilter filterParam) {
+    public Page<Producto> filter(ProductoFilter filterParam) {
         System.out.println(filterParam);
         List<FilterParam> params = new ArrayList<>();
         String hql;
-        if(filterParam.getDoubleParam() > 0){
+        if(filterParam.getProductoEstado() > 0){
                 hql = "WHERE (c.estado) != 1 " +
-                "AND (LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
-                "OR LOWER(c.codigoBarra) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
-                "OR LOWER(c.codigoProducto) LIKE LOWER('"+filterParam.getStringParam()+"%')) " +
-                "AND LOWER(c.marca.nombre) LIKE LOWER('"+filterParam.getThirdStringParam()+"%')";
+                "AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getProductoName()+"%') " +
+                "AND LOWER(c.codigoBarra) LIKE LOWER('"+filterParam.getProductoCodigoBarras()+"%') " +
+                "AND LOWER(c.codigoProducto) LIKE LOWER('"+filterParam.getProductoCodigo()+"%') " +
+                "AND LOWER(c.marca.nombre) LIKE LOWER('"+filterParam.getProductoMarcaName()+"%')";
         }else{
-            if(filterParam.getLongParam() != 0 || filterParam.getSecondLongParam() != 0 || filterParam.getThirdLongParam() != 0){
-                hql = "JOIN c.atributos a WHERE (a.id = '"+filterParam.getLongParam()+"' " +
-                        "OR a.id = ('"+filterParam.getSecondLongParam()+"') " +
-                        "OR a.id = ('"+filterParam.getThirdLongParam()+"')) AND c.estado = 1 " +
-                        "AND (LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
-                        "OR LOWER(c.codigoBarra) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
-                        "OR LOWER(c.codigoProducto) LIKE LOWER('"+filterParam.getStringParam()+"%')) " +
-                        "AND LOWER(c.marca.nombre) LIKE LOWER('"+filterParam.getThirdStringParam()+"%')";
-            }else{
+            if(filterParam.getProductoPrimerAtributoName().isEmpty() &&
+                filterParam.getProductoSegundoAtributoName().isEmpty() &&
+                filterParam.getProductoTercerAtributoName().isEmpty()){
                 hql =
                         "WHERE (c.estado) = 1 " +
-                        "AND (LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
-                        "OR LOWER(c.codigoBarra) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
-                        "OR LOWER(c.codigoProducto) LIKE LOWER('"+filterParam.getStringParam()+"%')) " +
-                        "AND LOWER(c.marca.nombre) LIKE LOWER('"+filterParam.getThirdStringParam()+"%')";
+                        "AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getProductoName()+"%') " +
+                        "AND LOWER(c.codigoBarra) LIKE LOWER('"+filterParam.getProductoCodigoBarras()+"%') " +
+                        "AND LOWER(c.codigoProducto) LIKE LOWER('"+filterParam.getProductoCodigo()+"%') " +
+                        "AND LOWER(c.marca.nombre) LIKE LOWER('"+filterParam.getProductoMarcaName()+"%')";
+            }else{
+                hql = "JOIN c.atributos a WHERE LOWER(a.valor) LIKE LOWER('"+filterParam.getProductoPrimerAtributoName()+"%')" +
+                        "AND c.estado = 1 " +
+                        "AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getProductoName()+"%') " +
+                        "AND LOWER(c.codigoBarra) LIKE LOWER('"+filterParam.getProductoCodigoBarras()+"%') " +
+                        "AND LOWER(c.codigoProducto) LIKE LOWER('"+filterParam.getProductoCodigo()+"%') " +
+                        "AND LOWER(c.marca.nombre) LIKE LOWER('"+filterParam.getProductoMarcaName()+"%')";
             }
         }
 
