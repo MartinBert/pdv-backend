@@ -1,6 +1,6 @@
 package com.prysoft.pdv.service;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.VendedorFilter;
 import com.prysoft.pdv.models.Vendedor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,7 +13,7 @@ public interface VendedorService {
 
     Vendedor saveOrUpdate(Vendedor entity);
 
-    Page<Vendedor> filter(GenericFilter filterParam);
+    Page<Vendedor> filter(VendedorFilter filterParam);
 
     void delete(Long id);
 }

@@ -2,7 +2,7 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.DistribuidorDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.ProveedorFilter;
 import com.prysoft.pdv.models.Proveedor;
 import com.prysoft.pdv.service.DistribuidorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,28 +49,28 @@ public class DistribuidorServiceImpl extends FilterService<Proveedor> implements
     }
 
     @Override
-    public Page<Proveedor> filter(GenericFilter filterParam) {
+    public Page<Proveedor> filter(ProveedorFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
 
-        if(filterParam.getThirdLongParam() == null){
+        if(filterParam.getSucursalId() == null){
             hql =
-                    "WHERE (LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
-                            "OR LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
-                            "OR LOWER(c.direccion) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
-                            "OR LOWER(c.nombreContacto) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
-                            "OR LOWER(c.cuit) LIKE LOWER('"+filterParam.getStringParam()+"%'))";
+                    "WHERE (LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getPersonaSocialReason()+"%') " +
+                            "AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getPersonaName()+"%') " +
+                            "AND LOWER(c.direccion) LIKE LOWER('"+filterParam.getPersonaDirection()+"%') " +
+                            "AND LOWER(c.nombreContacto) LIKE LOWER('"+filterParam.getPersonaContactName()+"%') " +
+                            "AND LOWER(c.cuit) LIKE LOWER('"+filterParam.getPersonaCuit()+"%'))";
         }else{
             hql =
-                    "JOIN c.sucursales WHERE (id_sucursal) = ('"+filterParam.getThirdLongParam()+"') " +
-                            "AND (LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
-                            "OR LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
-                            "OR LOWER(c.direccion) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
-                            "OR LOWER(c.nombreContacto) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
-                            "OR LOWER(c.cuit) LIKE LOWER('"+filterParam.getStringParam()+"%'))";
+                    "JOIN c.sucursales s WHERE s.id = ('"+filterParam.getSucursalId()+"') " +
+                            "AND (LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getPersonaSocialReason()+"%') " +
+                            "AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getPersonaName()+"%') " +
+                            "AND LOWER(c.direccion) LIKE LOWER('"+filterParam.getPersonaDirection()+"%') " +
+                            "AND LOWER(c.nombreContacto) LIKE LOWER('"+filterParam.getPersonaContactName()+"%') " +
+                            "AND LOWER(c.cuit) LIKE LOWER('"+filterParam.getPersonaCuit()+"%'))";
         }
 
-        return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
+        return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 
 

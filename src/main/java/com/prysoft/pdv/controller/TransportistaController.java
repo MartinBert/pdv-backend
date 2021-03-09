@@ -1,7 +1,6 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.GenericFilter;
-import com.prysoft.pdv.models.Cliente;
+import com.prysoft.pdv.dto.TransportistaFilter;
 import com.prysoft.pdv.models.Transportista;
 import com.prysoft.pdv.service.TransportistaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +43,7 @@ public class TransportistaController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<Transportista> filter(@RequestBody GenericFilter filterParam) {
+    public Page<Transportista> filter(@RequestBody TransportistaFilter filterParam) {
         return service.filter(filterParam);
     }
 }

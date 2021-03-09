@@ -1,6 +1,6 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.ClienteFilter;
 import com.prysoft.pdv.models.Cliente;
 import com.prysoft.pdv.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,7 @@ public class ClienteController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<Cliente> filter(@RequestBody GenericFilter filterParam) {
+    public Page<Cliente> filter(@RequestBody ClienteFilter filterParam) {
         return service.filter(filterParam);
     }
 }

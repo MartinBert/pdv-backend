@@ -1,6 +1,6 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.ProveedorFilter;
 import com.prysoft.pdv.models.Proveedor;
 import com.prysoft.pdv.service.DistribuidorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,7 @@ public class DistribuidorController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<Proveedor> filter(@RequestBody GenericFilter filterParam) {
+    public Page<Proveedor> filter(@RequestBody ProveedorFilter filterParam) {
         return service.filter(filterParam);
     }
 }

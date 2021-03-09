@@ -1,7 +1,6 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.GenericFilter;
-import com.prysoft.pdv.models.Cliente;
+import com.prysoft.pdv.dto.VendedorFilter;
 import com.prysoft.pdv.models.Vendedor;
 import com.prysoft.pdv.service.VendedorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +43,7 @@ public class VendedorController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<Vendedor> filter(@RequestBody GenericFilter filterParam) {
+    public Page<Vendedor> filter(@RequestBody VendedorFilter filterParam) {
         return service.filter(filterParam);
     }
 }

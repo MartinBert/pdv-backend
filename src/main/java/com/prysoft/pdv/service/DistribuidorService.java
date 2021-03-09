@@ -1,6 +1,6 @@
 package com.prysoft.pdv.service;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.ProveedorFilter;
 import com.prysoft.pdv.models.Proveedor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,7 +13,7 @@ public interface DistribuidorService {
 
     Proveedor saveOrUpdate(Proveedor entity);
 
-    Page<Proveedor> filter(GenericFilter filterParam);
+    Page<Proveedor> filter(ProveedorFilter filterParam);
 
     void delete(Long id);
 }
