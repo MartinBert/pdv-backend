@@ -6,7 +6,6 @@ import org.springframework.data.domain.Page;
 
 import java.util.ArrayList;
 
-
 public interface VentaService {
     Page<ComprobanteFiscal> filter(VentaFilter filterParam);
     ArrayList<ComprobanteFiscal> filterNotCloseReceipts(VentaFilter filterParam);

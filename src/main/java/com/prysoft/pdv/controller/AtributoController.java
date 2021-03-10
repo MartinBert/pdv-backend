@@ -1,6 +1,6 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.AtributoFilter;
 import com.prysoft.pdv.models.Atributo;
 import com.prysoft.pdv.service.AtributoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +48,7 @@ public class AtributoController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<Atributo> filter(@RequestBody GenericFilter filterParam) {
+    public Page<Atributo> filter(@RequestBody AtributoFilter filterParam) {
         return service.filter(filterParam);
     }
 }

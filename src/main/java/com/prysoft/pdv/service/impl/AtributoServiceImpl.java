@@ -1,8 +1,8 @@
 package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.AtributoDao;
+import com.prysoft.pdv.dto.AtributoFilter;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.Atributo;
 import com.prysoft.pdv.service.AtributoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,6 @@ public class AtributoServiceImpl extends FilterService<Atributo> implements Atri
         if(!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
-
         return optional.get();
     }
 
@@ -65,13 +64,11 @@ public class AtributoServiceImpl extends FilterService<Atributo> implements Atri
     }
 
     @Override
-    public Page<Atributo> filter(GenericFilter filterParam) {
+    public Page<Atributo> filter(AtributoFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-
-        hql = "";
-
-        return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
+        hql = "WHERE LOWER(c.valor) LIKE LOWER('"+filterParam.getAtributoValor()+"%')";
+        return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 
     @Override
@@ -86,7 +83,6 @@ public class AtributoServiceImpl extends FilterService<Atributo> implements Atri
                 }
             });
         });
-
         return dao.saveAll(entities);
     }
 }

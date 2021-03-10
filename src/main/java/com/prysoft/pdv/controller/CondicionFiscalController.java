@@ -1,6 +1,6 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.CondicionFiscalFilter;
 import com.prysoft.pdv.models.CondicionFiscal;
 import com.prysoft.pdv.service.CondicionFiscalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,7 @@ public class CondicionFiscalController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<CondicionFiscal> filter(@RequestBody GenericFilter filterParam) {
+    public Page<CondicionFiscal> filter(@RequestBody CondicionFiscalFilter filterParam) {
         return service.filter(filterParam);
     }
 }

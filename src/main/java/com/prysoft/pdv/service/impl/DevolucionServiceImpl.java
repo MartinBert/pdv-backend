@@ -1,8 +1,8 @@
 package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.DevolucionDao;
+import com.prysoft.pdv.dto.DevolucionFilter;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.Devolucion;
 import com.prysoft.pdv.service.DevolucionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,6 @@ public class DevolucionServiceImpl extends FilterService<Devolucion> implements 
         if(!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
-
         return optional.get();
     }
 
@@ -39,23 +38,24 @@ public class DevolucionServiceImpl extends FilterService<Devolucion> implements 
     }
 
     @Override
-    public Devolucion saveOrUpdate(Devolucion entity) {return dao.save(entity);}
+    public Devolucion saveOrUpdate(Devolucion entity) {
+        return dao.save(entity);
+    }
 
     @Override
-    public Page<Devolucion> filter(GenericFilter filterParam) {
+    public Page<Devolucion> filter(DevolucionFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        if(filterParam.getThirdLongParam() == null){
+        if(filterParam.getSucursalId() == null){
             hql = "";
         }else{
-            if(filterParam.getLongParam() != null && filterParam.getLongParam() == 999999999){
-                hql = "WHERE c.sucursal.id = ('"+filterParam.getThirdLongParam()+"')";
+            if(filterParam.getBlackReceiptFilter() != null && filterParam.getBlackReceiptFilter() == 999999999){
+                hql = "WHERE c.sucursal.id = ('"+filterParam.getSucursalId()+"')";
             }else{
-                hql = "WHERE c.sucursal.id = ('"+filterParam.getThirdLongParam()+"') AND LOWER(c.comprobante.letra) NOT LIKE LOWER('nx')";
+                hql = "WHERE c.sucursal.id = ('"+filterParam.getSucursalId()+"') AND LOWER(c.comprobante.letra) NOT LIKE LOWER('nx')";
             }
         }
-
-        return getPage(hql,filterParam.getPage(),filterParam.getSize(),params);
+        return getPage(hql,filterParam.getPage() - 1,filterParam.getSize(),params);
     }
 
     @Override

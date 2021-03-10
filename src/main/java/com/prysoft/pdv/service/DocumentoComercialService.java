@@ -1,6 +1,6 @@
 package com.prysoft.pdv.service;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.DocumentoComercialFilter;
 import com.prysoft.pdv.models.DocumentoComercial;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +17,7 @@ public interface DocumentoComercialService {
 
     DocumentoComercial saveOrUpdate(DocumentoComercial entity);
 
-    Page<DocumentoComercial> filter(GenericFilter filterParam);
+    Page<DocumentoComercial> filter(DocumentoComercialFilter filterParam);
 
     void delete(Long id);
 

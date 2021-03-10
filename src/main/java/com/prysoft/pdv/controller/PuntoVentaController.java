@@ -1,6 +1,6 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.PuntoVentaFilter;
 import com.prysoft.pdv.models.PuntoVenta;
 import com.prysoft.pdv.service.PuntoVentaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,7 @@ public class PuntoVentaController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<PuntoVenta> filter(@RequestBody GenericFilter filterParam) {
+    public Page<PuntoVenta> filter(@RequestBody PuntoVentaFilter filterParam) {
         return service.filter(filterParam);
     }
 }

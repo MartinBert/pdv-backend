@@ -1,6 +1,6 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.DocumentoComercialFilter;
 import com.prysoft.pdv.models.DocumentoComercial;
 import com.prysoft.pdv.service.DocumentoComercialService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +45,7 @@ public class DocumentoComercialController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<DocumentoComercial> filter(@RequestBody GenericFilter filterParam) {
+    public Page<DocumentoComercial> filter(@RequestBody DocumentoComercialFilter filterParam) {
         return service.filter(filterParam);
     }
 

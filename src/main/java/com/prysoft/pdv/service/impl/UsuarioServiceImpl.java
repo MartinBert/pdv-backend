@@ -2,7 +2,7 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.UsuarioDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.UsuarioFilter;
 import com.prysoft.pdv.models.Usuario;
 import com.prysoft.pdv.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,20 +99,23 @@ public class UsuarioServiceImpl extends FilterService<Usuario> implements Usuari
     }
 
     @Override
-    public Page<Usuario> filter(GenericFilter filterParam) {
-        System.out.println(filterParam);
+    public Page<Usuario> filter(UsuarioFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        if(filterParam.getThirdLongParam() == null){
-            hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
+        if(filterParam.getEmpresaId() == null){
+            hql =
+            "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getUsuarioName()+"%') " +
+            "AND (LOWER(c.sucursal.razonSocial) LIKE LOWER('"+filterParam.getSucursalSocialReason()+"%') " +
+            "AND LOWER(c.perfil.nombre) LIKE LOWER('"+filterParam.getPerfilName()+"%') " +
+            "AND LOWER(c.puntoVenta.nombre) LIKE LOWER('"+filterParam.getPuntoVentaName()+"%'))";
         }else{
             hql =
-            "WHERE (c.empresa.id) = ('"+filterParam.getThirdLongParam()+"') " +
-            "AND (LOWER(c.sucursal.razonSocial) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
-            "OR LOWER(c.perfil.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') " +
-            "OR LOWER(c.puntoVenta.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%'))";
+            "WHERE (c.empresa.id) = ('"+filterParam.getEmpresaId()+"') " +
+            "AND (LOWER(c.sucursal.razonSocial) LIKE LOWER('"+filterParam.getSucursalSocialReason()+"%') " +
+            "AND LOWER(c.perfil.nombre) LIKE LOWER('"+filterParam.getPerfilName()+"%') " +
+            "AND LOWER(c.puntoVenta.nombre) LIKE LOWER('"+filterParam.getPuntoVentaName()+"%'))";
         }
 
-        return getPage(hql , filterParam.getPage(), filterParam.getSize(), params);
+        return getPage(hql , filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 }

@@ -1,6 +1,6 @@
 package com.prysoft.pdv.service;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.DevolucionFilter;
 import com.prysoft.pdv.models.Devolucion;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,7 +13,7 @@ public interface DevolucionService {
 
     Devolucion saveOrUpdate(Devolucion entity);
 
-    Page<Devolucion> filter(GenericFilter filterParam);
+    Page<Devolucion> filter(DevolucionFilter filterParam);
 
     void delete(Long id);
 }

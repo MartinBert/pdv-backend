@@ -2,7 +2,7 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.HistorialMovimientosStockDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.HistorialMovimientosStockFilter;
 import com.prysoft.pdv.models.HistorialMovimientosStock;
 import com.prysoft.pdv.service.HistorialMovimientosStockService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,6 @@ public class HistorialMovimientosStockServiceImpl extends FilterService<Historia
         if(!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
-
         return optional.get();
     }
 
@@ -39,7 +38,9 @@ public class HistorialMovimientosStockServiceImpl extends FilterService<Historia
     }
 
     @Override
-    public HistorialMovimientosStock saveOrUpdate(HistorialMovimientosStock entity) {return dao.save(entity);}
+    public HistorialMovimientosStock saveOrUpdate(HistorialMovimientosStock entity) {
+        return dao.save(entity);
+    }
 
     @Override
     public void delete(Long id) {
@@ -47,18 +48,23 @@ public class HistorialMovimientosStockServiceImpl extends FilterService<Historia
     }
 
     @Override
-    public Page<HistorialMovimientosStock> filter(GenericFilter filterParam) {
+    public Page<HistorialMovimientosStock> filter(HistorialMovimientosStockFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-
-        if(filterParam.getThirdLongParam() == null){
-            hql = "WHERE LOWER(c.descripcion) LIKE LOWER('"+filterParam.getStringParam()+"%') OR LOWER(c.fecha) = LOWER('"+filterParam.getStringParam()+"')";
+        if(filterParam.getSucursalId() == null){
+            hql =
+                "WHERE LOWER(c.descripcion) LIKE LOWER('"+filterParam.getHistorialMovimientosStockDescripcion()+"%') " +
+                "AND LOWER(c.fecha) LIKE LOWER('"+filterParam.getHistorialMovimientosStockFecha()+"%') " +
+                "AND LOWER(c.usuario) LIKE LOWER('"+filterParam.getHistorialMovimientosStockUsuario()+"%') ";
         }else{
             hql =
-                "WHERE (c.sucursal.id) = ('"+filterParam.getThirdLongParam()+"') GROUP BY (c.id) ORDER BY (c.id) DESC";
+                "WHERE (c.sucursal.id) = ('"+filterParam.getSucursalId()+"') " +
+                "AND LOWER(c.descripcion) LIKE LOWER('"+filterParam.getHistorialMovimientosStockDescripcion()+"%') " +
+                "AND LOWER(c.fecha) LIKE LOWER('"+filterParam.getHistorialMovimientosStockFecha()+"%') " +
+                "AND LOWER(c.usuario) LIKE LOWER('"+filterParam.getHistorialMovimientosStockUsuario()+"%') " +
+                "GROUP BY (c.id) ORDER BY (c.id) DESC";
         }
-
-        return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
+        return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 
 }

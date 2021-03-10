@@ -1,6 +1,6 @@
 package com.prysoft.pdv.dto;
 
-public class TransportistaFilter extends PersonaFilter{
+public class TransportistaFilter extends PersonaFilter {
     @Override
     public String getPersonaSocialReason() {
         return super.getPersonaSocialReason();

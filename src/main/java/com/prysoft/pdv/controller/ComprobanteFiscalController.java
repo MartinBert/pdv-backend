@@ -1,8 +1,7 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.ComprobanteFiscalFilter;
 import com.prysoft.pdv.models.ComprobanteFiscal;
-import com.prysoft.pdv.models.Producto;
 import com.prysoft.pdv.service.ComprobanteFiscalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -54,7 +53,7 @@ public class ComprobanteFiscalController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<ComprobanteFiscal> filter(@RequestBody GenericFilter filterParam) {
+    public Page<ComprobanteFiscal> filter(@RequestBody ComprobanteFiscalFilter filterParam) {
         return service.filter(filterParam);
     }
 }

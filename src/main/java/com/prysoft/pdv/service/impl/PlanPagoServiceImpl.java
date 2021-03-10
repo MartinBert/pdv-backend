@@ -2,7 +2,7 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.PlanPagoDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.PlanPagoFilter;
 import com.prysoft.pdv.models.PlanPago;
 import com.prysoft.pdv.service.PlanPagoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,17 +53,18 @@ public class PlanPagoServiceImpl extends FilterService<PlanPago> implements Plan
     }
 
     @Override
-    public Page<PlanPago> filter(GenericFilter filterParam) {
+    public Page<PlanPago> filter(PlanPagoFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
 
-        if(filterParam.getThirdLongParam() == null){
-            hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
+        if(filterParam.getSucursalId() == null){
+            hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getPlanPagoName()+"%')";
         }else{
-            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getThirdLongParam()+"') AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
+            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getSucursalId()+"') " +
+                    "AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getPlanPagoName()+"%')";
         }
 
-        return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
+        return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 }
 

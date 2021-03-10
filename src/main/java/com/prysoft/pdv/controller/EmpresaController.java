@@ -1,6 +1,6 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.EmpresaFilter;
 import com.prysoft.pdv.models.Empresa;
 import com.prysoft.pdv.service.EmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,7 @@ public class EmpresaController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<Empresa> filter(@RequestBody GenericFilter filterParam) {
+    public Page<Empresa> filter(@RequestBody EmpresaFilter filterParam) {
         return service.filter(filterParam);
     }
 }

@@ -2,7 +2,7 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.PerfilDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.PerfilFilter;
 import com.prysoft.pdv.models.Perfil;
 import com.prysoft.pdv.service.PerfilService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,6 @@ public class PerfilServiceImpl extends FilterService<Perfil> implements PerfilSe
         if(!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
-
         return optional.get();
     }
 
@@ -48,16 +47,15 @@ public class PerfilServiceImpl extends FilterService<Perfil> implements PerfilSe
     }
 
     @Override
-    public Page<Perfil> filter(GenericFilter filterParam) {
+    public Page<Perfil> filter(PerfilFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        if(filterParam.getFourthLongParam() == 1){
-            hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
+        if(filterParam.getPerfilId() == 1){
+            hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getPerfilName()+"%')";
         }else{
-            hql = "WHERE (c.id) != ('1') AND (c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
+            hql = "WHERE (c.id) != ('1') AND (c.nombre) LIKE LOWER('"+filterParam.getPerfilName()+"%')";
         }
-        
-        return getPage(hql , filterParam.getPage(), filterParam.getSize(), params);
+        return getPage(hql , filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 
 }

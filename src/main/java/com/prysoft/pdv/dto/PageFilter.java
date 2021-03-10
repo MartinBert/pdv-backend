@@ -1,6 +1,6 @@
 package com.prysoft.pdv.dto;
 
-public abstract class PageFilter {
+public class PageFilter {
     private int page = 0;
     private int size = 10;
     private String order = "id,desc";

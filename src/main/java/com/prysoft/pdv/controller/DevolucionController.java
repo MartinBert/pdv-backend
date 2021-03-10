@@ -1,6 +1,6 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.DevolucionFilter;
 import com.prysoft.pdv.models.Devolucion;
 import com.prysoft.pdv.service.DevolucionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +43,6 @@ public class DevolucionController {
     }
 
     @PostMapping(value = "/filter")
-    Page<Devolucion> filter(@RequestBody GenericFilter filterParam) {
+    Page<Devolucion> filter(@RequestBody DevolucionFilter filterParam) {
         return service.filter(filterParam);}
 }

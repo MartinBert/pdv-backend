@@ -1,8 +1,8 @@
 package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.ComprobanteFiscalDao;
+import com.prysoft.pdv.dto.ComprobanteFiscalFilter;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.ComprobanteFiscal;
 import com.prysoft.pdv.service.ComprobanteFiscalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,6 @@ public class ComprobanteFiscalServiceImpl extends FilterService<ComprobanteFisca
         if(optional.isEmpty()) {
             throw new EntityNotFoundException();
         }
-
         return optional.get();
     }
 
@@ -39,7 +38,6 @@ public class ComprobanteFiscalServiceImpl extends FilterService<ComprobanteFisca
         if(optional.isEmpty()){
             throw new EntityNotFoundException();
         }
-
         return optional.get();
     }
 
@@ -64,21 +62,23 @@ public class ComprobanteFiscalServiceImpl extends FilterService<ComprobanteFisca
     }
 
     @Override
-    public Page<ComprobanteFiscal> filter(GenericFilter filterParam) {
+    public Page<ComprobanteFiscal> filter(ComprobanteFiscalFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        if(filterParam.getThirdLongParam() == null){
+        if(filterParam.getSucursalId() == null){
             hql =
-                    "WHERE ((c.totalVenta) = ('"+filterParam.getDoubleParam()+"') " +
-                            "OR (c.fechaEmision) LIKE ('"+filterParam.getStringParam()+"%'))";
+                "WHERE LOWER(c.letra) LIKE LOWER('"+filterParam.getComprobanteFiscalLetra()+"') " +
+                "AND LOWER(c.fechaEmision) LIKE LOWER('"+filterParam.getComprobanteFiscalFechaEmision()+"%') " +
+                "AND LOWER(c.numeroCbte) LIKE LOWER('"+filterParam.getComprobanteFiscalNumeroCbte()+"%') " +
+                "AND LOWER(c.nombreDocumento) LIKE LOWER('"+filterParam.getComprobanteFiscalNombreDocumento()+"%') ";
         }else{
             hql =
-                    "WHERE (c.sucursal.id) = ('"+filterParam.getThirdLongParam()+"') " +
-                            "AND ((c.totalVenta) = ('"+filterParam.getDoubleParam()+"') " +
-                            "OR (c.fechaEmision) LIKE ('"+filterParam.getStringParam()+"%') " +
-                            "OR (c.numeroCbte) LIKE ('"+filterParam.getStringParam()+"%'))";
+                "WHERE (c.sucursal.id) = ('"+filterParam.getSucursalId()+"') " +
+                "AND LOWER(c.letra) LIKE LOWER('"+filterParam.getComprobanteFiscalLetra()+"') " +
+                "AND LOWER(c.fechaEmision) LIKE LOWER('"+filterParam.getComprobanteFiscalFechaEmision()+"%') " +
+                "AND LOWER(c.numeroCbte) LIKE LOWER('"+filterParam.getComprobanteFiscalNumeroCbte()+"%') " +
+                "AND LOWER(c.nombreDocumento) LIKE LOWER('"+filterParam.getComprobanteFiscalNombreDocumento()+"%') ";
         }
-
         return getPage(hql , filterParam.getPage(), filterParam.getSize(), params);
     }
 }

@@ -1,6 +1,6 @@
 package com.prysoft.pdv.service;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.ModuloFilter;
 import com.prysoft.pdv.models.Modulo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,5 +14,5 @@ public interface ModuloService {
 
     void delete(Long id);
 
-    Page<Modulo> filter(GenericFilter filterParam);
+    Page<Modulo> filter(ModuloFilter filterParam);
 }

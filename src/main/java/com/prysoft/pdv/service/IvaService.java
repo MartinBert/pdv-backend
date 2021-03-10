@@ -1,6 +1,6 @@
 package com.prysoft.pdv.service;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.IvaFilter;
 import com.prysoft.pdv.models.Iva;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,5 +14,5 @@ public interface IvaService {
 
     void delete(Long id);
 
-    Page<Iva> filter(GenericFilter filterParam);
+    Page<Iva> filter(IvaFilter filterParam);
 }

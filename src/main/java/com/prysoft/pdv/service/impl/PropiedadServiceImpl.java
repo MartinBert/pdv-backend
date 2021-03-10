@@ -2,7 +2,7 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.PropiedadDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.PropiedadFilter;
 import com.prysoft.pdv.models.Propiedad;
 import com.prysoft.pdv.service.PropiedadService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,6 @@ public class PropiedadServiceImpl extends FilterService<Propiedad> implements Pr
         if(!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
-
         return optional.get();
     }
 
@@ -46,12 +45,10 @@ public class PropiedadServiceImpl extends FilterService<Propiedad> implements Pr
     }
 
     @Override
-    public Page<Propiedad> filter(GenericFilter filterParam) {
+    public Page<Propiedad> filter(PropiedadFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-
-        hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
-
-        return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
+        hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getPropiedadName()+"%')";
+        return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 }

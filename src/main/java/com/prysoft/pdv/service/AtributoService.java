@@ -1,6 +1,6 @@
 package com.prysoft.pdv.service;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.AtributoFilter;
 import com.prysoft.pdv.models.Atributo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,5 +18,5 @@ public interface AtributoService {
 
     Iterable<Atributo> saveOrUpdateAll(ArrayList<Atributo> entities);
 
-    Page<Atributo> filter(GenericFilter filterParam);
+    Page<Atributo> filter(AtributoFilter filterParam);
 }

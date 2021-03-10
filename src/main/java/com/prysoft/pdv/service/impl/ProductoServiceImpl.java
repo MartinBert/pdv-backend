@@ -72,7 +72,6 @@ public class ProductoServiceImpl extends FilterService<Producto> implements Prod
 
     @Override
     public Page<Producto> filter(ProductoFilter filterParam) {
-        System.out.println(filterParam);
         List<FilterParam> params = new ArrayList<>();
         String hql;
         if(filterParam.getProductoEstado() > 0){
@@ -100,7 +99,6 @@ public class ProductoServiceImpl extends FilterService<Producto> implements Prod
                         "AND LOWER(c.marca.nombre) LIKE LOWER('"+filterParam.getProductoMarcaName()+"%')";
             }
         }
-
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 }

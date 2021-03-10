@@ -1,10 +1,11 @@
 package com.prysoft.pdv.dto;
 
-public abstract class SucursalFilter extends PageFilter{
+public class SucursalFilter extends EmpresaFilter{
     private Long sucursalId;
     private String sucursalName;
     private String sucursalSocialReason;
     private String sucursalCuit;
+    private String sucursalDirection;
 
     public Long getSucursalId() {
         return sucursalId;
@@ -30,12 +31,40 @@ public abstract class SucursalFilter extends PageFilter{
         this.sucursalSocialReason = sucursalSocialReason;
     }
 
+    public String getSucursalDirection() {
+        return sucursalDirection;
+    }
+
+    public void setSucursalDirection(String sucursalDirection) {
+        this.sucursalDirection = sucursalDirection;
+    }
+
     public String getSucursalCuit() {
         return sucursalCuit;
     }
 
     public void setSucursalCuit(String sucursalCuit) {
         this.sucursalCuit = sucursalCuit;
+    }
+
+    @Override
+    public Long getPerfilId() {
+        return super.getPerfilId();
+    }
+
+    @Override
+    public void setPerfilId(Long perfilId) {
+        super.setPerfilId(perfilId);
+    }
+
+    @Override
+    public String getPerfilName() {
+        return super.getPerfilName();
+    }
+
+    @Override
+    public void setPerfilName(String perfilName) {
+        super.setPerfilName(perfilName);
     }
 
     @Override

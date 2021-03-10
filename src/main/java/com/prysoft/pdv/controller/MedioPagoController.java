@@ -1,6 +1,6 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.MedioPagoFilter;
 import com.prysoft.pdv.models.MedioPago;
 import com.prysoft.pdv.service.MedioPagoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +48,7 @@ public class MedioPagoController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<MedioPago> filter(@RequestBody GenericFilter filterParam) {
+    public Page<MedioPago> filter(@RequestBody MedioPagoFilter filterParam) {
         return service.filter(filterParam);
     }
 }

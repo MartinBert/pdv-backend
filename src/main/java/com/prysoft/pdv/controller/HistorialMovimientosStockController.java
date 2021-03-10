@@ -1,6 +1,6 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.HistorialMovimientosStockFilter;
 import com.prysoft.pdv.models.HistorialMovimientosStock;
 import com.prysoft.pdv.service.HistorialMovimientosStockService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,7 @@ public class HistorialMovimientosStockController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<HistorialMovimientosStock> filter(@RequestBody GenericFilter filterParam) {
+    public Page<HistorialMovimientosStock> filter(@RequestBody HistorialMovimientosStockFilter filterParam) {
         try{
             return service.filter(filterParam);
         }catch(Exception e){

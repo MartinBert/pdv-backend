@@ -1,6 +1,6 @@
 package com.prysoft.pdv.service;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.SucursalFilter;
 import com.prysoft.pdv.models.Sucursal;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,7 +13,7 @@ public interface SucursalService {
 
     Sucursal saveOrUpdate(Sucursal entity);
 
-    Page<Sucursal> filter(GenericFilter filterParam);
+    Page<Sucursal> filter(SucursalFilter filterParam);
 
     void delete(Long id);
 }

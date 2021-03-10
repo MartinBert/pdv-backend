@@ -1,6 +1,6 @@
 package com.prysoft.pdv.service;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.MensajeFilter;
 import com.prysoft.pdv.models.Mensaje;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,5 +14,5 @@ public interface MensajeService {
 
     void delete(Long id);
 
-    Page<Mensaje> filter(GenericFilter filterParam);
+    Page<Mensaje> filter(MensajeFilter filterParam);
 }

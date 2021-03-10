@@ -2,8 +2,8 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.CondicionFiscalDao;
 import com.prysoft.pdv.dao.EmpresaDao;
+import com.prysoft.pdv.dto.EmpresaFilter;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.Empresa;
 import com.prysoft.pdv.service.EmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,12 +33,13 @@ public class EmpresaServiceImpl extends FilterService<Empresa> implements Empres
         if(!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
-
         return optional.get();
     }
 
     @Override
-    public Page<Empresa> findAll(Pageable page) { return dao.findAll(page); }
+    public Page<Empresa> findAll(Pageable page) {
+        return dao.findAll(page);
+    }
 
     @Override
     public Empresa saveOrUpdate(Empresa entity) {
@@ -51,17 +52,22 @@ public class EmpresaServiceImpl extends FilterService<Empresa> implements Empres
     }
 
     @Override
-    public Page<Empresa> filter(GenericFilter filterParam) {
+    public Page<Empresa> filter(EmpresaFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-
-        if(filterParam.getSecondLongParam() == null){
-            hql = "";
+        if(filterParam.getPerfilId() == 1){
+            hql =
+                "WHERE LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getEmpresaSocialReason()+"%') " +
+                "AND LOWER(c.cuit) LIKE LOWER('"+filterParam.getEmpresaCuit()+"%') " +
+                "AND LOWER(c.alias) LIKE LOWER('"+filterParam.getEmpresaName()+"%')";
         }else{
-            hql = "WHERE (c.id) = ('"+filterParam.getThirdLongParam()+"') AND LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getStringParam()+"%')";
+            hql =
+                "WHERE (c.id) = ('"+filterParam.getEmpresaId()+"') " +
+                "AND LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getEmpresaSocialReason()+"%') " +
+                "AND LOWER(c.cuit) LIKE LOWER('"+filterParam.getEmpresaCuit()+"%') " +
+                "AND LOWER(c.alias) LIKE LOWER('"+filterParam.getEmpresaName()+"%')";
         }
-
-        return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
+        return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 }
 

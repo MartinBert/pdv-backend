@@ -1,6 +1,6 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.MensajeFilter;
 import com.prysoft.pdv.models.Mensaje;
 import com.prysoft.pdv.service.MensajeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,7 @@ public class MensajeController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<Mensaje> filter(@RequestBody GenericFilter filterParam) {
+    public Page<Mensaje> filter(@RequestBody MensajeFilter filterParam) {
         return service.filter(filterParam);
     }
 }

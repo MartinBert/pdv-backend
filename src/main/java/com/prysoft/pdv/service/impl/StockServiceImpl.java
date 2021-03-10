@@ -105,13 +105,13 @@ public class StockServiceImpl extends FilterService<Stock> implements StockServi
                     "AND LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getProductoName()+"%') " +
                     "AND LOWER(c.producto.marca.nombre) LIKE LOWER('"+filterParam.getProductoMarcaName()+"%')";
         }else{
+            System.out.println(filterParam.getProductoCodigoBarras());
             hql = "WHERE (c.sucursal.id) = ('"+filterParam.getSucursalId()+"') " +
                     "AND (c.deposito.id) = ('"+filterParam.getStockDepositoId()+"') " +
-                    "AND (LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getProductoName()+"%') " +
+                    "AND LOWER(c.producto.nombre) LIKE LOWER('"+filterParam.getProductoName()+"%') " +
                     "AND LOWER(c.producto.codigoBarra) LIKE LOWER('"+filterParam.getProductoCodigoBarras()+"%') " +
-                    "AND LOWER(c.producto.codigoProducto) LIKE LOWER('"+filterParam.getProductoCodigo()+"%')) " +
+                    "AND LOWER(c.producto.codigoProducto) LIKE LOWER('"+filterParam.getProductoCodigo()+"%') " +
                     "AND LOWER(c.producto.marca.nombre) LIKE LOWER('"+filterParam.getProductoMarcaName()+"%')";
-
         }
         return getPage(hql , filterParam.getPage() - 1, filterParam.getSize(), params);
     }

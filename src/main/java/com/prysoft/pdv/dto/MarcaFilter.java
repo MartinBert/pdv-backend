@@ -1,6 +1,6 @@
 package com.prysoft.pdv.dto;
 
-public class MarcaFilter extends PageFilter{
+public class MarcaFilter extends PageFilter {
     private Long marcaId;
     private String marcaName;
 

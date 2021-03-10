@@ -1,9 +1,8 @@
 package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.CajaDao;
-import com.prysoft.pdv.dao.ComprobanteFiscalDao;
+import com.prysoft.pdv.dto.CajaFilter;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.Caja;
 import com.prysoft.pdv.service.CajaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,6 @@ import java.util.Optional;
 public class CajaServiceImpl extends FilterService<Caja> implements CajaService {
     @Autowired
     private CajaDao dao;
-    private ComprobanteFiscalDao daoc;
 
     @Override
     public Caja findById(Long id) {
@@ -30,7 +28,6 @@ public class CajaServiceImpl extends FilterService<Caja> implements CajaService 
         if(!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
-
         return optional.get();
     }
 
@@ -40,7 +37,9 @@ public class CajaServiceImpl extends FilterService<Caja> implements CajaService 
     }
 
     @Override
-    public Caja saveOrUpdate(Caja entity) {return dao.save(entity);}
+    public Caja saveOrUpdate(Caja entity) {
+        return dao.save(entity);
+    }
 
     @Override
     public void delete(Long id) {
@@ -48,16 +47,14 @@ public class CajaServiceImpl extends FilterService<Caja> implements CajaService 
     }
 
     @Override
-    public Page<Caja> filter(GenericFilter filterParam) {
+    public Page<Caja> filter(CajaFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-
-        if(filterParam.getThirdLongParam() == null){
+        if(filterParam.getSucursalId() == null){
             hql ="";
         }else{
-            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getThirdLongParam()+"')";
+            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getSucursalId()+"')";
         }
-
-        return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
+        return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 }

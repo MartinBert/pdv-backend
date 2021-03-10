@@ -2,7 +2,7 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.IvaDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.IvaFilter;
 import com.prysoft.pdv.models.Iva;
 import com.prysoft.pdv.service.IvaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,6 @@ public class IvaServiceImpl extends FilterService<Iva> implements IvaService {
         if(!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
-
         return optional.get();
     }
 
@@ -39,7 +38,9 @@ public class IvaServiceImpl extends FilterService<Iva> implements IvaService {
     }
 
     @Override
-    public Iva saveOrUpdate(Iva entity) {return dao.save(entity);}
+    public Iva saveOrUpdate(Iva entity) {
+        return dao.save(entity);
+    }
 
     @Override
     public void delete(Long id) {
@@ -47,13 +48,10 @@ public class IvaServiceImpl extends FilterService<Iva> implements IvaService {
     }
 
     @Override
-    public Page<Iva> filter(GenericFilter filterParam) {
+    public Page<Iva> filter(IvaFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-
         hql = "";
-
-        return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
+        return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
-
 }

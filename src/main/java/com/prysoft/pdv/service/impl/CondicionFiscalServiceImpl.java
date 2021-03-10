@@ -1,8 +1,8 @@
 package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.CondicionFiscalDao;
+import com.prysoft.pdv.dto.CondicionFiscalFilter;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.CondicionFiscal;
 import com.prysoft.pdv.service.CondicionFiscalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,6 @@ public class CondicionFiscalServiceImpl extends FilterService<CondicionFiscal> i
         if(!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
-
         return optional.get();
     }
 
@@ -49,12 +48,10 @@ public class CondicionFiscalServiceImpl extends FilterService<CondicionFiscal> i
     }
 
     @Override
-    public Page<CondicionFiscal> filter(GenericFilter filterParam) {
+    public Page<CondicionFiscal> filter(CondicionFiscalFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
-
-        String hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
-
-        return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
+        String hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getCondicionFiscalName()+"%')";
+        return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 }
 

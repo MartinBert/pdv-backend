@@ -1,6 +1,6 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.IvaFilter;
 import com.prysoft.pdv.models.Iva;
 import com.prysoft.pdv.service.IvaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,7 @@ public class IvaController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<Iva> filter(@RequestBody GenericFilter filterParam) {
+    public Page<Iva> filter(@RequestBody IvaFilter filterParam) {
         return service.filter(filterParam);
     }
 }

@@ -1,8 +1,8 @@
 package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.SucursalDao;
+import com.prysoft.pdv.dto.SucursalFilter;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.Sucursal;
 import com.prysoft.pdv.service.SucursalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import java.util.Optional;
 public class SucursalServiceImpl extends FilterService<Sucursal> implements SucursalService {
 
     @Autowired
-        private SucursalDao dao;
+    private SucursalDao dao;
 
     @Override
         public Sucursal findById(Long id) {
@@ -29,17 +29,16 @@ public class SucursalServiceImpl extends FilterService<Sucursal> implements Sucu
         if(!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
-
         return optional.get();
     }
 
     @Override
-        public Page<Sucursal> findAll(Pageable page) {
+    public Page<Sucursal> findAll(Pageable page) {
         return dao.findAll(page);
     }
 
     @Override
-            public Sucursal saveOrUpdate(Sucursal entity) {
+    public Sucursal saveOrUpdate(Sucursal entity) {
         return dao.save(entity);
     }
 
@@ -49,16 +48,19 @@ public class SucursalServiceImpl extends FilterService<Sucursal> implements Sucu
     }
 
     @Override
-    public Page<Sucursal> filter(GenericFilter filterParam) {
+    public Page<Sucursal> filter(SucursalFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-
-        if(filterParam.getThirdLongParam() == null){
-            hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') OR LOWER(c.direccion) LIKE LOWER('"+filterParam.getStringParam()+"%')";
+        if(filterParam.getSucursalId() == null){
+            hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getSucursalName()+"%') " +
+                    "AND LOWER(c.direccion) LIKE LOWER('"+filterParam.getSucursalDirection()+"%') " +
+                    "AND LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getSucursalSocialReason()+"%')";
         }else{
-            hql = "WHERE (c.id) = ('"+filterParam.getThirdLongParam()+"') AND (LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%') OR LOWER(c.direccion) LIKE LOWER('"+filterParam.getStringParam()+"%'))";
+            hql = "WHERE (c.id) = ('"+filterParam.getSucursalId()+"') " +
+                    "AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getSucursalName()+"%') " +
+                    "AND LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getSucursalSocialReason()+"%') " +
+                    "AND LOWER(c.direccion) LIKE LOWER('"+filterParam.getSucursalDirection()+"%')";
         }
-
-        return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
+        return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 }

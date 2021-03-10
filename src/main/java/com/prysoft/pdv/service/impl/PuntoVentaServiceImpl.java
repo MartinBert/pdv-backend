@@ -2,7 +2,7 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.PuntoVentaDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.PuntoVentaFilter;
 import com.prysoft.pdv.models.PuntoVenta;
 import com.prysoft.pdv.service.PuntoVentaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,6 @@ public class PuntoVentaServiceImpl extends FilterService<PuntoVenta> implements 
         if(!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
-
         return optional.get();
     }
 
@@ -52,17 +51,16 @@ public class PuntoVentaServiceImpl extends FilterService<PuntoVenta> implements 
     }
 
     @Override
-    public Page<PuntoVenta> filter(GenericFilter filterParam) {
+    public Page<PuntoVenta> filter(PuntoVentaFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-
-        if(filterParam.getThirdLongParam() == null){
-            hql = "";
+        if(filterParam.getSucursalId() == null){
+            hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getPuntoVentaName()+"%')";
         }else{
-            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getThirdLongParam()+"') AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
+            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getSucursalId()+"') " +
+                    "AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getPuntoVentaName()+"%')";
         }
-
-        return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
+        return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 }
 

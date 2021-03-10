@@ -1,6 +1,6 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.DepositoFilter;
 import com.prysoft.pdv.models.Deposito;
 import com.prysoft.pdv.service.DepositoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +48,7 @@ public class DepositoController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<Deposito> filter(@RequestBody GenericFilter filterParam) {
+    public Page<Deposito> filter(@RequestBody DepositoFilter filterParam) {
         return service.filter(filterParam);
     }
 }

@@ -2,7 +2,7 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.PreguntaFrecuenteDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.PreguntaFrecuenteFilter;
 import com.prysoft.pdv.models.PreguntaFrecuente;
 import com.prysoft.pdv.service.PreguntaFrecuenteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,11 +46,11 @@ public class PreguntaFrecuenteServiceImpl extends FilterService<PreguntaFrecuent
     }
 
     @Override
-    public Page<PreguntaFrecuente> filter(GenericFilter filterParam) {
+    public Page<PreguntaFrecuente> filter(PreguntaFrecuenteFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
-
-        String hql = "WHERE LOWER(c.pregunta) LIKE LOWER('"+filterParam.getStringParam()+"%')";
-
-        return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
+        String hql =
+                "WHERE LOWER(c.pregunta) LIKE LOWER('"+filterParam.getPreguntaFrecuenteQuestion()+"%') " +
+                "AND LOWER(c.respuesta) LIKE LOWER('"+filterParam.getPreguntaFrecuenteResponse()+"%')";
+        return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 }

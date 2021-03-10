@@ -2,7 +2,7 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.ModuloDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.ModuloFilter;
 import com.prysoft.pdv.models.Modulo;
 import com.prysoft.pdv.service.ModuloService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,6 @@ public class ModuloServiceImpl extends FilterService<Modulo> implements ModuloSe
         if(!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
-
         return optional.get();
     }
 
@@ -47,11 +46,9 @@ public class ModuloServiceImpl extends FilterService<Modulo> implements ModuloSe
     }
 
     @Override
-    public Page<Modulo> filter(GenericFilter filterParam) {
+    public Page<Modulo> filter(ModuloFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
-
-        String hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
-
-        return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
+        String hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getModuloName()+"%')";
+        return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 }

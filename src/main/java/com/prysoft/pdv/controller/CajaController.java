@@ -1,6 +1,6 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.CajaFilter;
 import com.prysoft.pdv.dto.VentaFilter;
 import com.prysoft.pdv.models.Caja;
 import com.prysoft.pdv.models.ComprobanteFiscal;
@@ -50,7 +50,7 @@ public class CajaController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<Caja> filter(@RequestBody GenericFilter filterParam) {
+    public Page<Caja> filter(@RequestBody CajaFilter filterParam) {
         return service.filter(filterParam);
     }
 

@@ -1,6 +1,6 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.SucursalFilter;
 import com.prysoft.pdv.models.Sucursal;
 import com.prysoft.pdv.service.SucursalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/{tenantid}/api/sucursales")
@@ -45,7 +43,7 @@ public class SucursalController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<Sucursal> filter(@RequestBody GenericFilter filterParam) {
+    public Page<Sucursal> filter(@RequestBody SucursalFilter filterParam) {
         return service.filter(filterParam);
     }
 }

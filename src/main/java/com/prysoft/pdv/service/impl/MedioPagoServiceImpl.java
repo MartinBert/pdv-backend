@@ -2,7 +2,7 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.MedioPagoDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.MedioPagoFilter;
 import com.prysoft.pdv.models.MedioPago;
 import com.prysoft.pdv.service.MedioPagoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,6 @@ public class MedioPagoServiceImpl extends FilterService<MedioPago> implements Me
         if(!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
-
         return optional.get();
     }
 
@@ -53,17 +52,17 @@ public class MedioPagoServiceImpl extends FilterService<MedioPago> implements Me
     }
 
     @Override
-    public Page<MedioPago> filter(GenericFilter filterParam) {
+    public Page<MedioPago> filter(MedioPagoFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-
-        if(filterParam.getThirdLongParam() == null){
-            hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
+        if(filterParam.getSucursalId() == null){
+            hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getMedioPagoName()+"%')";
         }else{
-            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getThirdLongParam()+"') AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
+            hql =
+                "WHERE (c.sucursal.id) = ('"+filterParam.getSucursalId()+"') " +
+                "AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getMedioPagoName()+"%')";
         }
-
-        return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
+        return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 }
 

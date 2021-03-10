@@ -1,6 +1,6 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.PropiedadFilter;
 import com.prysoft.pdv.models.Propiedad;
 import com.prysoft.pdv.service.PropiedadService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,7 @@ public class PropiedadController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<Propiedad> filter(@RequestBody GenericFilter filterParam) {
+    public Page<Propiedad> filter(@RequestBody PropiedadFilter filterParam) {
         return service.filter(filterParam);
     }
 }

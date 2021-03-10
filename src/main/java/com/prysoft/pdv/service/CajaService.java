@@ -1,6 +1,6 @@
 package com.prysoft.pdv.service;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.CajaFilter;
 import com.prysoft.pdv.models.Caja;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,5 +14,5 @@ public interface CajaService {
 
     void delete(Long id);
 
-    Page<Caja> filter(GenericFilter filterParam);
+    Page<Caja> filter(CajaFilter filterParam);
 }

@@ -1,6 +1,6 @@
 package com.prysoft.pdv.service;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.PropiedadFilter;
 import com.prysoft.pdv.models.Propiedad;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,5 +15,5 @@ public interface PropiedadService {
 
     void delete(Long id);
 
-    Page<Propiedad> filter(GenericFilter filterParam);
+    Page<Propiedad> filter(PropiedadFilter filterParam);
 }

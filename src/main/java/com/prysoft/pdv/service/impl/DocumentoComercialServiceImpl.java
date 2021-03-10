@@ -1,8 +1,8 @@
 package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.DocumentoComercialDao;
+import com.prysoft.pdv.dto.DocumentoComercialFilter;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.GenericFilter;
 import com.prysoft.pdv.models.DocumentoComercial;
 import com.prysoft.pdv.service.DocumentoComercialService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,6 @@ public class DocumentoComercialServiceImpl extends FilterService<DocumentoComerc
         if(!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
-
         return optional.get();
     }
 
@@ -53,7 +52,6 @@ public class DocumentoComercialServiceImpl extends FilterService<DocumentoComerc
         String[] invoicesCodeArray = new String[]{"001", "006", "011", "081", "082", "111", "9999"};
         Iterable<DocumentoComercial> allDocuments = dao.findAll();
         ArrayList<DocumentoComercial> documentList = new ArrayList<>();
-
         for(DocumentoComercial el: allDocuments){
             for(String e: invoicesCodeArray){
                 if(el.getCodigoDocumento().equals(e)){
@@ -65,12 +63,10 @@ public class DocumentoComercialServiceImpl extends FilterService<DocumentoComerc
     }
 
     @Override
-    public Page<DocumentoComercial> filter(GenericFilter filterParam) {
+    public Page<DocumentoComercial> filter(DocumentoComercialFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
-
-        String hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getStringParam()+"%')";
-
-        return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
+        String hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getDocumentoComercialName()+"%')";
+        return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 
     @Override

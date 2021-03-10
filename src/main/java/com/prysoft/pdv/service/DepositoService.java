@@ -1,6 +1,6 @@
 package com.prysoft.pdv.service;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.DepositoFilter;
 import com.prysoft.pdv.models.Deposito;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +17,7 @@ public interface DepositoService {
 
     Iterable<Deposito> saveAll(ArrayList<Deposito> entity);
 
-    Page<Deposito> filter(GenericFilter filterParam);
+    Page<Deposito> filter(DepositoFilter filterParam);
 
     void delete(Long id);
 }

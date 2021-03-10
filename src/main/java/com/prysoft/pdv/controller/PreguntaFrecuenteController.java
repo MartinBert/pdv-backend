@@ -1,6 +1,6 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.PreguntaFrecuenteFilter;
 import com.prysoft.pdv.models.PreguntaFrecuente;
 import com.prysoft.pdv.service.PreguntaFrecuenteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,7 @@ public class PreguntaFrecuenteController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<PreguntaFrecuente> filter(@RequestBody GenericFilter filterParam) {
+    public Page<PreguntaFrecuente> filter(@RequestBody PreguntaFrecuenteFilter filterParam) {
         return service.filter(filterParam);
     }
 }

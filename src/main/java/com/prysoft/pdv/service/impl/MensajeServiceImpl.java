@@ -2,7 +2,7 @@ package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.MensajeDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.MensajeFilter;
 import com.prysoft.pdv.models.Mensaje;
 import com.prysoft.pdv.service.MensajeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,11 +46,13 @@ public class MensajeServiceImpl extends FilterService<Mensaje> implements Mensaj
     }
 
     @Override
-    public Page<Mensaje> filter(GenericFilter filterParam) {
+    public Page<Mensaje> filter(MensajeFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
-
-        String hql = "WHERE LOWER(c.nameAndLastName) LIKE LOWER('"+filterParam.getStringParam()+"%') OR LOWER(c.date) LIKE LOWER('"+filterParam.getStringParam()+"')";
-
-        return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
+        String hql =
+                "WHERE LOWER(c.nameAndLastName) LIKE LOWER('"+filterParam.getMensajeNameAndLastName()+"%') " +
+                "AND LOWER(c.date) LIKE LOWER('"+filterParam.getMensajeDate()+"%') " +
+                "AND LOWER(c.contactPhoneOrEmail) LIKE LOWER('"+filterParam.getMensajeContactPhoneOrEmail()+"%') " +
+                "AND LOWER(c.message) LIKE LOWER('"+filterParam.getMensajeMessage()+"%') ";
+        return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 }

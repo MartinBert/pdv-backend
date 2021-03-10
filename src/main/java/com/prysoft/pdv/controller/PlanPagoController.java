@@ -1,6 +1,6 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.GenericFilter;
+import com.prysoft.pdv.dto.PlanPagoFilter;
 import com.prysoft.pdv.models.PlanPago;
 import com.prysoft.pdv.service.PlanPagoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +48,7 @@ public class PlanPagoController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<PlanPago> filter(@RequestBody GenericFilter filterParam) {
+    public Page<PlanPago> filter(@RequestBody PlanPagoFilter filterParam) {
         return service.filter(filterParam);
     }
 }
