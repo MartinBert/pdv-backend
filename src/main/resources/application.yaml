@@ -52,5 +52,15 @@ tenants:
       driverClassName: org.postgresql.Driver
       username: postgres
       password: 12345
+    fragancias2:
+      jdbcUrl: jdbc:postgresql://localhost:5432/fragancias2
+      driverClassName: org.postgresql.Driver
+      username: postgres
+      password: 12345
+    tiendanautica:
+      jdbcUrl: jdbc:postgresql://localhost:5432/tiendanautica
+      driverClassName: org.postgresql.Driver
+      username: postgres
+      password: 12345
 server:
   port: 8000
