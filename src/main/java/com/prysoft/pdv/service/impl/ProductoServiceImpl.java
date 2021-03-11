@@ -57,11 +57,9 @@ public class ProductoServiceImpl extends FilterService<Producto> implements Prod
             entities.forEach((Producto e) -> {
                 if(el.getCodigoBarra().equals(e.getCodigoBarra())){
                     e.setId(el.getId());
-                    System.out.println("Sel");
                 }
             });
         });
-
         return dao.saveAll(entities);
     }
 
