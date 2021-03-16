@@ -51,7 +51,6 @@ public class VentaServiceImpl extends FilterService<ComprobanteFiscal> implement
 
     @Override
     public ArrayList<ComprobanteFiscal> filterNotCloseReceipts(VentaFilter filterParam) {
-        System.out.println(filterParam);
         Iterable<ComprobanteFiscal> comprobantes = dao.findAll();
         ArrayList<ComprobanteFiscal> filteredReceipts = new ArrayList<>();
         comprobantes.forEach((ComprobanteFiscal comprobante) ->
@@ -59,7 +58,7 @@ public class VentaServiceImpl extends FilterService<ComprobanteFiscal> implement
                 if(filterParam.getSucursalId() != null){
                     if(comprobante.getCerrado() == null && comprobante.getSucursal().getId() == filterParam.getSucursalId()){
                         comprobante.getMediosPago().forEach((MedioPago medio) -> {
-                            if(medio.getNombre().toLowerCase().equals("efectivo") || medio.getNombre().toLowerCase().equals("contado")){
+                            if(medio.isSumaEnCierreDeCaja()){
                                 filteredReceipts.add(comprobante);
                             }
                         });
@@ -71,7 +70,6 @@ public class VentaServiceImpl extends FilterService<ComprobanteFiscal> implement
                 }
             }
         );
-
         return filteredReceipts;
     }
 }

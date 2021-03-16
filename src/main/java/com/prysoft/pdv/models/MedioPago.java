@@ -23,6 +23,9 @@ public class MedioPago implements Serializable {
     @OneToOne
     private Sucursal sucursal;
 
+    @Column(name = "suma_en_cierre_de_caja", columnDefinition = "boolean default false")
+    private boolean sumaEnCierreDeCaja;
+
     public Long getId() {
         return id;
     }
@@ -55,6 +58,14 @@ public class MedioPago implements Serializable {
         this.sucursal = sucursal;
     }
 
+    public boolean isSumaEnCierreDeCaja() {
+        return sumaEnCierreDeCaja;
+    }
+
+    public void setSumaEnCierreDeCaja(boolean sumaEnCierreDeCaja) {
+        this.sumaEnCierreDeCaja = sumaEnCierreDeCaja;
+    }
+
     @Override
     public String toString() {
         return "MedioPago{" +
@@ -62,6 +73,7 @@ public class MedioPago implements Serializable {
                 ", nombre='" + nombre + '\'' +
                 ", planPago=" + planPago +
                 ", sucursal=" + sucursal +
+                ", sumaEnCierreDeCaja=" + sumaEnCierreDeCaja +
                 '}';
     }
 }

@@ -56,7 +56,6 @@ public class CajaController {
 
     @PostMapping(value = "/filterNotCloseReceipts")
     public ArrayList<ComprobanteFiscal> filterNotCloseReceipts(@RequestBody VentaFilter filterParam) {
-        System.out.println(filterParam);
         return salesService.filterNotCloseReceipts(filterParam);
     }
 }

@@ -56,11 +56,11 @@ public class MedioPagoServiceImpl extends FilterService<MedioPago> implements Me
         String hql;
         List<FilterParam> params = new ArrayList<>();
         if(filterParam.getSucursalId() == null){
-            hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getMedioPagoName()+"%')";
+            hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getMedioPagoName()+"%') GROUP BY c.id ORDER BY c.id ASC";
         }else{
             hql =
                 "WHERE (c.sucursal.id) = ('"+filterParam.getSucursalId()+"') " +
-                "AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getMedioPagoName()+"%')";
+                "AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getMedioPagoName()+"%') GROUP BY c.id ORDER BY c.id ASC";
         }
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }

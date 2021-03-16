@@ -53,19 +53,19 @@ public class ClienteServiceImpl extends FilterService<Cliente> implements Client
 
         if(filterParam.getSucursalId() == null){
             hql =
-                    "WHERE (LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getPersonaSocialReason()+"%') " +
-                            "AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getPersonaName()+"%') " +
-                            "AND LOWER(c.direccion) LIKE LOWER('"+filterParam.getPersonaDirection()+"%') " +
-                            "AND LOWER(c.nombreContacto) LIKE LOWER('"+filterParam.getPersonaContactName()+"%') " +
-                            "AND LOWER(c.cuit) LIKE LOWER('"+filterParam.getPersonaCuit()+"%'))";
+                "WHERE (LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getPersonaSocialReason()+"%') " +
+                "AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getPersonaName()+"%') " +
+                "AND LOWER(c.direccion) LIKE LOWER('"+filterParam.getPersonaDirection()+"%') " +
+                "AND LOWER(c.nombreContacto) LIKE LOWER('"+filterParam.getPersonaContactName()+"%') " +
+                "AND LOWER(c.cuit) LIKE LOWER('"+filterParam.getPersonaCuit()+"%'))";
         }else{
             hql =
-                    "JOIN c.sucursales s WHERE s.id = ('"+filterParam.getSucursalId()+"') " +
-                            "AND (LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getPersonaSocialReason()+"%') " +
-                            "AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getPersonaName()+"%') " +
-                            "AND LOWER(c.direccion) LIKE LOWER('"+filterParam.getPersonaDirection()+"%') " +
-                            "AND LOWER(c.nombreContacto) LIKE LOWER('"+filterParam.getPersonaContactName()+"%') " +
-                            "AND LOWER(c.cuit) LIKE LOWER('"+filterParam.getPersonaCuit()+"%'))";
+                "JOIN c.sucursales s WHERE s.id = ('"+filterParam.getSucursalId()+"') " +
+                "AND (LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getPersonaSocialReason()+"%') " +
+                "AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getPersonaName()+"%') " +
+                "AND LOWER(c.direccion) LIKE LOWER('"+filterParam.getPersonaDirection()+"%') " +
+                "AND LOWER(c.nombreContacto) LIKE LOWER('"+filterParam.getPersonaContactName()+"%') " +
+                "AND LOWER(c.cuit) LIKE LOWER('"+filterParam.getPersonaCuit()+"%'))";
         }
 
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
