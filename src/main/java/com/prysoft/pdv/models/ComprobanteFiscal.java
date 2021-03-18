@@ -12,48 +12,37 @@ public class ComprobanteFiscal implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String letra;
-
     @Column(name = "numero_cbte", nullable = false)
     private String numeroCbte;
-
     private String fechaEmision;
     private String fechaVto;
     private Boolean condicionVenta;
-
     private ArrayList<PrintComprobanteDetail> productos;
-
     private String barCode;
     private String cae;
     private Double totalVenta;
+    private double ingresosBrutos;
     private String nombreDocumento;
-
     @ManyToMany
     @JoinTable(name = "comprobantes_medios",
             joinColumns = @JoinColumn(name = "id_comprobante"),
             inverseJoinColumns = @JoinColumn(name = "id_medio"))
     private Set<MedioPago> mediosPago;
-
     @ManyToMany
     @JoinTable(name = "comprobantes_planes",
             joinColumns = @JoinColumn(name = "id_comprobante"),
             inverseJoinColumns = @JoinColumn(name = "id_plan"))
     private Set<PlanPago> planesPago;
-
     @OneToOne
     private PuntoVenta puntoVenta;
-
     @OneToOne
     private Sucursal sucursal;
-
     @OneToOne
     private DocumentoComercial documentoComercial;
-
     @OneToOne
     private Empresa empresa;
-
     @OneToOne
     private Cliente cliente;
-
     private String cerrado;
 
     public Long getId() {
@@ -208,6 +197,14 @@ public class ComprobanteFiscal implements Serializable {
         this.cerrado = cerrado;
     }
 
+    public double getIngresosBrutos() {
+        return ingresosBrutos;
+    }
+
+    public void setIngresosBrutos(double ingresosBrutos) {
+        this.ingresosBrutos = ingresosBrutos;
+    }
+
     @Override
     public String toString() {
         return "ComprobanteFiscal{" +
@@ -217,6 +214,7 @@ public class ComprobanteFiscal implements Serializable {
                 ", fechaEmision='" + fechaEmision + '\'' +
                 ", fechaVto='" + fechaVto + '\'' +
                 ", condicionVenta=" + condicionVenta +
+                ", ingresosBrutos=" + ingresosBrutos +
                 ", productos=" + productos +
                 ", barCode='" + barCode + '\'' +
                 ", cae='" + cae + '\'' +

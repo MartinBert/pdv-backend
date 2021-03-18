@@ -17,6 +17,9 @@ public class Cliente extends Persona implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "id_sucursal"))
     private Set<Sucursal> sucursales;
 
+    @Column(name="alic_ing_brutos", columnDefinition = "Decimal(10,2) default 0.00")
+    private double alicIngBrutos;
+
     public Long getId() {
         return id;
     }
@@ -33,11 +36,20 @@ public class Cliente extends Persona implements Serializable {
         this.sucursales = sucursales;
     }
 
+    public double getAlicIngBrutos() {
+        return alicIngBrutos;
+    }
+
+    public void setAlicIngBrutos(double alicIngBrutos) {
+        this.alicIngBrutos = alicIngBrutos;
+    }
+
     @Override
     public String toString() {
         return "Cliente{" +
                 "id=" + id +
                 ", sucursales=" + sucursales +
+                ", alicIngBrutos=" + alicIngBrutos +
                 '}';
     }
 }
