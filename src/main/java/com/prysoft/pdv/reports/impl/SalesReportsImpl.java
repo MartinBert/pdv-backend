@@ -6,8 +6,12 @@ import com.prysoft.pdv.models.ComprobanteFiscal;
 import com.prysoft.pdv.models.PrintComprobante;
 import com.prysoft.pdv.print.PrintSalesReport;
 import com.prysoft.pdv.reports.SalesReport;
+import com.prysoft.pdv.reports.routes.ReportsRoutes;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import org.apache.tomcat.util.codec.binary.Base64;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Paths;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -37,6 +41,8 @@ public class SalesReportsImpl implements SalesReport {
     private PrintComprobanteHelper printComprobanteHelper;
     @Autowired
     private PrintSalesHelper printSalesHelper;
+    @Autowired
+    private ReportsRoutes reportsRoutes;
 
     @Override
     public JasperPrint allSalesReport(String tenant, Long id, HttpServletResponse response) throws SQLException, JRException, IOException {
@@ -144,35 +150,81 @@ public class SalesReportsImpl implements SalesReport {
     }
 
     @Override
-    public JasperPrint closeSaleReport(ComprobanteFiscal request, String tenant, HttpServletResponse response) throws IOException, JRException {
+    public JasperPrint closeSaleReport(ComprobanteFiscal request, String tenant, HttpServletResponse response)
+            throws IOException, JRException, JSONException
+    {
         if (request.getCae() != "") {
-            List<PrintComprobante> data = new ArrayList<>();
-            String detailRoute = Paths.get("", "src", "main", "resources", "reports/receiptsReports/factura_detail.jasper").toString();
-            InputStream stream = this.getClass().getResourceAsStream("/reports/receiptsReports/factura_electronica.jasper");
+            String encodedJsonForQrCode = createEncodedJsonObject(request);
+            String subReportRoute = reportsRoutes.getSubReportRoute("receiptsReports", "factura_detail.jasper");
+            InputStream stream = reportsRoutes.getStreamReportResource("receiptsReports", "factura_electronica.jasper");
             PrintComprobante comprobante = printComprobanteHelper.processReceiptForPrint(request);
-            System.out.println(comprobante);
-            data.add(comprobante);
+            List<PrintComprobante> data = new ArrayList<>(Collections.singleton(comprobante));
             JRBeanCollectionDataSource subreportDataSource = new JRBeanCollectionDataSource(comprobante.getProductos());
-            HashMap<String, Object> params = new HashMap<>();
-            params.put("SUBREPORT_DIR", detailRoute);
-            params.put("SUBREPORT_DATA", subreportDataSource);
-            params.put("TOTAL_VENTA", comprobante.getTotalVenta().toString());
-
+            HashMap<String, Object> params =
+                    createHashMapForFiscalReceiptReport(subReportRoute, subreportDataSource, comprobante.getTotalVenta().toString(), encodedJsonForQrCode);
             return printHelper.printOnCloseSale(stream, data, params, response);
         } else {
-            List<PrintComprobante> data = new ArrayList<>();
-            String detailRoute = Paths.get("", "src", "main", "resources", "reports/receiptsReports/ticket_detail.jasper").toString();
-            InputStream stream = this.getClass().getResourceAsStream("/reports/receiptsReports/x_ticket.jasper");
+            String subReportRoute = reportsRoutes.getSubReportRoute("receiptsReports", "ticket_detail.jasper");
+            InputStream stream = reportsRoutes.getStreamReportResource("receiptsReports", "x_ticket.jasper");
             PrintComprobante comprobante = printComprobanteHelper.processReceiptForPrint(request);
-            System.out.println(comprobante);
-            data.add(comprobante);
+            List<PrintComprobante> data = new ArrayList<>(Collections.singleton(comprobante));
             JRBeanCollectionDataSource subreportDataSource = new JRBeanCollectionDataSource(comprobante.getProductos());
-            HashMap<String, Object> params = new HashMap<>();
-            params.put("SUBREPORT_DIR", detailRoute);
-            params.put("SUBREPORT_DATA", subreportDataSource);
-            params.put("TOTAL_VENTA", comprobante.getTotalVenta().toString());
-
+            HashMap<String, Object> params =
+                    createHashMapForNotFiscalReceiptReport(subReportRoute, subreportDataSource, comprobante.getTotalVenta().toString());
             return printHelper.printOnCloseSale(stream, data, params, response);
         }
+    }
+
+    protected String createEncodedJsonObject(ComprobanteFiscal data)
+            throws JSONException
+    {
+        JSONObject objectForQrCode = new JSONObject();
+        objectForQrCode.put("ver", 1);
+        objectForQrCode.put("fecha", data.getFechaEmision());
+        objectForQrCode.put("cuit", data.getSucursal().getCuit());
+        objectForQrCode.put("ptoVta", data.getPuntoVenta().getIdFiscal());
+        objectForQrCode.put("tipoCmp", data.getDocumentoComercial().getCodigoDocumento());
+        objectForQrCode.put("nroCmp", data.getNumeroCbte());
+        objectForQrCode.put("importe", data.getTotalVenta());
+        objectForQrCode.put("moneda", "PES");
+        objectForQrCode.put("ctz", 1);
+        objectForQrCode.put("tipoDocRec", (data.getDocumentoComercial().getLetra().equals("A")) ? "80" : "96");
+        objectForQrCode.put("nroDocRec", data.getCliente().getCuit());
+        objectForQrCode.put("tipoCodAut", "E");
+        objectForQrCode.put("codAut", data.getCae());
+        byte[] econdedBase64 = Base64.encodeBase64(objectForQrCode.toString().getBytes(StandardCharsets.UTF_8));
+        return new String(econdedBase64);
+    }
+
+    protected HashMap<String, Object> createHashMapForFiscalReceiptReport(String subReportDir,
+                                                                          JRBeanCollectionDataSource subReportDataSource,
+                                                                          String totalVenta,
+                                                                          String encodedJsonForQrCode)
+    {
+        HashMap<String,Object> paramsForJasperReport = new HashMap<>();
+        paramsForJasperReport.put("SUBREPORT_DIR", subReportDir);
+        paramsForJasperReport.put("SUBREPORT_DATA", subReportDataSource);
+        paramsForJasperReport.put("TOTAL_VENTA", totalVenta);
+        paramsForJasperReport.put("QR_PARAM", encodedJsonForQrCode);
+        return paramsForJasperReport;
+    }
+
+    protected HashMap<String, Object> createHashMapForNotFiscalReceiptReport(String subReportDir,
+                                                                          JRBeanCollectionDataSource subReportDataSource,
+                                                                          String totalVenta)
+    {
+        HashMap<String,Object> paramsForJasperReport = new HashMap<>();
+        paramsForJasperReport.put("SUBREPORT_DIR", subReportDir);
+        paramsForJasperReport.put("SUBREPORT_DATA", subReportDataSource);
+        paramsForJasperReport.put("TOTAL_VENTA", totalVenta);
+        return paramsForJasperReport;
+    }
+
+    protected JasperPrint createNotFiscalReceipt(){
+        return null;
+    }
+
+    protected JasperPrint createFiscalReceipt(){
+        return null;
     }
 }
