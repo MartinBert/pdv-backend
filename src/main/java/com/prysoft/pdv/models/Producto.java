@@ -12,16 +12,12 @@ public class Producto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name = "nombre", nullable = false)
     private String nombre;
-
     @Column(name = "codigo_barra", nullable = false, unique = true)
     private String codigoBarra;
-
     @Column(name = "codigo_producto", nullable = false)
     private String codigoProducto;
-
     private double precioCosto;
     private int propiedad;
     private double ivaVenta;
@@ -32,16 +28,14 @@ public class Producto implements Serializable {
     private double precioSinIva;
     private int estado;
     private double precioTotal;
-
+    @Column(name = "editable", columnDefinition = "boolean default false")
+    private boolean editable;
     @OneToOne
     private Marca marca;
-
     @OneToOne
     private Iva ivaComprasObject;
-
     @OneToOne
     private Iva ivaVentasObject;
-
     @OneToMany(mappedBy = "producto")
     private Set<ProductoVariacion> variaciones;
 
@@ -50,29 +44,24 @@ public class Producto implements Serializable {
             joinColumns =  @JoinColumn(name = "id_producto"),
             inverseJoinColumns = @JoinColumn(name = "id_distribuidor"))
     private Set<Proveedor> distribuidores;
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "productos_depositos",
             joinColumns =  @JoinColumn(name = "id_producto"),
             inverseJoinColumns = @JoinColumn(name = "id_deposito"))
     private Set<Deposito> depositos;
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "productos_propiedades",
             joinColumns =  @JoinColumn(name = "id_producto"),
             inverseJoinColumns = @JoinColumn(name = "id_propiedad"))
     private Set<Propiedad> propiedades;
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "productos_atributos",
             joinColumns =  @JoinColumn(name = "id_producto"),
             inverseJoinColumns = @JoinColumn(name = "id_atributo"))
     private Set<Atributo> atributos;
-
     @OneToMany(mappedBy = "producto")
     @JsonBackReference
     private Set<Stock> stocks;
-
     @OneToOne
     private Rubro rubro;
 
@@ -268,6 +257,14 @@ public class Producto implements Serializable {
         this.ivaVentasObject = ivaVentasObject;
     }
 
+    public boolean isEditable() {
+        return editable;
+    }
+
+    public void setEditable(boolean editable) {
+        this.editable = editable;
+    }
+
     @Override
     public String toString() {
         return "Producto{" +
@@ -285,6 +282,7 @@ public class Producto implements Serializable {
                 ", precioSinIva=" + precioSinIva +
                 ", estado=" + estado +
                 ", precioTotal=" + precioTotal +
+                ", editable=" + editable +
                 ", marca=" + marca +
                 ", ivaComprasObject=" + ivaComprasObject +
                 ", ivaVentasObject=" + ivaVentasObject +

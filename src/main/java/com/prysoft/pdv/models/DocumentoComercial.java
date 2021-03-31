@@ -9,15 +9,14 @@ public class DocumentoComercial implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name = "nombre", unique = true, nullable = false)
     private String nombre;
-
     @Column(name = "codigo_documento", unique = true, nullable = false)
     private String codigoDocumento;
-
     private String letra;
     private boolean tipo;
+    @Column(name = "ticket", columnDefinition = "boolean default false")
+    private boolean ticket;
     private int ivaCat;
     private boolean activo;
 
@@ -77,6 +76,14 @@ public class DocumentoComercial implements Serializable {
         this.activo = activo;
     }
 
+    public boolean isTicket() {
+        return ticket;
+    }
+
+    public void setTicket(boolean ticket) {
+        this.ticket = ticket;
+    }
+
     @Override
     public String toString() {
         return "DocumentoComercial{" +
@@ -85,6 +92,7 @@ public class DocumentoComercial implements Serializable {
                 ", codigoDocumento='" + codigoDocumento + '\'' +
                 ", letra='" + letra + '\'' +
                 ", tipo=" + tipo +
+                ", ticket=" + ticket +
                 ", ivaCat=" + ivaCat +
                 ", activo=" + activo +
                 '}';
