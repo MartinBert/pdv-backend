@@ -15,14 +15,16 @@ public class PrintSalesHelper implements Serializable {
     public PrintSalesReport processReceiptForPrint(ComprobanteFiscal receipt){
         PrintSalesReport report = new PrintSalesReport();
         String medios = medioHelper.stringPaymentMethodsNameConvertion(receipt.getMediosPago());
-
         report.setFechaEmision(receipt.getFechaEmision());
-        report.setCliente(receipt.getCliente().getRazonSocial());
+        if(receipt.getCliente() != null){
+            report.setCliente(receipt.getCliente().getRazonSocial());
+        }else{
+            report.setCliente("");
+        }
         report.setPuntoVenta(receipt.getPuntoVenta().getNombre());
         report.setNombreDocumento(receipt.getNombreDocumento());
         report.setTotalVenta(receipt.getTotalVenta());
         report.setMedioPago(medios);
-
         return report;
     }
 }
