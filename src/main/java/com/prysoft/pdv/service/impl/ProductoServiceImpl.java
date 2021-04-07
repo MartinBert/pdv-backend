@@ -5,20 +5,17 @@ import com.prysoft.pdv.dao.SucursalDao;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.ProductoFilter;
 import com.prysoft.pdv.helpers.MathHelper;
-import com.prysoft.pdv.helpers.PageProductsHelper;
 import com.prysoft.pdv.models.Producto;
 import com.prysoft.pdv.models.Sucursal;
 import com.prysoft.pdv.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.*;
-import java.util.function.Function;
 
 @Service
 @Transactional
@@ -145,7 +142,6 @@ public class ProductoServiceImpl extends FilterService<Producto> implements Prod
         double number = mathHelper.sumNumbers(numbers);
         return number;
     }
-
 
     private boolean isNotNull(Long value){
         if(value != null) return true;
