@@ -13,46 +13,37 @@ public class Sucursal implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name = "nombre", nullable = false)
     private String nombre;
-
     @Column(name = "direccion", nullable = false)
     private String direccion;
-
     @OneToOne
     private CondicionFiscal condicionIva; //1-Responsable Inscripto, 2-Monotributista
-
     private String email;
     private String telefono;
     private String telefonoAlternativo;
     private String nombreContacto;
     private String provincia;
     private String ciudad;
-
     @Column(name = "fecha_inicio_act")
     private Date fechaInicioAct;
-
     @Column(name = "ing_bruto")
     private int ingBruto;
-
     @Column(name = "razon_social")
     private String razonSocial;
-
     @Column(name = "cuit")
     private String cuit;
-
     @OneToMany(mappedBy = "sucursal")
     private Set<PuntoVenta> puntosVenta;
-
     @OneToMany(mappedBy = "sucursales")
     @JsonBackReference(value = "depositos")
     private Set<Deposito> depositos;
-
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name="empresa_id", nullable=false)
     private Empresa empresa;
+    @Column(name = "variacion_ganancia")
+    private double variacionGanancia;
 
     public Long getId() {
         return id;
@@ -190,6 +181,14 @@ public class Sucursal implements Serializable {
         this.empresa = empresa;
     }
 
+    public double getVariacionGanancia() {
+        return variacionGanancia;
+    }
+
+    public void setVariacionGanancia(double variacionGanancia) {
+        this.variacionGanancia = variacionGanancia;
+    }
+
     @Override
     public String toString() {
         return "Sucursal{" +
@@ -210,6 +209,7 @@ public class Sucursal implements Serializable {
                 ", puntosVenta=" + puntosVenta +
                 ", depositos=" + depositos +
                 ", empresa=" + empresa +
+                ", variacionGanancia=" + variacionGanancia +
                 '}';
     }
 }

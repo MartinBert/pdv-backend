@@ -38,7 +38,6 @@ public class Producto implements Serializable {
     private Iva ivaVentasObject;
     @OneToMany(mappedBy = "producto")
     private Set<ProductoVariacion> variaciones;
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "productos_distribuidores",
             joinColumns =  @JoinColumn(name = "id_producto"),

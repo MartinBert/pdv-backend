@@ -135,6 +135,11 @@ public class ProductoFilter extends SucursalFilter {
     }
 
     @Override
+    public Long getSucursalId() {
+        return super.getSucursalId();
+    }
+
+    @Override
     public String toString() {
         return "ProductoFilter{" +
                 "productoId=" + productoId +

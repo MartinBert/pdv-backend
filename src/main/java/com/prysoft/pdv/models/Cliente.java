@@ -10,13 +10,11 @@ public class Cliente extends Persona implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "cliente_sucursal",
             joinColumns =  @JoinColumn(name = "id_cliente"),
             inverseJoinColumns = @JoinColumn(name = "id_sucursal"))
     private Set<Sucursal> sucursales;
-
     @Column(name="alic_ing_brutos", columnDefinition = "Decimal(10,2) default 0.00")
     private double alicIngBrutos;
 
