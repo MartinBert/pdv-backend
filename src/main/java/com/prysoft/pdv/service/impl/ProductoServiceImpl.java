@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.PersistenceContext;
 import java.util.*;
 
 @Service
@@ -106,6 +107,7 @@ public class ProductoServiceImpl extends FilterService<Producto> implements Prod
                         "AND LOWER(c.marca.nombre) LIKE LOWER('"+filterParam.getProductoMarcaName()+"%')";
             }
         }
+
         Page<Producto> page = getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
         if(isNotNull(filterParam.getSucursalId())){
             Optional<Sucursal> sucursal = sucursalDao.findById(filterParam.getSucursalId());
@@ -118,10 +120,10 @@ public class ProductoServiceImpl extends FilterService<Producto> implements Prod
                         producto.setIvaVenta(getIvaVenta(producto));
                         producto.setPrecioTotal(getPrecioTotal(producto));
                     }
+                    return page;
                 }
             }
         }
-        System.out.print(page.getContent());
         return page;
     }
 

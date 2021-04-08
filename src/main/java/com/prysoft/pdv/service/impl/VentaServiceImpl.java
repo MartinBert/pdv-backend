@@ -53,10 +53,11 @@ public class VentaServiceImpl extends FilterService<ComprobanteFiscal> implement
     public ArrayList<ComprobanteFiscal> filterNotCloseReceipts(VentaFilter filterParam) {
         Iterable<ComprobanteFiscal> comprobantes = dao.findAll();
         ArrayList<ComprobanteFiscal> filteredReceipts = new ArrayList<>();
+        Long sucursalId = filterParam.getSucursalId();
         comprobantes.forEach((ComprobanteFiscal comprobante) ->
             {
-                if(filterParam.getSucursalId() != null){
-                    if(comprobante.getCerrado() == null && comprobante.getSucursal().getId() == filterParam.getSucursalId()){
+                if(isNotNull(sucursalId)){
+                    if(passNotCloseReceiptValidations(comprobante, sucursalId)){
                         comprobante.getMediosPago().forEach((MedioPago medio) -> {
                             if(medio.isSumaEnCierreDeCaja()){
                                 filteredReceipts.add(comprobante);
@@ -71,6 +72,18 @@ public class VentaServiceImpl extends FilterService<ComprobanteFiscal> implement
             }
         );
         return filteredReceipts;
+    }
+
+    private boolean passNotCloseReceiptValidations(ComprobanteFiscal comprobante, Long sucursalId){
+        if(comprobante.getCerrado() != null) return false;
+        if(comprobante.getSucursal().getId() != sucursalId) return false;
+        return true;
+    }
+
+    private boolean isNotNull(Long value){
+        if(value == null) return false;
+        if(value.equals("")) return false;
+        return true;
     }
 }
 
