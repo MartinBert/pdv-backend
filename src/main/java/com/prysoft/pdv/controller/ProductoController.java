@@ -1,7 +1,6 @@
 package com.prysoft.pdv.controller;
 
 import com.prysoft.pdv.dto.ProductoFilter;
-import com.prysoft.pdv.helpers.PageProductsHelper;
 import com.prysoft.pdv.models.*;
 import com.prysoft.pdv.print.PrintProductsLabels;
 import com.prysoft.pdv.reports.ProductsReport;
