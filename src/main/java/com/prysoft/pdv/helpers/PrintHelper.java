@@ -3,6 +3,7 @@ package com.prysoft.pdv.helpers;
 import com.prysoft.pdv.models.PrintComprobante;
 import com.prysoft.pdv.print.PrintProductsLabels;
 import com.prysoft.pdv.print.PrintSalesReport;
+import com.prysoft.pdv.print.PrintWithProductDetails;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
@@ -25,6 +26,17 @@ public class PrintHelper implements Serializable {
 
     /***** SALES *****/
     public JasperPrint printWithDataSourceCollection(InputStream stream, ArrayList<PrintSalesReport> data, HashMap<String, Object> params, HttpServletResponse response) throws JRException, IOException {
+
+        JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(data);
+        JasperReport report = (JasperReport) JRLoader.loadObject(stream);
+        JasperPrint print = JasperFillManager.fillReport(report,params,datasource);
+        final ServletOutputStream output = response.getOutputStream();
+        JasperExportManager.exportReportToPdfStream(print, output);
+
+        return null;
+    }
+
+    public JasperPrint printWithDataSourceCollectionAndProductDetails(InputStream stream, ArrayList<PrintWithProductDetails> data, HashMap<String, Object> params, HttpServletResponse response) throws JRException, IOException {
 
         JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(data);
         JasperReport report = (JasperReport) JRLoader.loadObject(stream);

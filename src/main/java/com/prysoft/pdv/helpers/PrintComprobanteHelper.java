@@ -37,7 +37,6 @@ public class PrintComprobanteHelper implements Serializable {
       comprobante.setProductos(receipt.getProductos());
       comprobante.setTotalVenta(receipt.getTotalVenta());
       comprobante.setNombreDocumento(receipt.getNombreDocumento());
-
       return comprobante;
     }
 }
