@@ -7,6 +7,7 @@ import com.prysoft.pdv.models.PrintComprobante;
 import com.prysoft.pdv.models.Producto;
 import com.prysoft.pdv.models.ProductoDescription;
 import com.prysoft.pdv.print.PrintSaleForSelectedProductAndDate;
+import com.prysoft.pdv.print.PrintSaleProductQuantityDetail;
 import com.prysoft.pdv.print.PrintSalesReport;
 import com.prysoft.pdv.print.PrintWithProductDetails;
 import com.prysoft.pdv.reports.SalesReport;
@@ -252,9 +253,11 @@ public class SalesReportsImpl implements SalesReport {
                                                                   HttpServletResponse response)
             throws JRException, IOException
     {
-        String subReportRoute = reportsRoutes.getSubReportRoute("salesReports", "salesForProductAndDatesSubReport.jasper");
         InputStream stream = reportsRoutes.getStreamReportResource("salesReports", "salesForProductAndDates.jasper");
+        String subReportRoute = reportsRoutes.getSubReportRoute("salesReports", "salesForProductAndDatesSubReport.jasper");
+        String subReportProductsDetailRoute = reportsRoutes.getSubReportRoute("salesReports", "productAndDateDetailsSubReport.jasper");
         ArrayList<PrintWithProductDetails> data = new ArrayList<>();
+        ArrayList<PrintSaleProductQuantityDetail> subReportProductsDetail = new ArrayList<>();
         Iterable<ComprobanteFiscal> vouchers = dao.findAll();
         for(ComprobanteFiscal voucher: vouchers){
             if(isInvoice(voucher)){
@@ -262,14 +265,51 @@ public class SalesReportsImpl implements SalesReport {
                     if(invoiceContainProducts(voucher, request.getProducts())){
                         if(invoiceBelongsToBranch(id, voucher)){
                             PrintWithProductDetails detail = printSalesHelper.processReceiptForPrintWithProductDetails(voucher);
+                            for(ProductoDescription productDescriptionInVoucher: voucher.getProductoDescription()){
+                                if(subReportProductsDetail.isEmpty()){
+                                    PrintSaleProductQuantityDetail printSaleProductQuantityDetail = printSalesHelper.processPrintSaleProductQuantityDetail(productDescriptionInVoucher, request);
+                                    if(printSaleProductQuantityDetail != null){
+                                        subReportProductsDetail.add(printSaleProductQuantityDetail);
+                                    }
+                                }else{
+                                    ArrayList<PrintSaleProductQuantityDetail> check = new ArrayList<>();
+                                    PrintSaleProductQuantityDetail printSaleProductQuantityDetail = printSalesHelper.processPrintSaleProductQuantityDetail(productDescriptionInVoucher, request);
+                                    for (PrintSaleProductQuantityDetail printSaleProductQuantityDetailInSubReportArray: subReportProductsDetail){
+                                        if(printSaleProductQuantityDetail != null && printSaleProductQuantityDetailInSubReportArray != null){
+                                            if(printSaleProductQuantityDetailInSubReportArray.getProduct().equals(printSaleProductQuantityDetail.getProduct())){
+                                                check.add(printSaleProductQuantityDetail);
+                                            }
+                                        }
+                                    }
+                                    if(check.isEmpty()){
+                                        if(printSaleProductQuantityDetail != null){
+                                            subReportProductsDetail.add(printSaleProductQuantityDetail);
+                                        }
+                                    }else{
+                                        for (PrintSaleProductQuantityDetail printSaleProductQuantityDetailInSubReportArray: subReportProductsDetail){
+                                            if(printSaleProductQuantityDetail != null && printSaleProductQuantityDetailInSubReportArray != null){
+                                                if(printSaleProductQuantityDetailInSubReportArray.getProduct().equals(printSaleProductQuantityDetail.getProduct())){
+                                                    printSaleProductQuantityDetailInSubReportArray.setQuantity(printSaleProductQuantityDetailInSubReportArray.getQuantity() + printSaleProductQuantityDetail.getQuantity());
+                                                    printSaleProductQuantityDetailInSubReportArray.setAmount(printSaleProductQuantityDetailInSubReportArray.getAmount() + printSaleProductQuantityDetail.getAmount());
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                             data.add(detail);
                         }
                     }
                 }
             }
         }
+
+        JRBeanCollectionDataSource subReportProductsDetailDataSource = new JRBeanCollectionDataSource(subReportProductsDetail);
+
         HashMap<String, Object> params = new HashMap<>();
         params.put("SUBREPORT_DIR", subReportRoute);
+        params.put("SUBREPORT_PRODUCTS_DIR", subReportProductsDetailRoute);
+        params.put("SUBREPORT_PRODUCTS_DATA", subReportProductsDetailDataSource);
         return printHelper.printWithDataSourceCollectionAndProductDetails(stream, data, params, response);
     }
 
