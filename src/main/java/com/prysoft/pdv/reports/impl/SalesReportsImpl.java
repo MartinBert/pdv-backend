@@ -2,14 +2,8 @@ package com.prysoft.pdv.reports.impl;
 
 import com.prysoft.pdv.dao.ComprobanteFiscalDao;
 import com.prysoft.pdv.helpers.*;
-import com.prysoft.pdv.models.ComprobanteFiscal;
-import com.prysoft.pdv.models.PrintComprobante;
-import com.prysoft.pdv.models.Producto;
-import com.prysoft.pdv.models.ProductoDescription;
-import com.prysoft.pdv.print.PrintSaleForSelectedProductAndDate;
-import com.prysoft.pdv.print.PrintSaleProductQuantityDetail;
-import com.prysoft.pdv.print.PrintSalesReport;
-import com.prysoft.pdv.print.PrintWithProductDetails;
+import com.prysoft.pdv.models.*;
+import com.prysoft.pdv.print.*;
 import com.prysoft.pdv.reports.SalesReport;
 import com.prysoft.pdv.reports.routes.ReportsRoutes;
 import net.sf.jasperreports.engine.*;
@@ -175,6 +169,49 @@ public class SalesReportsImpl implements SalesReport {
     }
 
     @Override
+    public JasperPrint findQuantityOfProductsSold(Long id,
+                                                  SearchFilterInProductsSold search,
+                                                  HttpServletResponse response)
+            throws JRException, IOException, SQLException
+    {
+        InputStream stream = reportsRoutes.getStreamReportResource("salesReports", "quantityProductsSoldReport.jasper");
+        ArrayList<QuantityProductsSold> data = new ArrayList<>();
+        Iterable<ComprobanteFiscal> vouchers = dao.findAll();
+        for (ComprobanteFiscal voucher: vouchers){
+            if(invoiceBelongsToBranch(id, voucher)){
+                if(voucherIsInDateRange(voucher, search)){
+                    for (PrintComprobanteDetail detailInVoucher: voucher.getProductos()){
+                        QuantityProductsSold detail = new QuantityProductsSold();
+                        if (detailInVoucher.getNombre().toLowerCase().trim().equals(search.getSearch().toLowerCase().trim())){
+                            if(data.isEmpty()){
+                                detail.setNameOfProduct(detailInVoucher.getNombre());
+                                detail.setQuantity(Double.parseDouble(detailInVoucher.getCantUnidades()));
+                                detail.setTotal(detailInVoucher.getPrecioTotal());
+                                data.add(detail);
+                            }else{
+                                data.get(0).setQuantity(data.get(0).getQuantity() + Double.parseDouble(detailInVoucher.getCantUnidades()));
+                                data.get(0).setTotal(data.get(0).getTotal() + detailInVoucher.getPrecioTotal());
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("INIT_DATE", search.getInitDate());
+        params.put("FINISH_DATE", search.getFinishDate());
+        return printHelper.printWithDataSourceCollectionQuantityProductsSold(stream, data, params, response);
+    }
+
+    protected boolean voucherIsInDateRange(ComprobanteFiscal voucher, SearchFilterInProductsSold search){
+        if(date(voucher.getFechaEmision()) >= date(search.getInitDate()) && date(voucher.getFechaEmision()) <= date(search.getFinishDate())){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    @Override
     public JasperPrint closeSaleReport(ComprobanteFiscal request,
                                        String tenant,
                                        HttpServletResponse response)
@@ -303,9 +340,7 @@ public class SalesReportsImpl implements SalesReport {
                 }
             }
         }
-
         JRBeanCollectionDataSource subReportProductsDetailDataSource = new JRBeanCollectionDataSource(subReportProductsDetail);
-
         HashMap<String, Object> params = new HashMap<>();
         params.put("SUBREPORT_DIR", subReportRoute);
         params.put("SUBREPORT_PRODUCTS_DIR", subReportProductsDetailRoute);

@@ -2,6 +2,7 @@ package com.prysoft.pdv.reports;
 
 import com.prysoft.pdv.models.ComprobanteFiscal;
 import com.prysoft.pdv.print.PrintSaleForSelectedProductAndDate;
+import com.prysoft.pdv.print.SearchFilterInProductsSold;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperPrint;
 import org.json.JSONException;
@@ -62,5 +63,10 @@ public interface SalesReport {
     JasperPrint salesForSelectedProductsAndDateRangeReport(PrintSaleForSelectedProductAndDate request,
                                                            Long id,
                                                            HttpServletResponse response)
+            throws JRException, IOException, SQLException;
+
+    JasperPrint findQuantityOfProductsSold(Long id,
+                                           SearchFilterInProductsSold search,
+                                           HttpServletResponse response)
             throws JRException, IOException, SQLException;
 }

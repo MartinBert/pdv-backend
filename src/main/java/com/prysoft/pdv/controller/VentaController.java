@@ -3,6 +3,7 @@ package com.prysoft.pdv.controller;
 import com.prysoft.pdv.dto.VentaFilter;
 import com.prysoft.pdv.models.ComprobanteFiscal;
 import com.prysoft.pdv.print.PrintSaleForSelectedProductAndDate;
+import com.prysoft.pdv.print.SearchFilterInProductsSold;
 import com.prysoft.pdv.reports.SalesReport;
 import com.prysoft.pdv.service.VentaService;
 import net.sf.jasperreports.engine.JRException;
@@ -107,6 +108,14 @@ public class VentaController {
             throws IOException, JRException, SQLException, JSONException
     {
         return reports.salesForSelectedProductsAndDateRangeReport(request, id, response);
+    }
+
+    @PostMapping(value = "/findQuantityOfProductsSold/{id}")
+    public JasperPrint findQuantityOfProductsSold(@PathVariable Long id,
+                                                  @RequestBody SearchFilterInProductsSold search,
+                                                  HttpServletResponse response)
+            throws JRException, IOException, SQLException {
+        return reports.findQuantityOfProductsSold(id, search, response);
     }
 
     @PostMapping(value = "/filter")
