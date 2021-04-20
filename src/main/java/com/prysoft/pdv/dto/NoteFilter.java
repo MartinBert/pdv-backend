@@ -4,12 +4,23 @@ import org.apache.fop.area.Page;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Service
 public class NoteFilter extends PageFilter {
 
     private String name;
     private String details;
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    private Date fecha;
 
     public String getName() {
         return name;

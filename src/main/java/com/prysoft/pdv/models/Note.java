@@ -2,6 +2,7 @@ package com.prysoft.pdv.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "Note")
@@ -12,6 +13,16 @@ public class Note implements Serializable {
     private Long id;
 
     private String name ;
+
+    private Date fecha;
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
 
     public Long getId() {
         return id;
