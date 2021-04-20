@@ -1,17 +1,16 @@
 package com.prysoft.pdv.print;
 
-import com.prysoft.pdv.models.ProductoDescription;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
-public class PrintSalesReport implements Serializable {
+public class PrintWithProductDetails implements Serializable {
     private String fechaEmision;
     private String nombreDocumento;
     private String cliente;
     private String puntoVenta;
     private String medioPago;
-    private ArrayList<ProductoDescription> productos;
+    private JRBeanCollectionDataSource productos;
     private double totalVenta;
 
     public String getFechaEmision() {
@@ -62,11 +61,11 @@ public class PrintSalesReport implements Serializable {
         this.totalVenta = totalVenta;
     }
 
-    public ArrayList<ProductoDescription> getProductos() {
+    public JRBeanCollectionDataSource getProductos() {
         return productos;
     }
 
-    public void setProductos(ArrayList<ProductoDescription> productos) {
+    public void setProductos(JRBeanCollectionDataSource productos) {
         this.productos = productos;
     }
 

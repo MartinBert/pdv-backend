@@ -18,6 +18,8 @@ public class ComprobanteFiscal implements Serializable {
     private String fechaVto;
     private Boolean condicionVenta;
     private ArrayList<PrintComprobanteDetail> productos;
+    private ArrayList<Producto> productosDetalle;
+    private ArrayList<ProductoDescription> productoDescription;
     private String barCode;
     private String cae;
     private Double totalVenta;
@@ -205,6 +207,22 @@ public class ComprobanteFiscal implements Serializable {
         this.ingresosBrutos = ingresosBrutos;
     }
 
+    public ArrayList<Producto> getProductosDetalle() {
+        return productosDetalle;
+    }
+
+    public void setProductosDetalle(ArrayList<Producto> productosDetalle) {
+        this.productosDetalle = productosDetalle;
+    }
+
+    public ArrayList<ProductoDescription> getProductoDescription() {
+        return productoDescription;
+    }
+
+    public void setProductoDescription(ArrayList<ProductoDescription> productoDescription) {
+        this.productoDescription = productoDescription;
+    }
+
     @Override
     public String toString() {
         return "ComprobanteFiscal{" +
@@ -214,11 +232,13 @@ public class ComprobanteFiscal implements Serializable {
                 ", fechaEmision='" + fechaEmision + '\'' +
                 ", fechaVto='" + fechaVto + '\'' +
                 ", condicionVenta=" + condicionVenta +
-                ", ingresosBrutos=" + ingresosBrutos +
                 ", productos=" + productos +
+                ", productosDetalle=" + productosDetalle +
+                ", productoDescription=" + productoDescription +
                 ", barCode='" + barCode + '\'' +
                 ", cae='" + cae + '\'' +
                 ", totalVenta=" + totalVenta +
+                ", ingresosBrutos=" + ingresosBrutos +
                 ", nombreDocumento='" + nombreDocumento + '\'' +
                 ", mediosPago=" + mediosPago +
                 ", planesPago=" + planesPago +

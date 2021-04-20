@@ -2,9 +2,8 @@ package com.prysoft.pdv.reports.impl;
 
 import com.prysoft.pdv.dao.ComprobanteFiscalDao;
 import com.prysoft.pdv.helpers.*;
-import com.prysoft.pdv.models.ComprobanteFiscal;
-import com.prysoft.pdv.models.PrintComprobante;
-import com.prysoft.pdv.print.PrintSalesReport;
+import com.prysoft.pdv.models.*;
+import com.prysoft.pdv.print.*;
 import com.prysoft.pdv.reports.SalesReport;
 import com.prysoft.pdv.reports.routes.ReportsRoutes;
 import net.sf.jasperreports.engine.*;
@@ -45,40 +44,53 @@ public class SalesReportsImpl implements SalesReport {
     private ReportsRoutes reportsRoutes;
 
     @Override
-    public JasperPrint allSalesReport(String tenant, Long id, HttpServletResponse response) throws SQLException, JRException, IOException {
-
-        InputStream stream = this.getClass().getResourceAsStream("/reports/salesReports/allSalesForSucursal.jasper");
+    public JasperPrint allSalesReport(String tenant,
+                                      Long id,
+                                      HttpServletResponse response)
+            throws SQLException, JRException, IOException
+    {
+        InputStream stream = reportsRoutes.getStreamReportResource("salesReports", "allSalesForSucursal.jasper");
         HashMap<String, Object> params = new HashMap<>();
         params.put("SUCURSAL", id);
-
         return printHelper.printWithDatabaseConnection(tenant, stream, params, response);
     }
 
     @Override
-    public JasperPrint salesForReceiptReport(String tenant, Long id, String receipt, HttpServletResponse response) throws SQLException, JRException, IOException {
-
-        InputStream stream = this.getClass().getResourceAsStream("/reports/salesReports/allSalesForReceipt.jasper");
+    public JasperPrint salesForReceiptReport(String tenant,
+                                             Long id,
+                                             String receipt,
+                                             HttpServletResponse response)
+            throws SQLException, JRException, IOException
+    {
+        InputStream stream = reportsRoutes.getStreamReportResource("salesReports", "allSalesForReceipt.jasper");
         HashMap<String, Object> params = new HashMap<>();
         params.put("SUCURSAL", id);
         params.put("CODIGO_DOCUMENTO", receipt);
-
         return printHelper.printWithDatabaseConnection(tenant, stream, params, response);
     }
 
     @Override
-    public JasperPrint salesForClientReport(String tenant, Long id, Long client, HttpServletResponse response) throws SQLException, JRException, IOException {
-
-        InputStream stream = this.getClass().getResourceAsStream("/reports/salesReports/allSalesForClient.jasper");
+    public JasperPrint salesForClientReport(String tenant,
+                                            Long id,
+                                            Long client,
+                                            HttpServletResponse response)
+            throws SQLException, JRException, IOException
+    {
+        InputStream stream = reportsRoutes.getStreamReportResource("salesReports", "allSalesForClient.jasper");
         HashMap<String, Object> params = new HashMap<>();
         params.put("SUCURSAL", id);
         params.put("CLIENTE_ID", client);
-
         return printHelper.printWithDatabaseConnection(tenant, stream, params, response);
     }
 
     @Override
-    public JasperPrint salesForDateReport(String tenant, Long id, String firstDate, String secondDate, HttpServletResponse response) throws JRException, IOException {
-
+    public JasperPrint salesForDateReport(String tenant,
+                                          Long id,
+                                          String firstDate,
+                                          String secondDate,
+                                          HttpServletResponse response)
+            throws JRException, IOException
+    {
         Iterable<ComprobanteFiscal> receipts = dao.findAll();
         ArrayList<PrintSalesReport> data = new ArrayList<>();
         for (ComprobanteFiscal c : receipts) {
@@ -90,15 +102,19 @@ public class SalesReportsImpl implements SalesReport {
                 }
             }
         }
-        InputStream stream = this.getClass().getResourceAsStream("/reports/salesReports/salesForDate.jasper");
+        InputStream stream = reportsRoutes.getStreamReportResource("salesReports", "salesForDate.jasper");
         HashMap<String, Object> params = new HashMap<>();
-
         return printHelper.printWithDataSourceCollection(stream, data, params, response);
     }
 
     @Override
-    public JasperPrint salesForMonthReport(String tenant, Long id, String year, String month, HttpServletResponse response) throws JRException, IOException {
-
+    public JasperPrint salesForMonthReport(String tenant,
+                                           Long id,
+                                           String year,
+                                           String month,
+                                           HttpServletResponse response)
+            throws JRException, IOException
+    {
         Iterable<ComprobanteFiscal> receipts = dao.findAll();
         ArrayList<PrintSalesReport> data = new ArrayList<>();
         for (ComprobanteFiscal c : receipts) {
@@ -109,48 +125,96 @@ public class SalesReportsImpl implements SalesReport {
                 }
             }
         }
-
-        InputStream stream = this.getClass().getResourceAsStream("/reports/salesReports/salesForMonth.jasper");
+        InputStream stream = reportsRoutes.getStreamReportResource("salesReports", "salesForMonth.jasper");
         HashMap<String, Object> params = new HashMap<>();
         params.put("YEAR", year);
         params.put("MONTH", dateHelper.getMonthName(month).toUpperCase());
-
         return printHelper.printWithDataSourceCollection(stream, data, params, response);
     }
 
     @Override
-    public JasperPrint salesForYearReport(String tenant, Long id, String year, HttpServletResponse response) throws JRException, IOException {
-
+    public JasperPrint salesForYearReport(String tenant,
+                                          Long id,
+                                          String year,
+                                          HttpServletResponse response)
+            throws JRException, IOException
+    {
         Iterable<ComprobanteFiscal> receipts = dao.findAll();
         ArrayList<PrintSalesReport> data = new ArrayList<>();
         for (ComprobanteFiscal c : receipts) {
             if (c.getFechaEmision().substring(6).equals(year)) {
-                if (c.getSucursal().getId() == id && documentoHelper.checkReceiptIsInvoice(c.getDocumentoComercial())) {
+                if (c.getSucursal().getId() == id && isInvoice(c)) {
                     PrintSalesReport detail = printSalesHelper.processReceiptForPrint(c);
                     data.add(detail);
                 }
             }
         }
-
-        InputStream stream = this.getClass().getResourceAsStream("/reports/salesReports/salesForYear.jasper");
+        InputStream stream = reportsRoutes.getStreamReportResource("salesReports", "salesForYear.jasper");
         HashMap<String, Object> params = new HashMap<>();
         params.put("YEAR", year);
-
         return printHelper.printWithDataSourceCollection(stream, data, params, response);
     }
 
     @Override
-    public JasperPrint allSalesGroupBy(String tenant, Long id, String type, HttpServletResponse response) throws JRException, IOException, SQLException {
-
-        InputStream stream = this.getClass().getResourceAsStream("/reports/salesReports/allSalesGroupBy" + type + ".jasper");
+    public JasperPrint allSalesGroupBy(String tenant,
+                                       Long id,
+                                       String type,
+                                       HttpServletResponse response)
+            throws JRException, IOException, SQLException
+    {
+        InputStream stream = reportsRoutes.getStreamReportResource("salesReports", "allSalesGroupBy" + type + ".jasper");
         HashMap<String, Object> params = new HashMap<>();
         params.put("SUCURSAL", id);
-
         return printHelper.printWithDatabaseConnection(tenant, stream, params, response);
     }
 
     @Override
-    public JasperPrint closeSaleReport(ComprobanteFiscal request, String tenant, HttpServletResponse response)
+    public JasperPrint findQuantityOfProductsSold(Long id,
+                                                  SearchFilterInProductsSold search,
+                                                  HttpServletResponse response)
+            throws JRException, IOException, SQLException
+    {
+        InputStream stream = reportsRoutes.getStreamReportResource("salesReports", "quantityProductsSoldReport.jasper");
+        ArrayList<QuantityProductsSold> data = new ArrayList<>();
+        Iterable<ComprobanteFiscal> vouchers = dao.findAll();
+        for (ComprobanteFiscal voucher: vouchers){
+            if(invoiceBelongsToBranch(id, voucher)){
+                if(voucherIsInDateRange(voucher, search)){
+                    for (PrintComprobanteDetail detailInVoucher: voucher.getProductos()){
+                        QuantityProductsSold detail = new QuantityProductsSold();
+                        if (detailInVoucher.getNombre().toLowerCase().trim().equals(search.getSearch().toLowerCase().trim())){
+                            if(data.isEmpty()){
+                                detail.setNameOfProduct(detailInVoucher.getNombre());
+                                detail.setQuantity(Double.parseDouble(detailInVoucher.getCantUnidades()));
+                                detail.setTotal(detailInVoucher.getPrecioTotal());
+                                data.add(detail);
+                            }else{
+                                data.get(0).setQuantity(data.get(0).getQuantity() + Double.parseDouble(detailInVoucher.getCantUnidades()));
+                                data.get(0).setTotal(data.get(0).getTotal() + detailInVoucher.getPrecioTotal());
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("INIT_DATE", search.getInitDate());
+        params.put("FINISH_DATE", search.getFinishDate());
+        return printHelper.printWithDataSourceCollectionQuantityProductsSold(stream, data, params, response);
+    }
+
+    protected boolean voucherIsInDateRange(ComprobanteFiscal voucher, SearchFilterInProductsSold search){
+        if(date(voucher.getFechaEmision()) >= date(search.getInitDate()) && date(voucher.getFechaEmision()) <= date(search.getFinishDate())){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    @Override
+    public JasperPrint closeSaleReport(ComprobanteFiscal request,
+                                       String tenant,
+                                       HttpServletResponse response)
             throws IOException, JRException, JSONException
     {
         if (request.getCae() != "") {
@@ -220,11 +284,110 @@ public class SalesReportsImpl implements SalesReport {
         return paramsForJasperReport;
     }
 
-    protected JasperPrint createNotFiscalReceipt(){
-        return null;
+    @Override
+    public JasperPrint salesForSelectedProductsAndDateRangeReport(PrintSaleForSelectedProductAndDate request,
+                                                                  Long id,
+                                                                  HttpServletResponse response)
+            throws JRException, IOException
+    {
+        InputStream stream = reportsRoutes.getStreamReportResource("salesReports", "salesForProductAndDates.jasper");
+        String subReportRoute = reportsRoutes.getSubReportRoute("salesReports", "salesForProductAndDatesSubReport.jasper");
+        String subReportProductsDetailRoute = reportsRoutes.getSubReportRoute("salesReports", "productAndDateDetailsSubReport.jasper");
+        ArrayList<PrintWithProductDetails> data = new ArrayList<>();
+        ArrayList<PrintSaleProductQuantityDetail> subReportProductsDetail = new ArrayList<>();
+        Iterable<ComprobanteFiscal> vouchers = dao.findAll();
+        for(ComprobanteFiscal voucher: vouchers){
+            if(isInvoice(voucher)){
+                if(invoiceIsInTheDateRange(voucher, request)){
+                    if(invoiceContainProducts(voucher, request.getProducts())){
+                        if(invoiceBelongsToBranch(id, voucher)){
+                            PrintWithProductDetails detail = printSalesHelper.processReceiptForPrintWithProductDetails(voucher);
+                            for(ProductoDescription productDescriptionInVoucher: voucher.getProductoDescription()){
+                                if(subReportProductsDetail.isEmpty()){
+                                    PrintSaleProductQuantityDetail printSaleProductQuantityDetail = printSalesHelper.processPrintSaleProductQuantityDetail(productDescriptionInVoucher, request);
+                                    if(printSaleProductQuantityDetail != null){
+                                        subReportProductsDetail.add(printSaleProductQuantityDetail);
+                                    }
+                                }else{
+                                    ArrayList<PrintSaleProductQuantityDetail> check = new ArrayList<>();
+                                    PrintSaleProductQuantityDetail printSaleProductQuantityDetail = printSalesHelper.processPrintSaleProductQuantityDetail(productDescriptionInVoucher, request);
+                                    for (PrintSaleProductQuantityDetail printSaleProductQuantityDetailInSubReportArray: subReportProductsDetail){
+                                        if(printSaleProductQuantityDetail != null && printSaleProductQuantityDetailInSubReportArray != null){
+                                            if(printSaleProductQuantityDetailInSubReportArray.getProduct().equals(printSaleProductQuantityDetail.getProduct())){
+                                                check.add(printSaleProductQuantityDetail);
+                                            }
+                                        }
+                                    }
+                                    if(check.isEmpty()){
+                                        if(printSaleProductQuantityDetail != null){
+                                            subReportProductsDetail.add(printSaleProductQuantityDetail);
+                                        }
+                                    }else{
+                                        for (PrintSaleProductQuantityDetail printSaleProductQuantityDetailInSubReportArray: subReportProductsDetail){
+                                            if(printSaleProductQuantityDetail != null && printSaleProductQuantityDetailInSubReportArray != null){
+                                                if(printSaleProductQuantityDetailInSubReportArray.getProduct().equals(printSaleProductQuantityDetail.getProduct())){
+                                                    printSaleProductQuantityDetailInSubReportArray.setQuantity(printSaleProductQuantityDetailInSubReportArray.getQuantity() + printSaleProductQuantityDetail.getQuantity());
+                                                    printSaleProductQuantityDetailInSubReportArray.setAmount(printSaleProductQuantityDetailInSubReportArray.getAmount() + printSaleProductQuantityDetail.getAmount());
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            data.add(detail);
+                        }
+                    }
+                }
+            }
+        }
+        JRBeanCollectionDataSource subReportProductsDetailDataSource = new JRBeanCollectionDataSource(subReportProductsDetail);
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("SUBREPORT_DIR", subReportRoute);
+        params.put("SUBREPORT_PRODUCTS_DIR", subReportProductsDetailRoute);
+        params.put("SUBREPORT_PRODUCTS_DATA", subReportProductsDetailDataSource);
+        return printHelper.printWithDataSourceCollectionAndProductDetails(stream, data, params, response);
     }
 
-    protected JasperPrint createFiscalReceipt(){
-        return null;
+    protected boolean isInvoice(ComprobanteFiscal receipt){
+        return documentoHelper.checkReceiptIsInvoice(receipt.getDocumentoComercial());
+    }
+
+    protected boolean invoiceIsInTheDateRange(ComprobanteFiscal receipt,
+                                              PrintSaleForSelectedProductAndDate request)
+    {
+        if(date(receipt.getFechaEmision()) >= date(request.getFechaDesde()) && date(receipt.getFechaEmision()) <= date(request.getFechaHasta())){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    protected boolean invoiceContainProducts(ComprobanteFiscal receipt,
+                                             ArrayList<Producto> requestProducts)
+    {
+        boolean status = false;
+        if(receipt.getProductoDescription() != null){
+            for(ProductoDescription productOfReceipt: receipt.getProductoDescription()){
+                for(Producto product: requestProducts){
+                    if(productOfReceipt.getBarCode().equals(product.getCodigoBarra())){
+                        status = true;
+                    }
+                }
+            }
+        }else{
+            status = false;
+        }
+        return status;
+    }
+
+    protected boolean invoiceBelongsToBranch(Long id,
+                                             ComprobanteFiscal receipt)
+    {
+        if(receipt.getSucursal().getId() != id) return false;
+        return true;
+    }
+
+    protected double date(String date){
+        return dateHelper.stringDateToDoubleConvertion(date);
     }
 }
