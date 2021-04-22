@@ -14,14 +14,24 @@ public class Note implements Serializable {
 
     private String name ;
 
-    private Date fecha;
+    private Date startEvent;
 
-    public Date getFecha() {
-        return fecha;
+    private Date endEvent;
+
+    public Date getStarEvent() {
+        return startEvent;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setStarEvent(Date starEvent) {
+        this.startEvent = starEvent;
+    }
+
+    public Date getEndEvent() {
+        return endEvent;
+    }
+
+    public void setEndEvent(Date endEvent) {
+        this.endEvent = endEvent;
     }
 
     public Long getId() {

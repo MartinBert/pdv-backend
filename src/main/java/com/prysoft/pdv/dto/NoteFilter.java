@@ -1,9 +1,7 @@
 package com.prysoft.pdv.dto;
 
-import org.apache.fop.area.Page;
-import org.springframework.stereotype.Service;
 
-import java.io.Serializable;
+import org.springframework.stereotype.Service;
 import java.util.Date;
 
 @Service
@@ -11,6 +9,24 @@ public class NoteFilter extends PageFilter {
 
     private String name;
     private String details;
+    private Date startEvent;
+    private Date endEvent;
+
+    public Date getStartEvent() {
+        return startEvent;
+    }
+
+    public void setStartEvent(Date startEvent) {
+        this.startEvent = startEvent;
+    }
+
+    public Date getEndEvent() {
+        return endEvent;
+    }
+
+    public void setEndEvent(Date endEvent) {
+        this.endEvent = endEvent;
+    }
 
     public Date getFecha() {
         return fecha;
@@ -39,9 +55,11 @@ public class NoteFilter extends PageFilter {
         return "NoteFilter{" +
                 "name='" + name + '\'' +
                 ", details='" + details + '\'' +
+                ", startEvent=" + startEvent +
+                ", endEvent=" + endEvent +
+                ", fecha=" + fecha +
                 '}';
     }
-
 
 
     public void setDetails(String details) {
