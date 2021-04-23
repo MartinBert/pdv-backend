@@ -23,6 +23,8 @@ public class PuntoVenta implements Serializable {
     @JoinColumn(name="sucursal_id", nullable=false)
     private Sucursal sucursal;
 
+    private String ipLocal;
+
     public Long getId() {
         return id;
     }
@@ -55,6 +57,14 @@ public class PuntoVenta implements Serializable {
         this.sucursal = sucursal;
     }
 
+    public String getIpLocal() {
+        return ipLocal;
+    }
+
+    public void setIpLocal(String ipLocal) {
+        this.ipLocal = ipLocal;
+    }
+
     @Override
     public String toString() {
         return "PuntoVenta{" +
@@ -62,6 +72,7 @@ public class PuntoVenta implements Serializable {
                 ", idFiscal=" + idFiscal +
                 ", nombre='" + nombre + '\'' +
                 ", sucursal=" + sucursal +
+                ", ipLocal='" + ipLocal + '\'' +
                 '}';
     }
 }
