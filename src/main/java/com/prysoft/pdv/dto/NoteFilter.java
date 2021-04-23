@@ -1,6 +1,7 @@
 package com.prysoft.pdv.dto;
 
 
+import org.exolab.castor.types.DateTime;
 import org.springframework.stereotype.Service;
 import java.util.Date;
 
@@ -9,34 +10,26 @@ public class NoteFilter extends PageFilter {
 
     private String name;
     private String details;
-    private Date startEvent;
-    private Date endEvent;
+    private String startEvent;
 
-    public Date getStartEvent() {
+    public String getStartEvent() {
         return startEvent;
     }
 
-    public void setStartEvent(Date startEvent) {
+    public void setStartEvent(String startEvent) {
         this.startEvent = startEvent;
     }
 
-    public Date getEndEvent() {
+    public String getEndEvent() {
         return endEvent;
     }
 
-    public void setEndEvent(Date endEvent) {
+    public void setEndEvent(String endEvent) {
         this.endEvent = endEvent;
     }
 
-    public Date getFecha() {
-        return fecha;
-    }
+    private String endEvent;
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    private Date fecha;
 
     public String getName() {
         return name;
@@ -57,7 +50,6 @@ public class NoteFilter extends PageFilter {
                 ", details='" + details + '\'' +
                 ", startEvent=" + startEvent +
                 ", endEvent=" + endEvent +
-                ", fecha=" + fecha +
                 '}';
     }
 

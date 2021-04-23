@@ -1,8 +1,10 @@
 package com.prysoft.pdv.models;
 
+import org.exolab.castor.types.DateTime;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+
 
 @Entity
 @Table(name = "Note")
@@ -14,25 +16,29 @@ public class Note implements Serializable {
 
     private String name ;
 
-    private Date startEvent;
+    private String startEvent;
 
-    private Date endEvent;
-
-    public Date getStarEvent() {
+    public String getStartEvent() {
         return startEvent;
     }
 
-    public void setStarEvent(Date starEvent) {
-        this.startEvent = starEvent;
+    public void setStartEvent(String startEvent) {
+        this.startEvent = startEvent;
     }
 
-    public Date getEndEvent() {
+    public String getEndEvent() {
         return endEvent;
     }
 
-    public void setEndEvent(Date endEvent) {
+    public void setEndEvent(String endEvent) {
         this.endEvent = endEvent;
     }
+
+    private String endEvent;
+
+
+
+
 
     public Long getId() {
         return id;
