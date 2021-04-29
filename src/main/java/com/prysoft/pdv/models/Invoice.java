@@ -19,7 +19,7 @@ public class Invoice implements Serializable {
     private String fechaVto;
     private Boolean condicionVenta;
     private ArrayList<PrintComprobanteDetail> productos;
-    private ArrayList<Producto> productosDetalle;
+    private ArrayList<Product> productosDetalle;
     private ArrayList<ProductoDescription> productoDescription;
     private String barCode;
     private String cae;
@@ -208,11 +208,11 @@ public class Invoice implements Serializable {
         this.ingresosBrutos = ingresosBrutos;
     }
 
-    public ArrayList<Producto> getProductosDetalle() {
+    public ArrayList<Product> getProductosDetalle() {
         return productosDetalle;
     }
 
-    public void setProductosDetalle(ArrayList<Producto> productosDetalle) {
+    public void setProductosDetalle(ArrayList<Product> productosDetalle) {
         this.productosDetalle = productosDetalle;
     }
 

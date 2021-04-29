@@ -1,6 +1,6 @@
 package com.prysoft.pdv.dto;
 
-public class DevolucionFilter extends SucursalFilter {
+public class RefundFilter extends SucursalFilter {
     private Long blackReceiptFilter;
 
     public Long getBlackReceiptFilter() {

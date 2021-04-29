@@ -17,7 +17,7 @@ public class ProductoVariacion implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="producto_id", nullable=false)
-    private Producto producto;
+    private Product producto;
 
     public Long getId() {
         return id;
@@ -43,11 +43,11 @@ public class ProductoVariacion implements Serializable {
         this.porcentaje = porcentaje;
     }
 
-    public Producto getProducto() {
+    public Product getProducto() {
         return producto;
     }
 
-    public void setProducto(Producto producto) {
+    public void setProducto(Product producto) {
         this.producto = producto;
     }
 

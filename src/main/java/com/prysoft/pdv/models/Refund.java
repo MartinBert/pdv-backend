@@ -6,7 +6,8 @@ import java.util.ArrayList;
 
 @Entity
 @Table(name="devoluciones")
-public class Devolucion implements Serializable {
+public class Refund implements Serializable {
+    private static final long serialVersionUID = 999999999999999999L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -96,7 +97,7 @@ public class Devolucion implements Serializable {
 
     @Override
     public String toString() {
-        return "Devolucion{" +
+        return "Refund{" +
                 "id=" + id +
                 ", fecha='" + fecha + '\'' +
                 ", descripcion='" + descripcion + '\'' +

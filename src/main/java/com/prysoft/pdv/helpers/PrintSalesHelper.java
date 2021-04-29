@@ -1,7 +1,7 @@
 package com.prysoft.pdv.helpers;
 
 import com.prysoft.pdv.models.Invoice;
-import com.prysoft.pdv.models.Producto;
+import com.prysoft.pdv.models.Product;
 import com.prysoft.pdv.models.ProductoDescription;
 import com.prysoft.pdv.print.PrintSaleForSelectedProductAndDate;
 import com.prysoft.pdv.print.PrintSaleProductQuantityDetail;
@@ -55,7 +55,7 @@ public class PrintSalesHelper implements Serializable {
 
     public PrintSaleProductQuantityDetail processPrintSaleProductQuantityDetail(ProductoDescription product, PrintSaleForSelectedProductAndDate request){
         PrintSaleProductQuantityDetail productQuantityDetail = new PrintSaleProductQuantityDetail();
-        for(Producto productoDescription: request.getProducts()){
+        for(Product productoDescription: request.getProducts()){
             if(product.getBarCode().equals(productoDescription.getCodigoBarra())){
                 productQuantityDetail.setQuantity(product.getQuantity());
                 productQuantityDetail.setAmount(product.getSalePrice());

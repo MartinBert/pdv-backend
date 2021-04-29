@@ -11,7 +11,7 @@ public class Stock implements Serializable {
     private Long id;
 
     @ManyToOne
-    private Producto producto;
+    private Product producto;
 
     @ManyToOne
     private Deposit deposito;
@@ -33,11 +33,11 @@ public class Stock implements Serializable {
         this.id = id;
     }
 
-    public Producto getProducto() {
+    public Product getProducto() {
         return producto;
     }
 
-    public void setProducto(Producto producto) {
+    public void setProducto(Product producto) {
         this.producto = producto;
     }
 

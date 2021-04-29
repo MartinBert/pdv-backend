@@ -362,12 +362,12 @@ public class SalesReportsImpl implements SalesReport {
     }
 
     protected boolean invoiceContainProducts(Invoice receipt,
-                                             ArrayList<Producto> requestProducts)
+                                             ArrayList<Product> requestProducts)
     {
         boolean status = false;
         if(receipt.getProductoDescription() != null){
             for(ProductoDescription productOfReceipt: receipt.getProductoDescription()){
-                for(Producto product: requestProducts){
+                for(Product product: requestProducts){
                     if(productOfReceipt.getBarCode().equals(product.getCodigoBarra())){
                         status = true;
                     }

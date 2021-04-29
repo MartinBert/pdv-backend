@@ -19,10 +19,8 @@ import java.util.Optional;
 @Service
 @Transactional
 public class VendedorServiceImpl extends FilterService<Vendedor> implements VendedorService {
-
     @Autowired
     private VendedorDao dao;
-
     @Override
     public Vendedor findById(Long id) {
         Optional<Vendedor> optional = dao.findById(id);
@@ -32,22 +30,18 @@ public class VendedorServiceImpl extends FilterService<Vendedor> implements Vend
 
         return optional.get();
     }
-
     @Override
     public Page<Vendedor> findAll(Pageable page) {
         return dao.findAll(page);
     }
-
     @Override
     public Vendedor saveOrUpdate(Vendedor entity) {
         return dao.save(entity);
     }
-
     @Override
     public void delete(Long id) {
         dao.deleteById(id);
     }
-
     @Override
     public Page<Vendedor> filter(VendedorFilter filterParam) {
         String hql;

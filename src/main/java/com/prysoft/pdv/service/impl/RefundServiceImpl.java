@@ -1,10 +1,10 @@
 package com.prysoft.pdv.service.impl;
 
-import com.prysoft.pdv.dao.DevolucionDao;
-import com.prysoft.pdv.dto.DevolucionFilter;
+import com.prysoft.pdv.dao.RefundDao;
+import com.prysoft.pdv.dto.RefundFilter;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.models.Devolucion;
-import com.prysoft.pdv.service.DevolucionService;
+import com.prysoft.pdv.models.Refund;
+import com.prysoft.pdv.service.RefundService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,14 +18,13 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class DevolucionServiceImpl extends FilterService<Devolucion> implements DevolucionService {
-
+public class RefundServiceImpl extends FilterService<Refund> implements RefundService {
     @Autowired
-    private DevolucionDao dao;
+    private RefundDao dao;
 
     @Override
-    public Devolucion findById(Long id) {
-        Optional<Devolucion> optional = dao.findById(id);
+    public Refund findById(Long id) {
+        Optional<Refund> optional = dao.findById(id);
         if(!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
@@ -33,17 +32,17 @@ public class DevolucionServiceImpl extends FilterService<Devolucion> implements 
     }
 
     @Override
-    public Page<Devolucion> findAll(Pageable page) {
+    public Page<Refund> findAll(Pageable page) {
         return dao.findAll(page);
     }
 
     @Override
-    public Devolucion saveOrUpdate(Devolucion entity) {
+    public Refund saveOrUpdate(Refund entity) {
         return dao.save(entity);
     }
 
     @Override
-    public Page<Devolucion> filter(DevolucionFilter filterParam) {
+    public Page<Refund> filter(RefundFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
         if(filterParam.getSucursalId() == null){

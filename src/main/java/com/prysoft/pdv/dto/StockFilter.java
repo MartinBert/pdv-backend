@@ -1,6 +1,6 @@
 package com.prysoft.pdv.dto;
 
-public class StockFilter extends ProductoFilter{
+public class StockFilter extends ProductFilter {
     private Long stockId;
     private Long stockDepositoId;
     private String stockDepositoName;

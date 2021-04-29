@@ -1,10 +1,10 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.ProductoFilter;
+import com.prysoft.pdv.dto.ProductFilter;
 import com.prysoft.pdv.models.*;
 import com.prysoft.pdv.print.PrintProductsLabels;
 import com.prysoft.pdv.reports.ProductsReport;
-import com.prysoft.pdv.service.ProductoService;
+import com.prysoft.pdv.service.ProductService;
 import net.sf.jasperreports.engine.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,43 +19,43 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping(value = "/{tenantid}/api/productos")
-public class ProductoController {
+public class ProductController {
     @Autowired
-    private ProductoService service;
+    private ProductService service;
 
     @Autowired
     private ProductsReport reports;
 
     @GetMapping
-    Page<Producto> findAll(Pageable page) {
+    Page<Product> findAll(Pageable page) {
         return service.findAll(page);
     }
 
     @GetMapping(value = "/{id}")
-    Producto findById(@PathVariable long id) {
+    Product findById(@PathVariable long id) {
         return service.findById(id);
     }
 
     @GetMapping(value = "/codb/{codigoBarra}")
-    Producto findByCodigoBarra(@PathVariable String codigoBarra) {
+    Product findByCodigoBarra(@PathVariable String codigoBarra) {
         return service.findByCodigoBarra(codigoBarra);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    Producto save(@RequestBody Producto entity) { Producto obj = service.saveOrUpdate(entity);
+    Product save(@RequestBody Product entity) { Product obj = service.saveOrUpdate(entity);
         return obj;}
 
     @PostMapping(value = "/filter")
-    public Page<Producto> filter(@RequestBody ProductoFilter filterParam) {
+    public Page<Product> filter(@RequestBody ProductFilter filterParam) {
         return service.filter(filterParam);
     }
 
     @PostMapping(value = "/saveAll")
-    Iterable<Producto> saveAll(@RequestBody ArrayList<Producto> entities){ return service.saveOrUpdateAll(entities); }
+    Iterable<Product> saveAll(@RequestBody ArrayList<Product> entities){ return service.saveOrUpdateAll(entities); }
 
     @PutMapping
-    Producto update(@RequestBody Producto entity) {
+    Product update(@RequestBody Product entity) {
         return service.saveOrUpdate(entity);
     }
 

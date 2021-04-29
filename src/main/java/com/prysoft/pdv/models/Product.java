@@ -8,7 +8,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "productos")
-public class Producto implements Serializable {
+public class Product implements Serializable {
+    private static final long serialVersionUID = 999999999999999999L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -176,12 +177,36 @@ public class Producto implements Serializable {
         this.precioTotal = precioTotal;
     }
 
+    public boolean isEditable() {
+        return editable;
+    }
+
+    public void setEditable(boolean editable) {
+        this.editable = editable;
+    }
+
     public Brand getMarca() {
         return marca;
     }
 
     public void setMarca(Brand marca) {
         this.marca = marca;
+    }
+
+    public Iva getIvaComprasObject() {
+        return ivaComprasObject;
+    }
+
+    public void setIvaComprasObject(Iva ivaComprasObject) {
+        this.ivaComprasObject = ivaComprasObject;
+    }
+
+    public Iva getIvaVentasObject() {
+        return ivaVentasObject;
+    }
+
+    public void setIvaVentasObject(Iva ivaVentasObject) {
+        this.ivaVentasObject = ivaVentasObject;
     }
 
     public Set<ProductoVariacion> getVariaciones() {
@@ -208,22 +233,6 @@ public class Producto implements Serializable {
         this.depositos = depositos;
     }
 
-    public Set<Stock> getStocks() {
-        return stocks;
-    }
-
-    public void setStocks(Set<Stock> stocks) {
-        this.stocks = stocks;
-    }
-
-    public Heading getRubro() {
-        return rubro;
-    }
-
-    public void setRubro(Heading rubro) {
-        this.rubro = rubro;
-    }
-
     public Set<Property> getPropiedades() {
         return propiedades;
     }
@@ -240,33 +249,25 @@ public class Producto implements Serializable {
         this.atributos = atributos;
     }
 
-    public Iva getIvaComprasObject() {
-        return ivaComprasObject;
+    public Set<Stock> getStocks() {
+        return stocks;
     }
 
-    public void setIvaComprasObject(Iva ivaComprasObject) {
-        this.ivaComprasObject = ivaComprasObject;
+    public void setStocks(Set<Stock> stocks) {
+        this.stocks = stocks;
     }
 
-    public Iva getIvaVentasObject() {
-        return ivaVentasObject;
+    public Heading getRubro() {
+        return rubro;
     }
 
-    public void setIvaVentasObject(Iva ivaVentasObject) {
-        this.ivaVentasObject = ivaVentasObject;
-    }
-
-    public boolean isEditable() {
-        return editable;
-    }
-
-    public void setEditable(boolean editable) {
-        this.editable = editable;
+    public void setRubro(Heading rubro) {
+        this.rubro = rubro;
     }
 
     @Override
     public String toString() {
-        return "Producto{" +
+        return "Product{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", codigoBarra='" + codigoBarra + '\'' +
@@ -282,7 +283,7 @@ public class Producto implements Serializable {
                 ", estado=" + estado +
                 ", precioTotal=" + precioTotal +
                 ", editable=" + editable +
-                ", marca=" + marca+
+                ", marca=" + marca +
                 ", ivaComprasObject=" + ivaComprasObject +
                 ", ivaVentasObject=" + ivaVentasObject +
                 ", variaciones=" + variaciones +

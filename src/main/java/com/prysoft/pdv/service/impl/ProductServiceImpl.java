@@ -1,39 +1,36 @@
 package com.prysoft.pdv.service.impl;
 
-import com.prysoft.pdv.dao.ProductoDao;
+import com.prysoft.pdv.dao.ProductDao;
 import com.prysoft.pdv.dao.SucursalDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.ProductoFilter;
+import com.prysoft.pdv.dto.ProductFilter;
 import com.prysoft.pdv.helpers.MathHelper;
-import com.prysoft.pdv.models.Producto;
-import com.prysoft.pdv.models.Sucursal;
-import com.prysoft.pdv.service.ProductoService;
+import com.prysoft.pdv.models.Product;
+import com.prysoft.pdv.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Transient;
-import java.lang.reflect.Array;
 import java.util.*;
 
 @Service
 @Transactional
-public class ProductoServiceImpl extends FilterService<Producto> implements ProductoService  {
+public class ProductServiceImpl extends FilterService<Product> implements ProductService {
 
     @Autowired
-    private ProductoDao dao;
+    private ProductDao dao;
     @Autowired
     private SucursalDao sucursalDao;
     @Autowired
     private MathHelper mathHelper;
 
     @Override
-    public Producto findById(Long id) {
-        Optional<Producto> optional = dao.findById(id);
+    public Product findById(Long id) {
+        Optional<Product> optional = dao.findById(id);
         if(optional.isEmpty()) {
             throw new EntityNotFoundException();
         }
@@ -41,9 +38,9 @@ public class ProductoServiceImpl extends FilterService<Producto> implements Prod
     }
 
     @Override
-    public Producto findByCodigoBarra(String codigoBarra) {
+    public Product findByCodigoBarra(String codigoBarra) {
         try{
-            Optional<Producto> optional = dao.findByCodigoBarra(codigoBarra);
+            Optional<Product> optional = dao.findByCodigoBarra(codigoBarra);
             return optional.get();
         }catch (Exception e){
             System.out.println(e.getMessage());
@@ -52,18 +49,18 @@ public class ProductoServiceImpl extends FilterService<Producto> implements Prod
     }
 
     @Override
-    public Page<Producto> findAll(Pageable page) {return dao.findAll(page);}
+    public Page<Product> findAll(Pageable page) {return dao.findAll(page);}
 
     @Override
-    public Producto saveOrUpdate(Producto entity) {
+    public Product saveOrUpdate(Product entity) {
         return dao.save(entity);
     }
 
     @Override
-    public Iterable<Producto> saveOrUpdateAll(ArrayList<Producto> entities) {
-        Iterable<Producto> productos = dao.findAll();
-        productos.forEach((Producto el) -> {
-            entities.forEach((Producto e) -> {
+    public Iterable<Product> saveOrUpdateAll(ArrayList<Product> entities) {
+        Iterable<Product> productos = dao.findAll();
+        productos.forEach((Product el) -> {
+            entities.forEach((Product e) -> {
                 if(el.getCodigoBarra().equals(e.getCodigoBarra())){
                     e.setId(el.getId());
                 }
@@ -79,7 +76,7 @@ public class ProductoServiceImpl extends FilterService<Producto> implements Prod
 
     @Override
     @Transient
-    public Page<Producto> filter(ProductoFilter filterParam) {
+    public Page<Product> filter(ProductFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
         String hql;
         if(filterParam.getProductoEstado() > 0){
