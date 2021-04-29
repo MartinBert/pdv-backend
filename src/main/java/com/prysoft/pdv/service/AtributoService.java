@@ -1,22 +1,22 @@
 package com.prysoft.pdv.service;
 
-import com.prysoft.pdv.dto.AtributoFilter;
-import com.prysoft.pdv.models.Atributo;
+import com.prysoft.pdv.dto.AttributeFilter;
+import com.prysoft.pdv.models.Attribute;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
 
 public interface AtributoService {
-    Atributo findById(Long id);
+    Attribute findById(Long id);
 
-    Page<Atributo> findAll(Pageable page);
+    Page<Attribute> findAll(Pageable page);
 
-    Atributo saveOrUpdate(Atributo entity);
+    Attribute saveOrUpdate(Attribute entity);
 
     void delete(Long id);
 
-    Iterable<Atributo> saveOrUpdateAll(ArrayList<Atributo> entities);
+    Iterable<Attribute> saveOrUpdateAll(ArrayList<Attribute> entities);
 
-    Page<Atributo> filter(AtributoFilter filterParam);
+    Page<Attribute> filter(AttributeFilter filterParam);
 }

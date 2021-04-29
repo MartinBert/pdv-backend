@@ -11,8 +11,8 @@ public class ProductoDescription implements Serializable {
     private Long tradeMarkId;
     private String rubroName;
     private Long rubroId;
-    private ArrayList<Atributo> attributes;
-    private ArrayList<Propiedad> properties;
+    private ArrayList<Attribute> attributes;
+    private ArrayList<Property> properties;
     private double quantity;
     private double costPrice;
     private double salePrice;
@@ -62,19 +62,19 @@ public class ProductoDescription implements Serializable {
         this.rubroName = rubroName;
     }
 
-    public ArrayList<Atributo> getAttributes() {
+    public ArrayList<Attribute> getAttributes() {
         return attributes;
     }
 
-    public void setAttributes(ArrayList<Atributo> attributes) {
+    public void setAttributes(ArrayList<Attribute> attributes) {
         this.attributes = attributes;
     }
 
-    public ArrayList<Propiedad> getProperties() {
+    public ArrayList<Property> getProperties() {
         return properties;
     }
 
-    public void setProperties(ArrayList<Propiedad> properties) {
+    public void setProperties(ArrayList<Property> properties) {
         this.properties = properties;
     }
 

@@ -1,9 +1,9 @@
 package com.prysoft.pdv.service.impl;
 
-import com.prysoft.pdv.dao.AtributoDao;
-import com.prysoft.pdv.dto.AtributoFilter;
+import com.prysoft.pdv.dao.AttributeDao;
+import com.prysoft.pdv.dto.AttributeFilter;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.models.Atributo;
+import com.prysoft.pdv.models.Attribute;
 import com.prysoft.pdv.service.AtributoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,14 +18,14 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class AtributoServiceImpl extends FilterService<Atributo> implements AtributoService {
+public class AtributoServiceImpl extends FilterService<Attribute> implements AtributoService {
 
     @Autowired
-    private AtributoDao dao;
+    private AttributeDao dao;
 
     @Override
-    public Atributo findById(Long id) {
-        Optional<Atributo> optional = dao.findById(id);
+    public Attribute findById(Long id) {
+        Optional<Attribute> optional = dao.findById(id);
         if(!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
@@ -33,21 +33,21 @@ public class AtributoServiceImpl extends FilterService<Atributo> implements Atri
     }
 
     @Override
-    public Page<Atributo> findAll(Pageable page) {
+    public Page<Attribute> findAll(Pageable page) {
         return dao.findAll(page);
     }
 
     @Override
-    public Atributo saveOrUpdate(Atributo entity) {
+    public Attribute saveOrUpdate(Attribute entity) {
         if(entity.getValor() != null){
-            Optional<Atributo> textAtributeInDatabase = dao.findByValor(entity.getValor());
+            Optional<Attribute> textAtributeInDatabase = dao.findByValor(entity.getValor());
             if(textAtributeInDatabase.isPresent()){
                 return null;
             }else{
                 return dao.save(entity);
             }
         }else if(entity.getValorNumerico() != 0){
-            Optional<Atributo> numericAtributeInDatabase = dao.findByValorNumerico(entity.getValorNumerico());
+            Optional<Attribute> numericAtributeInDatabase = dao.findByValorNumerico(entity.getValorNumerico());
             if(numericAtributeInDatabase.isPresent()){
                 return null;
             }else{
@@ -64,7 +64,7 @@ public class AtributoServiceImpl extends FilterService<Atributo> implements Atri
     }
 
     @Override
-    public Page<Atributo> filter(AtributoFilter filterParam) {
+    public Page<Attribute> filter(AttributeFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
         hql = "WHERE LOWER(c.valor) LIKE LOWER('"+filterParam.getAtributoValor()+"%')";
@@ -72,10 +72,10 @@ public class AtributoServiceImpl extends FilterService<Atributo> implements Atri
     }
 
     @Override
-    public Iterable<Atributo> saveOrUpdateAll(ArrayList<Atributo> entities) {
-        Iterable<Atributo> atributos = dao.findAll();
-        atributos.forEach((Atributo el) -> {
-            entities.forEach((Atributo e) -> {
+    public Iterable<Attribute> saveOrUpdateAll(ArrayList<Attribute> entities) {
+        Iterable<Attribute> atributos = dao.findAll();
+        atributos.forEach((Attribute el) -> {
+            entities.forEach((Attribute e) -> {
                 if(el.getValor().equals(e.getValor())){
                     e.setId(el.getId());
                 }else if(el.getValorNumerico() == e.getValorNumerico()){

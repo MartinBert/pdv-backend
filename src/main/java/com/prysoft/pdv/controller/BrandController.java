@@ -1,8 +1,8 @@
 package com.prysoft.pdv.controller;
 
 import com.prysoft.pdv.dto.MarcaFilter;
-import com.prysoft.pdv.models.Marca;
-import com.prysoft.pdv.service.MarcaService;
+import com.prysoft.pdv.models.Brand;
+import com.prysoft.pdv.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,31 +13,31 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping(value = "/{tenantid}/api/marcas")
-public class MarcaController {
+public class BrandController {
     @Autowired
-    private MarcaService service;
+    private BrandService service;
 
     @GetMapping
-    Page<Marca> findAll(Pageable page) {
+    Page<Brand> findAll(Pageable page) {
         return service.findAll(page);
     }
 
     @GetMapping(value = "/{id}")
-    Marca findById(@PathVariable long id) {
+    Brand findById(@PathVariable long id) {
         return service.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    Marca save(@RequestBody Marca entity) {
+    Brand save(@RequestBody Brand entity) {
         return service.saveOrUpdate(entity);
     }
 
     @PostMapping(value = "/saveAll")
-    Iterable<Marca> saveAll(@RequestBody ArrayList<Marca> entities) { return service.saveAll(entities); }
+    Iterable<Brand> saveAll(@RequestBody ArrayList<Brand> entities) { return service.saveAll(entities); }
 
     @PutMapping
-    Marca update(@RequestBody Marca entity) {
+    Brand update(@RequestBody Brand entity) {
         return service.saveOrUpdate(entity);
     }
 
@@ -48,7 +48,7 @@ public class MarcaController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<Marca> filter(@RequestBody MarcaFilter filterParam) {
+    public Page<Brand> filter(@RequestBody MarcaFilter filterParam) {
         return service.filter(filterParam);
     }
 }

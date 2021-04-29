@@ -31,7 +31,7 @@ public class Producto implements Serializable {
     @Column(name = "editable", columnDefinition = "boolean default false")
     private boolean editable;
     @OneToOne
-    private Marca marca;
+    private Brand marca;
     @OneToOne
     private Iva ivaComprasObject;
     @OneToOne
@@ -52,17 +52,17 @@ public class Producto implements Serializable {
     @JoinTable(name = "productos_propiedades",
             joinColumns =  @JoinColumn(name = "id_producto"),
             inverseJoinColumns = @JoinColumn(name = "id_propiedad"))
-    private Set<Propiedad> propiedades;
+    private Set<Property> propiedades;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "productos_atributos",
             joinColumns =  @JoinColumn(name = "id_producto"),
             inverseJoinColumns = @JoinColumn(name = "id_atributo"))
-    private Set<Atributo> atributos;
+    private Set<Attribute> atributos;
     @OneToMany(mappedBy = "producto")
     @JsonBackReference
     private Set<Stock> stocks;
     @OneToOne
-    private Rubro rubro;
+    private Heading rubro;
 
     public Long getId() {
         return id;
@@ -176,11 +176,11 @@ public class Producto implements Serializable {
         this.precioTotal = precioTotal;
     }
 
-    public Marca getMarca() {
+    public Brand getMarca() {
         return marca;
     }
 
-    public void setMarca(Marca marca) {
+    public void setMarca(Brand marca) {
         this.marca = marca;
     }
 
@@ -216,27 +216,27 @@ public class Producto implements Serializable {
         this.stocks = stocks;
     }
 
-    public Rubro getRubro() {
+    public Heading getRubro() {
         return rubro;
     }
 
-    public void setRubro(Rubro rubro) {
+    public void setRubro(Heading rubro) {
         this.rubro = rubro;
     }
 
-    public Set<Propiedad> getPropiedades() {
+    public Set<Property> getPropiedades() {
         return propiedades;
     }
 
-    public void setPropiedades(Set<Propiedad> propiedades) {
+    public void setPropiedades(Set<Property> propiedades) {
         this.propiedades = propiedades;
     }
 
-    public Set<Atributo> getAtributos() {
+    public Set<Attribute> getAtributos() {
         return atributos;
     }
 
-    public void setAtributos(Set<Atributo> atributos) {
+    public void setAtributos(Set<Attribute> atributos) {
         this.atributos = atributos;
     }
 
@@ -282,7 +282,7 @@ public class Producto implements Serializable {
                 ", estado=" + estado +
                 ", precioTotal=" + precioTotal +
                 ", editable=" + editable +
-                ", marca=" + marca +
+                ", marca=" + marca+
                 ", ivaComprasObject=" + ivaComprasObject +
                 ", ivaVentasObject=" + ivaVentasObject +
                 ", variaciones=" + variaciones +

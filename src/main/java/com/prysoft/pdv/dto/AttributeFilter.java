@@ -1,6 +1,6 @@
 package com.prysoft.pdv.dto;
 
-public class AtributoFilter extends PageFilter {
+public class AttributeFilter extends PageFilter {
     private String atributoValor;
 
     public String getAtributoValor() {

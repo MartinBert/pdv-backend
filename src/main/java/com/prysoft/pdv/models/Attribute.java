@@ -5,7 +5,8 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "atributos")
-public class Atributo implements Serializable {
+public class Attribute implements Serializable {
+    private static final long serialVersionUID = 999999999999999999L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -38,10 +39,12 @@ public class Atributo implements Serializable {
 
     @Override
     public String toString() {
-        return "Atributo{" +
+        return "Attribute{" +
                 "id=" + id +
                 ", valor='" + valor + '\'' +
                 ", valorNumerico=" + valorNumerico +
                 '}';
     }
 }
+
+

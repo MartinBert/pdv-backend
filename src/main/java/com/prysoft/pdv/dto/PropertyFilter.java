@@ -1,6 +1,6 @@
 package com.prysoft.pdv.dto;
 
-public class PropiedadFilter extends PageFilter{
+public class PropertyFilter extends PageFilter{
     private String propiedadName;
 
     public String getPropiedadName() {

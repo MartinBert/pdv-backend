@@ -1,10 +1,10 @@
 package com.prysoft.pdv.service.impl;
 
-import com.prysoft.pdv.dao.RubroDao;
+import com.prysoft.pdv.dao.HeadingDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.RubroFilter;
-import com.prysoft.pdv.models.Rubro;
-import com.prysoft.pdv.service.RubroService;
+import com.prysoft.pdv.dto.HeadingFilter;
+import com.prysoft.pdv.models.Heading;
+import com.prysoft.pdv.service.HeadingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,13 +18,13 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class RubroServiceImpl extends FilterService<Rubro> implements RubroService {
+public class HeadingServiceImpl extends FilterService<Heading> implements HeadingService {
     @Autowired
-    private RubroDao dao;
+    private HeadingDao dao;
 
     @Override
-    public Rubro findById(Long id) {
-        Optional<Rubro> optional = dao.findById(id);
+    public Heading findById(Long id) {
+        Optional<Heading> optional = dao.findById(id);
         if(!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
@@ -32,17 +32,17 @@ public class RubroServiceImpl extends FilterService<Rubro> implements RubroServi
     }
 
     @Override
-    public Page<Rubro> findAll(Pageable page) {
+    public Page<Heading> findAll(Pageable page) {
         return dao.findAll(page);
     }
 
     @Override
-    public Rubro saveOrUpdate(Rubro entity) {
+    public Heading saveOrUpdate(Heading entity) {
         return dao.save(entity);
     }
 
     @Override
-    public Iterable<Rubro> saveAll(ArrayList<Rubro> entities) {
+    public Iterable<Heading> saveAll(ArrayList<Heading> entities) {
         return dao.saveAll(entities);
     }
 
@@ -52,7 +52,7 @@ public class RubroServiceImpl extends FilterService<Rubro> implements RubroServi
     }
 
     @Override
-    public Page<Rubro> filter(RubroFilter filterParams) {
+    public Page<Heading> filter(HeadingFilter filterParams) {
         List<FilterParam> params = new ArrayList<>();
         String hql = "WHERE LOWER(c.nombre) LIKE LOWER ('"+filterParams.getRubroName()+"%')";
         return getPage(hql, filterParams.getPage() - 1, filterParams.getSize(), params);

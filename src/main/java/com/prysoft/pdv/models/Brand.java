@@ -4,8 +4,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "rubros")
-public class Rubro implements Serializable {
+@Table(name = "marcas")
+public class Brand implements Serializable {
+    private static final long serialVersionUID = 999999999999999999L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,7 +32,7 @@ public class Rubro implements Serializable {
 
     @Override
     public String toString() {
-        return "Rubro{" +
+        return "Brand{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 '}';

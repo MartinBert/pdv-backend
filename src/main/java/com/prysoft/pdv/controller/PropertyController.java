@@ -1,8 +1,8 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.PropiedadFilter;
-import com.prysoft.pdv.models.Propiedad;
-import com.prysoft.pdv.service.PropiedadService;
+import com.prysoft.pdv.dto.PropertyFilter;
+import com.prysoft.pdv.models.Property;
+import com.prysoft.pdv.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,28 +11,29 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/{tenantid}/api/propiedades")
-public class PropiedadController {
+public class PropertyController {
+
     @Autowired
-    private PropiedadService service;
+    private PropertyService service;
 
     @GetMapping
-    Page<Propiedad> findAll(Pageable page) {
+    Page<Property> findAll(Pageable page) {
         return service.findAll(page);
     }
 
     @GetMapping(value = "/{id}")
-    Propiedad findById(@PathVariable long id) {
+    Property findById(@PathVariable long id) {
         return service.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    Propiedad save(@RequestBody Propiedad entity) {
+    Property save(@RequestBody Property entity) {
         return service.saveOrUpdate(entity);
     }
 
     @PutMapping
-    Propiedad update(@RequestBody Propiedad entity) {
+    Property update(@RequestBody Property entity) {
         return service.saveOrUpdate(entity);
     }
 
@@ -43,7 +44,7 @@ public class PropiedadController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<Propiedad> filter(@RequestBody PropiedadFilter filterParam) {
+    public Page<Property> filter(@RequestBody PropertyFilter filterParam) {
         return service.filter(filterParam);
     }
 }

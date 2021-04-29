@@ -1,30 +1,30 @@
 package com.prysoft.pdv.service.impl;
 
-import com.prysoft.pdv.dao.MarcaDao;
+import com.prysoft.pdv.dao.PropertyDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.MarcaFilter;
-import com.prysoft.pdv.models.Marca;
-import com.prysoft.pdv.service.MarcaService;
+import com.prysoft.pdv.dto.PropertyFilter;
+import com.prysoft.pdv.models.Property;
+import com.prysoft.pdv.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @Transactional
-public class MarcaServiceImpl extends FilterService<Marca> implements MarcaService {
+public class PropertyServiceImpl extends FilterService<Property> implements PropertyService {
     @Autowired
-    private MarcaDao dao;
+    private PropertyDao dao;
 
     @Override
-    public Marca findById(Long id) {
-        Optional<Marca> optional = dao.findById(id);
+    public Property findById(Long id) {
+        Optional<Property> optional = dao.findById(id);
         if(!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
@@ -32,19 +32,12 @@ public class MarcaServiceImpl extends FilterService<Marca> implements MarcaServi
     }
 
     @Override
-    public Page<Marca> findAll(Pageable page) {
+    public Page<Property> findAll(Pageable page) {
         return dao.findAll(page);
     }
 
     @Override
-    public Marca saveOrUpdate(Marca entity) {
-        return dao.save(entity);
-    }
-
-    @Override
-    public Iterable<Marca> saveAll(ArrayList<Marca> entities) {
-        return dao.saveAll(entities);
-    }
+    public Property saveOrUpdate(Property entity) {return dao.save(entity);}
 
     @Override
     public void delete(Long id) {
@@ -52,9 +45,10 @@ public class MarcaServiceImpl extends FilterService<Marca> implements MarcaServi
     }
 
     @Override
-    public Page<Marca> filter(MarcaFilter filterParam) {
+    public Page<Property> filter(PropertyFilter filterParam) {
+        String hql;
         List<FilterParam> params = new ArrayList<>();
-        String hql = "WHERE LOWER(c.nombre) LIKE LOWER ('"+filterParam.getMarcaName()+"%')";
+        hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getPropiedadName()+"%')";
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 }

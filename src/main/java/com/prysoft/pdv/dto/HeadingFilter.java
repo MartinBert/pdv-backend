@@ -1,6 +1,6 @@
 package com.prysoft.pdv.dto;
 
-public class RubroFilter extends PageFilter {
+public class HeadingFilter extends PageFilter {
     private Long rubroId;
     private String rubroName;
 

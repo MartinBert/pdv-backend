@@ -1,8 +1,8 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.AtributoFilter;
-import com.prysoft.pdv.models.Atributo;
-import com.prysoft.pdv.service.AtributoService;
+import com.prysoft.pdv.dto.HeadingFilter;
+import com.prysoft.pdv.models.Heading;
+import com.prysoft.pdv.service.HeadingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,32 +12,32 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping(value = "/{tenantid}/api/atributos")
-public class AtributoController {
+@RequestMapping(value = "/{tenantid}/api/rubros")
+public class HeadingController {
     @Autowired
-    private AtributoService service;
+    private HeadingService service;
 
     @GetMapping
-    Page<Atributo> findAll(Pageable page) {
+    Page<Heading> findAll(Pageable page) {
         return service.findAll(page);
     }
 
     @GetMapping(value = "/{id}")
-    Atributo findById(@PathVariable long id) {
+    Heading findById(@PathVariable long id) {
         return service.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    Atributo save(@RequestBody Atributo entity) {
+    Heading save(@RequestBody Heading entity) {
         return service.saveOrUpdate(entity);
     }
 
     @PostMapping(value = "/saveAll")
-    Iterable<Atributo> saveAll(@RequestBody ArrayList<Atributo> entities){ return service.saveOrUpdateAll(entities); }
+    Iterable<Heading> saveAll(@RequestBody ArrayList<Heading> entities) { return service.saveAll(entities); }
 
     @PutMapping
-    Atributo update(@RequestBody Atributo entity) {
+    Heading update(@RequestBody Heading entity) {
         return service.saveOrUpdate(entity);
     }
 
@@ -48,8 +48,7 @@ public class AtributoController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<Atributo> filter(@RequestBody AtributoFilter filterParam) {
-        return service.filter(filterParam);
+    public Page<Heading> filter(@RequestBody HeadingFilter filterParams) {
+        return service.filter(filterParams);
     }
 }
-
