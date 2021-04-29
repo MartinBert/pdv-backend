@@ -1,10 +1,10 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.CajaFilter;
+import com.prysoft.pdv.dto.CashBoxFilter;
 import com.prysoft.pdv.dto.VentaFilter;
-import com.prysoft.pdv.models.Caja;
+import com.prysoft.pdv.models.CashBox;
 import com.prysoft.pdv.models.ComprobanteFiscal;
-import com.prysoft.pdv.service.CajaService;
+import com.prysoft.pdv.service.CashBoxService;
 import com.prysoft.pdv.service.VentaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,30 +16,30 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping(value = "/{tenantid}/api/caja")
-public class CajaController {
+public class CashBoxController {
     @Autowired
-    private CajaService service;
+    private CashBoxService service;
     @Autowired
     private VentaService salesService;
 
     @GetMapping
-    Page<Caja> findAll(Pageable page) {
+    Page<CashBox> findAll(Pageable page) {
         return service.findAll(page);
     }
 
     @GetMapping(value = "/{id}")
-    Caja findById(@PathVariable long id) {
+    CashBox findById(@PathVariable long id) {
         return service.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    Caja save(@RequestBody Caja entity) {
+    CashBox save(@RequestBody CashBox entity) {
         return service.saveOrUpdate(entity);
     }
 
     @PutMapping
-    Caja update(@RequestBody Caja entity) {
+    CashBox update(@RequestBody CashBox entity) {
         return service.saveOrUpdate(entity);
     }
 
@@ -50,7 +50,7 @@ public class CajaController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<Caja> filter(@RequestBody CajaFilter filterParam) {
+    public Page<CashBox> filter(@RequestBody CashBoxFilter filterParam) {
         return service.filter(filterParam);
     }
 

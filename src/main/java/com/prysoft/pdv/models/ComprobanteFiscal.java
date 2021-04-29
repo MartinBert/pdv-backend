@@ -44,7 +44,7 @@ public class ComprobanteFiscal implements Serializable {
     @OneToOne
     private Empresa empresa;
     @OneToOne
-    private Cliente cliente;
+    private Client cliente;
     private String cerrado;
 
     public Long getId() {
@@ -167,11 +167,11 @@ public class ComprobanteFiscal implements Serializable {
         this.empresa = empresa;
     }
 
-    public Cliente getCliente() {
+    public Client getCliente() {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
+    public void setCliente(Client cliente) {
         this.cliente = cliente;
     }
 

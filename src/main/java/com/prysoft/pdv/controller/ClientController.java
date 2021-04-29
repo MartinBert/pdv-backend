@@ -1,8 +1,8 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.ClienteFilter;
-import com.prysoft.pdv.models.Cliente;
-import com.prysoft.pdv.service.ClienteService;
+import com.prysoft.pdv.dto.ClientFilter;
+import com.prysoft.pdv.models.Client;
+import com.prysoft.pdv.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,28 +11,28 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/{tenantid}/api/clientes")
-public class ClienteController {
+public class ClientController {
     @Autowired
-    private ClienteService service;
+    private ClientService service;
 
     @GetMapping
-    Page<Cliente> findAll(Pageable page) {
+    Page<Client> findAll(Pageable page) {
         return service.findAll(page);
     }
 
     @GetMapping(value = "/{id}")
-    Cliente findById(@PathVariable long id) {
+    Client findById(@PathVariable long id) {
         return service.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    Cliente save(@RequestBody Cliente entity) {
+    Client save(@RequestBody Client entity) {
         return service.saveOrUpdate(entity);
     }
 
     @PutMapping
-    Cliente update(@RequestBody Cliente entity) {
+    Client update(@RequestBody Client entity) {
         return service.saveOrUpdate(entity);
     }
 
@@ -43,7 +43,7 @@ public class ClienteController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<Cliente> filter(@RequestBody ClienteFilter filterParam) {
+    public Page<Client> filter(@RequestBody ClientFilter filterParam) {
         return service.filter(filterParam);
     }
 }

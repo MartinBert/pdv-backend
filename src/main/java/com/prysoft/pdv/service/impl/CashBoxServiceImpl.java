@@ -1,10 +1,10 @@
 package com.prysoft.pdv.service.impl;
 
-import com.prysoft.pdv.dao.CajaDao;
-import com.prysoft.pdv.dto.CajaFilter;
+import com.prysoft.pdv.dao.CashBoxDao;
+import com.prysoft.pdv.dto.CashBoxFilter;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.models.Caja;
-import com.prysoft.pdv.service.CajaService;
+import com.prysoft.pdv.models.CashBox;
+import com.prysoft.pdv.service.CashBoxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,13 +18,13 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class CajaServiceImpl extends FilterService<Caja> implements CajaService {
+public class CashBoxServiceImpl extends FilterService<CashBox> implements CashBoxService {
     @Autowired
-    private CajaDao dao;
+    private CashBoxDao dao;
 
     @Override
-    public Caja findById(Long id) {
-        Optional<Caja> optional = dao.findById(id);
+    public CashBox findById(Long id) {
+        Optional<CashBox> optional = dao.findById(id);
         if(!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
@@ -32,12 +32,12 @@ public class CajaServiceImpl extends FilterService<Caja> implements CajaService 
     }
 
     @Override
-    public Page<Caja> findAll(Pageable page) {
+    public Page<CashBox> findAll(Pageable page) {
         return dao.findAll(page);
     }
 
     @Override
-    public Caja saveOrUpdate(Caja entity) {
+    public CashBox saveOrUpdate(CashBox entity) {
         return dao.save(entity);
     }
 
@@ -47,7 +47,7 @@ public class CajaServiceImpl extends FilterService<Caja> implements CajaService 
     }
 
     @Override
-    public Page<Caja> filter(CajaFilter filterParam) {
+    public Page<CashBox> filter(CashBoxFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
         if(filterParam.getSucursalId() == null){

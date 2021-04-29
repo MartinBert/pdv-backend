@@ -48,6 +48,7 @@ public class ComprobanteFiscalServiceImpl extends FilterService<ComprobanteFisca
 
     @Override
     public ComprobanteFiscal saveOrUpdate(ComprobanteFiscal entity) {
+        System.out.println(entity);
         return dao.save(entity);
     }
 

@@ -1,11 +1,8 @@
 package com.prysoft.pdv.service.impl;
 
-import com.prysoft.pdv.dao.CajaDao;
 import com.prysoft.pdv.dao.NoteDao;
-import com.prysoft.pdv.dto.CajaFilter;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.NoteFilter;
-import com.prysoft.pdv.models.Caja;
 import com.prysoft.pdv.models.Note;
 import com.prysoft.pdv.service.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;

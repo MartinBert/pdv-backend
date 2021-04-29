@@ -5,8 +5,9 @@ import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-@Table(name="clientes")
-public class Cliente extends Persona implements Serializable {
+@Table(name = "clientes")
+public class Client extends Persona implements Serializable {
+    private static final long serialVersionUID = 999999999999999999L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -44,7 +45,7 @@ public class Cliente extends Persona implements Serializable {
 
     @Override
     public String toString() {
-        return "Cliente{" +
+        return "Client{" +
                 "id=" + id +
                 ", sucursales=" + sucursales +
                 ", alicIngBrutos=" + alicIngBrutos +

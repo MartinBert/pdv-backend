@@ -1,10 +1,10 @@
 package com.prysoft.pdv.service.impl;
 
-import com.prysoft.pdv.dao.ClienteDao;
-import com.prysoft.pdv.dto.ClienteFilter;
+import com.prysoft.pdv.dao.ClientDao;
+import com.prysoft.pdv.dto.ClientFilter;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.models.Cliente;
-import com.prysoft.pdv.service.ClienteService;
+import com.prysoft.pdv.models.Client;
+import com.prysoft.pdv.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,14 +18,14 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class ClienteServiceImpl extends FilterService<Cliente> implements ClienteService {
+public class ClientServiceImpl extends FilterService<Client> implements ClientService {
 
     @Autowired
-    private ClienteDao dao;
+    private ClientDao dao;
 
     @Override
-    public Cliente findById(Long id) {
-        Optional<Cliente> optional = dao.findById(id);
+    public Client findById(Long id) {
+        Optional<Client> optional = dao.findById(id);
         if(!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
@@ -34,12 +34,12 @@ public class ClienteServiceImpl extends FilterService<Cliente> implements Client
     }
 
     @Override
-    public Page<Cliente> findAll(Pageable page) {
+    public Page<Client> findAll(Pageable page) {
         return dao.findAll(page);
     }
 
     @Override
-    public Cliente saveOrUpdate(Cliente entity) {return dao.save(entity);}
+    public Client saveOrUpdate(Client entity) {return dao.save(entity);}
 
     @Override
     public void delete(Long id) {
@@ -47,7 +47,7 @@ public class ClienteServiceImpl extends FilterService<Cliente> implements Client
     }
 
     @Override
-    public Page<Cliente> filter(ClienteFilter filterParam) {
+    public Page<Client> filter(ClientFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
 
