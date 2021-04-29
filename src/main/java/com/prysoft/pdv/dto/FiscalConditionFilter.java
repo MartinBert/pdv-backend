@@ -1,6 +1,6 @@
 package com.prysoft.pdv.dto;
 
-public class CondicionFiscalFilter extends PageFilter {
+public class FiscalConditionFilter extends PageFilter {
     private String condicionFiscalName;
 
     public String getCondicionFiscalName() {

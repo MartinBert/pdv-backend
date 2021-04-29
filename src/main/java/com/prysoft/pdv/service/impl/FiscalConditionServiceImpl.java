@@ -1,10 +1,10 @@
 package com.prysoft.pdv.service.impl;
 
-import com.prysoft.pdv.dao.CondicionFiscalDao;
-import com.prysoft.pdv.dto.CondicionFiscalFilter;
+import com.prysoft.pdv.dao.FiscalConditionDao;
+import com.prysoft.pdv.dto.FiscalConditionFilter;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.models.CondicionFiscal;
-import com.prysoft.pdv.service.CondicionFiscalService;
+import com.prysoft.pdv.models.FiscalCondition;
+import com.prysoft.pdv.service.FiscalConditionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,14 +18,14 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class CondicionFiscalServiceImpl extends FilterService<CondicionFiscal> implements CondicionFiscalService {
+public class FiscalConditionServiceImpl extends FilterService<FiscalCondition> implements FiscalConditionService {
 
     @Autowired
-    private CondicionFiscalDao dao;
+    private FiscalConditionDao dao;
 
     @Override
-    public CondicionFiscal findById(Long id) {
-        Optional<CondicionFiscal> optional = dao.findById(id);
+    public FiscalCondition findById(Long id) {
+        Optional<FiscalCondition> optional = dao.findById(id);
         if(!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
@@ -33,12 +33,12 @@ public class CondicionFiscalServiceImpl extends FilterService<CondicionFiscal> i
     }
 
     @Override
-    public Page<CondicionFiscal> findAll(Pageable page) {
+    public Page<FiscalCondition> findAll(Pageable page) {
         return dao.findAll(page);
     }
 
     @Override
-    public CondicionFiscal saveOrUpdate(CondicionFiscal entity) {
+    public FiscalCondition saveOrUpdate(FiscalCondition entity) {
         return dao.save(entity);
     }
 
@@ -48,7 +48,7 @@ public class CondicionFiscalServiceImpl extends FilterService<CondicionFiscal> i
     }
 
     @Override
-    public Page<CondicionFiscal> filter(CondicionFiscalFilter filterParam) {
+    public Page<FiscalCondition> filter(FiscalConditionFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
         String hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getCondicionFiscalName()+"%')";
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);

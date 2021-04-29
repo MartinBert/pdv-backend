@@ -18,7 +18,7 @@ public class Sucursal implements Serializable {
     @Column(name = "direccion", nullable = false)
     private String direccion;
     @OneToOne
-    private CondicionFiscal condicionIva; //1-Responsable Inscripto, 2-Monotributista
+    private FiscalCondition condicionIva; //1-Responsable Inscripto, 2-Monotributista
     private String email;
     private String telefono;
     private String telefonoAlternativo;
@@ -69,11 +69,11 @@ public class Sucursal implements Serializable {
         this.direccion = direccion;
     }
 
-    public CondicionFiscal getCondicionIva() {
+    public FiscalCondition getCondicionIva() {
         return condicionIva;
     }
 
-    public void setCondicionIva(CondicionFiscal condicionIva) {
+    public void setCondicionIva(FiscalCondition condicionIva) {
         this.condicionIva = condicionIva;
     }
 
