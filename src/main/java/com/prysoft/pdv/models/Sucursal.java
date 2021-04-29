@@ -37,7 +37,7 @@ public class Sucursal implements Serializable {
     private Set<PuntoVenta> puntosVenta;
     @OneToMany(mappedBy = "sucursales")
     @JsonBackReference(value = "depositos")
-    private Set<Deposito> depositos;
+    private Set<Deposit> depositos;
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name="empresa_id", nullable=false)
@@ -165,11 +165,11 @@ public class Sucursal implements Serializable {
         this.puntosVenta = puntosVenta;
     }
 
-    public Set<Deposito> getDepositos() {
+    public Set<Deposit> getDepositos() {
         return depositos;
     }
 
-    public void setDepositos(Set<Deposito> depositos) {
+    public void setDepositos(Set<Deposit> depositos) {
         this.depositos = depositos;
     }
 

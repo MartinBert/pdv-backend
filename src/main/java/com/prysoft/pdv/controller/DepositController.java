@@ -1,8 +1,8 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.DepositoFilter;
-import com.prysoft.pdv.models.Deposito;
-import com.prysoft.pdv.service.DepositoService;
+import com.prysoft.pdv.dto.DepositFilter;
+import com.prysoft.pdv.models.Deposit;
+import com.prysoft.pdv.service.DepositService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,31 +13,31 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping(value = "/{tenantid}/api/depositos")
-public class DepositoController {
+public class DepositController {
     @Autowired
-    private DepositoService service;
+    private DepositService service;
 
     @GetMapping
-    Page<Deposito> findAll(Pageable page) {
+    Page<Deposit> findAll(Pageable page) {
         return service.findAll(page);
     }
 
     @GetMapping(value = "/{id}")
-    Deposito findById(@PathVariable long id) {
+    Deposit findById(@PathVariable long id) {
         return service.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    Deposito save(@RequestBody Deposito entity) {
+    Deposit save(@RequestBody Deposit entity) {
         return service.saveOrUpdate(entity);
     }
 
     @PostMapping(value = "/saveAll")
-    Iterable<Deposito> saveAll(@RequestBody ArrayList<Deposito> entities) { return service.saveAll(entities); }
+    Iterable<Deposit> saveAll(@RequestBody ArrayList<Deposit> entities) { return service.saveAll(entities); }
 
     @PutMapping
-    Deposito update(@RequestBody Deposito entity) {
+    Deposit update(@RequestBody Deposit entity) {
         return service.saveOrUpdate(entity);
     }
 
@@ -48,7 +48,7 @@ public class DepositoController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<Deposito> filter(@RequestBody DepositoFilter filterParam) {
+    public Page<Deposit> filter(@RequestBody DepositFilter filterParam) {
         return service.filter(filterParam);
     }
 }

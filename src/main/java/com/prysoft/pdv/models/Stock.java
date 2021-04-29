@@ -14,7 +14,7 @@ public class Stock implements Serializable {
     private Producto producto;
 
     @ManyToOne
-    private Deposito deposito;
+    private Deposit deposito;
 
     @OneToOne Sucursal sucursal;
 
@@ -41,11 +41,11 @@ public class Stock implements Serializable {
         this.producto = producto;
     }
 
-    public Deposito getDeposito() {
+    public Deposit getDeposito() {
         return deposito;
     }
 
-    public void setDeposito(Deposito deposito) {
+    public void setDeposito(Deposit deposito) {
         this.deposito = deposito;
     }
 

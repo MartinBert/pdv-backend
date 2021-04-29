@@ -8,26 +8,21 @@ import java.util.Set;
 
 @Entity
 @Table(name = "depositos")
-public class Deposito implements Serializable{
+public class Deposit implements Serializable {
+    private static final long serialVersionUID = 999999999999999999L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name = "nombre", unique = true, nullable = false)
     private String nombre;
-
     @Column(name = "direccion", unique = true, nullable = false)
     private String direccion;
-
     @ManyToOne
     private Sucursal sucursales;
-
     private String telefono;
-
     @OneToMany(mappedBy = "deposito")
     @JsonBackReference
     private Set<Stock> stock;
-
     private String defaultDeposit;
 
     public Long getId() {
@@ -88,7 +83,7 @@ public class Deposito implements Serializable{
 
     @Override
     public String toString() {
-        return "Deposito{" +
+        return "Deposit{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", direccion='" + direccion + '\'' +

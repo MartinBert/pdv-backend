@@ -47,7 +47,7 @@ public class Producto implements Serializable {
     @JoinTable(name = "productos_depositos",
             joinColumns =  @JoinColumn(name = "id_producto"),
             inverseJoinColumns = @JoinColumn(name = "id_deposito"))
-    private Set<Deposito> depositos;
+    private Set<Deposit> depositos;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "productos_propiedades",
             joinColumns =  @JoinColumn(name = "id_producto"),
@@ -200,11 +200,11 @@ public class Producto implements Serializable {
         this.distribuidores = distribuidores;
     }
 
-    public Set<Deposito> getDepositos() {
+    public Set<Deposit> getDepositos() {
         return depositos;
     }
 
-    public void setDepositos(Set<Deposito> depositos) {
+    public void setDepositos(Set<Deposit> depositos) {
         this.depositos = depositos;
     }
 

@@ -1,6 +1,6 @@
 package com.prysoft.pdv.dto;
 
-public class DepositoFilter extends SucursalFilter {
+public class DepositFilter extends SucursalFilter {
     private String depositoName;
 
     public String getDepositoName() {
