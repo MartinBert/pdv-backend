@@ -6,14 +6,13 @@ import java.util.Set;
 
 @Entity
 @Table(name = "condiciones_fiscales")
-public class CondicionFiscal implements Serializable {
+public class FiscalCondition implements Serializable {
+    private static final long serialVersionUID = 999999999999999999L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name = "nombre", unique = true, nullable = false)
     private String nombre;
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "condiciones_documentos",
             joinColumns =  @JoinColumn(name = "id_condicion"),
@@ -46,7 +45,7 @@ public class CondicionFiscal implements Serializable {
 
     @Override
     public String toString() {
-        return "CondicionFiscal{" +
+        return "FiscalCondition{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", documentos=" + documentos +

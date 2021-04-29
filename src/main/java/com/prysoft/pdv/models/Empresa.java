@@ -17,7 +17,7 @@ public class Empresa implements Serializable {
     private int ingBruto;
 
     @OneToOne
-    private CondicionFiscal condicionIva; //1-Responsable Inscripto, 2-Monotributista
+    private FiscalCondition condicionIva; //1-Responsable Inscripto, 2-Monotributista
 
     @OneToMany(mappedBy = "empresa")
     private Set<Sucursal> sucursales;
@@ -54,11 +54,11 @@ public class Empresa implements Serializable {
         this.ingBruto = ingBruto;
     }
 
-    public CondicionFiscal getCondicionIva() {
+    public FiscalCondition getCondicionIva() {
         return condicionIva;
     }
 
-    public void setCondicionIva(CondicionFiscal condicionIva) {
+    public void setCondicionIva(FiscalCondition condicionIva) {
         this.condicionIva = condicionIva;
     }
 

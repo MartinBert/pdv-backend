@@ -9,7 +9,7 @@ public class Persona implements Serializable {
     private int tipoPersona; //1-Fisica , 2-Juridica
 
     @OneToOne
-    private CondicionFiscal condicionIva; //1-Responsable Inscripto, 2-Monotributista, 3-Consumidor Final
+    private FiscalCondition condicionIva; //1-Responsable Inscripto, 2-Monotributista, 3-Consumidor Final
 
     private String nombre;
     private String razonSocial;
@@ -26,7 +26,7 @@ public class Persona implements Serializable {
 
     }
 
-    public Persona(int tipoPersona, CondicionFiscal condicionIva,
+    public Persona(int tipoPersona, FiscalCondition condicionIva,
                    String nombre, String razonSocial,
                    String cuit, String direccion,
                    String email, String telefono,
@@ -58,11 +58,11 @@ public class Persona implements Serializable {
     }
 
     @Column(name="condicionIva", nullable = false)
-    public CondicionFiscal getCondicionIva() {
+    public FiscalCondition getCondicionIva() {
         return this.condicionIva;
     }
 
-    public void setCondicionIva(CondicionFiscal condicionIva) {
+    public void setCondicionIva(FiscalCondition condicionIva) {
         this.condicionIva = condicionIva;
     }
 

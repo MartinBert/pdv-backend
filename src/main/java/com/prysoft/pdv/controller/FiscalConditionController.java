@@ -1,8 +1,8 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.CondicionFiscalFilter;
-import com.prysoft.pdv.models.CondicionFiscal;
-import com.prysoft.pdv.service.CondicionFiscalService;
+import com.prysoft.pdv.dto.FiscalConditionFilter;
+import com.prysoft.pdv.models.FiscalCondition;
+import com.prysoft.pdv.service.FiscalConditionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,28 +11,28 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/{tenantid}/api/condicionesFiscales")
-public class CondicionFiscalController {
+public class FiscalConditionController {
     @Autowired
-    private CondicionFiscalService service;
+    private FiscalConditionService service;
 
     @GetMapping
-    Page<CondicionFiscal> findAll(Pageable page) {
+    Page<FiscalCondition> findAll(Pageable page) {
         return service.findAll(page);
     }
 
     @GetMapping(value = "/{id}")
-    CondicionFiscal findById(@PathVariable long id) {
+    FiscalCondition findById(@PathVariable long id) {
         return service.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    CondicionFiscal save(@RequestBody CondicionFiscal entity) {
+    FiscalCondition save(@RequestBody FiscalCondition entity) {
         return service.saveOrUpdate(entity);
     }
 
     @PutMapping
-    CondicionFiscal update(@RequestBody CondicionFiscal entity) {
+    FiscalCondition update(@RequestBody FiscalCondition entity) {
         return service.saveOrUpdate(entity);
     }
 
@@ -43,7 +43,7 @@ public class CondicionFiscalController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<CondicionFiscal> filter(@RequestBody CondicionFiscalFilter filterParam) {
+    public Page<FiscalCondition> filter(@RequestBody FiscalConditionFilter filterParam) {
         return service.filter(filterParam);
     }
 }

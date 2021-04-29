@@ -1,10 +1,10 @@
 package com.prysoft.pdv.service.impl;
 
-import com.prysoft.pdv.dao.DepositoDao;
-import com.prysoft.pdv.dto.DepositoFilter;
+import com.prysoft.pdv.dao.DepositDao;
+import com.prysoft.pdv.dto.DepositFilter;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.models.Deposito;
-import com.prysoft.pdv.service.DepositoService;
+import com.prysoft.pdv.models.Deposit;
+import com.prysoft.pdv.service.DepositService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,13 +18,13 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class DepositoServiceImpl extends FilterService<Deposito> implements DepositoService {
+public class DepositServiceImpl extends FilterService<Deposit> implements DepositService {
     @Autowired
-    private DepositoDao dao;
+    private DepositDao dao;
 
     @Override
-    public Deposito findById(Long id) {
-        Optional<Deposito> optional = dao.findById(id);
+    public Deposit findById(Long id) {
+        Optional<Deposit> optional = dao.findById(id);
         if(!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
@@ -32,17 +32,17 @@ public class DepositoServiceImpl extends FilterService<Deposito> implements Depo
     }
 
     @Override
-    public Page<Deposito> findAll(Pageable page) {
+    public Page<Deposit> findAll(Pageable page) {
         return dao.findAll(page);
     }
 
     @Override
-    public Deposito saveOrUpdate(Deposito entity) {
+    public Deposit saveOrUpdate(Deposit entity) {
         return dao.save(entity);
     }
 
     @Override
-    public Iterable<Deposito> saveAll(ArrayList<Deposito> entities) {
+    public Iterable<Deposit> saveAll(ArrayList<Deposit> entities) {
         return dao.saveAll(entities);
     }
 
@@ -52,7 +52,7 @@ public class DepositoServiceImpl extends FilterService<Deposito> implements Depo
     }
 
     @Override
-    public Page<Deposito> filter(DepositoFilter filterParam) {
+    public Page<Deposit> filter(DepositFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
         if (filterParam.getPerfilId() == 1) {

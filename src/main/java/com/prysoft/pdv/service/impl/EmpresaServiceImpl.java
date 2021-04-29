@@ -1,6 +1,6 @@
 package com.prysoft.pdv.service.impl;
 
-import com.prysoft.pdv.dao.CondicionFiscalDao;
+import com.prysoft.pdv.dao.FiscalConditionDao;
 import com.prysoft.pdv.dao.EmpresaDao;
 import com.prysoft.pdv.dto.EmpresaFilter;
 import com.prysoft.pdv.dto.FilterParam;
@@ -25,7 +25,7 @@ public class EmpresaServiceImpl extends FilterService<Empresa> implements Empres
     private EmpresaDao dao;
 
     @Autowired
-    private CondicionFiscalDao daoc;
+    private FiscalConditionDao daoc;
 
     @Override
     public Empresa findById(Long id) {
