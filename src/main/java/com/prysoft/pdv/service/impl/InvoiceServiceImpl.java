@@ -1,10 +1,10 @@
 package com.prysoft.pdv.service.impl;
 
-import com.prysoft.pdv.dao.ComprobanteFiscalDao;
-import com.prysoft.pdv.dto.ComprobanteFiscalFilter;
+import com.prysoft.pdv.dao.InvoiceDao;
+import com.prysoft.pdv.dto.InvoiceFilter;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.models.ComprobanteFiscal;
-import com.prysoft.pdv.service.ComprobanteFiscalService;
+import com.prysoft.pdv.models.Invoice;
+import com.prysoft.pdv.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,14 +18,14 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class ComprobanteFiscalServiceImpl extends FilterService<ComprobanteFiscal> implements ComprobanteFiscalService {
+public class InvoiceServiceImpl extends FilterService<Invoice> implements InvoiceService {
 
     @Autowired
-    private ComprobanteFiscalDao dao;
+    private InvoiceDao dao;
 
     @Override
-    public ComprobanteFiscal findById(Long id) {
-        Optional<ComprobanteFiscal> optional = dao.findById(id);
+    public Invoice findById(Long id) {
+        Optional<Invoice> optional = dao.findById(id);
         if(optional.isEmpty()) {
             throw new EntityNotFoundException();
         }
@@ -33,8 +33,8 @@ public class ComprobanteFiscalServiceImpl extends FilterService<ComprobanteFisca
     }
 
     @Override
-    public ComprobanteFiscal findByNumeroCbte(String numero) {
-        Optional<ComprobanteFiscal> optional = dao.findByNumeroCbte(numero);
+    public Invoice findByNumeroCbte(String numero) {
+        Optional<Invoice> optional = dao.findByNumeroCbte(numero);
         if(optional.isEmpty()){
             throw new EntityNotFoundException();
         }
@@ -42,12 +42,12 @@ public class ComprobanteFiscalServiceImpl extends FilterService<ComprobanteFisca
     }
 
     @Override
-    public Page<ComprobanteFiscal> findAll(Pageable page) {
+    public Page<Invoice> findAll(Pageable page) {
         return dao.findAll(page);
     }
 
     @Override
-    public ComprobanteFiscal saveOrUpdate(ComprobanteFiscal entity) {
+    public Invoice saveOrUpdate(Invoice entity) {
         System.out.println(entity);
         return dao.save(entity);
     }
@@ -58,12 +58,12 @@ public class ComprobanteFiscalServiceImpl extends FilterService<ComprobanteFisca
     }
 
     @Override
-    public Iterable<ComprobanteFiscal> saveOrUpdateAll(ArrayList<ComprobanteFiscal> entities) {
+    public Iterable<Invoice> saveOrUpdateAll(ArrayList<Invoice> entities) {
         return dao.saveAll(entities);
     }
 
     @Override
-    public Page<ComprobanteFiscal> filter(ComprobanteFiscalFilter filterParam) {
+    public Page<Invoice> filter(InvoiceFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
         if(filterParam.getSucursalId() == null){

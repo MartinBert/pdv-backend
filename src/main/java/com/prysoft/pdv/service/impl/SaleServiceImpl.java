@@ -1,11 +1,11 @@
 package com.prysoft.pdv.service.impl;
 
-import com.prysoft.pdv.dao.ComprobanteFiscalDao;
+import com.prysoft.pdv.dao.InvoiceDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.VentaFilter;
-import com.prysoft.pdv.models.ComprobanteFiscal;
+import com.prysoft.pdv.dto.SaleFilter;
+import com.prysoft.pdv.models.Invoice;
 import com.prysoft.pdv.models.MedioPago;
-import com.prysoft.pdv.service.VentaService;
+import com.prysoft.pdv.service.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -14,13 +14,13 @@ import java.util.*;
 
 @Service
 @Transactional
-public class VentaServiceImpl extends FilterService<ComprobanteFiscal> implements VentaService {
+public class SaleServiceImpl extends FilterService<Invoice> implements SaleService {
 
     @Autowired
-    private ComprobanteFiscalDao dao;
+    private InvoiceDao dao;
 
     @Override
-    public Page<ComprobanteFiscal> filter(VentaFilter filterParam) {
+    public Page<Invoice> filter(SaleFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
         if(filterParam.getSucursalId() == null){
@@ -50,11 +50,11 @@ public class VentaServiceImpl extends FilterService<ComprobanteFiscal> implement
     }
 
     @Override
-    public ArrayList<ComprobanteFiscal> filterNotCloseReceipts(VentaFilter filterParam) {
-        Iterable<ComprobanteFiscal> comprobantes = dao.findAll();
-        ArrayList<ComprobanteFiscal> filteredReceipts = new ArrayList<>();
+    public ArrayList<Invoice> filterNotCloseReceipts(SaleFilter filterParam) {
+        Iterable<Invoice> comprobantes = dao.findAll();
+        ArrayList<Invoice> filteredReceipts = new ArrayList<>();
         Long sucursalId = filterParam.getSucursalId();
-        comprobantes.forEach((ComprobanteFiscal comprobante) ->
+        comprobantes.forEach((Invoice comprobante) ->
             {
                 if(isNotNull(sucursalId)){
                     if(passNotCloseReceiptValidations(comprobante, sucursalId)){
@@ -74,7 +74,7 @@ public class VentaServiceImpl extends FilterService<ComprobanteFiscal> implement
         return filteredReceipts;
     }
 
-    private boolean passNotCloseReceiptValidations(ComprobanteFiscal comprobante, Long sucursalId){
+    private boolean passNotCloseReceiptValidations(Invoice comprobante, Long sucursalId){
         if(comprobante.getCerrado() != null) return false;
         if(comprobante.getSucursal().getId() != sucursalId) return false;
         return true;

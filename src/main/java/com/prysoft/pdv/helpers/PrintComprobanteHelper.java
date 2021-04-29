@@ -1,6 +1,6 @@
 package com.prysoft.pdv.helpers;
 
-import com.prysoft.pdv.models.ComprobanteFiscal;
+import com.prysoft.pdv.models.Invoice;
 import com.prysoft.pdv.models.PrintComprobante;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ public class PrintComprobanteHelper implements Serializable {
     @Autowired
     private DateHelper dateHelper;
 
-    public PrintComprobante processReceiptForPrint(ComprobanteFiscal receipt){
+    public PrintComprobante processReceiptForPrint(Invoice receipt){
       String fechaInicioAct = dateHelper.dateToStringConvertion(receipt.getSucursal().getFechaInicioAct());
       PrintComprobante comprobante = new PrintComprobante();
       comprobante.setBarCode(receipt.getBarCode());

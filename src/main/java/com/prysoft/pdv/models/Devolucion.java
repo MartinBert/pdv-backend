@@ -13,17 +13,12 @@ public class Devolucion implements Serializable {
     private String fecha;
     private String descripcion;
     private double totalDevolucion;
-
     private ArrayList<PrintComprobanteDetail> productos;
-
     private ArrayList<PrintComprobanteDetail> productosSalientes;
-
     @OneToOne
-    private ComprobanteFiscal comprobante;
-
+    private Invoice comprobante;
     @OneToOne
     private Empresa empresa;
-
     @OneToOne
     private Sucursal sucursal;
 
@@ -51,11 +46,11 @@ public class Devolucion implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public ComprobanteFiscal getComprobante() {
+    public Invoice getComprobante() {
         return comprobante;
     }
 
-    public void setComprobante(ComprobanteFiscal comprobante) {
+    public void setComprobante(Invoice comprobante) {
         this.comprobante = comprobante;
     }
 

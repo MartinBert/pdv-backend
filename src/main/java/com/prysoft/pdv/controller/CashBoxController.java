@@ -1,11 +1,11 @@
 package com.prysoft.pdv.controller;
 
 import com.prysoft.pdv.dto.CashBoxFilter;
-import com.prysoft.pdv.dto.VentaFilter;
+import com.prysoft.pdv.dto.SaleFilter;
 import com.prysoft.pdv.models.CashBox;
-import com.prysoft.pdv.models.ComprobanteFiscal;
+import com.prysoft.pdv.models.Invoice;
 import com.prysoft.pdv.service.CashBoxService;
-import com.prysoft.pdv.service.VentaService;
+import com.prysoft.pdv.service.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,7 +20,7 @@ public class CashBoxController {
     @Autowired
     private CashBoxService service;
     @Autowired
-    private VentaService salesService;
+    private SaleService salesService;
 
     @GetMapping
     Page<CashBox> findAll(Pageable page) {
@@ -55,7 +55,7 @@ public class CashBoxController {
     }
 
     @PostMapping(value = "/filterNotCloseReceipts")
-    public ArrayList<ComprobanteFiscal> filterNotCloseReceipts(@RequestBody VentaFilter filterParam) {
+    public ArrayList<Invoice> filterNotCloseReceipts(@RequestBody SaleFilter filterParam) {
         return salesService.filterNotCloseReceipts(filterParam);
     }
 }

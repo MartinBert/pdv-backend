@@ -1,11 +1,11 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.VentaFilter;
-import com.prysoft.pdv.models.ComprobanteFiscal;
+import com.prysoft.pdv.dto.SaleFilter;
+import com.prysoft.pdv.models.Invoice;
 import com.prysoft.pdv.print.PrintSaleForSelectedProductAndDate;
 import com.prysoft.pdv.print.SearchFilterInProductsSold;
 import com.prysoft.pdv.reports.SalesReport;
-import com.prysoft.pdv.service.VentaService;
+import com.prysoft.pdv.service.SaleService;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperPrint;
 import org.json.JSONException;
@@ -21,13 +21,13 @@ import java.sql.SQLException;
 @RequestMapping(value = "/{tenantid}/api/ventas")
 public class VentaController {
     @Autowired
-    private VentaService service;
+    private SaleService service;
 
     @Autowired
     private SalesReport reports;
 
     @PostMapping(value = "/onCloseSaleReport/{tenant}")
-    public JasperPrint onCloseSaleReport(@RequestBody ComprobanteFiscal request,
+    public JasperPrint onCloseSaleReport(@RequestBody Invoice request,
                                          @PathVariable String tenant,
                                          HttpServletResponse response)
             throws IOException, JRException, SQLException, JSONException
@@ -119,7 +119,7 @@ public class VentaController {
     }
 
     @PostMapping(value = "/filter")
-    Page<ComprobanteFiscal> filter(@RequestBody VentaFilter filterParam) {
+    Page<Invoice> filter(@RequestBody SaleFilter filterParam) {
         return service.filter(filterParam);
     }
 }

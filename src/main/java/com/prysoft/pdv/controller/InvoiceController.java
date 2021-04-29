@@ -1,8 +1,8 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.ComprobanteFiscalFilter;
-import com.prysoft.pdv.models.ComprobanteFiscal;
-import com.prysoft.pdv.service.ComprobanteFiscalService;
+import com.prysoft.pdv.dto.InvoiceFilter;
+import com.prysoft.pdv.models.Invoice;
+import com.prysoft.pdv.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,36 +13,36 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping(value = "/{tenantid}/api/comprobantesFiscales")
-public class ComprobanteFiscalController {
+public class InvoiceController {
     @Autowired
-    private ComprobanteFiscalService service;
+    private InvoiceService service;
 
     @GetMapping
-    Page<ComprobanteFiscal> findAll(Pageable page) {
+    Page<Invoice> findAll(Pageable page) {
         return service.findAll(page);
     }
 
     @GetMapping(value = "/{id}")
-    ComprobanteFiscal findById(@PathVariable long id) {
+    Invoice findById(@PathVariable long id) {
         return service.findById(id);
     }
 
     @GetMapping(value = "cbteNumero/{numero}")
-    ComprobanteFiscal findByNumeroCbte(@PathVariable String numero) {return service.findByNumeroCbte(numero);}
+    Invoice findByNumeroCbte(@PathVariable String numero) {return service.findByNumeroCbte(numero);}
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    ComprobanteFiscal save(@RequestBody ComprobanteFiscal entity) {
+    Invoice save(@RequestBody Invoice entity) {
         service.saveOrUpdate(entity);
-        ComprobanteFiscal object = service.saveOrUpdate(entity);
+        Invoice object = service.saveOrUpdate(entity);
         return object ;
     }
 
     @PostMapping(value = "/saveAll")
-    Iterable<ComprobanteFiscal> saveAll(@RequestBody ArrayList<ComprobanteFiscal> entities){ return service.saveOrUpdateAll(entities); }
+    Iterable<Invoice> saveAll(@RequestBody ArrayList<Invoice> entities){ return service.saveOrUpdateAll(entities); }
 
     @PutMapping
-    ComprobanteFiscal update(@RequestBody ComprobanteFiscal entity) {
+    Invoice update(@RequestBody Invoice entity) {
         return service.saveOrUpdate(entity);
     }
 
@@ -53,7 +53,7 @@ public class ComprobanteFiscalController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<ComprobanteFiscal> filter(@RequestBody ComprobanteFiscalFilter filterParam) {
+    public Page<Invoice> filter(@RequestBody InvoiceFilter filterParam) {
         return service.filter(filterParam);
     }
 }

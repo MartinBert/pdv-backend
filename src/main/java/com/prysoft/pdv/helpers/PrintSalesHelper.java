@@ -1,6 +1,6 @@
 package com.prysoft.pdv.helpers;
 
-import com.prysoft.pdv.models.ComprobanteFiscal;
+import com.prysoft.pdv.models.Invoice;
 import com.prysoft.pdv.models.Producto;
 import com.prysoft.pdv.models.ProductoDescription;
 import com.prysoft.pdv.print.PrintSaleForSelectedProductAndDate;
@@ -18,7 +18,7 @@ public class PrintSalesHelper implements Serializable {
     @Autowired
     private MedioPagoHelper medioHelper;
 
-    public PrintSalesReport processReceiptForPrint(ComprobanteFiscal receipt){
+    public PrintSalesReport processReceiptForPrint(Invoice receipt){
         PrintSalesReport report = new PrintSalesReport();
         String medios = medioHelper.stringPaymentMethodsNameConvertion(receipt.getMediosPago());
         report.setFechaEmision(receipt.getFechaEmision());
@@ -35,7 +35,7 @@ public class PrintSalesHelper implements Serializable {
         return report;
     }
 
-    public PrintWithProductDetails processReceiptForPrintWithProductDetails(ComprobanteFiscal receipt){
+    public PrintWithProductDetails processReceiptForPrintWithProductDetails(Invoice receipt){
         PrintWithProductDetails report = new PrintWithProductDetails();
         String medios = medioHelper.stringPaymentMethodsNameConvertion(receipt.getMediosPago());
         JRBeanCollectionDataSource products = new JRBeanCollectionDataSource(receipt.getProductoDescription());

@@ -1,6 +1,6 @@
 package com.prysoft.pdv.reports;
 
-import com.prysoft.pdv.models.ComprobanteFiscal;
+import com.prysoft.pdv.models.Invoice;
 import com.prysoft.pdv.print.PrintSaleForSelectedProductAndDate;
 import com.prysoft.pdv.print.SearchFilterInProductsSold;
 import net.sf.jasperreports.engine.JRException;
@@ -17,7 +17,7 @@ public interface SalesReport {
                                HttpServletResponse response)
             throws SQLException, JRException, IOException;
 
-    JasperPrint closeSaleReport(ComprobanteFiscal request,
+    JasperPrint closeSaleReport(Invoice request,
                                 String tenant,
                                 HttpServletResponse response)
             throws IOException, JRException, SQLException, JSONException;

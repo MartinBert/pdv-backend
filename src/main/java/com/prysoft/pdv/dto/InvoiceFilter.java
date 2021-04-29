@@ -1,6 +1,6 @@
 package com.prysoft.pdv.dto;
 
-public class ComprobanteFiscalFilter extends SucursalFilter {
+public class InvoiceFilter extends SucursalFilter {
     private String comprobanteFiscalLetra;
     private String comprobanteFiscalNumeroCbte;
     private String comprobanteFiscalFechaEmision;

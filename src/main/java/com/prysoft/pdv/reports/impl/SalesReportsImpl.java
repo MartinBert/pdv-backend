@@ -1,6 +1,6 @@
 package com.prysoft.pdv.reports.impl;
 
-import com.prysoft.pdv.dao.ComprobanteFiscalDao;
+import com.prysoft.pdv.dao.InvoiceDao;
 import com.prysoft.pdv.helpers.*;
 import com.prysoft.pdv.models.*;
 import com.prysoft.pdv.print.*;
@@ -25,9 +25,8 @@ import java.util.*;
 @Service
 @Transactional
 public class SalesReportsImpl implements SalesReport {
-
     @Autowired
-    private ComprobanteFiscalDao dao;
+    private InvoiceDao dao;
     @Autowired
     private DateHelper dateHelper;
     @Autowired
@@ -91,9 +90,9 @@ public class SalesReportsImpl implements SalesReport {
                                           HttpServletResponse response)
             throws JRException, IOException
     {
-        Iterable<ComprobanteFiscal> receipts = dao.findAll();
+        Iterable<Invoice> receipts = dao.findAll();
         ArrayList<PrintSalesReport> data = new ArrayList<>();
-        for (ComprobanteFiscal c : receipts) {
+        for (Invoice c : receipts) {
             Double date = dateHelper.stringDateToDoubleConvertion(c.getFechaEmision());
             if (date >= Double.parseDouble(firstDate) && date <= Double.parseDouble(secondDate)) {
                 if (c.getSucursal().getId() == id && documentoHelper.checkReceiptIsInvoice(c.getDocumentoComercial())) {
@@ -115,9 +114,9 @@ public class SalesReportsImpl implements SalesReport {
                                            HttpServletResponse response)
             throws JRException, IOException
     {
-        Iterable<ComprobanteFiscal> receipts = dao.findAll();
+        Iterable<Invoice> receipts = dao.findAll();
         ArrayList<PrintSalesReport> data = new ArrayList<>();
-        for (ComprobanteFiscal c : receipts) {
+        for (Invoice c : receipts) {
             if (c.getFechaEmision().substring(3).equals(month.concat("/") + year)) {
                 if (c.getSucursal().getId() == id && documentoHelper.checkReceiptIsInvoice(c.getDocumentoComercial())) {
                     PrintSalesReport detail = printSalesHelper.processReceiptForPrint(c);
@@ -139,9 +138,9 @@ public class SalesReportsImpl implements SalesReport {
                                           HttpServletResponse response)
             throws JRException, IOException
     {
-        Iterable<ComprobanteFiscal> receipts = dao.findAll();
+        Iterable<Invoice> receipts = dao.findAll();
         ArrayList<PrintSalesReport> data = new ArrayList<>();
-        for (ComprobanteFiscal c : receipts) {
+        for (Invoice c : receipts) {
             if (c.getFechaEmision().substring(6).equals(year)) {
                 if (c.getSucursal().getId() == id && isInvoice(c)) {
                     PrintSalesReport detail = printSalesHelper.processReceiptForPrint(c);
@@ -176,8 +175,8 @@ public class SalesReportsImpl implements SalesReport {
     {
         InputStream stream = reportsRoutes.getStreamReportResource("salesReports", "quantityProductsSoldReport.jasper");
         ArrayList<QuantityProductsSold> data = new ArrayList<>();
-        Iterable<ComprobanteFiscal> vouchers = dao.findAll();
-        for (ComprobanteFiscal voucher: vouchers){
+        Iterable<Invoice> vouchers = dao.findAll();
+        for (Invoice voucher: vouchers){
             if(invoiceBelongsToBranch(id, voucher)){
                 if(voucherIsInDateRange(voucher, search)){
                     for (PrintComprobanteDetail detailInVoucher: voucher.getProductos()){
@@ -203,7 +202,7 @@ public class SalesReportsImpl implements SalesReport {
         return printHelper.printWithDataSourceCollectionQuantityProductsSold(stream, data, params, response);
     }
 
-    protected boolean voucherIsInDateRange(ComprobanteFiscal voucher, SearchFilterInProductsSold search){
+    protected boolean voucherIsInDateRange(Invoice voucher, SearchFilterInProductsSold search){
         if(date(voucher.getFechaEmision()) >= date(search.getInitDate()) && date(voucher.getFechaEmision()) <= date(search.getFinishDate())){
             return true;
         }else{
@@ -212,7 +211,7 @@ public class SalesReportsImpl implements SalesReport {
     }
 
     @Override
-    public JasperPrint closeSaleReport(ComprobanteFiscal request,
+    public JasperPrint closeSaleReport(Invoice request,
                                        String tenant,
                                        HttpServletResponse response)
             throws IOException, JRException, JSONException
@@ -239,7 +238,7 @@ public class SalesReportsImpl implements SalesReport {
         }
     }
 
-    protected String createEncodedJsonObject(ComprobanteFiscal data)
+    protected String createEncodedJsonObject(Invoice data)
             throws JSONException
     {
         JSONObject objectForQrCode = new JSONObject();
@@ -295,8 +294,8 @@ public class SalesReportsImpl implements SalesReport {
         String subReportProductsDetailRoute = reportsRoutes.getSubReportRoute("salesReports", "productAndDateDetailsSubReport.jasper");
         ArrayList<PrintWithProductDetails> data = new ArrayList<>();
         ArrayList<PrintSaleProductQuantityDetail> subReportProductsDetail = new ArrayList<>();
-        Iterable<ComprobanteFiscal> vouchers = dao.findAll();
-        for(ComprobanteFiscal voucher: vouchers){
+        Iterable<Invoice> vouchers = dao.findAll();
+        for(Invoice voucher: vouchers){
             if(isInvoice(voucher)){
                 if(invoiceIsInTheDateRange(voucher, request)){
                     if(invoiceContainProducts(voucher, request.getProducts())){
@@ -348,11 +347,11 @@ public class SalesReportsImpl implements SalesReport {
         return printHelper.printWithDataSourceCollectionAndProductDetails(stream, data, params, response);
     }
 
-    protected boolean isInvoice(ComprobanteFiscal receipt){
+    protected boolean isInvoice(Invoice receipt){
         return documentoHelper.checkReceiptIsInvoice(receipt.getDocumentoComercial());
     }
 
-    protected boolean invoiceIsInTheDateRange(ComprobanteFiscal receipt,
+    protected boolean invoiceIsInTheDateRange(Invoice receipt,
                                               PrintSaleForSelectedProductAndDate request)
     {
         if(date(receipt.getFechaEmision()) >= date(request.getFechaDesde()) && date(receipt.getFechaEmision()) <= date(request.getFechaHasta())){
@@ -362,7 +361,7 @@ public class SalesReportsImpl implements SalesReport {
         }
     }
 
-    protected boolean invoiceContainProducts(ComprobanteFiscal receipt,
+    protected boolean invoiceContainProducts(Invoice receipt,
                                              ArrayList<Producto> requestProducts)
     {
         boolean status = false;
@@ -381,7 +380,7 @@ public class SalesReportsImpl implements SalesReport {
     }
 
     protected boolean invoiceBelongsToBranch(Long id,
-                                             ComprobanteFiscal receipt)
+                                             Invoice receipt)
     {
         if(receipt.getSucursal().getId() != id) return false;
         return true;
