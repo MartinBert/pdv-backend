@@ -1,8 +1,8 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.PuntoVentaFilter;
-import com.prysoft.pdv.models.PuntoVenta;
-import com.prysoft.pdv.service.PuntoVentaService;
+import com.prysoft.pdv.dto.SalePointFilter;
+import com.prysoft.pdv.models.SalePoint;
+import com.prysoft.pdv.service.SalePointService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,28 +11,28 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/{tenantid}/api/punto_ventas")
-public class PuntoVentaController {
+public class SalePointController {
     @Autowired
-    private PuntoVentaService service;
+    private SalePointService service;
 
     @GetMapping
-    Page<PuntoVenta> findAll(Pageable page) {
+    Page<SalePoint> findAll(Pageable page) {
         return service.findAll(page);
     }
 
     @GetMapping(value = "/{id}")
-    PuntoVenta findById(@PathVariable long id) {
+    SalePoint findById(@PathVariable long id) {
         return service.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    PuntoVenta save(@RequestBody PuntoVenta entity) {
+    SalePoint save(@RequestBody SalePoint entity) {
         return service.saveOrUpdate(entity);
     }
 
     @PutMapping
-    PuntoVenta update(@RequestBody PuntoVenta entity) {
+    SalePoint update(@RequestBody SalePoint entity) {
         return service.saveOrUpdate(entity);
     }
 
@@ -43,7 +43,7 @@ public class PuntoVentaController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<PuntoVenta> filter(@RequestBody PuntoVentaFilter filterParam) {
+    public Page<SalePoint> filter(@RequestBody SalePointFilter filterParam) {
         return service.filter(filterParam);
     }
 }

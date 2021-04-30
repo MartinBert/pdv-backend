@@ -37,9 +37,9 @@ public class Invoice implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "id_plan"))
     private Set<PlanPago> planesPago;
     @OneToOne
-    private PuntoVenta puntoVenta;
+    private SalePoint puntoVenta;
     @OneToOne
-    private Sucursal sucursal;
+    private CommercialBranch sucursal;
     @OneToOne
     private DocumentoComercial documentoComercial;
     @OneToOne
@@ -136,19 +136,19 @@ public class Invoice implements Serializable {
         this.mediosPago = mediosPago;
     }
 
-    public PuntoVenta getPuntoVenta() {
+    public SalePoint getPuntoVenta() {
         return puntoVenta;
     }
 
-    public void setPuntoVenta(PuntoVenta puntoVenta) {
+    public void setPuntoVenta(SalePoint puntoVenta) {
         this.puntoVenta = puntoVenta;
     }
 
-    public Sucursal getSucursal() {
+    public CommercialBranch getSucursal() {
         return sucursal;
     }
 
-    public void setSucursal(Sucursal sucursal) {
+    public void setSucursal(CommercialBranch sucursal) {
         this.sucursal = sucursal;
     }
 

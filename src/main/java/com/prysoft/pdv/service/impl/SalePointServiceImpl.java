@@ -1,10 +1,10 @@
 package com.prysoft.pdv.service.impl;
 
-import com.prysoft.pdv.dao.PuntoVentaDao;
+import com.prysoft.pdv.dao.SalePointDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.PuntoVentaFilter;
-import com.prysoft.pdv.models.PuntoVenta;
-import com.prysoft.pdv.service.PuntoVentaService;
+import com.prysoft.pdv.dto.SalePointFilter;
+import com.prysoft.pdv.models.SalePoint;
+import com.prysoft.pdv.service.SalePointService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,17 +20,17 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class PuntoVentaServiceImpl extends FilterService<PuntoVenta> implements PuntoVentaService {
+public class SalePointServiceImpl extends FilterService<SalePoint> implements SalePointService {
 
     @PersistenceContext
     EntityManager entityManager;
 
     @Autowired
-    private PuntoVentaDao dao;
+    private SalePointDao dao;
 
     @Override
-    public PuntoVenta findById(Long id) {
-        Optional<PuntoVenta> optional = dao.findById(id);
+    public SalePoint findById(Long id) {
+        Optional<SalePoint> optional = dao.findById(id);
         if (!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
@@ -38,12 +38,12 @@ public class PuntoVentaServiceImpl extends FilterService<PuntoVenta> implements 
     }
 
     @Override
-    public Page<PuntoVenta> findAll(Pageable page) {
+    public Page<SalePoint> findAll(Pageable page) {
         return dao.findAll(page);
     }
 
     @Override
-    public PuntoVenta saveOrUpdate(PuntoVenta entity) {
+    public SalePoint saveOrUpdate(SalePoint entity) {
         return dao.save(entity);
     }
 
@@ -53,7 +53,7 @@ public class PuntoVentaServiceImpl extends FilterService<PuntoVenta> implements 
     }
 
     @Override
-    public Page<PuntoVenta> filter(PuntoVentaFilter filterParam) {
+    public Page<SalePoint> filter(SalePointFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
         if (filterParam.getSucursalId() == null) {

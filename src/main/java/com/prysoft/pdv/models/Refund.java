@@ -21,7 +21,7 @@ public class Refund implements Serializable {
     @OneToOne
     private Empresa empresa;
     @OneToOne
-    private Sucursal sucursal;
+    private CommercialBranch sucursal;
 
     public Long getId() {
         return id;
@@ -79,11 +79,11 @@ public class Refund implements Serializable {
         this.empresa = empresa;
     }
 
-    public Sucursal getSucursal() {
+    public CommercialBranch getSucursal() {
         return sucursal;
     }
 
-    public void setSucursal(Sucursal sucursal) {
+    public void setSucursal(CommercialBranch sucursal) {
         this.sucursal = sucursal;
     }
 

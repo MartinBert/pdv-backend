@@ -7,7 +7,8 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "punto_ventas")
-public class PuntoVenta implements Serializable {
+public class SalePoint implements Serializable {
+    private static final long serialVersionUID = 999999999999999999L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,7 +19,7 @@ public class PuntoVenta implements Serializable {
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "sucursal_id", nullable = false)
-    private Sucursal sucursal;
+    private CommercialBranch sucursal;
 
     private String ipLocal;
 
@@ -46,11 +47,11 @@ public class PuntoVenta implements Serializable {
         this.nombre = nombre;
     }
 
-    public Sucursal getSucursal() {
+    public CommercialBranch getSucursal() {
         return sucursal;
     }
 
-    public void setSucursal(Sucursal sucursal) {
+    public void setSucursal(CommercialBranch sucursal) {
         this.sucursal = sucursal;
     }
 

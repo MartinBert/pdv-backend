@@ -18,7 +18,7 @@ public class Deposit implements Serializable {
     @Column(name = "direccion", unique = true, nullable = false)
     private String direccion;
     @ManyToOne
-    private Sucursal sucursales;
+    private CommercialBranch sucursales;
     private String telefono;
     @OneToMany(mappedBy = "deposito")
     @JsonBackReference
@@ -49,11 +49,11 @@ public class Deposit implements Serializable {
         this.direccion = direccion;
     }
 
-    public Sucursal getSucursales() {
+    public CommercialBranch getSucursales() {
         return sucursales;
     }
 
-    public void setSucursales(Sucursal sucursales) {
+    public void setSucursales(CommercialBranch sucursales) {
         this.sucursales = sucursales;
     }
 

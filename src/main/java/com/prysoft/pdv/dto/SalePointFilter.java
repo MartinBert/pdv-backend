@@ -1,6 +1,6 @@
 package com.prysoft.pdv.dto;
 
-public class PuntoVentaFilter extends CommercialBranchFilter {
+public class SalePointFilter extends CommercialBranchFilter {
     private Long puntoVentaId;
     private String puntoVentaName;
     private Long puntoVentaIdFiscal;

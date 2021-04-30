@@ -1,6 +1,6 @@
 package com.prysoft.pdv.dto;
 
-public class UsuarioFilter extends PuntoVentaFilter {
+public class UsuarioFilter extends SalePointFilter {
     private Long usuarioId;
     private String usuarioName;
     private String usuarioUserName;

@@ -35,7 +35,7 @@ public class CommercialBranch  implements Serializable {
     @Column(name = "cuit")
     private String cuit;
     @OneToMany(mappedBy = "sucursal")
-    private Set<PuntoVenta> puntosVenta;
+    private Set<SalePoint> puntosVenta;
     @OneToMany(mappedBy = "sucursales")
     @JsonBackReference(value = "depositos")
     private Set<Deposit> depositos;
@@ -158,11 +158,11 @@ public class CommercialBranch  implements Serializable {
         this.cuit = cuit;
     }
 
-    public Set<PuntoVenta> getPuntosVenta() {
+    public Set<SalePoint> getPuntosVenta() {
         return puntosVenta;
     }
 
-    public void setPuntosVenta(Set<PuntoVenta> puntosVenta) {
+    public void setPuntosVenta(Set<SalePoint> puntosVenta) {
         this.puntosVenta = puntosVenta;
     }
 
