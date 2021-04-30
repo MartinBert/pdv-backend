@@ -6,7 +6,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "clientes")
-public class Client extends Persona implements Serializable {
+public class Client extends Person implements Serializable {
     private static final long serialVersionUID = 999999999999999999L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
