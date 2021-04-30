@@ -18,13 +18,13 @@ public class PrintSalesHelper implements Serializable {
     @Autowired
     private MedioPagoHelper medioHelper;
 
-    public PrintSalesReport processReceiptForPrint(Invoice receipt){
+    public PrintSalesReport processReceiptForPrint(Invoice receipt) {
         PrintSalesReport report = new PrintSalesReport();
         String medios = medioHelper.stringPaymentMethodsNameConvertion(receipt.getMediosPago());
         report.setFechaEmision(receipt.getFechaEmision());
-        if(receipt.getCliente() != null){
+        if (receipt.getCliente() != null) {
             report.setCliente(receipt.getCliente().getRazonSocial());
-        }else{
+        } else {
             report.setCliente("");
         }
         report.setPuntoVenta(receipt.getPuntoVenta().getNombre());
@@ -35,14 +35,14 @@ public class PrintSalesHelper implements Serializable {
         return report;
     }
 
-    public PrintWithProductDetails processReceiptForPrintWithProductDetails(Invoice receipt){
+    public PrintWithProductDetails processReceiptForPrintWithProductDetails(Invoice receipt) {
         PrintWithProductDetails report = new PrintWithProductDetails();
         String medios = medioHelper.stringPaymentMethodsNameConvertion(receipt.getMediosPago());
         JRBeanCollectionDataSource products = new JRBeanCollectionDataSource(receipt.getProductoDescription());
         report.setFechaEmision(receipt.getFechaEmision());
-        if(receipt.getCliente() != null){
+        if (receipt.getCliente() != null) {
             report.setCliente(receipt.getCliente().getRazonSocial());
-        }else{
+        } else {
             report.setCliente("");
         }
         report.setPuntoVenta(receipt.getPuntoVenta().getNombre());
@@ -53,10 +53,10 @@ public class PrintSalesHelper implements Serializable {
         return report;
     }
 
-    public PrintSaleProductQuantityDetail processPrintSaleProductQuantityDetail(ProductoDescription product, PrintSaleForSelectedProductAndDate request){
+    public PrintSaleProductQuantityDetail processPrintSaleProductQuantityDetail(ProductoDescription product, PrintSaleForSelectedProductAndDate request) {
         PrintSaleProductQuantityDetail productQuantityDetail = new PrintSaleProductQuantityDetail();
-        for(Product productoDescription: request.getProducts()){
-            if(product.getBarCode().equals(productoDescription.getCodigoBarra())){
+        for (Product productoDescription : request.getProducts()) {
+            if (product.getBarCode().equals(productoDescription.getCodigoBarra())) {
                 productQuantityDetail.setQuantity(product.getQuantity());
                 productQuantityDetail.setAmount(product.getSalePrice());
                 productQuantityDetail.setInitDate(request.getFechaDesde());
@@ -64,9 +64,9 @@ public class PrintSalesHelper implements Serializable {
                 productQuantityDetail.setProduct(product.getName() + " " + product.getBarCode() + " " + product.getCode());
             }
         }
-        if(productQuantityDetail.getProduct() != null){
+        if (productQuantityDetail.getProduct() != null) {
             return productQuantityDetail;
-        }else{
+        } else {
             return null;
         }
     }

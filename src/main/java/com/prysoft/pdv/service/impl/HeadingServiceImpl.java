@@ -25,7 +25,7 @@ public class HeadingServiceImpl extends FilterService<Heading> implements Headin
     @Override
     public Heading findById(Long id) {
         Optional<Heading> optional = dao.findById(id);
-        if(!optional.isPresent()) {
+        if (!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
         return optional.get();
@@ -54,7 +54,7 @@ public class HeadingServiceImpl extends FilterService<Heading> implements Headin
     @Override
     public Page<Heading> filter(HeadingFilter filterParams) {
         List<FilterParam> params = new ArrayList<>();
-        String hql = "WHERE LOWER(c.nombre) LIKE LOWER ('"+filterParams.getRubroName()+"%')";
+        String hql = "WHERE LOWER(c.nombre) LIKE LOWER ('" + filterParams.getRubroName() + "%')";
         return getPage(hql, filterParams.getPage() - 1, filterParams.getSize(), params);
     }
 }

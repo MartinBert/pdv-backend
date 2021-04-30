@@ -44,9 +44,9 @@ public class HistorialMovimientosStockController {
 
     @PostMapping(value = "/filter")
     public Page<HistorialMovimientosStock> filter(@RequestBody HistorialMovimientosStockFilter filterParam) {
-        try{
+        try {
             return service.filter(filterParam);
-        }catch(Exception e){
+        } catch (Exception e) {
             return null;
         }
     }

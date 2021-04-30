@@ -44,5 +44,6 @@ public class RefundController {
 
     @PostMapping(value = "/filter")
     Page<Refund> filter(@RequestBody RefundFilter filterParam) {
-        return service.filter(filterParam);}
+        return service.filter(filterParam);
+    }
 }

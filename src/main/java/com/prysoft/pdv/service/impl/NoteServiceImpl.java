@@ -25,7 +25,7 @@ public class NoteServiceImpl extends FilterService<Note> implements NoteService 
     @Override
     public Note findById(Long id) {
         Optional<Note> optional = dao.findById(id);
-        if(!optional.isPresent()) {
+        if (!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
         return optional.get();
@@ -48,7 +48,7 @@ public class NoteServiceImpl extends FilterService<Note> implements NoteService 
 
     @Override
     public Page<Note> filter(NoteFilter filterParam) {
-        String hql = "WHERE LOWER(c.name) LIKE LOWER('"+filterParam.getName()+"%')OR (c.details) LIKE LOWER('"+ filterParam.getDetails()+"%')";
+        String hql = "WHERE LOWER(c.name) LIKE LOWER('" + filterParam.getName() + "%')OR (c.details) LIKE LOWER('" + filterParam.getDetails() + "%')";
         List<FilterParam> params = new ArrayList<>();
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }

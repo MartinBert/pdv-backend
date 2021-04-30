@@ -25,7 +25,7 @@ public class PerfilServiceImpl extends FilterService<Perfil> implements PerfilSe
     @Override
     public Perfil findById(Long id) {
         Optional<Perfil> optional = dao.findById(id);
-        if(!optional.isPresent()) {
+        if (!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
         return optional.get();
@@ -50,12 +50,12 @@ public class PerfilServiceImpl extends FilterService<Perfil> implements PerfilSe
     public Page<Perfil> filter(PerfilFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        if(filterParam.getPerfilId() == 1){
-            hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getPerfilName()+"%')";
-        }else{
-            hql = "WHERE (c.id) != ('1') AND (c.nombre) LIKE LOWER('"+filterParam.getPerfilName()+"%')";
+        if (filterParam.getPerfilId() == 1) {
+            hql = "WHERE LOWER(c.nombre) LIKE LOWER('" + filterParam.getPerfilName() + "%')";
+        } else {
+            hql = "WHERE (c.id) != ('1') AND (c.nombre) LIKE LOWER('" + filterParam.getPerfilName() + "%')";
         }
-        return getPage(hql , filterParam.getPage() - 1, filterParam.getSize(), params);
+        return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 
 }

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public interface SaleService {
     Page<Invoice> filter(SaleFilter filterParam);
+
     ArrayList<Invoice> filterNotCloseReceipts(SaleFilter filterParam);
 }
 

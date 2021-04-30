@@ -16,7 +16,7 @@ public class MedioPago implements Serializable {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "medios_planes",
-            joinColumns =  @JoinColumn(name = "id_medio"),
+            joinColumns = @JoinColumn(name = "id_medio"),
             inverseJoinColumns = @JoinColumn(name = "id_plan"))
     private Set<PlanPago> planPago;
 

@@ -25,7 +25,7 @@ public class BrandServiceImpl extends FilterService<Brand> implements BrandServi
     @Override
     public Brand findById(Long id) {
         Optional<Brand> optional = dao.findById(id);
-        if(!optional.isPresent()) {
+        if (!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
         return optional.get();
@@ -54,7 +54,7 @@ public class BrandServiceImpl extends FilterService<Brand> implements BrandServi
     @Override
     public Page<Brand> filter(MarcaFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
-        String hql = "WHERE LOWER(c.nombre) LIKE LOWER ('"+filterParam.getMarcaName()+"%')";
+        String hql = "WHERE LOWER(c.nombre) LIKE LOWER ('" + filterParam.getMarcaName() + "%')";
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 }

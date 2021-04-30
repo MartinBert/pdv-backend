@@ -26,7 +26,7 @@ public class DocumentoComercialServiceImpl extends FilterService<DocumentoComerc
     @Override
     public DocumentoComercial findById(Long id) {
         Optional<DocumentoComercial> optional = dao.findById(id);
-        if(!optional.isPresent()) {
+        if (!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
         return optional.get();
@@ -52,9 +52,9 @@ public class DocumentoComercialServiceImpl extends FilterService<DocumentoComerc
         String[] invoicesCodeArray = new String[]{"001", "006", "011", "081", "082", "111", "9999"};
         Iterable<DocumentoComercial> allDocuments = dao.findAll();
         ArrayList<DocumentoComercial> documentList = new ArrayList<>();
-        for(DocumentoComercial el: allDocuments){
-            for(String e: invoicesCodeArray){
-                if(el.getCodigoDocumento().equals(e)){
+        for (DocumentoComercial el : allDocuments) {
+            for (String e : invoicesCodeArray) {
+                if (el.getCodigoDocumento().equals(e)) {
                     documentList.add(el);
                 }
             }
@@ -65,7 +65,7 @@ public class DocumentoComercialServiceImpl extends FilterService<DocumentoComerc
     @Override
     public Page<DocumentoComercial> filter(DocumentoComercialFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
-        String hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getDocumentoComercialName()+"%')";
+        String hql = "WHERE LOWER(c.nombre) LIKE LOWER('" + filterParam.getDocumentoComercialName() + "%')";
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 

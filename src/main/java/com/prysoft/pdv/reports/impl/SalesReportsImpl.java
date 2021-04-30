@@ -6,7 +6,8 @@ import com.prysoft.pdv.models.*;
 import com.prysoft.pdv.print.*;
 import com.prysoft.pdv.reports.SalesReport;
 import com.prysoft.pdv.reports.routes.ReportsRoutes;
-import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.json.JSONException;
@@ -20,7 +21,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 
 @Service
 @Transactional
@@ -46,8 +50,7 @@ public class SalesReportsImpl implements SalesReport {
     public JasperPrint allSalesReport(String tenant,
                                       Long id,
                                       HttpServletResponse response)
-            throws SQLException, JRException, IOException
-    {
+            throws SQLException, JRException, IOException {
         InputStream stream = reportsRoutes.getStreamReportResource("salesReports", "allSalesForSucursal.jasper");
         HashMap<String, Object> params = new HashMap<>();
         params.put("SUCURSAL", id);
@@ -59,8 +62,7 @@ public class SalesReportsImpl implements SalesReport {
                                              Long id,
                                              String receipt,
                                              HttpServletResponse response)
-            throws SQLException, JRException, IOException
-    {
+            throws SQLException, JRException, IOException {
         InputStream stream = reportsRoutes.getStreamReportResource("salesReports", "allSalesForReceipt.jasper");
         HashMap<String, Object> params = new HashMap<>();
         params.put("SUCURSAL", id);
@@ -73,8 +75,7 @@ public class SalesReportsImpl implements SalesReport {
                                             Long id,
                                             Long client,
                                             HttpServletResponse response)
-            throws SQLException, JRException, IOException
-    {
+            throws SQLException, JRException, IOException {
         InputStream stream = reportsRoutes.getStreamReportResource("salesReports", "allSalesForClient.jasper");
         HashMap<String, Object> params = new HashMap<>();
         params.put("SUCURSAL", id);
@@ -88,8 +89,7 @@ public class SalesReportsImpl implements SalesReport {
                                           String firstDate,
                                           String secondDate,
                                           HttpServletResponse response)
-            throws JRException, IOException
-    {
+            throws JRException, IOException {
         Iterable<Invoice> receipts = dao.findAll();
         ArrayList<PrintSalesReport> data = new ArrayList<>();
         for (Invoice c : receipts) {
@@ -112,8 +112,7 @@ public class SalesReportsImpl implements SalesReport {
                                            String year,
                                            String month,
                                            HttpServletResponse response)
-            throws JRException, IOException
-    {
+            throws JRException, IOException {
         Iterable<Invoice> receipts = dao.findAll();
         ArrayList<PrintSalesReport> data = new ArrayList<>();
         for (Invoice c : receipts) {
@@ -136,8 +135,7 @@ public class SalesReportsImpl implements SalesReport {
                                           Long id,
                                           String year,
                                           HttpServletResponse response)
-            throws JRException, IOException
-    {
+            throws JRException, IOException {
         Iterable<Invoice> receipts = dao.findAll();
         ArrayList<PrintSalesReport> data = new ArrayList<>();
         for (Invoice c : receipts) {
@@ -159,8 +157,7 @@ public class SalesReportsImpl implements SalesReport {
                                        Long id,
                                        String type,
                                        HttpServletResponse response)
-            throws JRException, IOException, SQLException
-    {
+            throws JRException, IOException, SQLException {
         InputStream stream = reportsRoutes.getStreamReportResource("salesReports", "allSalesGroupBy" + type + ".jasper");
         HashMap<String, Object> params = new HashMap<>();
         params.put("SUCURSAL", id);
@@ -171,23 +168,22 @@ public class SalesReportsImpl implements SalesReport {
     public JasperPrint findQuantityOfProductsSold(Long id,
                                                   SearchFilterInProductsSold search,
                                                   HttpServletResponse response)
-            throws JRException, IOException, SQLException
-    {
+            throws JRException, IOException, SQLException {
         InputStream stream = reportsRoutes.getStreamReportResource("salesReports", "quantityProductsSoldReport.jasper");
         ArrayList<QuantityProductsSold> data = new ArrayList<>();
         Iterable<Invoice> vouchers = dao.findAll();
-        for (Invoice voucher: vouchers){
-            if(invoiceBelongsToBranch(id, voucher)){
-                if(voucherIsInDateRange(voucher, search)){
-                    for (PrintComprobanteDetail detailInVoucher: voucher.getProductos()){
+        for (Invoice voucher : vouchers) {
+            if (invoiceBelongsToBranch(id, voucher)) {
+                if (voucherIsInDateRange(voucher, search)) {
+                    for (PrintComprobanteDetail detailInVoucher : voucher.getProductos()) {
                         QuantityProductsSold detail = new QuantityProductsSold();
-                        if (detailInVoucher.getNombre().toLowerCase().trim().equals(search.getSearch().toLowerCase().trim())){
-                            if(data.isEmpty()){
+                        if (detailInVoucher.getNombre().toLowerCase().trim().equals(search.getSearch().toLowerCase().trim())) {
+                            if (data.isEmpty()) {
                                 detail.setNameOfProduct(detailInVoucher.getNombre());
                                 detail.setQuantity(Double.parseDouble(detailInVoucher.getCantUnidades()));
                                 detail.setTotal(detailInVoucher.getPrecioTotal());
                                 data.add(detail);
-                            }else{
+                            } else {
                                 data.get(0).setQuantity(data.get(0).getQuantity() + Double.parseDouble(detailInVoucher.getCantUnidades()));
                                 data.get(0).setTotal(data.get(0).getTotal() + detailInVoucher.getPrecioTotal());
                             }
@@ -202,10 +198,10 @@ public class SalesReportsImpl implements SalesReport {
         return printHelper.printWithDataSourceCollectionQuantityProductsSold(stream, data, params, response);
     }
 
-    protected boolean voucherIsInDateRange(Invoice voucher, SearchFilterInProductsSold search){
-        if(date(voucher.getFechaEmision()) >= date(search.getInitDate()) && date(voucher.getFechaEmision()) <= date(search.getFinishDate())){
+    protected boolean voucherIsInDateRange(Invoice voucher, SearchFilterInProductsSold search) {
+        if (date(voucher.getFechaEmision()) >= date(search.getInitDate()) && date(voucher.getFechaEmision()) <= date(search.getFinishDate())) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -214,8 +210,7 @@ public class SalesReportsImpl implements SalesReport {
     public JasperPrint closeSaleReport(Invoice request,
                                        String tenant,
                                        HttpServletResponse response)
-            throws IOException, JRException, JSONException
-    {
+            throws IOException, JRException, JSONException {
         if (request.getCae() != "") {
             String encodedJsonForQrCode = createEncodedJsonObject(request);
             String subReportRoute = reportsRoutes.getSubReportRoute("receiptsReports", "factura_detail.jasper");
@@ -239,8 +234,7 @@ public class SalesReportsImpl implements SalesReport {
     }
 
     protected String createEncodedJsonObject(Invoice data)
-            throws JSONException
-    {
+            throws JSONException {
         JSONObject objectForQrCode = new JSONObject();
         objectForQrCode.put("ver", 1);
         objectForQrCode.put("fecha", data.getFechaEmision());
@@ -262,9 +256,8 @@ public class SalesReportsImpl implements SalesReport {
     protected HashMap<String, Object> createHashMapForFiscalReceiptReport(String subReportDir,
                                                                           JRBeanCollectionDataSource subReportDataSource,
                                                                           String totalVenta,
-                                                                          String encodedJsonForQrCode)
-    {
-        HashMap<String,Object> paramsForJasperReport = new HashMap<>();
+                                                                          String encodedJsonForQrCode) {
+        HashMap<String, Object> paramsForJasperReport = new HashMap<>();
         paramsForJasperReport.put("SUBREPORT_DIR", subReportDir);
         paramsForJasperReport.put("SUBREPORT_DATA", subReportDataSource);
         paramsForJasperReport.put("TOTAL_VENTA", totalVenta);
@@ -273,10 +266,9 @@ public class SalesReportsImpl implements SalesReport {
     }
 
     protected HashMap<String, Object> createHashMapForNotFiscalReceiptReport(String subReportDir,
-                                                                          JRBeanCollectionDataSource subReportDataSource,
-                                                                          String totalVenta)
-    {
-        HashMap<String,Object> paramsForJasperReport = new HashMap<>();
+                                                                             JRBeanCollectionDataSource subReportDataSource,
+                                                                             String totalVenta) {
+        HashMap<String, Object> paramsForJasperReport = new HashMap<>();
         paramsForJasperReport.put("SUBREPORT_DIR", subReportDir);
         paramsForJasperReport.put("SUBREPORT_DATA", subReportDataSource);
         paramsForJasperReport.put("TOTAL_VENTA", totalVenta);
@@ -287,44 +279,43 @@ public class SalesReportsImpl implements SalesReport {
     public JasperPrint salesForSelectedProductsAndDateRangeReport(PrintSaleForSelectedProductAndDate request,
                                                                   Long id,
                                                                   HttpServletResponse response)
-            throws JRException, IOException
-    {
+            throws JRException, IOException {
         InputStream stream = reportsRoutes.getStreamReportResource("salesReports", "salesForProductAndDates.jasper");
         String subReportRoute = reportsRoutes.getSubReportRoute("salesReports", "salesForProductAndDatesSubReport.jasper");
         String subReportProductsDetailRoute = reportsRoutes.getSubReportRoute("salesReports", "productAndDateDetailsSubReport.jasper");
         ArrayList<PrintWithProductDetails> data = new ArrayList<>();
         ArrayList<PrintSaleProductQuantityDetail> subReportProductsDetail = new ArrayList<>();
         Iterable<Invoice> vouchers = dao.findAll();
-        for(Invoice voucher: vouchers){
-            if(isInvoice(voucher)){
-                if(invoiceIsInTheDateRange(voucher, request)){
-                    if(invoiceContainProducts(voucher, request.getProducts())){
-                        if(invoiceBelongsToBranch(id, voucher)){
+        for (Invoice voucher : vouchers) {
+            if (isInvoice(voucher)) {
+                if (invoiceIsInTheDateRange(voucher, request)) {
+                    if (invoiceContainProducts(voucher, request.getProducts())) {
+                        if (invoiceBelongsToBranch(id, voucher)) {
                             PrintWithProductDetails detail = printSalesHelper.processReceiptForPrintWithProductDetails(voucher);
-                            for(ProductoDescription productDescriptionInVoucher: voucher.getProductoDescription()){
-                                if(subReportProductsDetail.isEmpty()){
+                            for (ProductoDescription productDescriptionInVoucher : voucher.getProductoDescription()) {
+                                if (subReportProductsDetail.isEmpty()) {
                                     PrintSaleProductQuantityDetail printSaleProductQuantityDetail = printSalesHelper.processPrintSaleProductQuantityDetail(productDescriptionInVoucher, request);
-                                    if(printSaleProductQuantityDetail != null){
+                                    if (printSaleProductQuantityDetail != null) {
                                         subReportProductsDetail.add(printSaleProductQuantityDetail);
                                     }
-                                }else{
+                                } else {
                                     ArrayList<PrintSaleProductQuantityDetail> check = new ArrayList<>();
                                     PrintSaleProductQuantityDetail printSaleProductQuantityDetail = printSalesHelper.processPrintSaleProductQuantityDetail(productDescriptionInVoucher, request);
-                                    for (PrintSaleProductQuantityDetail printSaleProductQuantityDetailInSubReportArray: subReportProductsDetail){
-                                        if(printSaleProductQuantityDetail != null && printSaleProductQuantityDetailInSubReportArray != null){
-                                            if(printSaleProductQuantityDetailInSubReportArray.getProduct().equals(printSaleProductQuantityDetail.getProduct())){
+                                    for (PrintSaleProductQuantityDetail printSaleProductQuantityDetailInSubReportArray : subReportProductsDetail) {
+                                        if (printSaleProductQuantityDetail != null && printSaleProductQuantityDetailInSubReportArray != null) {
+                                            if (printSaleProductQuantityDetailInSubReportArray.getProduct().equals(printSaleProductQuantityDetail.getProduct())) {
                                                 check.add(printSaleProductQuantityDetail);
                                             }
                                         }
                                     }
-                                    if(check.isEmpty()){
-                                        if(printSaleProductQuantityDetail != null){
+                                    if (check.isEmpty()) {
+                                        if (printSaleProductQuantityDetail != null) {
                                             subReportProductsDetail.add(printSaleProductQuantityDetail);
                                         }
-                                    }else{
-                                        for (PrintSaleProductQuantityDetail printSaleProductQuantityDetailInSubReportArray: subReportProductsDetail){
-                                            if(printSaleProductQuantityDetail != null && printSaleProductQuantityDetailInSubReportArray != null){
-                                                if(printSaleProductQuantityDetailInSubReportArray.getProduct().equals(printSaleProductQuantityDetail.getProduct())){
+                                    } else {
+                                        for (PrintSaleProductQuantityDetail printSaleProductQuantityDetailInSubReportArray : subReportProductsDetail) {
+                                            if (printSaleProductQuantityDetail != null && printSaleProductQuantityDetailInSubReportArray != null) {
+                                                if (printSaleProductQuantityDetailInSubReportArray.getProduct().equals(printSaleProductQuantityDetail.getProduct())) {
                                                     printSaleProductQuantityDetailInSubReportArray.setQuantity(printSaleProductQuantityDetailInSubReportArray.getQuantity() + printSaleProductQuantityDetail.getQuantity());
                                                     printSaleProductQuantityDetailInSubReportArray.setAmount(printSaleProductQuantityDetailInSubReportArray.getAmount() + printSaleProductQuantityDetail.getAmount());
                                                 }
@@ -347,46 +338,43 @@ public class SalesReportsImpl implements SalesReport {
         return printHelper.printWithDataSourceCollectionAndProductDetails(stream, data, params, response);
     }
 
-    protected boolean isInvoice(Invoice receipt){
+    protected boolean isInvoice(Invoice receipt) {
         return documentoHelper.checkReceiptIsInvoice(receipt.getDocumentoComercial());
     }
 
     protected boolean invoiceIsInTheDateRange(Invoice receipt,
-                                              PrintSaleForSelectedProductAndDate request)
-    {
-        if(date(receipt.getFechaEmision()) >= date(request.getFechaDesde()) && date(receipt.getFechaEmision()) <= date(request.getFechaHasta())){
+                                              PrintSaleForSelectedProductAndDate request) {
+        if (date(receipt.getFechaEmision()) >= date(request.getFechaDesde()) && date(receipt.getFechaEmision()) <= date(request.getFechaHasta())) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
     protected boolean invoiceContainProducts(Invoice receipt,
-                                             ArrayList<Product> requestProducts)
-    {
+                                             ArrayList<Product> requestProducts) {
         boolean status = false;
-        if(receipt.getProductoDescription() != null){
-            for(ProductoDescription productOfReceipt: receipt.getProductoDescription()){
-                for(Product product: requestProducts){
-                    if(productOfReceipt.getBarCode().equals(product.getCodigoBarra())){
+        if (receipt.getProductoDescription() != null) {
+            for (ProductoDescription productOfReceipt : receipt.getProductoDescription()) {
+                for (Product product : requestProducts) {
+                    if (productOfReceipt.getBarCode().equals(product.getCodigoBarra())) {
                         status = true;
                     }
                 }
             }
-        }else{
+        } else {
             status = false;
         }
         return status;
     }
 
     protected boolean invoiceBelongsToBranch(Long id,
-                                             Invoice receipt)
-    {
-        if(receipt.getSucursal().getId() != id) return false;
+                                             Invoice receipt) {
+        if (receipt.getSucursal().getId() != id) return false;
         return true;
     }
 
-    protected double date(String date){
+    protected double date(String date) {
         return dateHelper.stringDateToDoubleConvertion(date);
     }
 }

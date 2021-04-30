@@ -11,13 +11,34 @@ public class PrintComprobanteDetail implements Serializable {
     public String getNombre() {
         return nombre;
     }
-    public void setNombre(String nombre) {this.nombre = nombre;}
-    public String getCantUnidades() {return cantUnidades;}
-    public void setCantUnidades(String cantUnidades) {this.cantUnidades = cantUnidades;}
-    public double getPrecioUnitario() { return precioUnitario;}
-    public void setPrecioUnitario(double precioUnitario) {this.precioUnitario = precioUnitario;}
-    public double getPrecioTotal() {return precioTotal;}
-    public void setPrecioTotal(double precioTotal) {this.precioTotal = precioTotal;}
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getCantUnidades() {
+        return cantUnidades;
+    }
+
+    public void setCantUnidades(String cantUnidades) {
+        this.cantUnidades = cantUnidades;
+    }
+
+    public double getPrecioUnitario() {
+        return precioUnitario;
+    }
+
+    public void setPrecioUnitario(double precioUnitario) {
+        this.precioUnitario = precioUnitario;
+    }
+
+    public double getPrecioTotal() {
+        return precioTotal;
+    }
+
+    public void setPrecioTotal(double precioTotal) {
+        this.precioTotal = precioTotal;
+    }
 
     @Override
     public String toString() {

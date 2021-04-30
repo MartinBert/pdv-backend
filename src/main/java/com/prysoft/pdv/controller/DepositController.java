@@ -34,7 +34,9 @@ public class DepositController {
     }
 
     @PostMapping(value = "/saveAll")
-    Iterable<Deposit> saveAll(@RequestBody ArrayList<Deposit> entities) { return service.saveAll(entities); }
+    Iterable<Deposit> saveAll(@RequestBody ArrayList<Deposit> entities) {
+        return service.saveAll(entities);
+    }
 
     @PutMapping
     Deposit update(@RequestBody Deposit entity) {

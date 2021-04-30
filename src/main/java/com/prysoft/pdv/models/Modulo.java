@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "modulos")
-public class Modulo  implements Serializable {
+public class Modulo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,9 +21,13 @@ public class Modulo  implements Serializable {
         this.id = id;
     }
 
-    public String getNombre() { return nombre; }
+    public String getNombre() {
+        return nombre;
+    }
 
-    public void setNombre(String nombre) { this.nombre = nombre; }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
     @Override
     public String toString() {

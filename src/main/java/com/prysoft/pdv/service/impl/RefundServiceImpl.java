@@ -1,8 +1,8 @@
 package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.RefundDao;
-import com.prysoft.pdv.dto.RefundFilter;
 import com.prysoft.pdv.dto.FilterParam;
+import com.prysoft.pdv.dto.RefundFilter;
 import com.prysoft.pdv.models.Refund;
 import com.prysoft.pdv.service.RefundService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class RefundServiceImpl extends FilterService<Refund> implements RefundSe
     @Override
     public Refund findById(Long id) {
         Optional<Refund> optional = dao.findById(id);
-        if(!optional.isPresent()) {
+        if (!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
         return optional.get();
@@ -45,16 +45,16 @@ public class RefundServiceImpl extends FilterService<Refund> implements RefundSe
     public Page<Refund> filter(RefundFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        if(filterParam.getSucursalId() == null){
+        if (filterParam.getSucursalId() == null) {
             hql = "";
-        }else{
-            if(filterParam.getBlackReceiptFilter() != null && filterParam.getBlackReceiptFilter() == 999999999){
-                hql = "WHERE c.sucursal.id = ('"+filterParam.getSucursalId()+"')";
-            }else{
-                hql = "WHERE c.sucursal.id = ('"+filterParam.getSucursalId()+"') AND LOWER(c.comprobante.letra) NOT LIKE LOWER('nx')";
+        } else {
+            if (filterParam.getBlackReceiptFilter() != null && filterParam.getBlackReceiptFilter() == 999999999) {
+                hql = "WHERE c.sucursal.id = ('" + filterParam.getSucursalId() + "')";
+            } else {
+                hql = "WHERE c.sucursal.id = ('" + filterParam.getSucursalId() + "') AND LOWER(c.comprobante.letra) NOT LIKE LOWER('nx')";
             }
         }
-        return getPage(hql,filterParam.getPage() - 1,filterParam.getSize(),params);
+        return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 
     @Override

@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class DistribuidorServiceImpl extends FilterService<Proveedor> implements DistribuidorService{
+public class DistribuidorServiceImpl extends FilterService<Proveedor> implements DistribuidorService {
 
     @Autowired
     private DistribuidorDao dao;
@@ -26,7 +26,7 @@ public class DistribuidorServiceImpl extends FilterService<Proveedor> implements
     @Override
     public Proveedor findById(Long id) {
         Optional<Proveedor> optional = dao.findById(id);
-        if(!optional.isPresent()) {
+        if (!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
 
@@ -53,21 +53,21 @@ public class DistribuidorServiceImpl extends FilterService<Proveedor> implements
         String hql;
         List<FilterParam> params = new ArrayList<>();
 
-        if(filterParam.getSucursalId() == null){
+        if (filterParam.getSucursalId() == null) {
             hql =
-                    "WHERE (LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getPersonaSocialReason()+"%') " +
-                            "AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getPersonaName()+"%') " +
-                            "AND LOWER(c.direccion) LIKE LOWER('"+filterParam.getPersonaDirection()+"%') " +
-                            "AND LOWER(c.nombreContacto) LIKE LOWER('"+filterParam.getPersonaContactName()+"%') " +
-                            "AND LOWER(c.cuit) LIKE LOWER('"+filterParam.getPersonaCuit()+"%'))";
-        }else{
+                    "WHERE (LOWER(c.razonSocial) LIKE LOWER('" + filterParam.getPersonaSocialReason() + "%') " +
+                            "AND LOWER(c.nombre) LIKE LOWER('" + filterParam.getPersonaName() + "%') " +
+                            "AND LOWER(c.direccion) LIKE LOWER('" + filterParam.getPersonaDirection() + "%') " +
+                            "AND LOWER(c.nombreContacto) LIKE LOWER('" + filterParam.getPersonaContactName() + "%') " +
+                            "AND LOWER(c.cuit) LIKE LOWER('" + filterParam.getPersonaCuit() + "%'))";
+        } else {
             hql =
-                    "JOIN c.sucursales s WHERE s.id = ('"+filterParam.getSucursalId()+"') " +
-                            "AND (LOWER(c.razonSocial) LIKE LOWER('"+filterParam.getPersonaSocialReason()+"%') " +
-                            "AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getPersonaName()+"%') " +
-                            "AND LOWER(c.direccion) LIKE LOWER('"+filterParam.getPersonaDirection()+"%') " +
-                            "AND LOWER(c.nombreContacto) LIKE LOWER('"+filterParam.getPersonaContactName()+"%') " +
-                            "AND LOWER(c.cuit) LIKE LOWER('"+filterParam.getPersonaCuit()+"%'))";
+                    "JOIN c.sucursales s WHERE s.id = ('" + filterParam.getSucursalId() + "') " +
+                            "AND (LOWER(c.razonSocial) LIKE LOWER('" + filterParam.getPersonaSocialReason() + "%') " +
+                            "AND LOWER(c.nombre) LIKE LOWER('" + filterParam.getPersonaName() + "%') " +
+                            "AND LOWER(c.direccion) LIKE LOWER('" + filterParam.getPersonaDirection() + "%') " +
+                            "AND LOWER(c.nombreContacto) LIKE LOWER('" + filterParam.getPersonaContactName() + "%') " +
+                            "AND LOWER(c.cuit) LIKE LOWER('" + filterParam.getPersonaCuit() + "%'))";
         }
 
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);

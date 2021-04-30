@@ -26,7 +26,7 @@ public class HistorialMovimientosStockServiceImpl extends FilterService<Historia
     @Override
     public HistorialMovimientosStock findById(Long id) {
         Optional<HistorialMovimientosStock> optional = dao.findById(id);
-        if(!optional.isPresent()) {
+        if (!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
         return optional.get();
@@ -51,18 +51,18 @@ public class HistorialMovimientosStockServiceImpl extends FilterService<Historia
     public Page<HistorialMovimientosStock> filter(HistorialMovimientosStockFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        if(filterParam.getSucursalId() == null){
+        if (filterParam.getSucursalId() == null) {
             hql =
-                "WHERE LOWER(c.descripcion) LIKE LOWER('"+filterParam.getHistorialMovimientosStockDescripcion()+"%') " +
-                "AND LOWER(c.fecha) LIKE LOWER('"+filterParam.getHistorialMovimientosStockFecha()+"%') " +
-                "AND LOWER(c.usuario) LIKE LOWER('"+filterParam.getHistorialMovimientosStockUsuario()+"%') ";
-        }else{
+                    "WHERE LOWER(c.descripcion) LIKE LOWER('" + filterParam.getHistorialMovimientosStockDescripcion() + "%') " +
+                            "AND LOWER(c.fecha) LIKE LOWER('" + filterParam.getHistorialMovimientosStockFecha() + "%') " +
+                            "AND LOWER(c.usuario) LIKE LOWER('" + filterParam.getHistorialMovimientosStockUsuario() + "%') ";
+        } else {
             hql =
-                "WHERE (c.sucursal.id) = ('"+filterParam.getSucursalId()+"') " +
-                "AND LOWER(c.descripcion) LIKE LOWER('"+filterParam.getHistorialMovimientosStockDescripcion()+"%') " +
-                "AND LOWER(c.fecha) LIKE LOWER('"+filterParam.getHistorialMovimientosStockFecha()+"%') " +
-                "AND LOWER(c.usuario) LIKE LOWER('"+filterParam.getHistorialMovimientosStockUsuario()+"%') " +
-                "GROUP BY (c.id) ORDER BY (c.id) DESC";
+                    "WHERE (c.sucursal.id) = ('" + filterParam.getSucursalId() + "') " +
+                            "AND LOWER(c.descripcion) LIKE LOWER('" + filterParam.getHistorialMovimientosStockDescripcion() + "%') " +
+                            "AND LOWER(c.fecha) LIKE LOWER('" + filterParam.getHistorialMovimientosStockFecha() + "%') " +
+                            "AND LOWER(c.usuario) LIKE LOWER('" + filterParam.getHistorialMovimientosStockUsuario() + "%') " +
+                            "GROUP BY (c.id) ORDER BY (c.id) DESC";
         }
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }

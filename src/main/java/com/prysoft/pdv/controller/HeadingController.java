@@ -34,7 +34,9 @@ public class HeadingController {
     }
 
     @PostMapping(value = "/saveAll")
-    Iterable<Heading> saveAll(@RequestBody ArrayList<Heading> entities) { return service.saveAll(entities); }
+    Iterable<Heading> saveAll(@RequestBody ArrayList<Heading> entities) {
+        return service.saveAll(entities);
+    }
 
     @PutMapping
     Heading update(@RequestBody Heading entity) {

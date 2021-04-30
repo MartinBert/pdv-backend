@@ -37,7 +37,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
         //Chequear que el usuario sea del tenant
         String tenantUser = token.getSubject().split("/")[1];
 
-        if(!tenantUser.equals(tenant)){
+        if (!tenantUser.equals(tenant)) {
             chain.doFilter(request, response);
             return;
         }

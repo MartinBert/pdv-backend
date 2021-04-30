@@ -1,6 +1,6 @@
 package com.prysoft.pdv.dto;
 
-public class ModuloFilter extends PageFilter{
+public class ModuloFilter extends PageFilter {
     private String moduloName;
 
     public String getModuloName() {

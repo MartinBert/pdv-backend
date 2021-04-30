@@ -19,14 +19,13 @@ import java.util.Optional;
 @Service
 @Transactional
 public class AtributoServiceImpl extends FilterService<Attribute> implements AtributoService {
-
     @Autowired
     private AttributeDao dao;
 
     @Override
     public Attribute findById(Long id) {
         Optional<Attribute> optional = dao.findById(id);
-        if(!optional.isPresent()) {
+        if (!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
         return optional.get();
@@ -39,21 +38,21 @@ public class AtributoServiceImpl extends FilterService<Attribute> implements Atr
 
     @Override
     public Attribute saveOrUpdate(Attribute entity) {
-        if(entity.getValor() != null){
+        if (entity.getValor() != null) {
             Optional<Attribute> textAtributeInDatabase = dao.findByValor(entity.getValor());
-            if(textAtributeInDatabase.isPresent()){
+            if (textAtributeInDatabase.isPresent()) {
                 return null;
-            }else{
+            } else {
                 return dao.save(entity);
             }
-        }else if(entity.getValorNumerico() != 0){
+        } else if (entity.getValorNumerico() != 0) {
             Optional<Attribute> numericAtributeInDatabase = dao.findByValorNumerico(entity.getValorNumerico());
-            if(numericAtributeInDatabase.isPresent()){
+            if (numericAtributeInDatabase.isPresent()) {
                 return null;
-            }else{
+            } else {
                 return dao.save(entity);
             }
-        }else{
+        } else {
             return dao.save(entity);
         }
     }
@@ -67,7 +66,7 @@ public class AtributoServiceImpl extends FilterService<Attribute> implements Atr
     public Page<Attribute> filter(AttributeFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        hql = "WHERE LOWER(c.valor) LIKE LOWER('"+filterParam.getAtributoValor()+"%')";
+        hql = "WHERE LOWER(c.valor) LIKE LOWER('" + filterParam.getAtributoValor() + "%')";
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 
@@ -76,9 +75,9 @@ public class AtributoServiceImpl extends FilterService<Attribute> implements Atr
         Iterable<Attribute> atributos = dao.findAll();
         atributos.forEach((Attribute el) -> {
             entities.forEach((Attribute e) -> {
-                if(el.getValor().equals(e.getValor())){
+                if (el.getValor().equals(e.getValor())) {
                     e.setId(el.getId());
-                }else if(el.getValorNumerico() == e.getValorNumerico()){
+                } else if (el.getValorNumerico() == e.getValorNumerico()) {
                     e.setId(el.getId());
                 }
             });

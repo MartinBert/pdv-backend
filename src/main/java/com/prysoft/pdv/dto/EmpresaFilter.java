@@ -1,6 +1,6 @@
 package com.prysoft.pdv.dto;
 
-public class EmpresaFilter extends PerfilFilter{
+public class EmpresaFilter extends PerfilFilter {
     private Long empresaId;
     private String empresaName;
     private String empresaSocialReason;

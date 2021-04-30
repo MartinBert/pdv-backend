@@ -9,10 +9,10 @@ import java.util.Date;
 
 @Service
 public class DateHelper implements Serializable {
-    public String getMonthName(String month){
+    public String getMonthName(String month) {
         String monthName;
 
-        switch (month){
+        switch (month) {
             case "01":
                 monthName = "Enero";
                 break;
@@ -54,7 +54,7 @@ public class DateHelper implements Serializable {
         return monthName;
     }
 
-    public Double stringDateToDoubleConvertion(String date){
+    public Double stringDateToDoubleConvertion(String date) {
         Double convertDate = Double.valueOf(0);
 
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
@@ -68,12 +68,12 @@ public class DateHelper implements Serializable {
         return convertDate;
     }
 
-    public String dateToStringConvertion(Date date){
+    public String dateToStringConvertion(Date date) {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         try {
             String converDate = format.format(date);
             return converDate;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.getMessage();
             return null;
         }

@@ -1,6 +1,6 @@
 package com.prysoft.pdv.dto;
 
-public class PlanPagoFilter extends SucursalFilter{
+public class PlanPagoFilter extends SucursalFilter {
     private String planPagoName;
 
     public String getPlanPagoName() {

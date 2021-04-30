@@ -34,7 +34,9 @@ public class MedioPagoController {
     }
 
     @PostMapping(value = "/saveAll")
-    Iterable<MedioPago> saveAll(@RequestBody ArrayList<MedioPago> entities) { return service.saveAll(entities); }
+    Iterable<MedioPago> saveAll(@RequestBody ArrayList<MedioPago> entities) {
+        return service.saveAll(entities);
+    }
 
     @PutMapping
     MedioPago update(@RequestBody MedioPago entity) {

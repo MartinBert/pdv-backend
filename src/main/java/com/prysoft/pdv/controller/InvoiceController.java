@@ -28,18 +28,22 @@ public class InvoiceController {
     }
 
     @GetMapping(value = "cbteNumero/{numero}")
-    Invoice findByNumeroCbte(@PathVariable String numero) {return service.findByNumeroCbte(numero);}
+    Invoice findByNumeroCbte(@PathVariable String numero) {
+        return service.findByNumeroCbte(numero);
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     Invoice save(@RequestBody Invoice entity) {
         service.saveOrUpdate(entity);
         Invoice object = service.saveOrUpdate(entity);
-        return object ;
+        return object;
     }
 
     @PostMapping(value = "/saveAll")
-    Iterable<Invoice> saveAll(@RequestBody ArrayList<Invoice> entities){ return service.saveOrUpdateAll(entities); }
+    Iterable<Invoice> saveAll(@RequestBody ArrayList<Invoice> entities) {
+        return service.saveOrUpdateAll(entities);
+    }
 
     @PutMapping
     Invoice update(@RequestBody Invoice entity) {

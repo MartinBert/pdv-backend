@@ -1,4 +1,5 @@
 package com.prysoft.pdv.service;
+
 import com.prysoft.pdv.dto.NoteFilter;
 import com.prysoft.pdv.models.Note;
 import org.springframework.data.domain.Page;

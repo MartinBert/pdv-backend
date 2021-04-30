@@ -26,7 +26,7 @@ public class ModuloServiceImpl extends FilterService<Modulo> implements ModuloSe
     @Override
     public Modulo findById(Long id) {
         Optional<Modulo> optional = dao.findById(id);
-        if(!optional.isPresent()) {
+        if (!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
         return optional.get();
@@ -38,7 +38,9 @@ public class ModuloServiceImpl extends FilterService<Modulo> implements ModuloSe
     }
 
     @Override
-    public Modulo saveOrUpdate(Modulo entity) {return dao.save(entity);}
+    public Modulo saveOrUpdate(Modulo entity) {
+        return dao.save(entity);
+    }
 
     @Override
     public void delete(Long id) {
@@ -48,7 +50,7 @@ public class ModuloServiceImpl extends FilterService<Modulo> implements ModuloSe
     @Override
     public Page<Modulo> filter(ModuloFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
-        String hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getModuloName()+"%')";
+        String hql = "WHERE LOWER(c.nombre) LIKE LOWER('" + filterParam.getModuloName() + "%')";
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 }

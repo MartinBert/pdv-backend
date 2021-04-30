@@ -25,7 +25,7 @@ public class PlanPagoServiceImpl extends FilterService<PlanPago> implements Plan
     @Override
     public PlanPago findById(Long id) {
         Optional<PlanPago> optional = dao.findById(id);
-        if(!optional.isPresent()) {
+        if (!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
 
@@ -57,11 +57,11 @@ public class PlanPagoServiceImpl extends FilterService<PlanPago> implements Plan
         String hql;
         List<FilterParam> params = new ArrayList<>();
 
-        if(filterParam.getSucursalId() == null){
-            hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getPlanPagoName()+"%')";
-        }else{
-            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getSucursalId()+"') " +
-                    "AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getPlanPagoName()+"%')";
+        if (filterParam.getSucursalId() == null) {
+            hql = "WHERE LOWER(c.nombre) LIKE LOWER('" + filterParam.getPlanPagoName() + "%')";
+        } else {
+            hql = "WHERE (c.sucursal.id) = ('" + filterParam.getSucursalId() + "') " +
+                    "AND LOWER(c.nombre) LIKE LOWER('" + filterParam.getPlanPagoName() + "%')";
         }
 
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);

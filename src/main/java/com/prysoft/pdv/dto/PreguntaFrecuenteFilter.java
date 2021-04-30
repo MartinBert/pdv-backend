@@ -1,6 +1,6 @@
 package com.prysoft.pdv.dto;
 
-public class PreguntaFrecuenteFilter extends PageFilter{
+public class PreguntaFrecuenteFilter extends PageFilter {
     private String preguntaFrecuenteQuestion;
     private String preguntaFrecuenteResponse;
 

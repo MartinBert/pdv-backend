@@ -15,7 +15,7 @@ public class FiscalCondition implements Serializable {
     private String nombre;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "condiciones_documentos",
-            joinColumns =  @JoinColumn(name = "id_condicion"),
+            joinColumns = @JoinColumn(name = "id_condicion"),
             inverseJoinColumns = @JoinColumn(name = "id_documento"))
     private Set<DocumentoComercial> documentos;
 

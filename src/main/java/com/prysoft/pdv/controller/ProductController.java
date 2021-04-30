@@ -1,11 +1,12 @@
 package com.prysoft.pdv.controller;
 
 import com.prysoft.pdv.dto.ProductFilter;
-import com.prysoft.pdv.models.*;
+import com.prysoft.pdv.models.Product;
 import com.prysoft.pdv.print.PrintProductsLabels;
 import com.prysoft.pdv.reports.ProductsReport;
 import com.prysoft.pdv.service.ProductService;
-import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperPrint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -43,8 +44,10 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    Product save(@RequestBody Product entity) { Product obj = service.saveOrUpdate(entity);
-        return obj;}
+    Product save(@RequestBody Product entity) {
+        Product obj = service.saveOrUpdate(entity);
+        return obj;
+    }
 
     @PostMapping(value = "/filter")
     public Page<Product> filter(@RequestBody ProductFilter filterParam) {
@@ -52,7 +55,9 @@ public class ProductController {
     }
 
     @PostMapping(value = "/saveAll")
-    Iterable<Product> saveAll(@RequestBody ArrayList<Product> entities){ return service.saveOrUpdateAll(entities); }
+    Iterable<Product> saveAll(@RequestBody ArrayList<Product> entities) {
+        return service.saveOrUpdateAll(entities);
+    }
 
     @PutMapping
     Product update(@RequestBody Product entity) {

@@ -1,6 +1,6 @@
 package com.prysoft.pdv.dto;
 
-public class PerfilFilter extends PageFilter{
+public class PerfilFilter extends PageFilter {
     private Long perfilId;
     private String perfilName;
 

@@ -26,7 +26,7 @@ public class IvaServiceImpl extends FilterService<Iva> implements IvaService {
     @Override
     public Iva findById(Long id) {
         Optional<Iva> optional = dao.findById(id);
-        if(!optional.isPresent()) {
+        if (!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
         return optional.get();

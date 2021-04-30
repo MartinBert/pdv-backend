@@ -11,7 +11,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +31,7 @@ public class PuntoVentaServiceImpl extends FilterService<PuntoVenta> implements 
     @Override
     public PuntoVenta findById(Long id) {
         Optional<PuntoVenta> optional = dao.findById(id);
-        if(!optional.isPresent()) {
+        if (!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
         return optional.get();
@@ -54,11 +56,11 @@ public class PuntoVentaServiceImpl extends FilterService<PuntoVenta> implements 
     public Page<PuntoVenta> filter(PuntoVentaFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        if(filterParam.getSucursalId() == null){
-            hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getPuntoVentaName()+"%')";
-        }else{
-            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getSucursalId()+"') " +
-                    "AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getPuntoVentaName()+"%')";
+        if (filterParam.getSucursalId() == null) {
+            hql = "WHERE LOWER(c.nombre) LIKE LOWER('" + filterParam.getPuntoVentaName() + "%')";
+        } else {
+            hql = "WHERE (c.sucursal.id) = ('" + filterParam.getSucursalId() + "') " +
+                    "AND LOWER(c.nombre) LIKE LOWER('" + filterParam.getPuntoVentaName() + "%')";
         }
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }

@@ -25,7 +25,7 @@ public class CashBoxServiceImpl extends FilterService<CashBox> implements CashBo
     @Override
     public CashBox findById(Long id) {
         Optional<CashBox> optional = dao.findById(id);
-        if(!optional.isPresent()) {
+        if (!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
         return optional.get();
@@ -50,10 +50,10 @@ public class CashBoxServiceImpl extends FilterService<CashBox> implements CashBo
     public Page<CashBox> filter(CashBoxFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        if(filterParam.getSucursalId() == null){
-            hql ="";
-        }else{
-            hql = "WHERE (c.sucursal.id) = ('"+filterParam.getSucursalId()+"')";
+        if (filterParam.getSucursalId() == null) {
+            hql = "";
+        } else {
+            hql = "WHERE (c.sucursal.id) = ('" + filterParam.getSucursalId() + "')";
         }
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }

@@ -9,7 +9,6 @@ import java.util.Set;
 @Table(name = "propiedades")
 public class Property implements Serializable {
     private static final long serialVersionUID = 999999999999999999L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,7 +16,7 @@ public class Property implements Serializable {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "propiedades_atributos",
-            joinColumns =  @JoinColumn(name = "id_propiedad"),
+            joinColumns = @JoinColumn(name = "id_propiedad"),
             inverseJoinColumns = @JoinColumn(name = "id_atributo"))
     private Set<Attribute> atributos;
 
@@ -43,5 +42,14 @@ public class Property implements Serializable {
 
     public void setAtributos(Set<Attribute> atributos) {
         this.atributos = atributos;
+    }
+
+    @Override
+    public String toString() {
+        return "Property{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", atributos=" + atributos +
+                '}';
     }
 }

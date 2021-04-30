@@ -16,7 +16,8 @@ public class Stock implements Serializable {
     @ManyToOne
     private Deposit deposito;
 
-    @OneToOne Sucursal sucursal;
+    @OneToOne
+    Sucursal sucursal;
 
     private double cantidad;
 

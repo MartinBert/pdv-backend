@@ -1,6 +1,6 @@
 package com.prysoft.pdv.dto;
 
-public class MedioPagoFilter extends SucursalFilter{
+public class MedioPagoFilter extends SucursalFilter {
     private String medioPagoName;
 
     public String getMedioPagoName() {

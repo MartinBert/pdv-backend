@@ -29,7 +29,7 @@ public class UsuarioServiceImpl extends FilterService<Usuario> implements Usuari
     @Override
     public Usuario findById(Long id) {
         Optional<Usuario> optional = dao.findById(id);
-        if(!optional.isPresent()) {
+        if (!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
 
@@ -42,28 +42,27 @@ public class UsuarioServiceImpl extends FilterService<Usuario> implements Usuari
     }
 
     @Override
-    public Usuario findByUsername(String username){return dao.findOneByUsername(username);}
+    public Usuario findByUsername(String username) {
+        return dao.findOneByUsername(username);
+    }
 
     @Override
     public Usuario saveOrUpdate(Usuario entity) {
         Usuario u = dao.findOneByUsername(entity.getUsername());
-        if(entity.getId() == null){//Usuario nuevo
-            if(u != null){
+        if (entity.getId() == null) {//Usuario nuevo
+            if (u != null) {
                 throw new EntityNotFoundException("El nombre de usuario ya existe");
             }
             entity.setPassword(passwordEncoder.encode(entity.getPassword()));
-        }
-        else {//Actualiza el usuario
-            if(u != null && !entity.getId().equals(u.getId())){
+        } else {//Actualiza el usuario
+            if (u != null && !entity.getId().equals(u.getId())) {
                 throw new EntityNotFoundException("El nombre de usuario ya existe");
-            }
-            else {
-                if(entity.getPassword() == null){
+            } else {
+                if (entity.getPassword() == null) {
                     Optional<Usuario> optional = dao.findById(entity.getId());
                     Usuario user = optional.get();
                     entity.setPassword(user.getPassword());
-                }
-                else {
+                } else {
                     entity.setPassword(passwordEncoder.encode(entity.getPassword()));
                 }
             }
@@ -76,16 +75,16 @@ public class UsuarioServiceImpl extends FilterService<Usuario> implements Usuari
     public Usuario update(Usuario entity) {
         Optional<Usuario> userCoincidence = dao.findById(entity.getId());
 
-        if(userCoincidence.isPresent()){
-            try{
+        if (userCoincidence.isPresent()) {
+            try {
                 Usuario user = userCoincidence.get();
                 System.out.println(user.getPassword());
                 System.out.println(passwordEncoder.encode(entity.getPassword()));
-                if(user.getPassword().equals(passwordEncoder.encode(entity.getPassword()))){
+                if (user.getPassword().equals(passwordEncoder.encode(entity.getPassword()))) {
                     System.out.println("Coincidence");
                     return saveOrUpdate(entity);
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -102,20 +101,20 @@ public class UsuarioServiceImpl extends FilterService<Usuario> implements Usuari
     public Page<Usuario> filter(UsuarioFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        if(filterParam.getEmpresaId() == null){
+        if (filterParam.getEmpresaId() == null) {
             hql =
-            "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getUsuarioName()+"%') " +
-            "AND (LOWER(c.sucursal.razonSocial) LIKE LOWER('"+filterParam.getSucursalSocialReason()+"%') " +
-            "AND LOWER(c.perfil.nombre) LIKE LOWER('"+filterParam.getPerfilName()+"%') " +
-            "AND LOWER(c.puntoVenta.nombre) LIKE LOWER('"+filterParam.getPuntoVentaName()+"%'))";
-        }else{
+                    "WHERE LOWER(c.nombre) LIKE LOWER('" + filterParam.getUsuarioName() + "%') " +
+                            "AND (LOWER(c.sucursal.razonSocial) LIKE LOWER('" + filterParam.getSucursalSocialReason() + "%') " +
+                            "AND LOWER(c.perfil.nombre) LIKE LOWER('" + filterParam.getPerfilName() + "%') " +
+                            "AND LOWER(c.puntoVenta.nombre) LIKE LOWER('" + filterParam.getPuntoVentaName() + "%'))";
+        } else {
             hql =
-            "WHERE (c.empresa.id) = ('"+filterParam.getEmpresaId()+"') " +
-            "AND (LOWER(c.sucursal.razonSocial) LIKE LOWER('"+filterParam.getSucursalSocialReason()+"%') " +
-            "AND LOWER(c.perfil.nombre) LIKE LOWER('"+filterParam.getPerfilName()+"%') " +
-            "AND LOWER(c.puntoVenta.nombre) LIKE LOWER('"+filterParam.getPuntoVentaName()+"%'))";
+                    "WHERE (c.empresa.id) = ('" + filterParam.getEmpresaId() + "') " +
+                            "AND (LOWER(c.sucursal.razonSocial) LIKE LOWER('" + filterParam.getSucursalSocialReason() + "%') " +
+                            "AND LOWER(c.perfil.nombre) LIKE LOWER('" + filterParam.getPerfilName() + "%') " +
+                            "AND LOWER(c.puntoVenta.nombre) LIKE LOWER('" + filterParam.getPuntoVentaName() + "%'))";
         }
 
-        return getPage(hql , filterParam.getPage() - 1, filterParam.getSize(), params);
+        return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 }

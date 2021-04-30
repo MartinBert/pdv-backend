@@ -30,8 +30,7 @@ public class VentaController {
     public JasperPrint onCloseSaleReport(@RequestBody Invoice request,
                                          @PathVariable String tenant,
                                          HttpServletResponse response)
-            throws IOException, JRException, SQLException, JSONException
-    {
+            throws IOException, JRException, SQLException, JSONException {
         return reports.closeSaleReport(request, tenant, response);
     }
 
@@ -39,9 +38,8 @@ public class VentaController {
     public JasperPrint allSalesReport(@PathVariable String tenant,
                                       @PathVariable Long id,
                                       HttpServletResponse response)
-            throws JRException, IOException, SQLException
-    {
-        return reports.allSalesReport(tenant, id,response);
+            throws JRException, IOException, SQLException {
+        return reports.allSalesReport(tenant, id, response);
     }
 
     @GetMapping(value = "/salesForReceiptReport/{tenant}/{id}/{receipt}")
@@ -49,8 +47,7 @@ public class VentaController {
                                              @PathVariable Long id,
                                              @PathVariable String receipt,
                                              HttpServletResponse response)
-            throws JRException, IOException, SQLException
-    {
+            throws JRException, IOException, SQLException {
         return reports.salesForReceiptReport(tenant, id, receipt, response);
     }
 
@@ -59,8 +56,7 @@ public class VentaController {
                                             @PathVariable Long id,
                                             @PathVariable Long client,
                                             HttpServletResponse response)
-            throws JRException, IOException, SQLException
-    {
+            throws JRException, IOException, SQLException {
         return reports.salesForClientReport(tenant, id, client, response);
     }
 
@@ -103,10 +99,9 @@ public class VentaController {
 
     @PostMapping(value = "/salesForSelectedProductsAndDateRange/{id}")
     public JasperPrint salesForSelectedProductsAndDateRangeReport(@RequestBody PrintSaleForSelectedProductAndDate request,
-                                         @PathVariable Long id,
-                                         HttpServletResponse response)
-            throws IOException, JRException, SQLException, JSONException
-    {
+                                                                  @PathVariable Long id,
+                                                                  HttpServletResponse response)
+            throws IOException, JRException, SQLException, JSONException {
         return reports.salesForSelectedProductsAndDateRangeReport(request, id, response);
     }
 

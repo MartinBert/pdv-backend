@@ -1,6 +1,6 @@
 package com.prysoft.pdv.dto;
 
-public class PersonaFilter extends SucursalFilter{
+public class PersonaFilter extends SucursalFilter {
     private String personaSocialReason;
     private String personaName;
     private String personaCuit;

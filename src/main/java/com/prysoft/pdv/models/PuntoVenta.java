@@ -1,6 +1,6 @@
 package com.prysoft.pdv.models;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,7 +20,7 @@ public class PuntoVenta implements Serializable {
 
     @ManyToOne
     @JsonBackReference
-    @JoinColumn(name="sucursal_id", nullable=false)
+    @JoinColumn(name = "sucursal_id", nullable = false)
     private Sucursal sucursal;
 
     private String ipLocal;

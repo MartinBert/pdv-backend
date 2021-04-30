@@ -41,22 +41,22 @@ public class Product implements Serializable {
     private Set<ProductoVariacion> variaciones;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "productos_distribuidores",
-            joinColumns =  @JoinColumn(name = "id_producto"),
+            joinColumns = @JoinColumn(name = "id_producto"),
             inverseJoinColumns = @JoinColumn(name = "id_distribuidor"))
     private Set<Proveedor> distribuidores;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "productos_depositos",
-            joinColumns =  @JoinColumn(name = "id_producto"),
+            joinColumns = @JoinColumn(name = "id_producto"),
             inverseJoinColumns = @JoinColumn(name = "id_deposito"))
     private Set<Deposit> depositos;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "productos_propiedades",
-            joinColumns =  @JoinColumn(name = "id_producto"),
+            joinColumns = @JoinColumn(name = "id_producto"),
             inverseJoinColumns = @JoinColumn(name = "id_propiedad"))
     private Set<Property> propiedades;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "productos_atributos",
-            joinColumns =  @JoinColumn(name = "id_producto"),
+            joinColumns = @JoinColumn(name = "id_producto"),
             inverseJoinColumns = @JoinColumn(name = "id_atributo"))
     private Set<Attribute> atributos;
     @OneToMany(mappedBy = "producto")

@@ -16,7 +16,7 @@ public class ProductoVariacion implements Serializable {
     private double porcentaje;
 
     @ManyToOne
-    @JoinColumn(name="producto_id", nullable=false)
+    @JoinColumn(name = "producto_id", nullable = false)
     private Product producto;
 
     public Long getId() {

@@ -25,7 +25,7 @@ public class MensajeServiceImpl extends FilterService<Mensaje> implements Mensaj
     @Override
     public Mensaje findById(Long id) {
         Optional<Mensaje> optional = dao.findById(id);
-        if(!optional.isPresent()) {
+        if (!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
 
@@ -38,7 +38,9 @@ public class MensajeServiceImpl extends FilterService<Mensaje> implements Mensaj
     }
 
     @Override
-    public Mensaje saveOrUpdate(Mensaje entity) {return dao.save(entity);}
+    public Mensaje saveOrUpdate(Mensaje entity) {
+        return dao.save(entity);
+    }
 
     @Override
     public void delete(Long id) {
@@ -49,10 +51,10 @@ public class MensajeServiceImpl extends FilterService<Mensaje> implements Mensaj
     public Page<Mensaje> filter(MensajeFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
         String hql =
-                "WHERE LOWER(c.nameAndLastName) LIKE LOWER('"+filterParam.getMensajeNameAndLastName()+"%') " +
-                "AND LOWER(c.date) LIKE LOWER('"+filterParam.getMensajeDate()+"%') " +
-                "AND LOWER(c.contactPhoneOrEmail) LIKE LOWER('"+filterParam.getMensajeContactPhoneOrEmail()+"%') " +
-                "AND LOWER(c.message) LIKE LOWER('"+filterParam.getMensajeMessage()+"%') ";
+                "WHERE LOWER(c.nameAndLastName) LIKE LOWER('" + filterParam.getMensajeNameAndLastName() + "%') " +
+                        "AND LOWER(c.date) LIKE LOWER('" + filterParam.getMensajeDate() + "%') " +
+                        "AND LOWER(c.contactPhoneOrEmail) LIKE LOWER('" + filterParam.getMensajeContactPhoneOrEmail() + "%') " +
+                        "AND LOWER(c.message) LIKE LOWER('" + filterParam.getMensajeMessage() + "%') ";
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 }

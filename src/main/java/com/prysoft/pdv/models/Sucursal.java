@@ -40,7 +40,7 @@ public class Sucursal implements Serializable {
     private Set<Deposit> depositos;
     @ManyToOne
     @JsonBackReference
-    @JoinColumn(name="empresa_id", nullable=false)
+    @JoinColumn(name = "empresa_id", nullable = false)
     private Empresa empresa;
     @Column(name = "variacion_ganancia")
     private double variacionGanancia;

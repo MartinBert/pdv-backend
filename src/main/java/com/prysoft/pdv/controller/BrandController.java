@@ -34,7 +34,9 @@ public class BrandController {
     }
 
     @PostMapping(value = "/saveAll")
-    Iterable<Brand> saveAll(@RequestBody ArrayList<Brand> entities) { return service.saveAll(entities); }
+    Iterable<Brand> saveAll(@RequestBody ArrayList<Brand> entities) {
+        return service.saveAll(entities);
+    }
 
     @PutMapping
     Brand update(@RequestBody Brand entity) {

@@ -34,7 +34,9 @@ public class PlanPagoController {
     }
 
     @PostMapping(value = "/saveAll")
-    Iterable<PlanPago> saveAll(@RequestBody ArrayList<PlanPago> entities) { return service.saveAll(entities); }
+    Iterable<PlanPago> saveAll(@RequestBody ArrayList<PlanPago> entities) {
+        return service.saveAll(entities);
+    }
 
     @PutMapping
     PlanPago update(@RequestBody PlanPago entity) {

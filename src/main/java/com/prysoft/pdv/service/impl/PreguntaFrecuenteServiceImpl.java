@@ -25,7 +25,7 @@ public class PreguntaFrecuenteServiceImpl extends FilterService<PreguntaFrecuent
     @Override
     public PreguntaFrecuente findById(Long id) {
         Optional<PreguntaFrecuente> optional = dao.findById(id);
-        if(!optional.isPresent()) {
+        if (!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
 
@@ -38,7 +38,9 @@ public class PreguntaFrecuenteServiceImpl extends FilterService<PreguntaFrecuent
     }
 
     @Override
-    public PreguntaFrecuente saveOrUpdate(PreguntaFrecuente entity) {return dao.save(entity);}
+    public PreguntaFrecuente saveOrUpdate(PreguntaFrecuente entity) {
+        return dao.save(entity);
+    }
 
     @Override
     public void delete(Long id) {
@@ -49,8 +51,8 @@ public class PreguntaFrecuenteServiceImpl extends FilterService<PreguntaFrecuent
     public Page<PreguntaFrecuente> filter(PreguntaFrecuenteFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
         String hql =
-                "WHERE LOWER(c.pregunta) LIKE LOWER('"+filterParam.getPreguntaFrecuenteQuestion()+"%') " +
-                "AND LOWER(c.respuesta) LIKE LOWER('"+filterParam.getPreguntaFrecuenteResponse()+"%')";
+                "WHERE LOWER(c.pregunta) LIKE LOWER('" + filterParam.getPreguntaFrecuenteQuestion() + "%') " +
+                        "AND LOWER(c.respuesta) LIKE LOWER('" + filterParam.getPreguntaFrecuenteResponse() + "%')";
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 }

@@ -33,8 +33,8 @@ public class UsuarioController {
     }
 
     @GetMapping(value = "/getLogued")
-    Usuario getLogued(HttpServletRequest request){
-        String token = request.getHeader(Constants.HEADER_AUTHORIZACION_KEY).replace("Bearer ","");
+    Usuario getLogued(HttpServletRequest request) {
+        String token = request.getHeader(Constants.HEADER_AUTHORIZACION_KEY).replace("Bearer ", "");
         Claims claims = Jwts.parser().setSigningKey(Constants.SECRET_KEY).parseClaimsJws(token).getBody();
         String username = claims.getSubject().split("/")[0];
         return service.findByUsername(username);
@@ -44,11 +44,10 @@ public class UsuarioController {
     @ResponseStatus(HttpStatus.CREATED)
     ResponseEntity<Usuario> save(@RequestBody Usuario entity) {
         try {
-            return new ResponseEntity<Usuario>(service.saveOrUpdate(entity),HttpStatus.OK);
-        }
-        catch (EntityNotFoundException e){
+            return new ResponseEntity<Usuario>(service.saveOrUpdate(entity), HttpStatus.OK);
+        } catch (EntityNotFoundException e) {
 
-            return new ResponseEntity(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
     }

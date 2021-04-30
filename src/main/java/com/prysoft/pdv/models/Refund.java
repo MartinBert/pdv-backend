@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 @Entity
-@Table(name="devoluciones")
+@Table(name = "devoluciones")
 public class Refund implements Serializable {
     private static final long serialVersionUID = 999999999999999999L;
     @Id

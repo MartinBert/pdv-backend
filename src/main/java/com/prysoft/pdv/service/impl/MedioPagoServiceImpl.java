@@ -25,7 +25,7 @@ public class MedioPagoServiceImpl extends FilterService<MedioPago> implements Me
     @Override
     public MedioPago findById(Long id) {
         Optional<MedioPago> optional = dao.findById(id);
-        if(!optional.isPresent()) {
+        if (!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
         return optional.get();
@@ -55,12 +55,12 @@ public class MedioPagoServiceImpl extends FilterService<MedioPago> implements Me
     public Page<MedioPago> filter(MedioPagoFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        if(filterParam.getSucursalId() == null){
-            hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getMedioPagoName()+"%') GROUP BY c.id ORDER BY c.id ASC";
-        }else{
+        if (filterParam.getSucursalId() == null) {
+            hql = "WHERE LOWER(c.nombre) LIKE LOWER('" + filterParam.getMedioPagoName() + "%') GROUP BY c.id ORDER BY c.id ASC";
+        } else {
             hql =
-                "WHERE (c.sucursal.id) = ('"+filterParam.getSucursalId()+"') " +
-                "AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getMedioPagoName()+"%') GROUP BY c.id ORDER BY c.id ASC";
+                    "WHERE (c.sucursal.id) = ('" + filterParam.getSucursalId() + "') " +
+                            "AND LOWER(c.nombre) LIKE LOWER('" + filterParam.getMedioPagoName() + "%') GROUP BY c.id ORDER BY c.id ASC";
         }
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }

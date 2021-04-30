@@ -26,7 +26,7 @@ public class FilterService<T> {
         String hqlTotalObjects = "SELECT COUNT(c) FROM " + getGenericClass().getSimpleName() + " c ";
         String hqlSelectTotalObjects = hqlTotalObjects + HQL;
         TypedQuery<Long> queryTotalObjects = entityManager.createQuery(hqlSelectTotalObjects, Long.class);
-        if (params != null){
+        if (params != null) {
             for (FilterParam param : params) {
                 queryTotalObjects.setParameter(param.getName(), param.getObject());
             }
@@ -36,12 +36,12 @@ public class FilterService<T> {
         Integer totalObjects = totalObjectsL.intValue();
 
         // Get Real page
-        String hqlSelectPage = "SELECT DISTINCT c FROM " + getGenericClass().getSimpleName() +" c " + HQL;
+        String hqlSelectPage = "SELECT DISTINCT c FROM " + getGenericClass().getSimpleName() + " c " + HQL;
 
         int count = pageable.getPageSize();
 
         TypedQuery<T> query = entityManager.createQuery(hqlSelectPage, getGenericClass());
-        if (params != null){
+        if (params != null) {
             for (FilterParam param : params) {
                 query.setParameter(param.getName(), param.getObject());
             }

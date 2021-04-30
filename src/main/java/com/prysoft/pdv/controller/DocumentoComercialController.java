@@ -51,11 +51,11 @@ public class DocumentoComercialController {
 
     @PostMapping(value = "/saveAll")
     Iterable<DocumentoComercial> saveAll(@RequestBody ArrayList<DocumentoComercial> entities) {
-        return  service.saveAll(entities);
+        return service.saveAll(entities);
     }
 
     @GetMapping(value = "/invoices")
-    Iterable<DocumentoComercial> getInvoices(){
+    Iterable<DocumentoComercial> getInvoices() {
         return service.getInvoices();
     }
 }
