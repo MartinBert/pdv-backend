@@ -1,6 +1,6 @@
 package com.prysoft.pdv.dto;
 
-public class HistorialMovimientosStockFilter extends SucursalFilter {
+public class HistorialMovimientosStockFilter extends CommercialBranchFilter {
     private String historialMovimientosStockDescripcion;
     private String historialMovimientosStockFecha;
     private String historialMovimientosStockUsuario;

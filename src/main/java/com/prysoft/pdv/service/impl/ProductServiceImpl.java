@@ -1,7 +1,7 @@
 package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.ProductDao;
-import com.prysoft.pdv.dao.SucursalDao;
+import com.prysoft.pdv.dao.CommercialBranchDao;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.ProductFilter;
 import com.prysoft.pdv.helpers.MathHelper;
@@ -26,7 +26,7 @@ public class ProductServiceImpl extends FilterService<Product> implements Produc
     @Autowired
     private ProductDao dao;
     @Autowired
-    private SucursalDao sucursalDao;
+    private CommercialBranchDao commercialBranchDao;
     @Autowired
     private MathHelper mathHelper;
 

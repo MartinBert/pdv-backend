@@ -1,10 +1,10 @@
 package com.prysoft.pdv.service.impl;
 
-import com.prysoft.pdv.dao.SucursalDao;
+import com.prysoft.pdv.dao.CommercialBranchDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.SucursalFilter;
-import com.prysoft.pdv.models.Sucursal;
-import com.prysoft.pdv.service.SucursalService;
+import com.prysoft.pdv.dto.CommercialBranchFilter;
+import com.prysoft.pdv.models.CommercialBranch;
+import com.prysoft.pdv.service.CommercialBranchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,14 +18,14 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class SucursalServiceImpl extends FilterService<Sucursal> implements SucursalService {
+public class CommercialBranchServiceImpl extends FilterService<CommercialBranch> implements CommercialBranchService {
 
     @Autowired
-    private SucursalDao dao;
+    private CommercialBranchDao dao;
 
     @Override
-    public Sucursal findById(Long id) {
-        Optional<Sucursal> optional = dao.findById(id);
+    public CommercialBranch findById(Long id) {
+        Optional<CommercialBranch> optional = dao.findById(id);
         if (!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
@@ -33,12 +33,12 @@ public class SucursalServiceImpl extends FilterService<Sucursal> implements Sucu
     }
 
     @Override
-    public Page<Sucursal> findAll(Pageable page) {
+    public Page<CommercialBranch> findAll(Pageable page) {
         return dao.findAll(page);
     }
 
     @Override
-    public Sucursal saveOrUpdate(Sucursal entity) {
+    public CommercialBranch saveOrUpdate(CommercialBranch entity) {
         return dao.save(entity);
     }
 
@@ -48,7 +48,7 @@ public class SucursalServiceImpl extends FilterService<Sucursal> implements Sucu
     }
 
     @Override
-    public Page<Sucursal> filter(SucursalFilter filterParam) {
+    public Page<CommercialBranch> filter(CommercialBranchFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
         if (filterParam.getSucursalId() == null) {

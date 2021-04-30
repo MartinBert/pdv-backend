@@ -9,7 +9,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "sucursales")
-public class Sucursal implements Serializable {
+public class CommercialBranch  implements Serializable {
+    private static final long serialVersionUID = 999999999999999999L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,7 +19,7 @@ public class Sucursal implements Serializable {
     @Column(name = "direccion", nullable = false)
     private String direccion;
     @OneToOne
-    private CondicionFiscal condicionIva; //1-Responsable Inscripto, 2-Monotributista
+    private FiscalCondition condicionIva; //1-Responsable Inscripto, 2-Monotributista
     private String email;
     private String telefono;
     private String telefonoAlternativo;
@@ -37,7 +38,7 @@ public class Sucursal implements Serializable {
     private Set<PuntoVenta> puntosVenta;
     @OneToMany(mappedBy = "sucursales")
     @JsonBackReference(value = "depositos")
-    private Set<Deposito> depositos;
+    private Set<Deposit> depositos;
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "empresa_id", nullable = false)
@@ -69,11 +70,11 @@ public class Sucursal implements Serializable {
         this.direccion = direccion;
     }
 
-    public CondicionFiscal getCondicionIva() {
+    public FiscalCondition getCondicionIva() {
         return condicionIva;
     }
 
-    public void setCondicionIva(CondicionFiscal condicionIva) {
+    public void setCondicionIva(FiscalCondition condicionIva) {
         this.condicionIva = condicionIva;
     }
 
@@ -165,11 +166,11 @@ public class Sucursal implements Serializable {
         this.puntosVenta = puntosVenta;
     }
 
-    public Set<Deposito> getDepositos() {
+    public Set<Deposit> getDepositos() {
         return depositos;
     }
 
-    public void setDepositos(Set<Deposito> depositos) {
+    public void setDepositos(Set<Deposit> depositos) {
         this.depositos = depositos;
     }
 
@@ -191,7 +192,7 @@ public class Sucursal implements Serializable {
 
     @Override
     public String toString() {
-        return "Sucursal{" +
+        return "CommercialBranch{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", direccion='" + direccion + '\'' +
