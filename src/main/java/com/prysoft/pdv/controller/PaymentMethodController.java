@@ -1,8 +1,8 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.PlanPagoFilter;
-import com.prysoft.pdv.models.PlanPago;
-import com.prysoft.pdv.service.PlanPagoService;
+import com.prysoft.pdv.dto.PaymentMethodFilter;
+import com.prysoft.pdv.models.PaymentMethod;
+import com.prysoft.pdv.service.PaymentMethodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,34 +12,34 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping(value = "/{tenantid}/api/planesPago")
-public class PlanPagoController {
+@RequestMapping(value = "/{tenantid}/api/mediosPago")
+public class PaymentMethodController {
     @Autowired
-    private PlanPagoService service;
+    private PaymentMethodService service;
 
     @GetMapping
-    Page<PlanPago> findAll(Pageable page) {
+    Page<PaymentMethod> findAll(Pageable page) {
         return service.findAll(page);
     }
 
     @GetMapping(value = "/{id}")
-    PlanPago findById(@PathVariable long id) {
+    PaymentMethod findById(@PathVariable long id) {
         return service.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    PlanPago save(@RequestBody PlanPago entity) {
+    PaymentMethod save(@RequestBody PaymentMethod entity) {
         return service.saveOrUpdate(entity);
     }
 
     @PostMapping(value = "/saveAll")
-    Iterable<PlanPago> saveAll(@RequestBody ArrayList<PlanPago> entities) {
+    Iterable<PaymentMethod> saveAll(@RequestBody ArrayList<PaymentMethod> entities) {
         return service.saveAll(entities);
     }
 
     @PutMapping
-    PlanPago update(@RequestBody PlanPago entity) {
+    PaymentMethod update(@RequestBody PaymentMethod entity) {
         return service.saveOrUpdate(entity);
     }
 
@@ -50,7 +50,7 @@ public class PlanPagoController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<PlanPago> filter(@RequestBody PlanPagoFilter filterParam) {
+    public Page<PaymentMethod> filter(@RequestBody PaymentMethodFilter filterParam) {
         return service.filter(filterParam);
     }
 }

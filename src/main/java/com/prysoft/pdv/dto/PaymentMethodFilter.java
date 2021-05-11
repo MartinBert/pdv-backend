@@ -1,6 +1,6 @@
 package com.prysoft.pdv.dto;
 
-public class MedioPagoFilter extends CommercialBranchFilter {
+public class PaymentMethodFilter extends CommercialBranchFilter {
     private String medioPagoName;
 
     public String getMedioPagoName() {

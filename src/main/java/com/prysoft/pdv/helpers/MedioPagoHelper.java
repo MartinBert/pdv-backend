@@ -1,6 +1,6 @@
 package com.prysoft.pdv.helpers;
 
-import com.prysoft.pdv.models.MedioPago;
+import com.prysoft.pdv.models.PaymentMethod;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
@@ -9,9 +9,9 @@ import java.util.Iterator;
 
 @Service
 public class MedioPagoHelper implements Serializable {
-    public String stringPaymentMethodsNameConvertion(Iterable<MedioPago> medios) {
+    public String stringPaymentMethodsNameConvertion(Iterable<PaymentMethod> medios) {
         ArrayList<String> mediosPagoStringArray = new ArrayList<>();
-        Iterator<MedioPago> medio = medios.iterator();
+        Iterator<PaymentMethod> medio = medios.iterator();
         while (medio.hasNext()) {
             mediosPagoStringArray.add(medio.next().getNombre());
         }

@@ -30,12 +30,12 @@ public class Invoice implements Serializable {
     @JoinTable(name = "comprobantes_medios",
             joinColumns = @JoinColumn(name = "id_comprobante"),
             inverseJoinColumns = @JoinColumn(name = "id_medio"))
-    private Set<MedioPago> mediosPago;
+    private Set<PaymentMethod> mediosPago;
     @ManyToMany
     @JoinTable(name = "comprobantes_planes",
             joinColumns = @JoinColumn(name = "id_comprobante"),
             inverseJoinColumns = @JoinColumn(name = "id_plan"))
-    private Set<PlanPago> planesPago;
+    private Set<PaymentPlan> planesPago;
     @OneToOne
     private SalePoint puntoVenta;
     @OneToOne
@@ -128,11 +128,11 @@ public class Invoice implements Serializable {
         this.totalVenta = totalVenta;
     }
 
-    public Set<MedioPago> getMediosPago() {
+    public Set<PaymentMethod> getMediosPago() {
         return mediosPago;
     }
 
-    public void setMediosPago(Set<MedioPago> mediosPago) {
+    public void setMediosPago(Set<PaymentMethod> mediosPago) {
         this.mediosPago = mediosPago;
     }
 
@@ -176,11 +176,11 @@ public class Invoice implements Serializable {
         this.cliente = cliente;
     }
 
-    public Set<PlanPago> getPlanesPago() {
+    public Set<PaymentPlan> getPlanesPago() {
         return planesPago;
     }
 
-    public void setPlanesPago(Set<PlanPago> planesPago) {
+    public void setPlanesPago(Set<PaymentPlan> planesPago) {
         this.planesPago = planesPago;
     }
 

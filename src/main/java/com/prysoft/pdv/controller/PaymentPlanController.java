@@ -1,8 +1,8 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.MedioPagoFilter;
-import com.prysoft.pdv.models.MedioPago;
-import com.prysoft.pdv.service.MedioPagoService;
+import com.prysoft.pdv.dto.PaymentPlanFilter;
+import com.prysoft.pdv.models.PaymentPlan;
+import com.prysoft.pdv.service.PaymentPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,34 +12,34 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping(value = "/{tenantid}/api/mediosPago")
-public class MedioPagoController {
+@RequestMapping(value = "/{tenantid}/api/planesPago")
+public class PaymentPlanController {
     @Autowired
-    private MedioPagoService service;
+    private PaymentPlanService service;
 
     @GetMapping
-    Page<MedioPago> findAll(Pageable page) {
+    Page<PaymentPlan> findAll(Pageable page) {
         return service.findAll(page);
     }
 
     @GetMapping(value = "/{id}")
-    MedioPago findById(@PathVariable long id) {
+    PaymentPlan findById(@PathVariable long id) {
         return service.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    MedioPago save(@RequestBody MedioPago entity) {
+    PaymentPlan save(@RequestBody PaymentPlan entity) {
         return service.saveOrUpdate(entity);
     }
 
     @PostMapping(value = "/saveAll")
-    Iterable<MedioPago> saveAll(@RequestBody ArrayList<MedioPago> entities) {
+    Iterable<PaymentPlan> saveAll(@RequestBody ArrayList<PaymentPlan> entities) {
         return service.saveAll(entities);
     }
 
     @PutMapping
-    MedioPago update(@RequestBody MedioPago entity) {
+    PaymentPlan update(@RequestBody PaymentPlan entity) {
         return service.saveOrUpdate(entity);
     }
 
@@ -50,7 +50,7 @@ public class MedioPagoController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<MedioPago> filter(@RequestBody MedioPagoFilter filterParam) {
+    public Page<PaymentPlan> filter(@RequestBody PaymentPlanFilter filterParam) {
         return service.filter(filterParam);
     }
 }

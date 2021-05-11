@@ -5,6 +5,7 @@ import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.SaleFilter;
 import com.prysoft.pdv.models.Invoice;
 import com.prysoft.pdv.models.MedioPago;
+import com.prysoft.pdv.models.PaymentMethod;
 import com.prysoft.pdv.service.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -60,7 +61,7 @@ public class SaleServiceImpl extends FilterService<Invoice> implements SaleServi
                 {
                     if (isNotNull(sucursalId)) {
                         if (passNotCloseReceiptValidations(comprobante, sucursalId)) {
-                            comprobante.getMediosPago().forEach((MedioPago medio) -> {
+                            comprobante.getMediosPago().forEach((PaymentMethod medio) -> {
                                 if (medio.isSumaEnCierreDeCaja()) {
                                     filteredReceipts.add(comprobante);
                                 }

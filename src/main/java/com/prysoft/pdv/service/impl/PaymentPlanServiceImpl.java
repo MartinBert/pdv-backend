@@ -1,10 +1,10 @@
 package com.prysoft.pdv.service.impl;
 
-import com.prysoft.pdv.dao.MedioPagoDao;
+import com.prysoft.pdv.dao.PaymentPlanDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.MedioPagoFilter;
-import com.prysoft.pdv.models.MedioPago;
-import com.prysoft.pdv.service.MedioPagoService;
+import com.prysoft.pdv.dto.PaymentPlanFilter;
+import com.prysoft.pdv.models.PaymentPlan;
+import com.prysoft.pdv.service.PaymentPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,13 +18,13 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class MedioPagoServiceImpl extends FilterService<MedioPago> implements MedioPagoService {
+public class PaymentPlanServiceImpl extends FilterService<PaymentPlan> implements PaymentPlanService {
     @Autowired
-    private MedioPagoDao dao;
+    private PaymentPlanDao dao;
 
     @Override
-    public MedioPago findById(Long id) {
-        Optional<MedioPago> optional = dao.findById(id);
+    public PaymentPlan findById(Long id) {
+        Optional<PaymentPlan> optional = dao.findById(id);
         if (!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
@@ -32,17 +32,17 @@ public class MedioPagoServiceImpl extends FilterService<MedioPago> implements Me
     }
 
     @Override
-    public Page<MedioPago> findAll(Pageable page) {
+    public Page<PaymentPlan> findAll(Pageable page) {
         return dao.findAll(page);
     }
 
     @Override
-    public MedioPago saveOrUpdate(MedioPago entity) {
+    public PaymentPlan saveOrUpdate(PaymentPlan entity) {
         return dao.save(entity);
     }
 
     @Override
-    public Iterable<MedioPago> saveAll(ArrayList<MedioPago> entities) {
+    public Iterable<PaymentPlan> saveAll(ArrayList<PaymentPlan> entities) {
         return dao.saveAll(entities);
     }
 
@@ -52,15 +52,14 @@ public class MedioPagoServiceImpl extends FilterService<MedioPago> implements Me
     }
 
     @Override
-    public Page<MedioPago> filter(MedioPagoFilter filterParam) {
+    public Page<PaymentPlan> filter(PaymentPlanFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
         if (filterParam.getSucursalId() == null) {
-            hql = "WHERE LOWER(c.nombre) LIKE LOWER('" + filterParam.getMedioPagoName() + "%') GROUP BY c.id ORDER BY c.id ASC";
+            hql = "WHERE LOWER(c.nombre) LIKE LOWER('" + filterParam.getPlanPagoName() + "%')";
         } else {
-            hql =
-                    "WHERE (c.sucursal.id) = ('" + filterParam.getSucursalId() + "') " +
-                            "AND LOWER(c.nombre) LIKE LOWER('" + filterParam.getMedioPagoName() + "%') GROUP BY c.id ORDER BY c.id ASC";
+            hql = "WHERE (c.sucursal.id) = ('" + filterParam.getSucursalId() + "') " +
+                    "AND LOWER(c.nombre) LIKE LOWER('" + filterParam.getPlanPagoName() + "%')";
         }
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
