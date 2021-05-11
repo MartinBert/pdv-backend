@@ -11,6 +11,8 @@ public class PuntoVenta implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "id_fiscal", nullable = false)
+    private int idFiscal;
     @Column(name = "nombre", nullable = false)
     private String nombre;
     @ManyToOne
@@ -24,6 +26,14 @@ public class PuntoVenta implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public int getIdFiscal() {
+        return idFiscal;
+    }
+
+    public void setIdFiscal(int idFiscal) {
+        this.idFiscal = idFiscal;
     }
 
     public String getNombre() {
@@ -46,6 +56,7 @@ public class PuntoVenta implements Serializable {
     public String toString() {
         return "PuntoVenta{" +
                 "id=" + id +
+                ", idFiscal=" + idFiscal +
                 ", nombre='" + nombre + '\'' +
                 ", sucursal=" + sucursal +
                 '}';
