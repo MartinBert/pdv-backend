@@ -7,6 +7,7 @@ import java.io.Serializable;
 @Table(name = "ivas")
 public class TaxIva implements Serializable {
     private static final long serialVersionUID = 999999999999999999L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

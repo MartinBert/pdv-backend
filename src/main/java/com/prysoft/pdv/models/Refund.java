@@ -8,14 +8,15 @@ import java.util.ArrayList;
 @Table(name = "devoluciones")
 public class Refund implements Serializable {
     private static final long serialVersionUID = 999999999999999999L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String fecha;
     private String descripcion;
     private double totalDevolucion;
-    private ArrayList<PrintComprobanteDetail> productos;
-    private ArrayList<PrintComprobanteDetail> productosSalientes;
+    private ArrayList<InvoicePrintingDetail> productos;
+    private ArrayList<InvoicePrintingDetail> productosSalientes;
     @OneToOne
     private Invoice comprobante;
     @OneToOne
@@ -55,19 +56,19 @@ public class Refund implements Serializable {
         this.comprobante = comprobante;
     }
 
-    public ArrayList<PrintComprobanteDetail> getProductos() {
+    public ArrayList<InvoicePrintingDetail> getProductos() {
         return productos;
     }
 
-    public void setProductos(ArrayList<PrintComprobanteDetail> productos) {
+    public void setProductos(ArrayList<InvoicePrintingDetail> productos) {
         this.productos = productos;
     }
 
-    public ArrayList<PrintComprobanteDetail> getProductosSalientes() {
+    public ArrayList<InvoicePrintingDetail> getProductosSalientes() {
         return productosSalientes;
     }
 
-    public void setProductosSalientes(ArrayList<PrintComprobanteDetail> productosSalientes) {
+    public void setProductosSalientes(ArrayList<InvoicePrintingDetail> productosSalientes) {
         this.productosSalientes = productosSalientes;
     }
 

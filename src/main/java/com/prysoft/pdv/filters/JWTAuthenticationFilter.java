@@ -21,7 +21,7 @@ import java.util.Collections;
 import java.util.Date;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
-    private AuthenticationManager authManager;
+    private final AuthenticationManager authManager;
 
     public JWTAuthenticationFilter(AuthenticationManager authManager) {
 

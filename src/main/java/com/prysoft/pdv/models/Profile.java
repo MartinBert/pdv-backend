@@ -8,13 +8,12 @@ import java.util.Set;
 @Table(name = "perfiles")
 public class Profile implements Serializable {
     private static final long serialVersionUID = 999999999999999999L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name = "nombre", unique = true, nullable = false)
     private String nombre;
-
     @ManyToMany(cascade = {CascadeType.MERGE})
     private Set<Module> modulos;
 

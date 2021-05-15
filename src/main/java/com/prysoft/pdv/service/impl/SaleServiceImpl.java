@@ -79,14 +79,12 @@ public class SaleServiceImpl extends FilterService<Invoice> implements SaleServi
 
     private boolean passNotCloseReceiptValidations(Invoice comprobante, Long sucursalId) {
         if (comprobante.getCerrado() != null) return false;
-        if (comprobante.getSucursal().getId() != sucursalId) return false;
-        return true;
+        return comprobante.getSucursal().getId() == sucursalId;
     }
 
     private boolean isNotNull(Long value) {
         if (value == null) return false;
-        if (value.equals("")) return false;
-        return true;
+        return !value.equals("");
     }
 }
 

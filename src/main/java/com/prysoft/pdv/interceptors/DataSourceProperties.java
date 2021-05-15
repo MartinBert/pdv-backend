@@ -13,7 +13,7 @@ import java.util.Map;
 @Component
 @ConfigurationProperties(prefix = "tenants")
 public class DataSourceProperties {
-    private Map<Object, Object> datasources = new LinkedHashMap<>();
+    private final Map<Object, Object> datasources = new LinkedHashMap<>();
 
     public Map<Object, Object> getDatasources() {
         return datasources;

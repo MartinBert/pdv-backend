@@ -8,6 +8,7 @@ import java.util.ArrayList;
 @Table(name = "historial_movimientos_stock")
 public class StockMovementHistory implements Serializable {
     private static final long serialVersionUID = 999999999999999999L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -15,10 +16,8 @@ public class StockMovementHistory implements Serializable {
     private String descripcion;
     private String fecha;
     private String usuario;
-
     @OneToOne
     private CommercialBranch sucursal;
-
 
     public Long getId() {
         return id;

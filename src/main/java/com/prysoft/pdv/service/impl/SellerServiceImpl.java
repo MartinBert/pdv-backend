@@ -1,10 +1,10 @@
 package com.prysoft.pdv.service.impl;
 
-import com.prysoft.pdv.dao.VendedorDao;
+import com.prysoft.pdv.dao.SellerDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.VendedorFilter;
-import com.prysoft.pdv.models.Vendedor;
-import com.prysoft.pdv.service.VendedorService;
+import com.prysoft.pdv.dto.SellerFilter;
+import com.prysoft.pdv.models.Seller;
+import com.prysoft.pdv.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,27 +18,26 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class VendedorServiceImpl extends FilterService<Vendedor> implements VendedorService {
+public class SellerServiceImpl extends FilterService<Seller> implements SellerService {
     @Autowired
-    private VendedorDao dao;
+    private SellerDao dao;
 
     @Override
-    public Vendedor findById(Long id) {
-        Optional<Vendedor> optional = dao.findById(id);
+    public Seller findById(Long id) {
+        Optional<Seller> optional = dao.findById(id);
         if (!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
-
         return optional.get();
     }
 
     @Override
-    public Page<Vendedor> findAll(Pageable page) {
+    public Page<Seller> findAll(Pageable page) {
         return dao.findAll(page);
     }
 
     @Override
-    public Vendedor saveOrUpdate(Vendedor entity) {
+    public Seller saveOrUpdate(Seller entity) {
         return dao.save(entity);
     }
 
@@ -48,10 +47,9 @@ public class VendedorServiceImpl extends FilterService<Vendedor> implements Vend
     }
 
     @Override
-    public Page<Vendedor> filter(VendedorFilter filterParam) {
+    public Page<Seller> filter(SellerFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-
         if (filterParam.getSucursalId() == null) {
             hql =
                     "WHERE (LOWER(c.razonSocial) LIKE LOWER('" + filterParam.getPersonaSocialReason() + "%') " +
@@ -68,7 +66,6 @@ public class VendedorServiceImpl extends FilterService<Vendedor> implements Vend
                             "AND LOWER(c.nombreContacto) LIKE LOWER('" + filterParam.getPersonaContactName() + "%') " +
                             "AND LOWER(c.cuit) LIKE LOWER('" + filterParam.getPersonaCuit() + "%'))";
         }
-
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 }

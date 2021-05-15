@@ -199,11 +199,7 @@ public class SalesReportsImpl implements SalesReport {
     }
 
     protected boolean voucherIsInDateRange(Invoice voucher, SearchFilterInProductsSold search) {
-        if (date(voucher.getFechaEmision()) >= date(search.getInitDate()) && date(voucher.getFechaEmision()) <= date(search.getFinishDate())) {
-            return true;
-        } else {
-            return false;
-        }
+        return date(voucher.getFechaEmision()) >= date(search.getInitDate()) && date(voucher.getFechaEmision()) <= date(search.getFinishDate());
     }
 
     @Override
@@ -344,11 +340,7 @@ public class SalesReportsImpl implements SalesReport {
 
     protected boolean invoiceIsInTheDateRange(Invoice receipt,
                                               PrintSaleForSelectedProductAndDate request) {
-        if (date(receipt.getFechaEmision()) >= date(request.getFechaDesde()) && date(receipt.getFechaEmision()) <= date(request.getFechaHasta())) {
-            return true;
-        } else {
-            return false;
-        }
+        return date(receipt.getFechaEmision()) >= date(request.getFechaDesde()) && date(receipt.getFechaEmision()) <= date(request.getFechaHasta());
     }
 
     protected boolean invoiceContainProducts(Invoice receipt,
@@ -370,8 +362,7 @@ public class SalesReportsImpl implements SalesReport {
 
     protected boolean invoiceBelongsToBranch(Long id,
                                              Invoice receipt) {
-        if (receipt.getSucursal().getId() != id) return false;
-        return true;
+        return receipt.getSucursal().getId() == id;
     }
 
     protected double date(String date) {
