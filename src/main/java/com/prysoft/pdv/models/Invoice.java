@@ -18,9 +18,9 @@ public class Invoice implements Serializable {
     private String fechaEmision;
     private String fechaVto;
     private Boolean condicionVenta;
-    private ArrayList<PrintComprobanteDetail> productos;
+    private ArrayList<InvoicePrintingDetail> productos;
     private ArrayList<Product> productosDetalle;
-    private ArrayList<ProductoDescription> productoDescription;
+    private ArrayList<ProductDescription> productoDescription;
     private String barCode;
     private String cae;
     private Double totalVenta;
@@ -41,9 +41,9 @@ public class Invoice implements Serializable {
     @OneToOne
     private CommercialBranch sucursal;
     @OneToOne
-    private DocumentoComercial documentoComercial;
+    private CommercialDocument documentoComercial;
     @OneToOne
-    private Empresa empresa;
+    private Business empresa;
     @OneToOne
     private Client cliente;
     private String cerrado;
@@ -96,11 +96,11 @@ public class Invoice implements Serializable {
         this.condicionVenta = condicionVenta;
     }
 
-    public ArrayList<PrintComprobanteDetail> getProductos() {
+    public ArrayList<InvoicePrintingDetail> getProductos() {
         return productos;
     }
 
-    public void setProductos(ArrayList<PrintComprobanteDetail> productos) {
+    public void setProductos(ArrayList<InvoicePrintingDetail> productos) {
         this.productos = productos;
     }
 
@@ -152,19 +152,19 @@ public class Invoice implements Serializable {
         this.sucursal = sucursal;
     }
 
-    public DocumentoComercial getDocumentoComercial() {
+    public CommercialDocument getDocumentoComercial() {
         return documentoComercial;
     }
 
-    public void setDocumentoComercial(DocumentoComercial documentoComercial) {
+    public void setDocumentoComercial(CommercialDocument documentoComercial) {
         this.documentoComercial = documentoComercial;
     }
 
-    public Empresa getEmpresa() {
+    public Business getEmpresa() {
         return empresa;
     }
 
-    public void setEmpresa(Empresa empresa) {
+    public void setEmpresa(Business empresa) {
         this.empresa = empresa;
     }
 
@@ -216,11 +216,11 @@ public class Invoice implements Serializable {
         this.productosDetalle = productosDetalle;
     }
 
-    public ArrayList<ProductoDescription> getProductoDescription() {
+    public ArrayList<ProductDescription> getProductoDescription() {
         return productoDescription;
     }
 
-    public void setProductoDescription(ArrayList<ProductoDescription> productoDescription) {
+    public void setProductoDescription(ArrayList<ProductDescription> productoDescription) {
         this.productoDescription = productoDescription;
     }
 

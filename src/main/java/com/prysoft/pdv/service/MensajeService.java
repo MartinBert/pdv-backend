@@ -1,18 +1,18 @@
 package com.prysoft.pdv.service;
 
 import com.prysoft.pdv.dto.MensajeFilter;
-import com.prysoft.pdv.models.Mensaje;
+import com.prysoft.pdv.models.Message;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface MensajeService {
-    Mensaje findById(Long id);
+    Message findById(Long id);
 
-    Page<Mensaje> findAll(Pageable page);
+    Page<Message> findAll(Pageable page);
 
-    Mensaje saveOrUpdate(Mensaje entity);
+    Message saveOrUpdate(Message entity);
 
     void delete(Long id);
 
-    Page<Mensaje> filter(MensajeFilter filterParam);
+    Page<Message> filter(MensajeFilter filterParam);
 }

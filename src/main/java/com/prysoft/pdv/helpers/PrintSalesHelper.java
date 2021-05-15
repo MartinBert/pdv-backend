@@ -2,7 +2,7 @@ package com.prysoft.pdv.helpers;
 
 import com.prysoft.pdv.models.Invoice;
 import com.prysoft.pdv.models.Product;
-import com.prysoft.pdv.models.ProductoDescription;
+import com.prysoft.pdv.models.ProductDescription;
 import com.prysoft.pdv.print.PrintSaleForSelectedProductAndDate;
 import com.prysoft.pdv.print.PrintSaleProductQuantityDetail;
 import com.prysoft.pdv.print.PrintSalesReport;
@@ -16,7 +16,7 @@ import java.io.Serializable;
 @Service
 public class PrintSalesHelper implements Serializable {
     @Autowired
-    private MedioPagoHelper medioHelper;
+    private PaymentMethodHelper medioHelper;
 
     public PrintSalesReport processReceiptForPrint(Invoice receipt) {
         PrintSalesReport report = new PrintSalesReport();
@@ -53,7 +53,7 @@ public class PrintSalesHelper implements Serializable {
         return report;
     }
 
-    public PrintSaleProductQuantityDetail processPrintSaleProductQuantityDetail(ProductoDescription product, PrintSaleForSelectedProductAndDate request) {
+    public PrintSaleProductQuantityDetail processPrintSaleProductQuantityDetail(ProductDescription product, PrintSaleForSelectedProductAndDate request) {
         PrintSaleProductQuantityDetail productQuantityDetail = new PrintSaleProductQuantityDetail();
         for (Product productoDescription : request.getProducts()) {
             if (product.getBarCode().equals(productoDescription.getCodigoBarra())) {

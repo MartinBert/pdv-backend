@@ -1,6 +1,6 @@
 package com.prysoft.pdv.print;
 
-import com.prysoft.pdv.models.ProductoDescription;
+import com.prysoft.pdv.models.ProductDescription;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ public class PrintSalesReport implements Serializable {
     private String cliente;
     private String puntoVenta;
     private String medioPago;
-    private ArrayList<ProductoDescription> productos;
+    private ArrayList<ProductDescription> productos;
     private double totalVenta;
 
     public String getFechaEmision() {
@@ -62,11 +62,11 @@ public class PrintSalesReport implements Serializable {
         this.totalVenta = totalVenta;
     }
 
-    public ArrayList<ProductoDescription> getProductos() {
+    public ArrayList<ProductDescription> getProductos() {
         return productos;
     }
 
-    public void setProductos(ArrayList<ProductoDescription> productos) {
+    public void setProductos(ArrayList<ProductDescription> productos) {
         this.productos = productos;
     }
 

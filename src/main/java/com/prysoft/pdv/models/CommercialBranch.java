@@ -11,6 +11,7 @@ import java.util.Set;
 @Table(name = "sucursales")
 public class CommercialBranch  implements Serializable {
     private static final long serialVersionUID = 999999999999999999L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -42,7 +43,7 @@ public class CommercialBranch  implements Serializable {
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "empresa_id", nullable = false)
-    private Empresa empresa;
+    private Business empresa;
     @Column(name = "variacion_ganancia")
     private double variacionGanancia;
 
@@ -174,11 +175,11 @@ public class CommercialBranch  implements Serializable {
         this.depositos = depositos;
     }
 
-    public Empresa getEmpresa() {
+    public Business getEmpresa() {
         return empresa;
     }
 
-    public void setEmpresa(Empresa empresa) {
+    public void setEmpresa(Business empresa) {
         this.empresa = empresa;
     }
 
