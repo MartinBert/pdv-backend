@@ -22,6 +22,7 @@ public class User implements UserDetails, Serializable {
     private String username;
     private String password;
     @OneToOne
+    @JoinColumn(name = "perfil_id")
     private Profile perfil;
     @OneToOne
     @JoinColumn(name = "empresa_id")

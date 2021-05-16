@@ -15,6 +15,9 @@ public class Profile implements Serializable {
     @Column(name = "nombre", unique = true, nullable = false)
     private String nombre;
     @ManyToMany(cascade = {CascadeType.MERGE})
+    @JoinTable(name = "perfiles_modulos",
+            joinColumns = @JoinColumn(name = "perfil_id"),
+            inverseJoinColumns = @JoinColumn(name = "modulos_id"))
     private Set<Module> modulos;
 
     public Long getId() {
