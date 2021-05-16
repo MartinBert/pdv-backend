@@ -19,7 +19,7 @@ import java.sql.SQLException;
 
 @RestController
 @RequestMapping(value = "/{tenantid}/api/ventas")
-public class VentaController {
+public class SaleController {
     @Autowired
     private SaleService service;
 
