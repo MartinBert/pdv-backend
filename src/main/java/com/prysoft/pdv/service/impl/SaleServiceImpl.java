@@ -4,7 +4,6 @@ import com.prysoft.pdv.dao.InvoiceDao;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.SaleFilter;
 import com.prysoft.pdv.models.Invoice;
-import com.prysoft.pdv.models.MedioPago;
 import com.prysoft.pdv.models.PaymentMethod;
 import com.prysoft.pdv.service.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
