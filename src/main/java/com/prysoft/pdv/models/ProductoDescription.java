@@ -3,7 +3,7 @@ package com.prysoft.pdv.models;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ProductDescription implements Serializable {
+public class ProductoDescription implements Serializable {
     private static final long serialVersionUID = 999999999999999999L;
     private String name;
     private String barCode;

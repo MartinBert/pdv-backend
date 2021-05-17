@@ -288,15 +288,15 @@ public class SalesReportsImpl implements SalesReport {
                     if (invoiceContainProducts(voucher, request.getProducts())) {
                         if (invoiceBelongsToBranch(id, voucher)) {
                             PrintWithProductDetails detail = printSalesHelper.processReceiptForPrintWithProductDetails(voucher);
-                            for (ProductDescription productDescriptionInVoucher : voucher.getProductoDescription()) {
+                            for (ProductoDescription productoDescriptionInVoucher : voucher.getProductoDescription()) {
                                 if (subReportProductsDetail.isEmpty()) {
-                                    PrintSaleProductQuantityDetail printSaleProductQuantityDetail = printSalesHelper.processPrintSaleProductQuantityDetail(productDescriptionInVoucher, request);
+                                    PrintSaleProductQuantityDetail printSaleProductQuantityDetail = printSalesHelper.processPrintSaleProductQuantityDetail(productoDescriptionInVoucher, request);
                                     if (printSaleProductQuantityDetail != null) {
                                         subReportProductsDetail.add(printSaleProductQuantityDetail);
                                     }
                                 } else {
                                     ArrayList<PrintSaleProductQuantityDetail> check = new ArrayList<>();
-                                    PrintSaleProductQuantityDetail printSaleProductQuantityDetail = printSalesHelper.processPrintSaleProductQuantityDetail(productDescriptionInVoucher, request);
+                                    PrintSaleProductQuantityDetail printSaleProductQuantityDetail = printSalesHelper.processPrintSaleProductQuantityDetail(productoDescriptionInVoucher, request);
                                     for (PrintSaleProductQuantityDetail printSaleProductQuantityDetailInSubReportArray : subReportProductsDetail) {
                                         if (printSaleProductQuantityDetail != null && printSaleProductQuantityDetailInSubReportArray != null) {
                                             if (printSaleProductQuantityDetailInSubReportArray.getProduct().equals(printSaleProductQuantityDetail.getProduct())) {
@@ -347,7 +347,7 @@ public class SalesReportsImpl implements SalesReport {
                                              ArrayList<Product> requestProducts) {
         boolean status = false;
         if (receipt.getProductoDescription() != null) {
-            for (ProductDescription productOfReceipt : receipt.getProductoDescription()) {
+            for (ProductoDescription productOfReceipt : receipt.getProductoDescription()) {
                 for (Product product : requestProducts) {
                     if (productOfReceipt.getBarCode().equals(product.getCodigoBarra())) {
                         status = true;

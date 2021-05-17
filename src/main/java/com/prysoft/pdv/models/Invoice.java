@@ -20,7 +20,7 @@ public class Invoice implements Serializable {
     private Boolean condicionVenta;
     private ArrayList<PrintComprobanteDetail> productos;
     private ArrayList<Product> productosDetalle;
-    private ArrayList<ProductDescription> productoDescription;
+    private ArrayList<ProductoDescription> productoDescription;
     private String barCode;
     private String cae;
     private Double totalVenta;
@@ -216,11 +216,11 @@ public class Invoice implements Serializable {
         this.productosDetalle = productosDetalle;
     }
 
-    public ArrayList<ProductDescription> getProductoDescription() {
+    public ArrayList<ProductoDescription> getProductoDescription() {
         return productoDescription;
     }
 
-    public void setProductoDescription(ArrayList<ProductDescription> productoDescription) {
+    public void setProductoDescription(ArrayList<ProductoDescription> productoDescription) {
         this.productoDescription = productoDescription;
     }
 
