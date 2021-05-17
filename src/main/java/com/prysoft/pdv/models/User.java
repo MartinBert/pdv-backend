@@ -1,5 +1,6 @@
 package com.prysoft.pdv.models;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,16 +23,16 @@ public class User implements UserDetails, Serializable {
     private String username;
     private String password;
     @OneToOne
-    private Perfil perfil;
+    private Profile perfil;
     @OneToOne
     @JoinColumn(name = "empresa_id")
-    private Empresa empresa;
+    private Business empresa;
     @OneToOne
     @JoinColumn(name = "sucursal_id")
-    private Sucursal sucursal;
+    private CommercialBranch sucursal;
     @OneToOne
     @JoinColumn(name = "punto_venta_id")
-    private PuntoVenta puntoVenta;
+    private SalePoint puntoVenta;
 
     public Long getId() {
         return id;
@@ -67,35 +68,35 @@ public class User implements UserDetails, Serializable {
         this.password = password;
     }
 
-    public Perfil getPerfil() {
+    public Profile getPerfil() {
         return perfil;
     }
 
-    public void setPerfil(Perfil perfil) {
+    public void setPerfil(Profile perfil) {
         this.perfil = perfil;
     }
 
-    public Empresa getEmpresa() {
+    public Business getEmpresa() {
         return empresa;
     }
 
-    public void setEmpresa(Empresa empresa) {
+    public void setEmpresa(Business empresa) {
         this.empresa = empresa;
     }
 
-    public Sucursal getSucursal() {
+    public CommercialBranch getSucursal() {
         return sucursal;
     }
 
-    public void setSucursal(Sucursal sucursal) {
+    public void setSucursal(CommercialBranch sucursal) {
         this.sucursal = sucursal;
     }
 
-    public PuntoVenta getPuntoVenta() {
+    public SalePoint getPuntoVenta() {
         return puntoVenta;
     }
 
-    public void setPuntoVenta(PuntoVenta puntoVenta) {
+    public void setPuntoVenta(SalePoint puntoVenta) {
         this.puntoVenta = puntoVenta;
     }
 

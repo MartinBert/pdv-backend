@@ -3,7 +3,8 @@ package com.prysoft.pdv.models;
 import java.io.Serializable;
 
 public class PrintComprobanteDetail implements Serializable {
-    private static final long serialVersionUID = 999999999999999999L;
+    private static final long serialVersionUID = 6840527842564211059L;
+
     private String nombre;
     private String cantUnidades;
     private double precioUnitario;

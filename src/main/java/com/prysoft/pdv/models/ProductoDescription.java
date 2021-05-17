@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ProductoDescription implements Serializable {
-    private static final long serialVersionUID = 999999999999999999L;
+    private static final long serialVersionUID = -5084657499689909117L;
     private String name;
     private String barCode;
     private String code;
