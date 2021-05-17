@@ -11,24 +11,27 @@ import java.util.Collections;
 
 @Entity
 @Table(name = "usuarios")
-public class User implements UserDetails, Serializable {
-    private static final long serialVersionUID = 999999999999999999L;
-
+public class Usuario implements UserDetails, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "nombre", unique = true, nullable = false)
     private String nombre;
     private String username;
     private String password;
+
     @OneToOne
     private Perfil perfil;
+
     @OneToOne
     @JoinColumn(name = "empresa_id")
     private Empresa empresa;
+
     @OneToOne
     @JoinColumn(name = "sucursal_id")
     private Sucursal sucursal;
+
     @OneToOne
     @JoinColumn(name = "punto_venta_id")
     private PuntoVenta puntoVenta;

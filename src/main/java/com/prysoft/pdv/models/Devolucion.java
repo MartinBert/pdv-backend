@@ -6,23 +6,21 @@ import java.util.ArrayList;
 
 @Entity
 @Table(name = "devoluciones")
-public class Refund implements Serializable {
-    private static final long serialVersionUID = 999999999999999999L;
-
+public class Devolucion implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String fecha;
     private String descripcion;
     private double totalDevolucion;
-    private ArrayList<InvoicePrintingDetail> productos;
-    private ArrayList<InvoicePrintingDetail> productosSalientes;
+    private ArrayList<PrintComprobanteDetail> productos;
+    private ArrayList<PrintComprobanteDetail> productosSalientes;
     @OneToOne
-    private Invoice comprobante;
+    private ComprobanteFiscal comprobante;
     @OneToOne
-    private Business empresa;
+    private Empresa empresa;
     @OneToOne
-    private CommercialBranch sucursal;
+    private Sucursal sucursal;
 
     public Long getId() {
         return id;
@@ -48,43 +46,43 @@ public class Refund implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public Invoice getComprobante() {
+    public ComprobanteFiscal getComprobante() {
         return comprobante;
     }
 
-    public void setComprobante(Invoice comprobante) {
+    public void setComprobante(ComprobanteFiscal comprobante) {
         this.comprobante = comprobante;
     }
 
-    public ArrayList<InvoicePrintingDetail> getProductos() {
+    public ArrayList<PrintComprobanteDetail> getProductos() {
         return productos;
     }
 
-    public void setProductos(ArrayList<InvoicePrintingDetail> productos) {
+    public void setProductos(ArrayList<PrintComprobanteDetail> productos) {
         this.productos = productos;
     }
 
-    public ArrayList<InvoicePrintingDetail> getProductosSalientes() {
+    public ArrayList<PrintComprobanteDetail> getProductosSalientes() {
         return productosSalientes;
     }
 
-    public void setProductosSalientes(ArrayList<InvoicePrintingDetail> productosSalientes) {
+    public void setProductosSalientes(ArrayList<PrintComprobanteDetail> productosSalientes) {
         this.productosSalientes = productosSalientes;
     }
 
-    public Business getEmpresa() {
+    public Empresa getEmpresa() {
         return empresa;
     }
 
-    public void setEmpresa(Business empresa) {
+    public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
 
-    public CommercialBranch getSucursal() {
+    public Sucursal getSucursal() {
         return sucursal;
     }
 
-    public void setSucursal(CommercialBranch sucursal) {
+    public void setSucursal(Sucursal sucursal) {
         this.sucursal = sucursal;
     }
 

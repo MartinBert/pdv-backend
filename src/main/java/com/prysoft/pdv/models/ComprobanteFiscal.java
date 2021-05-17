@@ -7,8 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "comprobantes_fiscales")
-public class Invoice implements Serializable {
-    private static final long serialVersionUID = 999999999999999999L;
+public class ComprobanteFiscal implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,9 +17,9 @@ public class Invoice implements Serializable {
     private String fechaEmision;
     private String fechaVto;
     private Boolean condicionVenta;
-    private ArrayList<InvoicePrintingDetail> productos;
-    private ArrayList<Product> productosDetalle;
-    private ArrayList<ProductDescription> productoDescription;
+    private ArrayList<PrintComprobanteDetail> productos;
+    private ArrayList<Producto> productosDetalle;
+    private ArrayList<ProductoDescription> productoDescription;
     private String barCode;
     private String cae;
     private Double totalVenta;
@@ -30,22 +29,22 @@ public class Invoice implements Serializable {
     @JoinTable(name = "comprobantes_medios",
             joinColumns = @JoinColumn(name = "id_comprobante"),
             inverseJoinColumns = @JoinColumn(name = "id_medio"))
-    private Set<PaymentMethod> mediosPago;
+    private Set<MedioPago> mediosPago;
     @ManyToMany
     @JoinTable(name = "comprobantes_planes",
             joinColumns = @JoinColumn(name = "id_comprobante"),
             inverseJoinColumns = @JoinColumn(name = "id_plan"))
-    private Set<PaymentPlan> planesPago;
+    private Set<PlanPago> planesPago;
     @OneToOne
-    private SalePoint puntoVenta;
+    private PuntoVenta puntoVenta;
     @OneToOne
-    private CommercialBranch sucursal;
+    private Sucursal sucursal;
     @OneToOne
-    private CommercialDocument documentoComercial;
+    private DocumentoComercial documentoComercial;
     @OneToOne
-    private Business empresa;
+    private Empresa empresa;
     @OneToOne
-    private Client cliente;
+    private Cliente cliente;
     private String cerrado;
 
     public Long getId() {
@@ -96,11 +95,11 @@ public class Invoice implements Serializable {
         this.condicionVenta = condicionVenta;
     }
 
-    public ArrayList<InvoicePrintingDetail> getProductos() {
+    public ArrayList<PrintComprobanteDetail> getProductos() {
         return productos;
     }
 
-    public void setProductos(ArrayList<InvoicePrintingDetail> productos) {
+    public void setProductos(ArrayList<PrintComprobanteDetail> productos) {
         this.productos = productos;
     }
 
@@ -128,59 +127,59 @@ public class Invoice implements Serializable {
         this.totalVenta = totalVenta;
     }
 
-    public Set<PaymentMethod> getMediosPago() {
+    public Set<MedioPago> getMediosPago() {
         return mediosPago;
     }
 
-    public void setMediosPago(Set<PaymentMethod> mediosPago) {
+    public void setMediosPago(Set<MedioPago> mediosPago) {
         this.mediosPago = mediosPago;
     }
 
-    public SalePoint getPuntoVenta() {
+    public PuntoVenta getPuntoVenta() {
         return puntoVenta;
     }
 
-    public void setPuntoVenta(SalePoint puntoVenta) {
+    public void setPuntoVenta(PuntoVenta puntoVenta) {
         this.puntoVenta = puntoVenta;
     }
 
-    public CommercialBranch getSucursal() {
+    public Sucursal getSucursal() {
         return sucursal;
     }
 
-    public void setSucursal(CommercialBranch sucursal) {
+    public void setSucursal(Sucursal sucursal) {
         this.sucursal = sucursal;
     }
 
-    public CommercialDocument getDocumentoComercial() {
+    public DocumentoComercial getDocumentoComercial() {
         return documentoComercial;
     }
 
-    public void setDocumentoComercial(CommercialDocument documentoComercial) {
+    public void setDocumentoComercial(DocumentoComercial documentoComercial) {
         this.documentoComercial = documentoComercial;
     }
 
-    public Business getEmpresa() {
+    public Empresa getEmpresa() {
         return empresa;
     }
 
-    public void setEmpresa(Business empresa) {
+    public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
 
-    public Client getCliente() {
+    public Cliente getCliente() {
         return cliente;
     }
 
-    public void setCliente(Client cliente) {
+    public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 
-    public Set<PaymentPlan> getPlanesPago() {
+    public Set<PlanPago> getPlanesPago() {
         return planesPago;
     }
 
-    public void setPlanesPago(Set<PaymentPlan> planesPago) {
+    public void setPlanesPago(Set<PlanPago> planesPago) {
         this.planesPago = planesPago;
     }
 
@@ -208,19 +207,19 @@ public class Invoice implements Serializable {
         this.ingresosBrutos = ingresosBrutos;
     }
 
-    public ArrayList<Product> getProductosDetalle() {
+    public ArrayList<Producto> getProductosDetalle() {
         return productosDetalle;
     }
 
-    public void setProductosDetalle(ArrayList<Product> productosDetalle) {
+    public void setProductosDetalle(ArrayList<Producto> productosDetalle) {
         this.productosDetalle = productosDetalle;
     }
 
-    public ArrayList<ProductDescription> getProductoDescription() {
+    public ArrayList<ProductoDescription> getProductoDescription() {
         return productoDescription;
     }
 
-    public void setProductoDescription(ArrayList<ProductDescription> productoDescription) {
+    public void setProductoDescription(ArrayList<ProductoDescription> productoDescription) {
         this.productoDescription = productoDescription;
     }
 

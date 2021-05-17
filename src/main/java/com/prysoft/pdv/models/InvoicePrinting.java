@@ -3,7 +3,8 @@ package com.prysoft.pdv.models;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class PrintComprobante implements Serializable {
+public class InvoicePrinting implements Serializable {
+    private static final long serialVersionUID = 999999999999999999L;
     private String barCode;
     private String cae;
     private String fechaEmision;
@@ -24,7 +25,7 @@ public class PrintComprobante implements Serializable {
     private int empresaIngBruto;
     private String empresaTelefono;
 
-    private ArrayList<PrintComprobanteDetail> productos;
+    private ArrayList<InvoicePrintingDetail> productos;
 
     private Double totalVenta;
     private String nombreDocumento;
@@ -157,11 +158,11 @@ public class PrintComprobante implements Serializable {
         this.empresaTelefono = empresaTelefono;
     }
 
-    public ArrayList<PrintComprobanteDetail> getProductos() {
+    public ArrayList<InvoicePrintingDetail> getProductos() {
         return productos;
     }
 
-    public void setProductos(ArrayList<PrintComprobanteDetail> productos) {
+    public void setProductos(ArrayList<InvoicePrintingDetail> productos) {
         this.productos = productos;
     }
 
@@ -207,29 +208,29 @@ public class PrintComprobante implements Serializable {
 
     @Override
     public String toString() {
-        return "PrintComprobante{" +
-                "barCode='" + barCode + '\'' +
-                ", cae='" + cae + '\'' +
-                ", fechaEmision='" + fechaEmision + '\'' +
-                ", fechaVto='" + fechaVto + '\'' +
-                ", clienteCondicionIva='" + clienteCondicionIva + '\'' +
-                ", clienteCuit='" + clienteCuit + '\'' +
-                ", clienteDireccion='" + clienteDireccion + '\'' +
-                ", clienteRazonSocial='" + clienteRazonSocial + '\'' +
-                ", condicionVenta=" + condicionVenta +
-                ", letra='" + letra + '\'' +
-                ", numeroCbte='" + numeroCbte + '\'' +
-                ", idPuntoVenta=" + idPuntoVenta +
-                ", empresaCondicionIva='" + empresaCondicionIva + '\'' +
-                ", empresaCuit='" + empresaCuit + '\'' +
-                ", empresaDireccion='" + empresaDireccion + '\'' +
-                ", empresaRazonSocial='" + empresaRazonSocial + '\'' +
-                ", empresaFechaInicioAct='" + empresaFechaInicioAct + '\'' +
-                ", empresaIngBruto=" + empresaIngBruto +
-                ", empresaTelefono='" + empresaTelefono + '\'' +
-                ", productos=" + productos +
-                ", totalVenta=" + totalVenta +
-                ", nombreDocumento='" + nombreDocumento + '\'' +
-                '}';
+        return "InvoicePrinting{" +
+            "barCode='" + barCode + '\'' +
+            ", cae='" + cae + '\'' +
+            ", fechaEmision='" + fechaEmision + '\'' +
+            ", fechaVto='" + fechaVto + '\'' +
+            ", clienteCondicionIva='" + clienteCondicionIva + '\'' +
+            ", clienteCuit='" + clienteCuit + '\'' +
+            ", clienteDireccion='" + clienteDireccion + '\'' +
+            ", clienteRazonSocial='" + clienteRazonSocial + '\'' +
+            ", condicionVenta=" + condicionVenta +
+            ", letra='" + letra + '\'' +
+            ", numeroCbte='" + numeroCbte + '\'' +
+            ", idPuntoVenta=" + idPuntoVenta +
+            ", empresaCondicionIva='" + empresaCondicionIva + '\'' +
+            ", empresaCuit='" + empresaCuit + '\'' +
+            ", empresaDireccion='" + empresaDireccion + '\'' +
+            ", empresaRazonSocial='" + empresaRazonSocial + '\'' +
+            ", empresaFechaInicioAct='" + empresaFechaInicioAct + '\'' +
+            ", empresaIngBruto=" + empresaIngBruto +
+            ", empresaTelefono='" + empresaTelefono + '\'' +
+            ", productos=" + productos +
+            ", totalVenta=" + totalVenta +
+            ", nombreDocumento='" + nombreDocumento + '\'' +
+            '}';
     }
 }

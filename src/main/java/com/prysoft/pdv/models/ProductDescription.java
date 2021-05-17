@@ -3,7 +3,8 @@ package com.prysoft.pdv.models;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ProductoDescription implements Serializable {
+public class ProductDescription implements Serializable {
+    private static final long serialVersionUID = 999999999999999999L;
     private String name;
     private String barCode;
     private String code;
@@ -20,7 +21,7 @@ public class ProductoDescription implements Serializable {
     private double saleIvaPercent;
     private double buyIvaAmount;
     private double saleIvaAmount;
-    private ArrayList<Proveedor> providersData;
+    private ArrayList<Provider> providersData;
 
     public String getName() {
         return name;
@@ -150,17 +151,17 @@ public class ProductoDescription implements Serializable {
         this.rubroId = rubroId;
     }
 
-    public ArrayList<Proveedor> getProvidersData() {
+    public ArrayList<Provider> getProvidersData() {
         return providersData;
     }
 
-    public void setProvidersData(ArrayList<Proveedor> providersData) {
+    public void setProvidersData(ArrayList<Provider> providersData) {
         this.providersData = providersData;
     }
 
     @Override
     public String toString() {
-        return "ProductoDescription{" +
+        return "ProductDescription{" +
                 "name='" + name + '\'' +
                 ", barCode='" + barCode + '\'' +
                 ", code='" + code + '\'' +
