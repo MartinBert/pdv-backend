@@ -3,6 +3,7 @@ package com.prysoft.pdv.models;
 import java.io.Serializable;
 
 public class PrintComprobanteDetail implements Serializable {
+    private static final long serialVersionUID = 999999999999999999L;
     private String nombre;
     private String cantUnidades;
     private double precioUnitario;
@@ -42,7 +43,7 @@ public class PrintComprobanteDetail implements Serializable {
 
     @Override
     public String toString() {
-        return "PrintComprobanteDetail{" +
+        return "InvoicePrintingDetail{" +
                 "nombre='" + nombre + '\'' +
                 ", cantUnidades='" + cantUnidades + '\'' +
                 ", precioUnitario=" + precioUnitario +
