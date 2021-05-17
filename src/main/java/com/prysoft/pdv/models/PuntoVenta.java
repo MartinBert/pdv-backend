@@ -8,7 +8,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "punto_ventas")
 public class PuntoVenta implements Serializable {
-    private static final long serialVersionUID = 2123097355694757897L;
+    private static final long serialVersionUID = -4549473212492971830L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
