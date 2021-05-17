@@ -6,7 +6,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "ivas")
 public class Iva implements Serializable {
-    private static final long serialVersionUID = 999999999999999999L;
+    private static final long serialVersionUID = 1948016101528946296L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
