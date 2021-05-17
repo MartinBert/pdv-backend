@@ -3,7 +3,7 @@ package com.prysoft.pdv.models;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class InvoicePrinting implements Serializable {
+public class PrintComprobante implements Serializable {
     private static final long serialVersionUID = 999999999999999999L;
     private String barCode;
     private String cae;
@@ -25,7 +25,7 @@ public class InvoicePrinting implements Serializable {
     private int empresaIngBruto;
     private String empresaTelefono;
 
-    private ArrayList<InvoicePrintingDetail> productos;
+    private ArrayList<PrintComprobanteDetail> productos;
 
     private Double totalVenta;
     private String nombreDocumento;
@@ -158,11 +158,11 @@ public class InvoicePrinting implements Serializable {
         this.empresaTelefono = empresaTelefono;
     }
 
-    public ArrayList<InvoicePrintingDetail> getProductos() {
+    public ArrayList<PrintComprobanteDetail> getProductos() {
         return productos;
     }
 
-    public void setProductos(ArrayList<InvoicePrintingDetail> productos) {
+    public void setProductos(ArrayList<PrintComprobanteDetail> productos) {
         this.productos = productos;
     }
 

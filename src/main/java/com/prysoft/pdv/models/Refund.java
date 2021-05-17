@@ -15,8 +15,8 @@ public class Refund implements Serializable {
     private String fecha;
     private String descripcion;
     private double totalDevolucion;
-    private ArrayList<InvoicePrintingDetail> productos;
-    private ArrayList<InvoicePrintingDetail> productosSalientes;
+    private ArrayList<PrintComprobanteDetail> productos;
+    private ArrayList<PrintComprobanteDetail> productosSalientes;
     @OneToOne
     private Invoice comprobante;
     @OneToOne
@@ -56,19 +56,19 @@ public class Refund implements Serializable {
         this.comprobante = comprobante;
     }
 
-    public ArrayList<InvoicePrintingDetail> getProductos() {
+    public ArrayList<PrintComprobanteDetail> getProductos() {
         return productos;
     }
 
-    public void setProductos(ArrayList<InvoicePrintingDetail> productos) {
+    public void setProductos(ArrayList<PrintComprobanteDetail> productos) {
         this.productos = productos;
     }
 
-    public ArrayList<InvoicePrintingDetail> getProductosSalientes() {
+    public ArrayList<PrintComprobanteDetail> getProductosSalientes() {
         return productosSalientes;
     }
 
-    public void setProductosSalientes(ArrayList<InvoicePrintingDetail> productosSalientes) {
+    public void setProductosSalientes(ArrayList<PrintComprobanteDetail> productosSalientes) {
         this.productosSalientes = productosSalientes;
     }
 

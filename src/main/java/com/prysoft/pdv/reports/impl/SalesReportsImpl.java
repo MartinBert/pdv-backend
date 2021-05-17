@@ -175,7 +175,7 @@ public class SalesReportsImpl implements SalesReport {
         for (Invoice voucher : vouchers) {
             if (invoiceBelongsToBranch(id, voucher)) {
                 if (voucherIsInDateRange(voucher, search)) {
-                    for (InvoicePrintingDetail detailInVoucher : voucher.getProductos()) {
+                    for (PrintComprobanteDetail detailInVoucher : voucher.getProductos()) {
                         QuantityProductsSold detail = new QuantityProductsSold();
                         if (detailInVoucher.getNombre().toLowerCase().trim().equals(search.getSearch().toLowerCase().trim())) {
                             if (data.isEmpty()) {
@@ -211,8 +211,8 @@ public class SalesReportsImpl implements SalesReport {
             String encodedJsonForQrCode = createEncodedJsonObject(request);
             String subReportRoute = reportsRoutes.getSubReportRoute("receiptsReports", "factura_detail.jasper");
             InputStream stream = reportsRoutes.getStreamReportResource("receiptsReports", "factura_electronica.jasper");
-            InvoicePrinting comprobante = invoicePrintHelper.processReceiptForPrint(request);
-            List<InvoicePrinting> data = new ArrayList<>(Collections.singleton(comprobante));
+            PrintComprobante comprobante = invoicePrintHelper.processReceiptForPrint(request);
+            List<PrintComprobante> data = new ArrayList<>(Collections.singleton(comprobante));
             JRBeanCollectionDataSource subreportDataSource = new JRBeanCollectionDataSource(comprobante.getProductos());
             HashMap<String, Object> params =
                     createHashMapForFiscalReceiptReport(subReportRoute, subreportDataSource, comprobante.getTotalVenta().toString(), encodedJsonForQrCode);
@@ -220,8 +220,8 @@ public class SalesReportsImpl implements SalesReport {
         } else {
             String subReportRoute = reportsRoutes.getSubReportRoute("receiptsReports", "ticket_detail.jasper");
             InputStream stream = reportsRoutes.getStreamReportResource("receiptsReports", "x_ticket.jasper");
-            InvoicePrinting comprobante = invoicePrintHelper.processReceiptForPrint(request);
-            List<InvoicePrinting> data = new ArrayList<>(Collections.singleton(comprobante));
+            PrintComprobante comprobante = invoicePrintHelper.processReceiptForPrint(request);
+            List<PrintComprobante> data = new ArrayList<>(Collections.singleton(comprobante));
             JRBeanCollectionDataSource subreportDataSource = new JRBeanCollectionDataSource(comprobante.getProductos());
             HashMap<String, Object> params =
                     createHashMapForNotFiscalReceiptReport(subReportRoute, subreportDataSource, comprobante.getTotalVenta().toString());

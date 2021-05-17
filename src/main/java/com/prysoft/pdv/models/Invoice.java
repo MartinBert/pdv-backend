@@ -18,7 +18,7 @@ public class Invoice implements Serializable {
     private String fechaEmision;
     private String fechaVto;
     private Boolean condicionVenta;
-    private ArrayList<InvoicePrintingDetail> productos;
+    private ArrayList<PrintComprobanteDetail> productos;
     private ArrayList<Product> productosDetalle;
     private ArrayList<ProductDescription> productoDescription;
     private String barCode;
@@ -96,11 +96,11 @@ public class Invoice implements Serializable {
         this.condicionVenta = condicionVenta;
     }
 
-    public ArrayList<InvoicePrintingDetail> getProductos() {
+    public ArrayList<PrintComprobanteDetail> getProductos() {
         return productos;
     }
 
-    public void setProductos(ArrayList<InvoicePrintingDetail> productos) {
+    public void setProductos(ArrayList<PrintComprobanteDetail> productos) {
         this.productos = productos;
     }
 

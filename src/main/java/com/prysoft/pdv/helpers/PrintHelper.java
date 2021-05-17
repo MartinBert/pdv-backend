@@ -1,6 +1,6 @@
 package com.prysoft.pdv.helpers;
 
-import com.prysoft.pdv.models.InvoicePrinting;
+import com.prysoft.pdv.models.PrintComprobante;
 import com.prysoft.pdv.print.PrintProductsLabels;
 import com.prysoft.pdv.print.PrintSalesReport;
 import com.prysoft.pdv.print.PrintWithProductDetails;
@@ -59,7 +59,7 @@ public class PrintHelper implements Serializable {
         return null;
     }
 
-    public JasperPrint printOnCloseSale(InputStream stream, List<InvoicePrinting> data, HashMap<String, Object> params, HttpServletResponse response) throws JRException, IOException {
+    public JasperPrint printOnCloseSale(InputStream stream, List<PrintComprobante> data, HashMap<String, Object> params, HttpServletResponse response) throws JRException, IOException {
 
         JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(data);
         JasperReport report = (JasperReport) JRLoader.loadObject(stream);

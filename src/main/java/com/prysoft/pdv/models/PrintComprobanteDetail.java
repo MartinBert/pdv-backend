@@ -2,7 +2,7 @@ package com.prysoft.pdv.models;
 
 import java.io.Serializable;
 
-public class InvoicePrintingDetail implements Serializable {
+public class PrintComprobanteDetail implements Serializable {
     private static final long serialVersionUID = 999999999999999999L;
     private String nombre;
     private String cantUnidades;
