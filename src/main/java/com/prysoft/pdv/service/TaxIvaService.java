@@ -1,18 +1,18 @@
 package com.prysoft.pdv.service;
 
 import com.prysoft.pdv.dto.TaxIvaFilter;
-import com.prysoft.pdv.models.TaxIva;
+import com.prysoft.pdv.models.Iva;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface TaxIvaService {
-    TaxIva findById(Long id);
+    Iva findById(Long id);
 
-    Page<TaxIva> findAll(Pageable page);
+    Page<Iva> findAll(Pageable page);
 
-    TaxIva saveOrUpdate(TaxIva entity);
+    Iva saveOrUpdate(Iva entity);
 
     void delete(Long id);
 
-    Page<TaxIva> filter(TaxIvaFilter filterParam);
+    Page<Iva> filter(TaxIvaFilter filterParam);
 }

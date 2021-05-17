@@ -3,7 +3,7 @@ package com.prysoft.pdv.service.impl;
 import com.prysoft.pdv.dao.TaxIvaDao;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.TaxIvaFilter;
-import com.prysoft.pdv.models.TaxIva;
+import com.prysoft.pdv.models.Iva;
 import com.prysoft.pdv.service.TaxIvaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,14 +18,14 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class TaxIvaServiceImpl extends FilterService<TaxIva> implements TaxIvaService {
+public class TaxIvaServiceImpl extends FilterService<Iva> implements TaxIvaService {
 
     @Autowired
     private TaxIvaDao dao;
 
     @Override
-    public TaxIva findById(Long id) {
-        Optional<TaxIva> optional = dao.findById(id);
+    public Iva findById(Long id) {
+        Optional<Iva> optional = dao.findById(id);
         if (!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
@@ -33,12 +33,12 @@ public class TaxIvaServiceImpl extends FilterService<TaxIva> implements TaxIvaSe
     }
 
     @Override
-    public Page<TaxIva> findAll(Pageable page) {
+    public Page<Iva> findAll(Pageable page) {
         return dao.findAll(page);
     }
 
     @Override
-    public TaxIva saveOrUpdate(TaxIva entity) {
+    public Iva saveOrUpdate(Iva entity) {
         return dao.save(entity);
     }
 
@@ -48,7 +48,7 @@ public class TaxIvaServiceImpl extends FilterService<TaxIva> implements TaxIvaSe
     }
 
     @Override
-    public Page<TaxIva> filter(TaxIvaFilter filterParam) {
+    public Page<Iva> filter(TaxIvaFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
         hql = "";

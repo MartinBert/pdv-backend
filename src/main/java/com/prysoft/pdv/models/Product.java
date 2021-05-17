@@ -35,9 +35,9 @@ public class Product implements Serializable {
     @OneToOne
     private Brand marca;
     @OneToOne
-    private TaxIva ivaComprasObject;
+    private Iva ivaComprasObject;
     @OneToOne
-    private TaxIva ivaVentasObject;
+    private Iva ivaVentasObject;
     @OneToMany(mappedBy = "producto")
     private Set<ProductVariation> variaciones;
     @ManyToMany(fetch = FetchType.EAGER)
@@ -194,19 +194,19 @@ public class Product implements Serializable {
         this.marca = marca;
     }
 
-    public TaxIva getIvaComprasObject() {
+    public Iva getIvaComprasObject() {
         return ivaComprasObject;
     }
 
-    public void setIvaComprasObject(TaxIva ivaComprasObject) {
+    public void setIvaComprasObject(Iva ivaComprasObject) {
         this.ivaComprasObject = ivaComprasObject;
     }
 
-    public TaxIva getIvaVentasObject() {
+    public Iva getIvaVentasObject() {
         return ivaVentasObject;
     }
 
-    public void setIvaVentasObject(TaxIva ivaVentasObject) {
+    public void setIvaVentasObject(Iva ivaVentasObject) {
         this.ivaVentasObject = ivaVentasObject;
     }
 

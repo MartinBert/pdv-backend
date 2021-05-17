@@ -1,7 +1,7 @@
 package com.prysoft.pdv.controller;
 
 import com.prysoft.pdv.dto.TaxIvaFilter;
-import com.prysoft.pdv.models.TaxIva;
+import com.prysoft.pdv.models.Iva;
 import com.prysoft.pdv.service.TaxIvaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,23 +16,23 @@ public class TaxIvaController {
     private TaxIvaService service;
 
     @GetMapping
-    Page<TaxIva> findAll(Pageable page) {
+    Page<Iva> findAll(Pageable page) {
         return service.findAll(page);
     }
 
     @GetMapping(value = "/{id}")
-    TaxIva findById(@PathVariable long id) {
+    Iva findById(@PathVariable long id) {
         return service.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    TaxIva save(@RequestBody TaxIva entity) {
+    Iva save(@RequestBody Iva entity) {
         return service.saveOrUpdate(entity);
     }
 
     @PutMapping
-    TaxIva update(@RequestBody TaxIva entity) {
+    Iva update(@RequestBody Iva entity) {
         return service.saveOrUpdate(entity);
     }
 
@@ -43,7 +43,7 @@ public class TaxIvaController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<TaxIva> filter(@RequestBody TaxIvaFilter filterParam) {
+    public Page<Iva> filter(@RequestBody TaxIvaFilter filterParam) {
         return service.filter(filterParam);
     }
 }
