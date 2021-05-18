@@ -58,8 +58,7 @@ public class MedioPagoServiceImpl extends FilterService<MedioPago> implements Me
         if (filterParam.getSucursalId() == null) {
             hql = "WHERE LOWER(c.nombre) LIKE LOWER('" + filterParam.getMedioPagoName() + "%') GROUP BY c.id ORDER BY c.id ASC";
         } else {
-            hql =
-                    "WHERE (c.sucursal.id) = ('" + filterParam.getSucursalId() + "') " +
+            hql = "WHERE (c.sucursal.id) = ('" + filterParam.getSucursalId() + "') " +
                             "AND LOWER(c.nombre) LIKE LOWER('" + filterParam.getMedioPagoName() + "%') GROUP BY c.id ORDER BY c.id ASC";
         }
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);

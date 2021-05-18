@@ -2,6 +2,7 @@ package com.prysoft.pdv.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Time;
 
 
 @Entity
@@ -13,6 +14,26 @@ public class Note implements Serializable {
     private Long id;
 
     private String name;
+
+    private String Starthour;
+
+    public String getHourStart() {
+        return Starthour;
+    }
+
+    public void setStarthour(String Starthour) {
+        this.Starthour = Starthour;
+    }
+
+    public String getHourEnd() {
+        return Endhour;
+    }
+
+    public void setEndhour(String Endhour) {
+        this.Endhour = Endhour;
+    }
+
+    private String Endhour;
 
     private String startEvent;
 
