@@ -6,6 +6,8 @@ import java.io.Serializable;
 @Entity
 @Table(name = "ivas")
 public class Iva implements Serializable {
+    private static final long serialVersionUID = 1948016101528946296L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -47,7 +49,7 @@ public class Iva implements Serializable {
 
     @Override
     public String toString() {
-        return "Iva{" +
+        return "TaxIva{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", porcentaje=" + porcentaje +

@@ -34,13 +34,13 @@ public class SalesReportsImpl implements SalesReport {
     @Autowired
     private DateHelper dateHelper;
     @Autowired
-    private MedioPagoHelper medioHelper;
+    private PaymentMethodHelper medioHelper;
     @Autowired
-    private DocumentoComercialHelper documentoHelper;
+    private CommercialDocumentHelper documentoHelper;
     @Autowired
     private PrintHelper printHelper;
     @Autowired
-    private PrintComprobanteHelper printComprobanteHelper;
+    private InvoicePrintHelper invoicePrintHelper;
     @Autowired
     private PrintSalesHelper printSalesHelper;
     @Autowired
@@ -199,11 +199,7 @@ public class SalesReportsImpl implements SalesReport {
     }
 
     protected boolean voucherIsInDateRange(Invoice voucher, SearchFilterInProductsSold search) {
-        if (date(voucher.getFechaEmision()) >= date(search.getInitDate()) && date(voucher.getFechaEmision()) <= date(search.getFinishDate())) {
-            return true;
-        } else {
-            return false;
-        }
+        return date(voucher.getFechaEmision()) >= date(search.getInitDate()) && date(voucher.getFechaEmision()) <= date(search.getFinishDate());
     }
 
     @Override
@@ -215,7 +211,7 @@ public class SalesReportsImpl implements SalesReport {
             String encodedJsonForQrCode = createEncodedJsonObject(request);
             String subReportRoute = reportsRoutes.getSubReportRoute("receiptsReports", "factura_detail.jasper");
             InputStream stream = reportsRoutes.getStreamReportResource("receiptsReports", "factura_electronica.jasper");
-            PrintComprobante comprobante = printComprobanteHelper.processReceiptForPrint(request);
+            PrintComprobante comprobante = invoicePrintHelper.processReceiptForPrint(request);
             List<PrintComprobante> data = new ArrayList<>(Collections.singleton(comprobante));
             JRBeanCollectionDataSource subreportDataSource = new JRBeanCollectionDataSource(comprobante.getProductos());
             HashMap<String, Object> params =
@@ -224,7 +220,7 @@ public class SalesReportsImpl implements SalesReport {
         } else {
             String subReportRoute = reportsRoutes.getSubReportRoute("receiptsReports", "ticket_detail.jasper");
             InputStream stream = reportsRoutes.getStreamReportResource("receiptsReports", "x_ticket.jasper");
-            PrintComprobante comprobante = printComprobanteHelper.processReceiptForPrint(request);
+            PrintComprobante comprobante = invoicePrintHelper.processReceiptForPrint(request);
             List<PrintComprobante> data = new ArrayList<>(Collections.singleton(comprobante));
             JRBeanCollectionDataSource subreportDataSource = new JRBeanCollectionDataSource(comprobante.getProductos());
             HashMap<String, Object> params =
@@ -292,15 +288,15 @@ public class SalesReportsImpl implements SalesReport {
                     if (invoiceContainProducts(voucher, request.getProducts())) {
                         if (invoiceBelongsToBranch(id, voucher)) {
                             PrintWithProductDetails detail = printSalesHelper.processReceiptForPrintWithProductDetails(voucher);
-                            for (ProductoDescription productDescriptionInVoucher : voucher.getProductoDescription()) {
+                            for (ProductoDescription productoDescriptionInVoucher : voucher.getProductoDescription()) {
                                 if (subReportProductsDetail.isEmpty()) {
-                                    PrintSaleProductQuantityDetail printSaleProductQuantityDetail = printSalesHelper.processPrintSaleProductQuantityDetail(productDescriptionInVoucher, request);
+                                    PrintSaleProductQuantityDetail printSaleProductQuantityDetail = printSalesHelper.processPrintSaleProductQuantityDetail(productoDescriptionInVoucher, request);
                                     if (printSaleProductQuantityDetail != null) {
                                         subReportProductsDetail.add(printSaleProductQuantityDetail);
                                     }
                                 } else {
                                     ArrayList<PrintSaleProductQuantityDetail> check = new ArrayList<>();
-                                    PrintSaleProductQuantityDetail printSaleProductQuantityDetail = printSalesHelper.processPrintSaleProductQuantityDetail(productDescriptionInVoucher, request);
+                                    PrintSaleProductQuantityDetail printSaleProductQuantityDetail = printSalesHelper.processPrintSaleProductQuantityDetail(productoDescriptionInVoucher, request);
                                     for (PrintSaleProductQuantityDetail printSaleProductQuantityDetailInSubReportArray : subReportProductsDetail) {
                                         if (printSaleProductQuantityDetail != null && printSaleProductQuantityDetailInSubReportArray != null) {
                                             if (printSaleProductQuantityDetailInSubReportArray.getProduct().equals(printSaleProductQuantityDetail.getProduct())) {
@@ -344,11 +340,7 @@ public class SalesReportsImpl implements SalesReport {
 
     protected boolean invoiceIsInTheDateRange(Invoice receipt,
                                               PrintSaleForSelectedProductAndDate request) {
-        if (date(receipt.getFechaEmision()) >= date(request.getFechaDesde()) && date(receipt.getFechaEmision()) <= date(request.getFechaHasta())) {
-            return true;
-        } else {
-            return false;
-        }
+        return date(receipt.getFechaEmision()) >= date(request.getFechaDesde()) && date(receipt.getFechaEmision()) <= date(request.getFechaHasta());
     }
 
     protected boolean invoiceContainProducts(Invoice receipt,
@@ -370,8 +362,7 @@ public class SalesReportsImpl implements SalesReport {
 
     protected boolean invoiceBelongsToBranch(Long id,
                                              Invoice receipt) {
-        if (receipt.getSucursal().getId() != id) return false;
-        return true;
+        return receipt.getSucursal().getId() == id;
     }
 
     protected double date(String date) {

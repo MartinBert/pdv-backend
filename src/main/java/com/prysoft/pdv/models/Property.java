@@ -9,11 +9,11 @@ import java.util.Set;
 @Table(name = "propiedades")
 public class Property implements Serializable {
     private static final long serialVersionUID = 999999999999999999L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "propiedades_atributos",
             joinColumns = @JoinColumn(name = "id_propiedad"),

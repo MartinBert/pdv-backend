@@ -8,6 +8,7 @@ import java.util.ArrayList;
 @Table(name = "devoluciones")
 public class Refund implements Serializable {
     private static final long serialVersionUID = 999999999999999999L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,7 +20,7 @@ public class Refund implements Serializable {
     @OneToOne
     private Invoice comprobante;
     @OneToOne
-    private Empresa empresa;
+    private Business empresa;
     @OneToOne
     private CommercialBranch sucursal;
 
@@ -71,11 +72,11 @@ public class Refund implements Serializable {
         this.productosSalientes = productosSalientes;
     }
 
-    public Empresa getEmpresa() {
+    public Business getEmpresa() {
         return empresa;
     }
 
-    public void setEmpresa(Empresa empresa) {
+    public void setEmpresa(Business empresa) {
         this.empresa = empresa;
     }
 

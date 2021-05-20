@@ -10,6 +10,7 @@ import java.util.Set;
 @Table(name = "productos")
 public class Product implements Serializable {
     private static final long serialVersionUID = 999999999999999999L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -38,12 +39,12 @@ public class Product implements Serializable {
     @OneToOne
     private Iva ivaVentasObject;
     @OneToMany(mappedBy = "producto")
-    private Set<ProductoVariacion> variaciones;
+    private Set<ProductVariation> variaciones;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "productos_distribuidores",
             joinColumns = @JoinColumn(name = "id_producto"),
             inverseJoinColumns = @JoinColumn(name = "id_distribuidor"))
-    private Set<Proveedor> distribuidores;
+    private Set<Provider> distribuidores;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "productos_depositos",
             joinColumns = @JoinColumn(name = "id_producto"),
@@ -209,19 +210,19 @@ public class Product implements Serializable {
         this.ivaVentasObject = ivaVentasObject;
     }
 
-    public Set<ProductoVariacion> getVariaciones() {
+    public Set<ProductVariation> getVariaciones() {
         return variaciones;
     }
 
-    public void setVariaciones(Set<ProductoVariacion> variaciones) {
+    public void setVariaciones(Set<ProductVariation> variaciones) {
         this.variaciones = variaciones;
     }
 
-    public Set<Proveedor> getDistribuidores() {
+    public Set<Provider> getDistribuidores() {
         return distribuidores;
     }
 
-    public void setDistribuidores(Set<Proveedor> distribuidores) {
+    public void setDistribuidores(Set<Provider> distribuidores) {
         this.distribuidores = distribuidores;
     }
 

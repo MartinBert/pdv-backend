@@ -1,6 +1,8 @@
 package com.prysoft.pdv.models;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToOne;
 import java.io.Serializable;
 
 @MappedSuperclass

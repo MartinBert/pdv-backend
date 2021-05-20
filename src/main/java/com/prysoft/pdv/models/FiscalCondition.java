@@ -17,7 +17,7 @@ public class FiscalCondition implements Serializable {
     @JoinTable(name = "condiciones_documentos",
             joinColumns = @JoinColumn(name = "id_condicion"),
             inverseJoinColumns = @JoinColumn(name = "id_documento"))
-    private Set<DocumentoComercial> documentos;
+    private Set<CommercialDocument> documentos;
 
     public Long getId() {
         return id;
@@ -35,11 +35,11 @@ public class FiscalCondition implements Serializable {
         this.nombre = nombre;
     }
 
-    public Set<DocumentoComercial> getDocumentos() {
+    public Set<CommercialDocument> getDocumentos() {
         return documentos;
     }
 
-    public void setDocumentos(Set<DocumentoComercial> documentos) {
+    public void setDocumentos(Set<CommercialDocument> documentos) {
         this.documentos = documentos;
     }
 

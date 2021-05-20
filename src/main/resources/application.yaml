@@ -1,6 +1,6 @@
 spring:
   datasource:
-    jdbcUrl: jdbc:postgresql://localhost:5432/pdv
+    jdbcUrl: jdbc:postgresql://localhost:5432/pdv2
     username: postgres
     password: 12345
     driverClassName: org.postgresql.Driver
@@ -47,7 +47,7 @@ tenants:
       driverClassName: org.postgresql.Driver
       username: postgres
       password: 12345
-    pdv:
+    pdv2:
       jdbcUrl: jdbc:postgresql://localhost:5432/pdv
       driverClassName: org.postgresql.Driver
       username: postgres

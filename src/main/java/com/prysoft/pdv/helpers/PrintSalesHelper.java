@@ -16,7 +16,7 @@ import java.io.Serializable;
 @Service
 public class PrintSalesHelper implements Serializable {
     @Autowired
-    private MedioPagoHelper medioHelper;
+    private PaymentMethodHelper medioHelper;
 
     public PrintSalesReport processReceiptForPrint(Invoice receipt) {
         PrintSalesReport report = new PrintSalesReport();
