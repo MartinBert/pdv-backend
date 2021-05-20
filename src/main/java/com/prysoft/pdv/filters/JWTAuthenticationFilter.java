@@ -3,7 +3,7 @@ package com.prysoft.pdv.filters;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.prysoft.pdv.config.Constants;
 import com.prysoft.pdv.interceptors.ThreadTenantStorage;
-import com.prysoft.pdv.models.Usuario;
+import com.prysoft.pdv.models.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,9 +21,9 @@ import java.util.Collections;
 import java.util.Date;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
-    private AuthenticationManager authManager;
+    private final AuthenticationManager authManager;
 
-    public  JWTAuthenticationFilter(AuthenticationManager authManager) {
+    public JWTAuthenticationFilter(AuthenticationManager authManager) {
 
         this.authManager = authManager;
         super.setAuthenticationFailureHandler(new JwtAuthenticationFailureHandler());
@@ -33,7 +33,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         //TODO: VER ESTO
-        Usuario credentials = null;
+        User credentials = null;
 
         //Obtenemos el tenant por URI y asignamos al Thread
         String tenant = request.getRequestURI().split("/")[1];
@@ -41,7 +41,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         System.out.println(ThreadTenantStorage.getTenantId());
         try {
-            credentials = new ObjectMapper().readValue(request.getInputStream(), Usuario.class);
+            credentials = new ObjectMapper().readValue(request.getInputStream(), User.class);
         } catch (IOException e) {
             e.printStackTrace();
         }

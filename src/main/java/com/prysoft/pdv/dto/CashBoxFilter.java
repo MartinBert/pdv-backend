@@ -1,6 +1,6 @@
 package com.prysoft.pdv.dto;
 
-public class CashBoxFilter extends SucursalFilter {
+public class CashBoxFilter extends CommercialBranchFilter {
     @Override
     public Long getSucursalId() {
         return super.getSucursalId();

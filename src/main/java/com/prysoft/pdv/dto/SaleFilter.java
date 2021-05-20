@@ -1,6 +1,6 @@
 package com.prysoft.pdv.dto;
 
-public class SaleFilter extends SucursalFilter {
+public class SaleFilter extends CommercialBranchFilter {
     private String fechaEmision;
     private String comprobanteCerrado;
     private String numeroComprobante;

@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-@Table(name="transportistas")
+@Table(name = "transportistas")
 public class Transportista extends Persona implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,7 +13,7 @@ public class Transportista extends Persona implements Serializable {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "transportista_sucursal",
-            joinColumns =  @JoinColumn(name = "id_transportista"),
+            joinColumns = @JoinColumn(name = "id_transportista"),
             inverseJoinColumns = @JoinColumn(name = "id_sucursal"))
     private Set<Sucursal> sucursales;
 

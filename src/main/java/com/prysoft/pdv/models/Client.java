@@ -6,17 +6,17 @@ import java.util.Set;
 
 @Entity
 @Table(name = "clientes")
-public class Client extends Persona implements Serializable {
+public class Client extends Person implements Serializable {
     private static final long serialVersionUID = 999999999999999999L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "cliente_sucursal",
-            joinColumns =  @JoinColumn(name = "id_cliente"),
+            joinColumns = @JoinColumn(name = "id_cliente"),
             inverseJoinColumns = @JoinColumn(name = "id_sucursal"))
-    private Set<Sucursal> sucursales;
-    @Column(name="alic_ing_brutos", columnDefinition = "Decimal(10,2) default 0.00")
+    private Set<CommercialBranch> sucursales;
+    @Column(name = "alic_ing_brutos", columnDefinition = "Decimal(10,2) default 0.00")
     private double alicIngBrutos;
 
     public Long getId() {
@@ -27,11 +27,11 @@ public class Client extends Persona implements Serializable {
         this.id = id;
     }
 
-    public Set<Sucursal> getSucursales() {
+    public Set<CommercialBranch> getSucursales() {
         return sucursales;
     }
 
-    public void setSucursales(Set<Sucursal> sucursales) {
+    public void setSucursales(Set<CommercialBranch> sucursales) {
         this.sucursales = sucursales;
     }
 

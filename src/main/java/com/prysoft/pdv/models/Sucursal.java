@@ -18,7 +18,7 @@ public class Sucursal implements Serializable {
     @Column(name = "direccion", nullable = false)
     private String direccion;
     @OneToOne
-    private FiscalCondition condicionIva; //1-Responsable Inscripto, 2-Monotributista
+    private CondicionFiscal condicionIva; //1-Responsable Inscripto, 2-Monotributista
     private String email;
     private String telefono;
     private String telefonoAlternativo;
@@ -37,10 +37,10 @@ public class Sucursal implements Serializable {
     private Set<PuntoVenta> puntosVenta;
     @OneToMany(mappedBy = "sucursales")
     @JsonBackReference(value = "depositos")
-    private Set<Deposit> depositos;
+    private Set<Deposito> depositos;
     @ManyToOne
     @JsonBackReference
-    @JoinColumn(name="empresa_id", nullable=false)
+    @JoinColumn(name = "empresa_id", nullable = false)
     private Empresa empresa;
     @Column(name = "variacion_ganancia")
     private double variacionGanancia;
@@ -69,11 +69,11 @@ public class Sucursal implements Serializable {
         this.direccion = direccion;
     }
 
-    public FiscalCondition getCondicionIva() {
+    public CondicionFiscal getCondicionIva() {
         return condicionIva;
     }
 
-    public void setCondicionIva(FiscalCondition condicionIva) {
+    public void setCondicionIva(CondicionFiscal condicionIva) {
         this.condicionIva = condicionIva;
     }
 
@@ -165,11 +165,11 @@ public class Sucursal implements Serializable {
         this.puntosVenta = puntosVenta;
     }
 
-    public Set<Deposit> getDepositos() {
+    public Set<Deposito> getDepositos() {
         return depositos;
     }
 
-    public void setDepositos(Set<Deposit> depositos) {
+    public void setDepositos(Set<Deposito> depositos) {
         this.depositos = depositos;
     }
 

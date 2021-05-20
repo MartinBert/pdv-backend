@@ -1,6 +1,6 @@
 package com.prysoft.pdv.dto;
 
-public class ProductFilter extends SucursalFilter {
+public class ProductFilter extends CommercialBranchFilter {
     private Long productoId;
     private String productoName;
     private String productoCodigo;

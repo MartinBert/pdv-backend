@@ -51,7 +51,7 @@ public class StockController {
 
     @PostMapping(value = "/saveAll")
     Iterable<Stock> saveAll(@RequestBody ArrayList<Stock> entities) {
-        return  service.saveAll(entities);
+        return service.saveAll(entities);
     }
 
     @DeleteMapping(value = "/{id}")

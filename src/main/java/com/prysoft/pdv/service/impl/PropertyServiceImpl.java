@@ -25,7 +25,7 @@ public class PropertyServiceImpl extends FilterService<Property> implements Prop
     @Override
     public Property findById(Long id) {
         Optional<Property> optional = dao.findById(id);
-        if(!optional.isPresent()) {
+        if (!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
         return optional.get();
@@ -37,7 +37,9 @@ public class PropertyServiceImpl extends FilterService<Property> implements Prop
     }
 
     @Override
-    public Property saveOrUpdate(Property entity) {return dao.save(entity);}
+    public Property saveOrUpdate(Property entity) {
+        return dao.save(entity);
+    }
 
     @Override
     public void delete(Long id) {
@@ -48,7 +50,7 @@ public class PropertyServiceImpl extends FilterService<Property> implements Prop
     public Page<Property> filter(PropertyFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        hql = "WHERE LOWER(c.nombre) LIKE LOWER('"+filterParam.getPropiedadName()+"%')";
+        hql = "WHERE LOWER(c.nombre) LIKE LOWER('" + filterParam.getPropiedadName() + "%')";
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 }

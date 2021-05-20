@@ -25,7 +25,7 @@ public class DepositServiceImpl extends FilterService<Deposit> implements Deposi
     @Override
     public Deposit findById(Long id) {
         Optional<Deposit> optional = dao.findById(id);
-        if(!optional.isPresent()) {
+        if (!optional.isPresent()) {
             throw new EntityNotFoundException();
         }
         return optional.get();
@@ -57,10 +57,10 @@ public class DepositServiceImpl extends FilterService<Deposit> implements Deposi
         List<FilterParam> params = new ArrayList<>();
         if (filterParam.getPerfilId() == 1) {
             hql = "WHERE LOWER(c.nombre) LIKE LOWER('" + filterParam.getDepositoName() + "%')";
-        }else{
+        } else {
             hql =
-                "WHERE (c.sucursales.id) = ('" + filterParam.getSucursalId() + "') " +
-                "AND LOWER(c.nombre) LIKE LOWER('" + filterParam.getDepositoName() + "%')";
+                    "WHERE (c.sucursales.id) = ('" + filterParam.getSucursalId() + "') " +
+                            "AND LOWER(c.nombre) LIKE LOWER('" + filterParam.getDepositoName() + "%')";
         }
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }

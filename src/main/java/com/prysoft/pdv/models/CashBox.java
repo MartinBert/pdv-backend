@@ -18,7 +18,7 @@ public class CashBox implements Serializable {
     private double montoFacturado;
     private double diferencia;
     @OneToOne
-    private Sucursal sucursal;
+    private CommercialBranch sucursal;
 
     public Long getId() {
         return id;
@@ -60,11 +60,11 @@ public class CashBox implements Serializable {
         this.diferencia = diferencia;
     }
 
-    public Sucursal getSucursal() {
+    public CommercialBranch getSucursal() {
         return sucursal;
     }
 
-    public void setSucursal(Sucursal sucursal) {
+    public void setSucursal(CommercialBranch sucursal) {
         this.sucursal = sucursal;
     }
 

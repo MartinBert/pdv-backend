@@ -34,7 +34,9 @@ public class AttributeController {
     }
 
     @PostMapping(value = "/saveAll")
-    Iterable<Attribute> saveAll(@RequestBody ArrayList<Attribute> entities){ return service.saveOrUpdateAll(entities); }
+    Iterable<Attribute> saveAll(@RequestBody ArrayList<Attribute> entities) {
+        return service.saveOrUpdateAll(entities);
+    }
 
     @PutMapping
     Attribute update(@RequestBody Attribute entity) {

@@ -30,7 +30,7 @@ public class PrintHelper implements Serializable {
 
         JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(data);
         JasperReport report = (JasperReport) JRLoader.loadObject(stream);
-        JasperPrint print = JasperFillManager.fillReport(report,params,datasource);
+        JasperPrint print = JasperFillManager.fillReport(report, params, datasource);
         final ServletOutputStream output = response.getOutputStream();
         JasperExportManager.exportReportToPdfStream(print, output);
 
@@ -41,7 +41,7 @@ public class PrintHelper implements Serializable {
 
         JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(data);
         JasperReport report = (JasperReport) JRLoader.loadObject(stream);
-        JasperPrint print = JasperFillManager.fillReport(report,params,datasource);
+        JasperPrint print = JasperFillManager.fillReport(report, params, datasource);
         final ServletOutputStream output = response.getOutputStream();
         JasperExportManager.exportReportToPdfStream(print, output);
 
@@ -52,7 +52,7 @@ public class PrintHelper implements Serializable {
 
         JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(data);
         JasperReport report = (JasperReport) JRLoader.loadObject(stream);
-        JasperPrint print = JasperFillManager.fillReport(report,params,datasource);
+        JasperPrint print = JasperFillManager.fillReport(report, params, datasource);
         final ServletOutputStream output = response.getOutputStream();
         JasperExportManager.exportReportToPdfStream(print, output);
 
@@ -63,7 +63,7 @@ public class PrintHelper implements Serializable {
 
         JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(data);
         JasperReport report = (JasperReport) JRLoader.loadObject(stream);
-        JasperPrint print = JasperFillManager.fillReport(report,params,datasource);
+        JasperPrint print = JasperFillManager.fillReport(report, params, datasource);
         final ServletOutputStream output = response.getOutputStream();
         JasperExportManager.exportReportToPdfStream(print, output);
 
@@ -76,7 +76,7 @@ public class PrintHelper implements Serializable {
 
         JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(data);
         JasperReport report = (JasperReport) JRLoader.loadObject(stream);
-        JasperPrint print = JasperFillManager.fillReport(report,params,datasource);
+        JasperPrint print = JasperFillManager.fillReport(report, params, datasource);
         final ServletOutputStream output = response.getOutputStream();
         JasperExportManager.exportReportToPdfStream(print, output);
 
@@ -87,9 +87,9 @@ public class PrintHelper implements Serializable {
     /***** GENERIC *****/
     public JasperPrint printWithDatabaseConnection(String tenant, InputStream stream, HashMap<String, Object> params, HttpServletResponse response) throws SQLException, JRException, IOException {
 
-        Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/"+tenant,"postgres","12345");
+        Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/" + tenant, "postgres", "12345");
         JasperReport report = (JasperReport) JRLoader.loadObject(stream);
-        JasperPrint print = JasperFillManager.fillReport(report,params,conn);
+        JasperPrint print = JasperFillManager.fillReport(report, params, conn);
         final ServletOutputStream output = response.getOutputStream();
         JasperExportManager.exportReportToPdfStream(print, output);
 

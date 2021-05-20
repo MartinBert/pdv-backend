@@ -1,6 +1,6 @@
 package com.prysoft.pdv.dto;
 
-public class MensajeFilter extends PageFilter{
+public class MensajeFilter extends PageFilter {
     private String mensajeNameAndLastName;
     private String mensajeContactPhoneOrEmail;
     private String mensajeMessage;

@@ -1,6 +1,8 @@
 package com.prysoft.pdv.models;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToOne;
 import java.io.Serializable;
 
 @MappedSuperclass
@@ -9,7 +11,7 @@ public class Persona implements Serializable {
     private int tipoPersona; //1-Fisica , 2-Juridica
 
     @OneToOne
-    private FiscalCondition condicionIva; //1-Responsable Inscripto, 2-Monotributista, 3-Consumidor Final
+    private CondicionFiscal condicionIva; //1-Responsable Inscripto, 2-Monotributista, 3-Consumidor Final
 
     private String nombre;
     private String razonSocial;
@@ -22,17 +24,17 @@ public class Persona implements Serializable {
     private String pais;
     private String estado;
     private String region;
-    public Persona(){
+
+    public Persona() {
 
     }
 
-    public Persona(int tipoPersona, FiscalCondition condicionIva,
+    public Persona(int tipoPersona, CondicionFiscal condicionIva,
                    String nombre, String razonSocial,
                    String cuit, String direccion,
                    String email, String telefono,
                    String telefonoAlternativo, String nombreContacto,
-                   String pais, String estado, String region)
-    {
+                   String pais, String estado, String region) {
         this.tipoPersona = tipoPersona;
         this.condicionIva = condicionIva;
         this.nombre = nombre;
@@ -48,7 +50,7 @@ public class Persona implements Serializable {
         this.region = region;
     }
 
-    @Column(name="tipoPersona", nullable = false)
+    @Column(name = "tipoPersona", nullable = false)
     public int getTipoPersona() {
         return this.tipoPersona;
     }
@@ -57,16 +59,16 @@ public class Persona implements Serializable {
         this.tipoPersona = tipoPersona;
     }
 
-    @Column(name="condicionIva", nullable = false)
-    public FiscalCondition getCondicionIva() {
+    @Column(name = "condicionIva", nullable = false)
+    public CondicionFiscal getCondicionIva() {
         return this.condicionIva;
     }
 
-    public void setCondicionIva(FiscalCondition condicionIva) {
+    public void setCondicionIva(CondicionFiscal condicionIva) {
         this.condicionIva = condicionIva;
     }
 
-    @Column(name="nombre", nullable = false)
+    @Column(name = "nombre", nullable = false)
     public String getNombre() {
         return this.nombre;
     }
@@ -75,7 +77,7 @@ public class Persona implements Serializable {
         this.nombre = nombre;
     }
 
-    @Column(name="razonSocial", nullable = false)
+    @Column(name = "razonSocial", nullable = false)
     public String getRazonSocial() {
         return this.razonSocial;
     }
@@ -84,7 +86,7 @@ public class Persona implements Serializable {
         this.razonSocial = razonSocial;
     }
 
-    @Column(name="cuit", nullable = false)
+    @Column(name = "cuit", nullable = false)
     public String getCuit() {
         return this.cuit;
     }
@@ -93,7 +95,7 @@ public class Persona implements Serializable {
         this.cuit = cuit;
     }
 
-    @Column(name="direccion")
+    @Column(name = "direccion")
     public String getDireccion() {
         return this.direccion;
     }
@@ -102,7 +104,7 @@ public class Persona implements Serializable {
         this.direccion = direccion;
     }
 
-    @Column(name="email")
+    @Column(name = "email")
     public String getEmail() {
         return this.email;
     }
@@ -111,7 +113,7 @@ public class Persona implements Serializable {
         this.email = email;
     }
 
-    @Column(name="telefono")
+    @Column(name = "telefono")
     public String getTelefono() {
         return this.telefono;
     }
@@ -120,7 +122,7 @@ public class Persona implements Serializable {
         this.telefono = telefono;
     }
 
-    @Column(name="telefonoAlternativo")
+    @Column(name = "telefonoAlternativo")
     public String getTelefonoAlternativo() {
         return this.telefonoAlternativo;
     }
@@ -129,7 +131,7 @@ public class Persona implements Serializable {
         this.telefonoAlternativo = telefonoAlternativo;
     }
 
-    @Column(name="nombreContacto")
+    @Column(name = "nombreContacto")
     public String getNombreContacto() {
         return this.nombreContacto;
     }
@@ -138,7 +140,7 @@ public class Persona implements Serializable {
         this.nombreContacto = nombreContacto;
     }
 
-    @Column(name="pais")
+    @Column(name = "pais")
     public String getNombrePais() {
         return this.pais;
     }
@@ -147,7 +149,7 @@ public class Persona implements Serializable {
         this.pais = pais;
     }
 
-    @Column(name="estado")
+    @Column(name = "estado")
     public String getNombreEstado() {
         return this.estado;
     }
@@ -156,7 +158,7 @@ public class Persona implements Serializable {
         this.estado = estado;
     }
 
-    @Column(name="region")
+    @Column(name = "region")
     public String getNombreRegion() {
         return this.region;
     }

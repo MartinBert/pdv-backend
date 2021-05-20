@@ -11,5 +11,6 @@ import java.util.ArrayList;
 
 public interface ProductsReport {
     JasperPrint generalReport(String tenant, HttpServletResponse response) throws JRException, IOException, SQLException;
+
     JasperPrint labels(ArrayList<PrintProductsLabels> productos, HttpServletResponse response) throws IOException, JRException;
 }

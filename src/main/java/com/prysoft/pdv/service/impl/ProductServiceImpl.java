@@ -1,7 +1,7 @@
 package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.ProductDao;
-import com.prysoft.pdv.dao.SucursalDao;
+import com.prysoft.pdv.dao.CommercialBranchDao;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.ProductFilter;
 import com.prysoft.pdv.helpers.MathHelper;
@@ -15,7 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Transient;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -24,14 +26,14 @@ public class ProductServiceImpl extends FilterService<Product> implements Produc
     @Autowired
     private ProductDao dao;
     @Autowired
-    private SucursalDao sucursalDao;
+    private CommercialBranchDao commercialBranchDao;
     @Autowired
     private MathHelper mathHelper;
 
     @Override
     public Product findById(Long id) {
         Optional<Product> optional = dao.findById(id);
-        if(optional.isEmpty()) {
+        if (optional.isEmpty()) {
             throw new EntityNotFoundException();
         }
         return optional.get();
@@ -39,17 +41,19 @@ public class ProductServiceImpl extends FilterService<Product> implements Produc
 
     @Override
     public Product findByCodigoBarra(String codigoBarra) {
-        try{
+        try {
             Optional<Product> optional = dao.findByCodigoBarra(codigoBarra);
             return optional.get();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return null;
     }
 
     @Override
-    public Page<Product> findAll(Pageable page) {return dao.findAll(page);}
+    public Page<Product> findAll(Pageable page) {
+        return dao.findAll(page);
+    }
 
     @Override
     public Product saveOrUpdate(Product entity) {
@@ -61,7 +65,7 @@ public class ProductServiceImpl extends FilterService<Product> implements Produc
         Iterable<Product> productos = dao.findAll();
         productos.forEach((Product el) -> {
             entities.forEach((Product e) -> {
-                if(el.getCodigoBarra().equals(e.getCodigoBarra())){
+                if (el.getCodigoBarra().equals(e.getCodigoBarra())) {
                     e.setId(el.getId());
                 }
             });
@@ -79,31 +83,31 @@ public class ProductServiceImpl extends FilterService<Product> implements Produc
     public Page<Product> filter(ProductFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
         String hql;
-        if(filterParam.getProductoEstado() > 0){
+        if (filterParam.getProductoEstado() > 0) {
             hql =
                     "WHERE (c.estado) != 1 " +
-                            "AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getProductoName()+"%') " +
-                            "AND LOWER(c.codigoBarra) LIKE LOWER('"+filterParam.getProductoCodigoBarras()+"%') " +
-                            "AND LOWER(c.codigoProducto) LIKE LOWER('"+filterParam.getProductoCodigo()+"%') " +
-                            "AND LOWER(c.marca.nombre) LIKE LOWER('"+filterParam.getProductoMarcaName()+"%')";
-        }else{
-            if(filterParam.getProductoPrimerAtributoName().isEmpty() &&
+                            "AND LOWER(c.nombre) LIKE LOWER('" + filterParam.getProductoName() + "%') " +
+                            "AND LOWER(c.codigoBarra) LIKE LOWER('" + filterParam.getProductoCodigoBarras() + "%') " +
+                            "AND LOWER(c.codigoProducto) LIKE LOWER('" + filterParam.getProductoCodigo() + "%') " +
+                            "AND LOWER(c.marca.nombre) LIKE LOWER('" + filterParam.getProductoMarcaName() + "%')";
+        } else {
+            if (filterParam.getProductoPrimerAtributoName().isEmpty() &&
                     filterParam.getProductoSegundoAtributoName().isEmpty() &&
-                    filterParam.getProductoTercerAtributoName().isEmpty()){
+                    filterParam.getProductoTercerAtributoName().isEmpty()) {
                 hql =
                         "WHERE (c.estado) = 1 " +
-                                "AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getProductoName()+"%') " +
-                                "AND LOWER(c.codigoBarra) LIKE LOWER('"+filterParam.getProductoCodigoBarras()+"%') " +
-                                "AND LOWER(c.codigoProducto) LIKE LOWER('"+filterParam.getProductoCodigo()+"%') " +
-                                "AND LOWER(c.marca.nombre) LIKE LOWER('"+filterParam.getProductoMarcaName()+"%')";
-            }else{
+                                "AND LOWER(c.nombre) LIKE LOWER('" + filterParam.getProductoName() + "%') " +
+                                "AND LOWER(c.codigoBarra) LIKE LOWER('" + filterParam.getProductoCodigoBarras() + "%') " +
+                                "AND LOWER(c.codigoProducto) LIKE LOWER('" + filterParam.getProductoCodigo() + "%') " +
+                                "AND LOWER(c.marca.nombre) LIKE LOWER('" + filterParam.getProductoMarcaName() + "%')";
+            } else {
                 hql =
-                        "JOIN c.atributos a WHERE LOWER(a.valor) LIKE LOWER('"+filterParam.getProductoPrimerAtributoName()+"%')" +
+                        "JOIN c.atributos a WHERE LOWER(a.valor) LIKE LOWER('" + filterParam.getProductoPrimerAtributoName() + "%')" +
                                 "AND c.estado = 1 " +
-                                "AND LOWER(c.nombre) LIKE LOWER('"+filterParam.getProductoName()+"%') " +
-                                "AND LOWER(c.codigoBarra) LIKE LOWER('"+filterParam.getProductoCodigoBarras()+"%') " +
-                                "AND LOWER(c.codigoProducto) LIKE LOWER('"+filterParam.getProductoCodigo()+"%') " +
-                                "AND LOWER(c.marca.nombre) LIKE LOWER('"+filterParam.getProductoMarcaName()+"%')";
+                                "AND LOWER(c.nombre) LIKE LOWER('" + filterParam.getProductoName() + "%') " +
+                                "AND LOWER(c.codigoBarra) LIKE LOWER('" + filterParam.getProductoCodigoBarras() + "%') " +
+                                "AND LOWER(c.codigoProducto) LIKE LOWER('" + filterParam.getProductoCodigo() + "%') " +
+                                "AND LOWER(c.marca.nombre) LIKE LOWER('" + filterParam.getProductoMarcaName() + "%')";
             }
         }
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);

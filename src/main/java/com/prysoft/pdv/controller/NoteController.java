@@ -1,4 +1,5 @@
 package com.prysoft.pdv.controller;
+
 import com.prysoft.pdv.dto.NoteFilter;
 import com.prysoft.pdv.models.Note;
 import com.prysoft.pdv.service.NoteService;
@@ -7,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
 import java.io.Serializable;
 
 @RestController

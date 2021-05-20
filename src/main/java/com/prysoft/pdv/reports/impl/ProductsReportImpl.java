@@ -3,7 +3,8 @@ package com.prysoft.pdv.reports.impl;
 import com.prysoft.pdv.helpers.PrintHelper;
 import com.prysoft.pdv.print.PrintProductsLabels;
 import com.prysoft.pdv.reports.ProductsReport;
-import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperPrint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +35,6 @@ public class ProductsReportImpl implements ProductsReport {
     public JasperPrint labels(ArrayList<PrintProductsLabels> productos, HttpServletResponse response) throws IOException, JRException {
         InputStream stream = this.getClass().getResourceAsStream("/reports/productsReports/labelWithoutPrice.jasper");
         HashMap<String, Object> params = new HashMap<>();
-        return printHelper.printLabels(stream,productos,params,response);
+        return printHelper.printLabels(stream, productos, params, response);
     }
 }

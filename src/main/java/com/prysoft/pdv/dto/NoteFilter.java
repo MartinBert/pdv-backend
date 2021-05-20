@@ -1,9 +1,7 @@
 package com.prysoft.pdv.dto;
 
 
-import org.exolab.castor.types.DateTime;
 import org.springframework.stereotype.Service;
-import java.util.Date;
 
 @Service
 public class NoteFilter extends PageFilter {
@@ -57,7 +55,6 @@ public class NoteFilter extends PageFilter {
     public void setDetails(String details) {
         this.details = details;
     }
-
 
 
 }

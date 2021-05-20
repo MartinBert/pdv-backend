@@ -6,22 +6,19 @@ import java.io.Serializable;
 @Entity
 @Table(name = "stocks")
 public class Stock implements Serializable {
+    private static final long serialVersionUID = 999999999999999999L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @ManyToOne
     private Product producto;
-
     @ManyToOne
     private Deposit deposito;
-
-    @OneToOne Sucursal sucursal;
-
+    @OneToOne
+    CommercialBranch sucursal;
     private double cantidad;
-
     private String algorim;
-
     @Column(name = "cantidad_minima", nullable = true)
     private String cantidadMinima;
 
@@ -57,11 +54,11 @@ public class Stock implements Serializable {
         this.cantidad = cantidad;
     }
 
-    public Sucursal getSucursal() {
+    public CommercialBranch getSucursal() {
         return sucursal;
     }
 
-    public void setSucursal(Sucursal sucursal) {
+    public void setSucursal(CommercialBranch sucursal) {
         this.sucursal = sucursal;
     }
 

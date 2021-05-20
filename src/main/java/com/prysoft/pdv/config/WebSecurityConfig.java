@@ -27,7 +27,7 @@ import org.springframework.web.filter.CorsFilter;
 class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     @Qualifier("userDetailsService")
-    private UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
 
     public WebSecurityConfig(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
@@ -59,7 +59,6 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         UsernamePasswordAuthenticationFilter.class);
 
 
-
     }
 
 
@@ -82,7 +81,6 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
-
     JWTAuthenticationFilter authenticationFilter(AuthenticationManager authManager) {
         JWTAuthenticationFilter jwtAuthenticationFilter = new JWTAuthenticationFilter(authManager);
         jwtAuthenticationFilter.setFilterProcessesUrl(Constants.LOGIN_URL);
@@ -90,7 +88,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    CorsFilter corsFilter()  {
+    CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);

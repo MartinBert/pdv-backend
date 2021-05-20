@@ -1,6 +1,6 @@
 package com.prysoft.pdv.models;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,22 +8,19 @@ import java.io.Serializable;
 @Entity
 @Table(name = "punto_ventas")
 public class PuntoVenta implements Serializable {
+    private static final long serialVersionUID = -4549473212492971830L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name = "id_fiscal", nullable = false)
     private int idFiscal;
-
     @Column(name = "nombre", nullable = false)
     private String nombre;
-
     @ManyToOne
     @JsonBackReference
-    @JoinColumn(name="sucursal_id", nullable=false)
+    @JoinColumn(name = "sucursal_id", nullable = false)
     private Sucursal sucursal;
-
-    private String ipLocal;
 
     public Long getId() {
         return id;
@@ -57,14 +54,6 @@ public class PuntoVenta implements Serializable {
         this.sucursal = sucursal;
     }
 
-    public String getIpLocal() {
-        return ipLocal;
-    }
-
-    public void setIpLocal(String ipLocal) {
-        this.ipLocal = ipLocal;
-    }
-
     @Override
     public String toString() {
         return "PuntoVenta{" +
@@ -72,7 +61,6 @@ public class PuntoVenta implements Serializable {
                 ", idFiscal=" + idFiscal +
                 ", nombre='" + nombre + '\'' +
                 ", sucursal=" + sucursal +
-                ", ipLocal='" + ipLocal + '\'' +
                 '}';
     }
 }

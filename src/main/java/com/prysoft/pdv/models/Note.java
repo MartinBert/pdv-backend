@@ -1,21 +1,17 @@
 package com.prysoft.pdv.models;
 
-import org.exolab.castor.types.DateTime;
-
 import javax.persistence.*;
 import java.io.Serializable;
-
 
 @Entity
 @Table(name = "Note")
 public class Note implements Serializable {
+    private static final long serialVersionUID = 999999999999999999L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String name ;
-
+    private String name;
     private String startEvent;
 
     public String getStartEvent() {
@@ -35,10 +31,6 @@ public class Note implements Serializable {
     }
 
     private String endEvent;
-
-
-
-
 
     public Long getId() {
         return id;
@@ -66,6 +58,14 @@ public class Note implements Serializable {
 
     private String details;
 
-
-
+    @Override
+    public String toString() {
+        return "Note{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", startEvent='" + startEvent + '\'' +
+                ", endEvent='" + endEvent + '\'' +
+                ", details='" + details + '\'' +
+                '}';
+    }
 }

@@ -1,7 +1,7 @@
 package com.prysoft.pdv.controller;
 
 import com.prysoft.pdv.dto.MensajeFilter;
-import com.prysoft.pdv.models.Mensaje;
+import com.prysoft.pdv.models.Message;
 import com.prysoft.pdv.service.MensajeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,23 +16,23 @@ public class MensajeController {
     private MensajeService service;
 
     @GetMapping
-    Page<Mensaje> findAll(Pageable page) {
+    Page<Message> findAll(Pageable page) {
         return service.findAll(page);
     }
 
     @GetMapping(value = "/{id}")
-    Mensaje findById(@PathVariable long id) {
+    Message findById(@PathVariable long id) {
         return service.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    Mensaje save(@RequestBody Mensaje entity) {
+    Message save(@RequestBody Message entity) {
         return service.saveOrUpdate(entity);
     }
 
     @PutMapping
-    Mensaje update(@RequestBody Mensaje entity) {
+    Message update(@RequestBody Message entity) {
         return service.saveOrUpdate(entity);
     }
 
@@ -43,7 +43,7 @@ public class MensajeController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<Mensaje> filter(@RequestBody MensajeFilter filterParam) {
+    public Page<Message> filter(@RequestBody MensajeFilter filterParam) {
         return service.filter(filterParam);
     }
 }
