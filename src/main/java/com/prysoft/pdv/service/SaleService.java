@@ -10,5 +10,7 @@ public interface SaleService {
     Page<Invoice> filter(SaleFilter filterParam);
 
     ArrayList<Invoice> filterNotCloseReceipts(SaleFilter filterParam);
+
+    Page<Invoice> getUniqueDateSales(SaleFilter filterParam);
 }
 

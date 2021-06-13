@@ -28,23 +28,22 @@ public class SaleServiceImpl extends FilterService<Invoice> implements SaleServi
         if (filterParam.getSucursalId() == null) {
             hql =
                     "WHERE ((c.totalVenta) = ('" + filterParam.getTotalVenta() + "') " +
-                            "OR (c.fechaEmision) LIKE ('" + filterParam.getFechaEmision() + "%') " +
-                            "OR (c.cerrado) = ('" + filterParam.getComprobanteCerrado() + "'))";
+                    "OR (c.fechaEmision) LIKE ('%" + filterParam.getFechaEmision() + "%') " +
+                    "OR (c.cerrado) = ('" + filterParam.getComprobanteCerrado() + "'))";
         } else {
             if (filterParam.getBlackReceiptFilter() != null && filterParam.getBlackReceiptFilter() == 999999999) {
                 hql =
                         "WHERE (c.sucursal.id) = ('" + filterParam.getSucursalId() + "') " +
-                                "AND (LOWER(c.documentoComercial.letra) LIKE LOWER('x%') " +
-                                "OR LOWER(c.documentoComercial.letra) LIKE LOWER('nx%'))" +
-                                "AND (c.fechaEmision) LIKE ('" + filterParam.getFechaEmision() + "%') " +
-                                "AND LOWER(c.numeroCbte) LIKE LOWER('" + filterParam.getNumeroComprobante() + "%')";
+                        "AND (LOWER(c.documentoComercial.letra) LIKE LOWER('x%') " +
+                        "OR LOWER(c.documentoComercial.letra) LIKE LOWER('nx%'))" +
+                        "AND (c.fechaEmision) LIKE ('" + filterParam.getFechaEmision() + "%') " +
+                        "AND LOWER(c.numeroCbte) LIKE LOWER('" + filterParam.getNumeroComprobante() + "%')";
             } else {
                 hql =
                         "WHERE (c.sucursal.id) = ('" + filterParam.getSucursalId() + "') " +
-                                "AND (LOWER(c.documentoComercial.letra) != ('x') " +
-                                "AND LOWER(c.documentoComercial.letra) != ('nx'))" +
-                                "AND LOWER(c.fechaEmision) LIKE LOWER('" + filterParam.getFechaEmision() + "%') " +
-                                "AND LOWER(c.numeroCbte) LIKE LOWER('" + filterParam.getNumeroComprobante() + "%')";
+                        "AND LOWER(c.documentoComercial.letra) NOT IN ('%x%', '%nx%') " +
+                        "AND LOWER(c.fechaEmision) LIKE LOWER('%" + filterParam.getFechaEmision() + "%')" +
+                        "AND LOWER(c.numeroCbte) LIKE LOWER('%" + filterParam.getNumeroComprobante() + "%')";
             }
         }
 
@@ -74,6 +73,27 @@ public class SaleServiceImpl extends FilterService<Invoice> implements SaleServi
                 }
         );
         return filteredReceipts;
+    }
+
+    @Override
+    public Page<Invoice> getUniqueDateSales(SaleFilter filterParam) {
+        String hql;
+        List<FilterParam> params = new ArrayList<>();
+        if (filterParam.getSucursalId() == null) {
+            hql = "";
+        } else {
+            hql =
+                    "JOIN c.mediosPago m " +
+                    "JOIN c.documentoComercial d " +
+                    "JOIN c.sucursal s " +
+                    "WHERE (s.id) = ('" + filterParam.getSucursalId() + "') " +
+                    "AND LOWER(d.letra) NOT IN ('%x%', '%nx%') " +
+                    "AND LOWER(c.fechaEmision) LIKE LOWER('%" + filterParam.getFechaEmision() + "%') " +
+                    "AND c.cerradoEnCierreZ = false " +
+                    "AND m.aplicaCierreZ = true";
+        }
+
+        return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 
     private boolean passNotCloseReceiptValidations(Invoice comprobante, Long sucursalId) {

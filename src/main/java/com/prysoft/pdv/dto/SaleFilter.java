@@ -74,7 +74,7 @@ public class SaleFilter extends CommercialBranchFilter {
 
     @Override
     public String toString() {
-        return "VentaFilter{" +
+        return "SaleFilter{" +
                 "fechaEmision='" + fechaEmision + '\'' +
                 ", comprobanteCerrado='" + comprobanteCerrado + '\'' +
                 ", numeroComprobante='" + numeroComprobante + '\'' +

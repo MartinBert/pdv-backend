@@ -47,14 +47,15 @@ public class Invoice implements Serializable {
     @OneToOne
     private Client cliente;
     private String cerrado;
+    @ManyToOne()
+    @JoinColumn(name = "z_closure_id")
+    private ZClosure zClosure;
+    @Column(name = "cerrado_en_cierre_z", columnDefinition = "boolean default false")
+    private boolean cerradoEnCierreZ;
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public void setId(Long id) { this.id = id; }
 
     public String getLetra() {
         return letra;
@@ -224,6 +225,22 @@ public class Invoice implements Serializable {
         this.productoDescription = productoDescription;
     }
 
+    public ZClosure getzClosure() {
+        return zClosure;
+    }
+
+    public void setzClosure(ZClosure zClosure) {
+        this.zClosure = zClosure;
+    }
+
+    public boolean isCerradoEnCierreZ() {
+        return cerradoEnCierreZ;
+    }
+
+    public void setCerradoEnCierreZ(boolean cerradoEnCierreZ) {
+        this.cerradoEnCierreZ = cerradoEnCierreZ;
+    }
+
     @Override
     public String toString() {
         return "Invoice{" +
@@ -249,6 +266,8 @@ public class Invoice implements Serializable {
                 ", empresa=" + empresa +
                 ", cliente=" + cliente +
                 ", cerrado='" + cerrado + '\'' +
+                ", zClosure=" + zClosure +
+                ", cerradoEnCierreZ=" + cerradoEnCierreZ +
                 '}';
     }
 }

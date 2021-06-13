@@ -117,4 +117,9 @@ public class SaleController {
     Page<Invoice> filter(@RequestBody SaleFilter filterParam) {
         return service.filter(filterParam);
     }
+
+    @PostMapping(value = "/getUniqueDateSales")
+    Page<Invoice> getUniqueDateSales(@RequestBody SaleFilter filterParam) {
+        return service.getUniqueDateSales(filterParam);
+    }
 }

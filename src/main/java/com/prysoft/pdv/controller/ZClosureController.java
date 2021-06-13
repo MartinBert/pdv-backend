@@ -1,8 +1,8 @@
 package com.prysoft.pdv.controller;
 
-import com.prysoft.pdv.dto.InvoiceFilter;
-import com.prysoft.pdv.models.Invoice;
-import com.prysoft.pdv.service.InvoiceService;
+import com.prysoft.pdv.dto.ZClosureFilter;
+import com.prysoft.pdv.models.ZClosure;
+import com.prysoft.pdv.service.ZClosureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,41 +12,34 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping(value = "/{tenantid}/api/comprobantesFiscales")
-public class InvoiceController {
+@RequestMapping(value = "/{tenantid}/api/cierres_z")
+public class ZClosureController {
     @Autowired
-    private InvoiceService service;
+    private ZClosureService service;
 
     @GetMapping
-    Page<Invoice> findAll(Pageable page) {
+    Page<ZClosure> findAll(Pageable page) {
         return service.findAll(page);
     }
 
     @GetMapping(value = "/{id}")
-    Invoice findById(@PathVariable long id) {
+    ZClosure findById(@PathVariable long id) {
         return service.findById(id);
-    }
-
-    @GetMapping(value = "cbteNumero/{numero}")
-    Invoice findByNumeroCbte(@PathVariable String numero) {
-        return service.findByNumeroCbte(numero);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    Invoice save(@RequestBody Invoice entity) {
-        service.saveOrUpdate(entity);
-        Invoice object = service.saveOrUpdate(entity);
-        return object;
+    ZClosure save(@RequestBody ZClosure tentity) {
+        return service.saveOrUpdate(tentity);
     }
 
     @PostMapping(value = "/saveAll")
-    Iterable<Invoice> saveAll(@RequestBody ArrayList<Invoice> entities) {
+    Iterable<ZClosure> saveAll(@RequestBody ArrayList<ZClosure> entities) {
         return service.saveOrUpdateAll(entities);
     }
 
     @PutMapping
-    Invoice update(@RequestBody Invoice entity) {
+    ZClosure update(@RequestBody ZClosure entity) {
         return service.saveOrUpdate(entity);
     }
 
@@ -57,7 +50,8 @@ public class InvoiceController {
     }
 
     @PostMapping(value = "/filter")
-    public Page<Invoice> filter(@RequestBody InvoiceFilter filterParam) {
+    public Page<ZClosure> filter(@RequestBody ZClosureFilter filterParam) {
         return service.filter(filterParam);
     }
 }
+
