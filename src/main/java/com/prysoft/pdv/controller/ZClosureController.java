@@ -1,14 +1,22 @@
 package com.prysoft.pdv.controller;
 
 import com.prysoft.pdv.dto.ZClosureFilter;
+import com.prysoft.pdv.models.Invoice;
 import com.prysoft.pdv.models.ZClosure;
+import com.prysoft.pdv.reports.ZClosuresReport;
 import com.prysoft.pdv.service.ZClosureService;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperPrint;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 @RestController
@@ -16,6 +24,9 @@ import java.util.ArrayList;
 public class ZClosureController {
     @Autowired
     private ZClosureService service;
+
+    @Autowired
+    private ZClosuresReport reports;
 
     @GetMapping
     Page<ZClosure> findAll(Pageable page) {
@@ -52,6 +63,14 @@ public class ZClosureController {
     @PostMapping(value = "/filter")
     public Page<ZClosure> filter(@RequestBody ZClosureFilter filterParam) {
         return service.filter(filterParam);
+    }
+
+    @PostMapping(value = "/printZClosure/{specification}")
+    public JasperPrint printZClosure(@RequestBody Invoice request,
+                                         @PathVariable String specification,
+                                         HttpServletResponse response)
+            throws IOException, JRException, SQLException, JSONException {
+        return reports.printZClosure(request, specification, response);
     }
 }
 

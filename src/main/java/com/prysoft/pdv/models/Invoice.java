@@ -47,9 +47,6 @@ public class Invoice implements Serializable {
     @OneToOne
     private Client cliente;
     private String cerrado;
-    @ManyToOne()
-    @JoinColumn(name = "z_closure_id")
-    private ZClosure zClosure;
     @Column(name = "cerrado_en_cierre_z", columnDefinition = "boolean default false")
     private boolean cerradoEnCierreZ;
 
@@ -225,14 +222,6 @@ public class Invoice implements Serializable {
         this.productoDescription = productoDescription;
     }
 
-    public ZClosure getzClosure() {
-        return zClosure;
-    }
-
-    public void setzClosure(ZClosure zClosure) {
-        this.zClosure = zClosure;
-    }
-
     public boolean isCerradoEnCierreZ() {
         return cerradoEnCierreZ;
     }
@@ -266,7 +255,6 @@ public class Invoice implements Serializable {
                 ", empresa=" + empresa +
                 ", cliente=" + cliente +
                 ", cerrado='" + cerrado + '\'' +
-                ", zClosure=" + zClosure +
                 ", cerradoEnCierreZ=" + cerradoEnCierreZ +
                 '}';
     }

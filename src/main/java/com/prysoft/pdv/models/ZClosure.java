@@ -14,9 +14,13 @@ public class ZClosure implements Serializable {
     private Long id;
     @OneToOne
     private CommercialBranch sucursal;
-    @OneToMany(mappedBy = "zClosure", cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "cierrez_comprobantes",
+            joinColumns = @JoinColumn(name = "id_cierre"),
+            inverseJoinColumns = @JoinColumn(name = "id_comprobante"))
     private Set<Invoice> comprobantesFiscales;
     private double total;
+    private int cantidadVentas;
     private Date fecha;
 
     public Long getId() {
@@ -25,14 +29,6 @@ public class ZClosure implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Set<Invoice> getComprobantesFiscales() {
-        return comprobantesFiscales;
-    }
-
-    public void setComprobantesFiscales(Set<Invoice> comprobantesFiscales) {
-        this.comprobantesFiscales = comprobantesFiscales;
     }
 
     public double getTotal() {
@@ -59,6 +55,22 @@ public class ZClosure implements Serializable {
         this.fecha = fecha;
     }
 
+    public Set<Invoice> getComprobantesFiscales() {
+        return comprobantesFiscales;
+    }
+
+    public void setComprobantesFiscales(Set<Invoice> comprobantesFiscales) {
+        this.comprobantesFiscales = comprobantesFiscales;
+    }
+
+    public int getCantidadVentas() {
+        return cantidadVentas;
+    }
+
+    public void setCantidadVentas(int cantidadVentas) {
+        this.cantidadVentas = cantidadVentas;
+    }
+
     @Override
     public String toString() {
         return "ZClosure{" +
@@ -66,6 +78,7 @@ public class ZClosure implements Serializable {
                 ", sucursal=" + sucursal +
                 ", comprobantesFiscales=" + comprobantesFiscales +
                 ", total=" + total +
+                ", cantidadVentas=" + cantidadVentas +
                 ", fecha=" + fecha +
                 '}';
     }
