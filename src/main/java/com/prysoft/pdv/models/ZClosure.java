@@ -126,11 +126,11 @@ public class ZClosure implements Serializable {
         this.totalIva27 = totalIva27;
     }
 
-    public Set<Invoice> getDetalleMediosPago() {
+    public Set<PaymentMethodDetail> getDetalleMediosPago() {
         return detalleMediosPago;
     }
 
-    public void setDetalleMediosPago(Set<Invoice> detalleMediosPago) {
+    public void setDetalleMediosPago(Set<PaymentMethodDetail> detalleMediosPago) {
         this.detalleMediosPago = detalleMediosPago;
     }
 
