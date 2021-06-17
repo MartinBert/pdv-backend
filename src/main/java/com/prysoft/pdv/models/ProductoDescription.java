@@ -21,6 +21,10 @@ public class ProductoDescription implements Serializable {
     private double saleIvaPercent;
     private double buyIvaAmount;
     private double saleIvaAmount;
+    private double discountPercent;
+    private double discountAmount;
+    private double surchargePercent;
+    private double surchargeAmount;
     private ArrayList<Provider> providersData;
 
     public String getName() {
@@ -159,9 +163,41 @@ public class ProductoDescription implements Serializable {
         this.providersData = providersData;
     }
 
+    public double getDiscountPercent() {
+        return discountPercent;
+    }
+
+    public void setDiscountPercent(double discountPercent) {
+        this.discountPercent = discountPercent;
+    }
+
+    public double getDiscountAmount() {
+        return discountAmount;
+    }
+
+    public void setDiscountAmount(double discountAmount) {
+        this.discountAmount = discountAmount;
+    }
+
+    public double getSurchargePercent() {
+        return surchargePercent;
+    }
+
+    public void setSurchargePercent(double surchargePercent) {
+        this.surchargePercent = surchargePercent;
+    }
+
+    public double getSurchargeAmount() {
+        return surchargeAmount;
+    }
+
+    public void setSurchargeAmount(double surchargeAmount) {
+        this.surchargeAmount = surchargeAmount;
+    }
+
     @Override
     public String toString() {
-        return "ProductDescription{" +
+        return "ProductoDescription{" +
                 "name='" + name + '\'' +
                 ", barCode='" + barCode + '\'' +
                 ", code='" + code + '\'' +
@@ -178,6 +214,10 @@ public class ProductoDescription implements Serializable {
                 ", saleIvaPercent=" + saleIvaPercent +
                 ", buyIvaAmount=" + buyIvaAmount +
                 ", saleIvaAmount=" + saleIvaAmount +
+                ", discountPercent=" + discountPercent +
+                ", discountAmount=" + discountAmount +
+                ", surchargePercent=" + surchargePercent +
+                ", surchargeAmount=" + surchargeAmount +
                 ", providersData=" + providersData +
                 '}';
     }

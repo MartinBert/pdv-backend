@@ -24,6 +24,14 @@ public class Invoice implements Serializable {
     private String barCode;
     private String cae;
     private Double totalVenta;
+    @Column(name = "porcentaje_descuento_global", columnDefinition = "Decimal(10,2) default 0.00")
+    private Double porcentajeDescuentoGlobal;
+    @Column(name = "total_descuento_global", columnDefinition = "Decimal(10,2) default 0.00")
+    private Double totalDescuentoGlobal;
+    @Column(name = "porcentaje_recargo_global", columnDefinition = "Decimal(10,2) default 0.00")
+    private Double porcentajeRecargoGlobal;
+    @Column(name = "total_recargo_global", columnDefinition = "Decimal(10,2) default 0.00")
+    private Double totalRecargoGlobal;
     private double ingresosBrutos;
     private String nombreDocumento;
     @ManyToMany
@@ -50,9 +58,13 @@ public class Invoice implements Serializable {
     @Column(name = "cerrado_en_cierre_z", columnDefinition = "boolean default false")
     private boolean cerradoEnCierreZ;
 
-    public Long getId() { return id; }
+    public Long getId() {
+        return id;
+    }
 
-    public void setId(Long id) { this.id = id; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getLetra() {
         return letra;
@@ -230,6 +242,38 @@ public class Invoice implements Serializable {
         this.cerradoEnCierreZ = cerradoEnCierreZ;
     }
 
+    public Double getPorcentajeDescuentoGlobal() {
+        return porcentajeDescuentoGlobal;
+    }
+
+    public void setPorcentajeDescuentoGlobal(Double porcentajeDescuentoGlobal) {
+        this.porcentajeDescuentoGlobal = porcentajeDescuentoGlobal;
+    }
+
+    public Double getTotalDescuentoGlobal() {
+        return totalDescuentoGlobal;
+    }
+
+    public void setTotalDescuentoGlobal(Double totalDescuentoGlobal) {
+        this.totalDescuentoGlobal = totalDescuentoGlobal;
+    }
+
+    public Double getPorcentajeRecargoGlobal() {
+        return porcentajeRecargoGlobal;
+    }
+
+    public void setPorcentajeRecargoGlobal(Double porcentajeRecargoGlobal) {
+        this.porcentajeRecargoGlobal = porcentajeRecargoGlobal;
+    }
+
+    public Double getTotalRecargoGlobal() {
+        return totalRecargoGlobal;
+    }
+
+    public void setTotalRecargoGlobal(Double totalRecargoGlobal) {
+        this.totalRecargoGlobal = totalRecargoGlobal;
+    }
+
     @Override
     public String toString() {
         return "Invoice{" +
@@ -245,6 +289,10 @@ public class Invoice implements Serializable {
                 ", barCode='" + barCode + '\'' +
                 ", cae='" + cae + '\'' +
                 ", totalVenta=" + totalVenta +
+                ", porcentajeDescuentoGlobal=" + porcentajeDescuentoGlobal +
+                ", totalDescuentoGlobal=" + totalDescuentoGlobal +
+                ", porcentajeRecargoGlobal=" + porcentajeRecargoGlobal +
+                ", totalRecargoGlobal=" + totalRecargoGlobal +
                 ", ingresosBrutos=" + ingresosBrutos +
                 ", nombreDocumento='" + nombreDocumento + '\'' +
                 ", mediosPago=" + mediosPago +

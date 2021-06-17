@@ -1,9 +1,11 @@
 package com.prysoft.pdv.service.impl;
 
 import com.prysoft.pdv.dao.PaymentMethodDao;
+import com.prysoft.pdv.dao.PaymentMethodDetailDao;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.PaymentMethodFilter;
 import com.prysoft.pdv.models.PaymentMethod;
+import com.prysoft.pdv.models.PaymentMethodDetail;
 import com.prysoft.pdv.service.PaymentMethodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,6 +23,8 @@ import java.util.Optional;
 public class PaymentMethodServiceImpl extends FilterService<PaymentMethod> implements PaymentMethodService {
     @Autowired
     private PaymentMethodDao dao;
+    @Autowired
+    private PaymentMethodDetailDao paymentMethodDetailDao;
 
     @Override
     public PaymentMethod findById(Long id) {
