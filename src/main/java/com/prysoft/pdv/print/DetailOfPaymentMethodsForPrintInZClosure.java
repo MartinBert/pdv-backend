@@ -1,37 +1,22 @@
-package com.prysoft.pdv.models;
+package com.prysoft.pdv.print;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
-@Table(name = "detalles_medios_pago")
-public class PaymentMethodDetail implements Serializable {
+public class DetailOfPaymentMethodsForPrintInZClosure implements Serializable {
     private static final long serialVersionUID = 999999999999999999L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @OneToOne
-    private PaymentMethod medioPago;
+    private String paymentMethodName;
     private Double total;
     private Double importeTotalIva;
     private Double totalIva21;
     private Double totalIva10;
     private Double totalIva27;
 
-    public Long getId() {
-        return id;
+    public String getPaymentMethodName() {
+        return paymentMethodName;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public PaymentMethod getMedioPago() {
-        return medioPago;
-    }
-
-    public void setMedioPago(PaymentMethod medioPago) {
-        this.medioPago = medioPago;
+    public void setPaymentMethodName(String paymentMethodName) {
+        this.paymentMethodName = paymentMethodName;
     }
 
     public Double getTotal() {
@@ -76,9 +61,8 @@ public class PaymentMethodDetail implements Serializable {
 
     @Override
     public String toString() {
-        return "PaymentMethodDetail{" +
-                "id=" + id +
-                ", medioPago=" + medioPago +
+        return "DetailOfPaymentMethodsForPrintInZClosure{" +
+                "paymentMethodName='" + paymentMethodName + '\'' +
                 ", total=" + total +
                 ", importeTotalIva=" + importeTotalIva +
                 ", totalIva21=" + totalIva21 +

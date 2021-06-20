@@ -1,7 +1,6 @@
 package com.prysoft.pdv.controller;
 
 import com.prysoft.pdv.dto.ZClosureFilter;
-import com.prysoft.pdv.models.Invoice;
 import com.prysoft.pdv.models.ZClosure;
 import com.prysoft.pdv.reports.ZClosuresReport;
 import com.prysoft.pdv.service.ZClosureService;
@@ -66,7 +65,7 @@ public class ZClosureController {
     }
 
     @PostMapping(value = "/printZClosure/{specification}")
-    public JasperPrint printZClosure(@RequestBody Invoice request,
+    public JasperPrint printZClosure(@RequestBody ZClosure request,
                                          @PathVariable String specification,
                                          HttpServletResponse response)
             throws IOException, JRException, SQLException, JSONException {

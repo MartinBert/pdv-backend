@@ -1,8 +1,9 @@
 package com.prysoft.pdv.models;
 
+import java.util.Date;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -25,8 +26,8 @@ public class ZClosure implements Serializable {
     private int cantidadVentas;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "cierrez_medios",
-            joinColumns = @JoinColumn(name = "id_cierre"),
-            inverseJoinColumns = @JoinColumn(name = "id_medio"))
+            joinColumns = @JoinColumn(name = "id_medio_cierre"),
+            inverseJoinColumns = @JoinColumn(name = "id_cierre_medio"))
     private Set<PaymentMethodDetail> detalleMediosPago;
     @Column(name = "total_sumatoria_iva", columnDefinition = "Decimal(10,2) default 0.00")
     private Double totalSumatoriaIva;
