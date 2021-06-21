@@ -1,12 +1,9 @@
 package com.prysoft.pdv.service.impl;
 
-import com.prysoft.pdv.dao.AttributeDao;
 import com.prysoft.pdv.dao.ZClosureDao;
-import com.prysoft.pdv.dto.AttributeFilter;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.ZClosureFilter;
 import com.prysoft.pdv.models.ZClosure;
-import com.prysoft.pdv.service.AtributoService;
 import com.prysoft.pdv.service.ZClosureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -59,9 +56,9 @@ public class ZClosureServiceImpl extends FilterService<ZClosure> implements ZClo
             }
         }else{
             if(filterParam.getSucursalId() == null){
-                hql = "WHERE c.fecha = '" + filterParam.getDate() + "'";
+                hql = "WHERE c.fecha = '" + filterParam.getDate() + "' ORDER BY c.fecha DESC";
             }else{
-                hql = "WHERE c.sucursal = '"+filterParam.getSucursalId()+"' AND c.fecha = '" + filterParam.getDate() + "'";
+                hql = "WHERE c.sucursal = '"+filterParam.getSucursalId()+"' AND c.fecha = '" + filterParam.getDate() + "' ORDER BY c.fecha DESC";
             }
         }
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);

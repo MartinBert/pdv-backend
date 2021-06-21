@@ -18,7 +18,6 @@ public class ZClosureHelper implements Serializable {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/YYYY");
         SimpleDateFormat simpleHourFormat = new SimpleDateFormat("HH:mm:ss");
         ArrayList<DetailOfPaymentMethodsForPrintInZClosure> paymentMethodsDetail = new ArrayList<>();
-        System.out.println(zClosure.getDetalleMediosPago().toString());
         for (PaymentMethodDetail paymentMethodDetail: zClosure.getDetalleMediosPago()){
             DetailOfPaymentMethodsForPrintInZClosure detail = new DetailOfPaymentMethodsForPrintInZClosure();
             detail.setPaymentMethodName(paymentMethodDetail.getMedioPago().getNombre());
@@ -45,7 +44,7 @@ public class ZClosureHelper implements Serializable {
         printZCLosure.setTotalIva21(zClosure.getTotalIva21());
         printZCLosure.setTotalIva10(zClosure.getTotalIva10());
         printZCLosure.setTotalIva27(zClosure.getTotalIva27());
-        printZCLosure.setCantidadVentas(printZCLosure.getCantidadVentas());
+        printZCLosure.setCantidadVentas(zClosure.getCantidadVentas());
         return printZCLosure;
     }
 }

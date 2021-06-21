@@ -19,7 +19,7 @@ public class PrintZCLosure implements Serializable {
     private Double totalIva21;
     private Double totalIva10;
     private Double totalIva27;
-    private Double cantidadVentas;
+    private int cantidadVentas;
 
     public String getBusinessSocialReason() {
         return businessSocialReason;
@@ -133,11 +133,11 @@ public class PrintZCLosure implements Serializable {
         this.paymentMethodsDetail = paymentMethodsDetail;
     }
 
-    public Double getCantidadVentas() {
+    public int getCantidadVentas() {
         return cantidadVentas;
     }
 
-    public void setCantidadVentas(Double cantidadVentas) {
+    public void setCantidadVentas(int cantidadVentas) {
         this.cantidadVentas = cantidadVentas;
     }
 
