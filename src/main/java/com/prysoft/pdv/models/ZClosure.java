@@ -1,5 +1,7 @@
 package com.prysoft.pdv.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 import javax.persistence.*;
@@ -37,6 +39,7 @@ public class ZClosure implements Serializable {
     private Double totalIva10;
     @Column(name = "total_iva_27", columnDefinition = "Decimal(10,2) default 0.00")
     private Double totalIva27;
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
     private Date fecha;
 
     public Long getId() {
