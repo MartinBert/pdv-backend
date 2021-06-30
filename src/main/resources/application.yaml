@@ -1,3 +1,4 @@
+
 spring:
   datasource:
     jdbcUrl: jdbc:postgresql://localhost:5432/pdv2

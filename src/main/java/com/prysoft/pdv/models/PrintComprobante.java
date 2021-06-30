@@ -12,6 +12,7 @@ public class PrintComprobante implements Serializable {
     private String clienteCondicionIva;
     private String clienteCuit;
     private String clienteDireccion;
+    private String clienteLocalidad;
     private String clienteRazonSocial;
     private boolean condicionVenta;
     private String letra;
@@ -29,6 +30,10 @@ public class PrintComprobante implements Serializable {
 
     private Double totalVenta;
     private String nombreDocumento;
+    private String codigoDocumento;
+    private Double totalDescuentoGlobal;
+    private Double totalIva;
+    private Double subTotal;
 
     public String getBarCode() {
         return barCode;
@@ -206,31 +211,76 @@ public class PrintComprobante implements Serializable {
         this.nombreDocumento = nombreDocumento;
     }
 
+    public String getClienteLocalidad() {
+        return clienteLocalidad;
+    }
+
+    public void setClienteLocalidad(String clienteLocalidad) {
+        this.clienteLocalidad = clienteLocalidad;
+    }
+
+    public String getCodigoDocumento() {
+        return codigoDocumento;
+    }
+
+    public void setCodigoDocumento(String codigoDocumento) {
+        this.codigoDocumento = codigoDocumento;
+    }
+
+    public Double getTotalDescuentoGlobal() {
+        return totalDescuentoGlobal;
+    }
+
+    public void setTotalDescuentoGlobal(Double totalDescuentoGlobal) {
+        this.totalDescuentoGlobal = totalDescuentoGlobal;
+    }
+
+    public Double getTotalIva() {
+        return totalIva;
+    }
+
+    public void setTotalIva(Double totalIva) {
+        this.totalIva = totalIva;
+    }
+
+    public Double getSubTotal() {
+        return subTotal;
+    }
+
+    public void setSubTotal(Double subTotal) {
+        this.subTotal = subTotal;
+    }
+
     @Override
     public String toString() {
-        return "InvoicePrinting{" +
-            "barCode='" + barCode + '\'' +
-            ", cae='" + cae + '\'' +
-            ", fechaEmision='" + fechaEmision + '\'' +
-            ", fechaVto='" + fechaVto + '\'' +
-            ", clienteCondicionIva='" + clienteCondicionIva + '\'' +
-            ", clienteCuit='" + clienteCuit + '\'' +
-            ", clienteDireccion='" + clienteDireccion + '\'' +
-            ", clienteRazonSocial='" + clienteRazonSocial + '\'' +
-            ", condicionVenta=" + condicionVenta +
-            ", letra='" + letra + '\'' +
-            ", numeroCbte='" + numeroCbte + '\'' +
-            ", idPuntoVenta=" + idPuntoVenta +
-            ", empresaCondicionIva='" + empresaCondicionIva + '\'' +
-            ", empresaCuit='" + empresaCuit + '\'' +
-            ", empresaDireccion='" + empresaDireccion + '\'' +
-            ", empresaRazonSocial='" + empresaRazonSocial + '\'' +
-            ", empresaFechaInicioAct='" + empresaFechaInicioAct + '\'' +
-            ", empresaIngBruto=" + empresaIngBruto +
-            ", empresaTelefono='" + empresaTelefono + '\'' +
-            ", productos=" + productos +
-            ", totalVenta=" + totalVenta +
-            ", nombreDocumento='" + nombreDocumento + '\'' +
-            '}';
+        return "PrintComprobante{" +
+                "barCode='" + barCode + '\'' +
+                ", cae='" + cae + '\'' +
+                ", fechaEmision='" + fechaEmision + '\'' +
+                ", fechaVto='" + fechaVto + '\'' +
+                ", clienteCondicionIva='" + clienteCondicionIva + '\'' +
+                ", clienteCuit='" + clienteCuit + '\'' +
+                ", clienteDireccion='" + clienteDireccion + '\'' +
+                ", clienteLocalidad='" + clienteLocalidad + '\'' +
+                ", clienteRazonSocial='" + clienteRazonSocial + '\'' +
+                ", condicionVenta=" + condicionVenta +
+                ", letra='" + letra + '\'' +
+                ", numeroCbte='" + numeroCbte + '\'' +
+                ", idPuntoVenta=" + idPuntoVenta +
+                ", empresaCondicionIva='" + empresaCondicionIva + '\'' +
+                ", empresaCuit='" + empresaCuit + '\'' +
+                ", empresaDireccion='" + empresaDireccion + '\'' +
+                ", empresaRazonSocial='" + empresaRazonSocial + '\'' +
+                ", empresaFechaInicioAct='" + empresaFechaInicioAct + '\'' +
+                ", empresaIngBruto=" + empresaIngBruto +
+                ", empresaTelefono='" + empresaTelefono + '\'' +
+                ", productos=" + productos +
+                ", totalVenta=" + totalVenta +
+                ", nombreDocumento='" + nombreDocumento + '\'' +
+                ", codigoDocumento='" + codigoDocumento + '\'' +
+                ", totalDescuentoGlobal=" + totalDescuentoGlobal +
+                ", totalIva=" + totalIva +
+                ", subTotal=" + subTotal +
+                '}';
     }
 }
