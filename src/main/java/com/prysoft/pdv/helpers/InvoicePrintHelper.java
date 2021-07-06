@@ -2,11 +2,11 @@ package com.prysoft.pdv.helpers;
 
 import com.prysoft.pdv.models.Invoice;
 import com.prysoft.pdv.models.PrintComprobante;
-import com.prysoft.pdv.models.PrintComprobanteDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
+import java.util.stream.DoubleStream;
 
 @Service
 public class InvoicePrintHelper implements Serializable {
@@ -15,13 +15,18 @@ public class InvoicePrintHelper implements Serializable {
 
     public PrintComprobante processReceiptForPrint(Invoice receipt) {
         String fechaInicioAct = dateHelper.dateToStringConvertion(receipt.getSucursal().getFechaInicioAct());
+        DoubleStream streamIvas = DoubleStream.of(receipt.getTotalIva21(), receipt.getTotalIva10(), receipt.getTotalIva27());
+        DoubleStream streamPorcentajeDescuentos = DoubleStream.of(receipt.getPorcentajeDescuentoPlan(), receipt.getPorcentajeDescuentoGlobal());
+        DoubleStream streamPorcentajeRecargos = DoubleStream.of(receipt.getPorcentajeRecargoPlan(), receipt.getPorcentajeRecargoGlobal());
+        DoubleStream streamMontoDescuentos = DoubleStream.of(receipt.getTotalDescuentoPlan(), receipt.getTotalDescuentoGlobal());
+        DoubleStream streamMontoRecargos = DoubleStream.of(receipt.getTotalRecargoPlan(), receipt.getTotalRecargoGlobal());
+        Double totalIva = streamIvas.sum();
+        Double totalPorcentajeDescuento = streamPorcentajeDescuentos.sum();
+        Double totalPorcentajeRecargo = streamPorcentajeRecargos.sum();
+        Double totalRecargoGlobal = streamMontoRecargos.sum();
+        Double totalDescuentoGlobal = streamMontoDescuentos.sum();
         PrintComprobante comprobante = new PrintComprobante();
-        for (PrintComprobanteDetail product: receipt.getProductos()){
-            product.setPrecioUnitario(Math.round((product.getPrecioUnitario() / 1.21) * 100.0) / 100.0);
-            product.setPrecioTotal(Math.round((product.getPrecioTotal() / 1.21) * 100.0) / 100.0);
-        }
-        Double totalIva = Math.round((receipt.getTotalVenta() - (receipt.getTotalVenta() / 1.21)) * 100.0) / 100.0;
-        Double subTotal = Math.round((receipt.getTotalVenta() / 1.21) * 100.0) / 100.0;
+
         comprobante.setBarCode(receipt.getBarCode());
         comprobante.setCae(receipt.getCae());
         comprobante.setFechaEmision(receipt.getFechaEmision());
@@ -47,7 +52,14 @@ public class InvoicePrintHelper implements Serializable {
         comprobante.setClienteLocalidad(receipt.getCliente().getNombreRegion());
         comprobante.setCodigoDocumento(receipt.getDocumentoComercial().getCodigoDocumento());
         comprobante.setTotalDescuentoGlobal(receipt.getTotalDescuentoGlobal());
-        comprobante.setSubTotal(subTotal);
+        comprobante.setTotalIva21(receipt.getTotalIva21());
+        comprobante.setTotalIva10(receipt.getTotalIva10());
+        comprobante.setTotalIva27(receipt.getTotalIva27());
+        comprobante.setTotalDescuentoGlobal(totalDescuentoGlobal);
+        comprobante.setPorcentajeDescuentoGlobal(totalPorcentajeDescuento);
+        comprobante.setTotalRecargoGlobal(totalRecargoGlobal);
+        comprobante.setPorcentajeRecargoGlobal(totalPorcentajeRecargo);
+        comprobante.setSubTotal(receipt.getSubTotal());
         comprobante.setTotalIva(totalIva);
         return comprobante;
     }

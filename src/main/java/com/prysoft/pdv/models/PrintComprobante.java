@@ -25,14 +25,18 @@ public class PrintComprobante implements Serializable {
     private String empresaFechaInicioAct;
     private int empresaIngBruto;
     private String empresaTelefono;
-
     private ArrayList<PrintComprobanteDetail> productos;
-
     private Double totalVenta;
     private String nombreDocumento;
     private String codigoDocumento;
     private Double totalDescuentoGlobal;
+    private Double porcentajeDescuentoGlobal;
+    private Double totalRecargoGlobal;
+    private Double porcentajeRecargoGlobal;
     private Double totalIva;
+    private Double totalIva21;
+    private Double totalIva10;
+    private Double totalIva27;
     private Double subTotal;
 
     public String getBarCode() {
@@ -251,6 +255,54 @@ public class PrintComprobante implements Serializable {
         this.subTotal = subTotal;
     }
 
+    public Double getTotalIva21() {
+        return totalIva21;
+    }
+
+    public void setTotalIva21(Double totalIva21) {
+        this.totalIva21 = totalIva21;
+    }
+
+    public Double getTotalIva10() {
+        return totalIva10;
+    }
+
+    public void setTotalIva10(Double totalIva10) {
+        this.totalIva10 = totalIva10;
+    }
+
+    public Double getTotalIva27() {
+        return totalIva27;
+    }
+
+    public void setTotalIva27(Double totalIva27) {
+        this.totalIva27 = totalIva27;
+    }
+
+    public Double getPorcentajeDescuentoGlobal() {
+        return porcentajeDescuentoGlobal;
+    }
+
+    public void setPorcentajeDescuentoGlobal(Double porcentajeDescuentoGlobal) {
+        this.porcentajeDescuentoGlobal = porcentajeDescuentoGlobal;
+    }
+
+    public Double getTotalRecargoGlobal() {
+        return totalRecargoGlobal;
+    }
+
+    public void setTotalRecargoGlobal(Double totalRecargoGlobal) {
+        this.totalRecargoGlobal = totalRecargoGlobal;
+    }
+
+    public Double getPorcentajeRecargoGlobal() {
+        return porcentajeRecargoGlobal;
+    }
+
+    public void setPorcentajeRecargoGlobal(Double porcentajeRecargoGlobal) {
+        this.porcentajeRecargoGlobal = porcentajeRecargoGlobal;
+    }
+
     @Override
     public String toString() {
         return "PrintComprobante{" +
@@ -279,7 +331,13 @@ public class PrintComprobante implements Serializable {
                 ", nombreDocumento='" + nombreDocumento + '\'' +
                 ", codigoDocumento='" + codigoDocumento + '\'' +
                 ", totalDescuentoGlobal=" + totalDescuentoGlobal +
+                ", porcentajeDescuentoGlobal=" + porcentajeDescuentoGlobal +
+                ", totalRecargoGlobal=" + totalRecargoGlobal +
+                ", porcentajeRecargoGlobal=" + porcentajeRecargoGlobal +
                 ", totalIva=" + totalIva +
+                ", totalIva21=" + totalIva21 +
+                ", totalIva10=" + totalIva10 +
+                ", totalIva27=" + totalIva27 +
                 ", subTotal=" + subTotal +
                 '}';
     }

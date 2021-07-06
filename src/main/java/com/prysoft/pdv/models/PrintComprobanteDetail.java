@@ -6,6 +6,7 @@ public class PrintComprobanteDetail implements Serializable {
     private static final long serialVersionUID = 6840527842564211059L;
 
     private String nombre;
+    private String codigoBarra;
     private String cantUnidades;
     private double precioUnitario;
     private double precioTotal;
@@ -42,10 +43,19 @@ public class PrintComprobanteDetail implements Serializable {
         this.precioTotal = precioTotal;
     }
 
+    public String getCodigoBarra() {
+        return codigoBarra;
+    }
+
+    public void setCodigoBarra(String codigoBarra) {
+        this.codigoBarra = codigoBarra;
+    }
+
     @Override
     public String toString() {
-        return "InvoicePrintingDetail{" +
+        return "PrintComprobanteDetail{" +
                 "nombre='" + nombre + '\'' +
+                ", codigoBarra='" + codigoBarra + '\'' +
                 ", cantUnidades='" + cantUnidades + '\'' +
                 ", precioUnitario=" + precioUnitario +
                 ", precioTotal=" + precioTotal +
