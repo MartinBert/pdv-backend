@@ -32,6 +32,7 @@ public class InvoicePrintHelper implements Serializable {
         comprobante.setFechaEmision(receipt.getFechaEmision());
         comprobante.setFechaVto(receipt.getFechaVto());
         comprobante.setLetra(receipt.getLetra());
+        comprobante.setLogoUrl(receipt.getLogoUrl());
         comprobante.setClienteCondicionIva(receipt.getCliente().getCondicionIva().getNombre());
         comprobante.setClienteCuit(receipt.getCliente().getCuit());
         comprobante.setClienteDireccion(receipt.getCliente().getDireccion());

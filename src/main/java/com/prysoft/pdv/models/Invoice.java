@@ -18,6 +18,7 @@ public class Invoice implements Serializable {
     private String fechaEmision;
     private String fechaVto;
     private Boolean condicionVenta;
+    private String logoUrl;
     private ArrayList<PrintComprobanteDetail> productos;
     private ArrayList<Product> productosDetalle;
     private ArrayList<ProductoDescription> productoDescription;
@@ -354,6 +355,14 @@ public class Invoice implements Serializable {
         this.subTotal = subTotal;
     }
 
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
+    }
+
     @Override
     public String toString() {
         return "Invoice{" +
@@ -363,6 +372,7 @@ public class Invoice implements Serializable {
                 ", fechaEmision='" + fechaEmision + '\'' +
                 ", fechaVto='" + fechaVto + '\'' +
                 ", condicionVenta=" + condicionVenta +
+                ", logoUrl='" + logoUrl + '\'' +
                 ", productos=" + productos +
                 ", productosDetalle=" + productosDetalle +
                 ", productoDescription=" + productoDescription +

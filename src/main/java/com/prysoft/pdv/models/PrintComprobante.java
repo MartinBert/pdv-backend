@@ -16,6 +16,7 @@ public class PrintComprobante implements Serializable {
     private String clienteRazonSocial;
     private boolean condicionVenta;
     private String letra;
+    private String logoUrl;
     private String numeroCbte;
     private int idPuntoVenta;
     private String empresaCondicionIva;
@@ -303,6 +304,14 @@ public class PrintComprobante implements Serializable {
         this.porcentajeRecargoGlobal = porcentajeRecargoGlobal;
     }
 
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
+    }
+
     @Override
     public String toString() {
         return "PrintComprobante{" +
@@ -317,6 +326,7 @@ public class PrintComprobante implements Serializable {
                 ", clienteRazonSocial='" + clienteRazonSocial + '\'' +
                 ", condicionVenta=" + condicionVenta +
                 ", letra='" + letra + '\'' +
+                ", logoUrl='" + logoUrl + '\'' +
                 ", numeroCbte='" + numeroCbte + '\'' +
                 ", idPuntoVenta=" + idPuntoVenta +
                 ", empresaCondicionIva='" + empresaCondicionIva + '\'' +
