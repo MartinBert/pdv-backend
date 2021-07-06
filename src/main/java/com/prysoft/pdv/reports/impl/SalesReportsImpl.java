@@ -213,7 +213,6 @@ public class SalesReportsImpl implements SalesReport {
             InputStream stream = reportsRoutes.getStreamReportResource("receiptsReports", "factura_electronica.jasper");
             PrintComprobante comprobante = invoicePrintHelper.processReceiptForPrint(request);
             List<PrintComprobante> data = new ArrayList<>(Collections.singleton(comprobante));
-            System.out.println(comprobante.getProductos());
             JRBeanCollectionDataSource subreportDataSource = new JRBeanCollectionDataSource(comprobante.getProductos());
             HashMap<String, Object> params =
                     createHashMapForFiscalReceiptReport(subReportRoute, subreportDataSource, comprobante.getTotalVenta().toString(), encodedJsonForQrCode);
