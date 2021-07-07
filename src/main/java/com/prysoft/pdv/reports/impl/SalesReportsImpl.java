@@ -207,7 +207,7 @@ public class SalesReportsImpl implements SalesReport {
                                        String tenant,
                                        HttpServletResponse response)
             throws IOException, JRException, JSONException {
-        if (request.getCae() != "") {
+        if (request.getCae() != "" || request.getDocumentoComercial().isPresupuesto()) {
             String encodedJsonForQrCode = createEncodedJsonObject(request);
             String subReportRoute = reportsRoutes.getSubReportRoute("receiptsReports", "factura_detail.jasper");
             InputStream stream = reportsRoutes.getStreamReportResource("receiptsReports", "factura_electronica.jasper");

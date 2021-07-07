@@ -18,6 +18,8 @@ public class CommercialDocument implements Serializable {
     private boolean tipo;
     @Column(name = "ticket", columnDefinition = "boolean default false")
     private boolean ticket;
+    @Column(name = "presupuesto", columnDefinition = "boolean default false")
+    private boolean presupuesto;
     private int ivaCat;
     private boolean activo;
 
@@ -85,6 +87,14 @@ public class CommercialDocument implements Serializable {
         this.ticket = ticket;
     }
 
+    public boolean isPresupuesto() {
+        return presupuesto;
+    }
+
+    public void setPresupuesto(boolean presupuesto) {
+        this.presupuesto = presupuesto;
+    }
+
     @Override
     public String toString() {
         return "CommercialDocument{" +
@@ -94,6 +104,7 @@ public class CommercialDocument implements Serializable {
                 ", letra='" + letra + '\'' +
                 ", tipo=" + tipo +
                 ", ticket=" + ticket +
+                ", presupuesto=" + presupuesto +
                 ", ivaCat=" + ivaCat +
                 ", activo=" + activo +
                 '}';
