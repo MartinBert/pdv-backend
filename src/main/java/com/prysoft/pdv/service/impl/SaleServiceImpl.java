@@ -96,6 +96,22 @@ public class SaleServiceImpl extends FilterService<Invoice> implements SaleServi
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 
+    @Override
+    public Page<Invoice> getPresupuestos(SaleFilter filterParam) {
+        String hql;
+        List<FilterParam> params = new ArrayList<>();
+        if (filterParam.getSucursalId() == null) {
+            hql = "";
+        } else {
+            hql =
+                    "JOIN c.documentoComercial d " +
+                    "JOIN c.sucursal s " +
+                    "WHERE (s.id) = ('" + filterParam.getSucursalId() + "') " +
+                    "AND (d.presupuesto) = true";
+        }
+        return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
+    }
+
     private boolean passNotCloseReceiptValidations(Invoice comprobante, Long sucursalId) {
         if (comprobante.getCerrado() != null) return false;
         return comprobante.getSucursal().getId() == sucursalId;

@@ -118,6 +118,11 @@ public class SaleController {
         return service.filter(filterParam);
     }
 
+    @PostMapping(value = "/getPresupuestos")
+    Page<Invoice> getPresupuestos(@RequestBody SaleFilter filterParam) {
+        return service.getPresupuestos(filterParam);
+    }
+
     @PostMapping(value = "/getUniqueDateSales")
     Page<Invoice> getUniqueDateSales(@RequestBody SaleFilter filterParam) {
         return service.getUniqueDateSales(filterParam);
