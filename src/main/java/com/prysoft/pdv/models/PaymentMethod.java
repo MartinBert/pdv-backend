@@ -27,6 +27,9 @@ public class PaymentMethod implements Serializable {
     @Column(name = "suma_en_cierre_de_caja", columnDefinition = "boolean default false")
     private boolean sumaEnCierreDeCaja;
 
+    @Column(name = "aplica_cierre_z", columnDefinition = "boolean default false")
+    private boolean aplicaCierreZ;
+
     public Long getId() {
         return id;
     }
@@ -67,6 +70,14 @@ public class PaymentMethod implements Serializable {
         this.sumaEnCierreDeCaja = sumaEnCierreDeCaja;
     }
 
+    public boolean isAplicaCierreZ() {
+        return aplicaCierreZ;
+    }
+
+    public void setAplicaCierreZ(boolean aplicaCierreZ) {
+        this.aplicaCierreZ = aplicaCierreZ;
+    }
+
     @Override
     public String toString() {
         return "PaymentMethod{" +
@@ -75,6 +86,7 @@ public class PaymentMethod implements Serializable {
                 ", planPago=" + planPago +
                 ", sucursal=" + sucursal +
                 ", sumaEnCierreDeCaja=" + sumaEnCierreDeCaja +
+                ", aplicaCierreZ=" + aplicaCierreZ +
                 '}';
     }
 }

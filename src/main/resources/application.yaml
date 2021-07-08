@@ -52,6 +52,7 @@ tenants:
       driverClassName: org.postgresql.Driver
       username: postgres
       password: prysoft
+
     fragancias2:
       jdbcUrl: jdbc:postgresql://localhost:5432/fragancias2
       driverClassName: org.postgresql.Driver
