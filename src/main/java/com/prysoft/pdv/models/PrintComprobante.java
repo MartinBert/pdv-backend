@@ -9,6 +9,7 @@ public class PrintComprobante implements Serializable {
     private String cae;
     private String fechaEmision;
     private String fechaVto;
+    private String fechaVencimientoPresupuesto;
     private String clienteCondicionIva;
     private String clienteCuit;
     private String clienteDireccion;
@@ -312,6 +313,14 @@ public class PrintComprobante implements Serializable {
         this.logoUrl = logoUrl;
     }
 
+    public String getFechaVencimientoPresupuesto() {
+        return fechaVencimientoPresupuesto;
+    }
+
+    public void setFechaVencimientoPresupuesto(String fechaVencimientoPresupuesto) {
+        this.fechaVencimientoPresupuesto = fechaVencimientoPresupuesto;
+    }
+
     @Override
     public String toString() {
         return "PrintComprobante{" +
@@ -319,6 +328,7 @@ public class PrintComprobante implements Serializable {
                 ", cae='" + cae + '\'' +
                 ", fechaEmision='" + fechaEmision + '\'' +
                 ", fechaVto='" + fechaVto + '\'' +
+                ", fechaVencimientoPresupuesto='" + fechaVencimientoPresupuesto + '\'' +
                 ", clienteCondicionIva='" + clienteCondicionIva + '\'' +
                 ", clienteCuit='" + clienteCuit + '\'' +
                 ", clienteDireccion='" + clienteDireccion + '\'' +

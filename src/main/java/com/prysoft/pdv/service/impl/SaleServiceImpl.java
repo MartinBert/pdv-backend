@@ -98,16 +98,31 @@ public class SaleServiceImpl extends FilterService<Invoice> implements SaleServi
 
     @Override
     public Page<Invoice> getPresupuestos(SaleFilter filterParam) {
+        System.out.println(filterParam.getSucursalId());
         String hql;
         List<FilterParam> params = new ArrayList<>();
         if (filterParam.getSucursalId() == null) {
             hql = "";
         } else {
-            hql =
-                    "JOIN c.documentoComercial d " +
-                    "JOIN c.sucursal s " +
-                    "WHERE (s.id) = ('" + filterParam.getSucursalId() + "') " +
-                    "AND (d.presupuesto) = true";
+            if(filterParam.isValidityStatus()){
+                hql =
+                        "JOIN c.documentoComercial d " +
+                        "JOIN c.sucursal s " +
+                        "WHERE (s.id) = ('" + filterParam.getSucursalId() + "') " +
+                        "AND (d.presupuesto) = true " +
+                        "AND LOWER(c.vencido) LIKE LOWER('%vigente%') " +
+                        "AND LOWER(c.fechaEmision) LIKE LOWER('%" + filterParam.getFechaEmision() + "%')" +
+                        "AND LOWER(c.numeroCbte) LIKE LOWER('%" + filterParam.getNumeroComprobante() + "%')";
+            }else{
+                hql =
+                        "JOIN c.documentoComercial d " +
+                        "JOIN c.sucursal s " +
+                        "WHERE (s.id) = ('" + filterParam.getSucursalId() + "') " +
+                        "AND (d.presupuesto) = true " +
+                        "AND LOWER(c.vencido) LIKE LOWER('%vencido%') " +
+                        "AND LOWER(c.fechaEmision) LIKE LOWER('%" + filterParam.getFechaEmision() + "%')" +
+                        "AND LOWER(c.numeroCbte) LIKE LOWER('%" + filterParam.getNumeroComprobante() + "%')";
+            }
         }
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }

@@ -3,6 +3,7 @@ package com.prysoft.pdv.models;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -74,6 +75,10 @@ public class Invoice implements Serializable {
     private String cerrado;
     @Column(name = "cerrado_en_cierre_z", columnDefinition = "boolean default false")
     private boolean cerradoEnCierreZ;
+    @Column(name = "fecha_vencimiento")
+    private Date fechaVencimiento;
+    // 'vencido o vigente representa el estado de los presupuestos en el sistema, el campo puede ser nulo en otros tipos de comprobantes'
+    private String vencido;
 
     public Long getId() {
         return id;
@@ -363,6 +368,22 @@ public class Invoice implements Serializable {
         this.logoUrl = logoUrl;
     }
 
+    public Date getFechaVencimiento() {
+        return fechaVencimiento;
+    }
+
+    public void setFechaVencimiento(Date fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
+    }
+
+    public String getVencido() {
+        return vencido;
+    }
+
+    public void setVencido(String vencido) {
+        this.vencido = vencido;
+    }
+
     @Override
     public String toString() {
         return "Invoice{" +
@@ -402,6 +423,8 @@ public class Invoice implements Serializable {
                 ", cliente=" + cliente +
                 ", cerrado='" + cerrado + '\'' +
                 ", cerradoEnCierreZ=" + cerradoEnCierreZ +
+                ", fechaVencimiento=" + fechaVencimiento +
+                ", vencido='" + vencido + '\'' +
                 '}';
     }
 }

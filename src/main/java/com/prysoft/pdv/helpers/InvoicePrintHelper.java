@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.stream.DoubleStream;
 
 @Service
@@ -14,6 +15,8 @@ public class InvoicePrintHelper implements Serializable {
     private DateHelper dateHelper;
 
     public PrintComprobante processReceiptForPrint(Invoice receipt) {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/YYYY");
+        String fechaVencimientoPresupuesto = "";
         String fechaInicioAct = dateHelper.dateToStringConvertion(receipt.getSucursal().getFechaInicioAct());
         DoubleStream streamIvas = DoubleStream.of(receipt.getTotalIva21(), receipt.getTotalIva10(), receipt.getTotalIva27());
         DoubleStream streamPorcentajeDescuentos = DoubleStream.of(receipt.getPorcentajeDescuentoPlan(), receipt.getPorcentajeDescuentoGlobal());
@@ -26,6 +29,10 @@ public class InvoicePrintHelper implements Serializable {
         Double totalRecargoGlobal = streamMontoRecargos.sum();
         Double totalDescuentoGlobal = streamMontoDescuentos.sum();
         PrintComprobante comprobante = new PrintComprobante();
+
+        if(receipt.getFechaVencimiento() != null){
+            fechaVencimientoPresupuesto = format.format(receipt.getFechaVencimiento());
+        }
 
         comprobante.setBarCode(receipt.getBarCode());
         comprobante.setCae(receipt.getCae());
@@ -62,6 +69,8 @@ public class InvoicePrintHelper implements Serializable {
         comprobante.setPorcentajeRecargoGlobal(totalPorcentajeRecargo);
         comprobante.setSubTotal(receipt.getSubTotal());
         comprobante.setTotalIva(totalIva);
+        comprobante.setFechaVencimientoPresupuesto(fechaVencimientoPresupuesto);
+
         return comprobante;
     }
 }

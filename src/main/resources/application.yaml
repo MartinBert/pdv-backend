@@ -48,11 +48,11 @@ tenants:
       driverClassName: org.postgresql.Driver
       username: postgres
       password: 12345
-    pdv2:
-      jdbcUrl: jdbc:postgresql://localhost:5432/pdv2
+    pdv:
+      jdbcUrl: jdbc:postgresql://localhost:5432/pdv
       driverClassName: org.postgresql.Driver
       username: postgres
-      password: 39127052
+      password: 12345
     fragancias2:
       jdbcUrl: jdbc:postgresql://localhost:5432/fragancias2
       driverClassName: org.postgresql.Driver
@@ -65,6 +65,16 @@ tenants:
       password: 12345
     spoutlet:
       jdbcUrl: jdbc:postgresql://localhost:5432/spoutlet
+      driverClassName: org.postgresql.Driver
+      username: postgres
+      password: 12345
+    revancharepuestos:
+      jdbcUrl: jdbc:postgresql://localhost:5432/revancharepuestos
+      driverClassName: org.postgresql.Driver
+      username: postgres
+      password: 12345
+    prysoft:
+      jdbcUrl: jdbc:postgresql://localhost:5432/prysoft
       driverClassName: org.postgresql.Driver
       username: postgres
       password: 12345
