@@ -97,8 +97,34 @@ public class SaleServiceImpl extends FilterService<Invoice> implements SaleServi
     }
 
     @Override
+    public String getPreviousCorrelativeDocumentNumber(Long sucursalId, String codigoDocumento) {
+        String hql;
+        List<FilterParam> params = new ArrayList<>();
+        if (sucursalId == null) {
+            hql = "";
+        } else {
+            hql =
+                    "JOIN c.documentoComercial d " +
+                    "JOIN c.sucursal s " +
+                    "WHERE (s.id) = ('" + sucursalId + "') " +
+                    "AND LOWER(d.codigoDocumento) LIKE LOWER('%" + codigoDocumento + "%') " +
+                    "GROUP BY c.id ORDER BY c.id DESC";
+        }
+        Page<Invoice> result = getPage(hql, 0, 1, params);
+        if(result.getContent().isEmpty()){
+            return "0";
+        }else{
+            String correlativoComprobante = result.getContent().get(0).getCorrelativoComprobante();
+            if(correlativoComprobante != null){
+                return correlativoComprobante;
+            }else {
+                return "0";
+            }
+        }
+    }
+
+    @Override
     public Page<Invoice> getPresupuestos(SaleFilter filterParam) {
-        System.out.println(filterParam.getSucursalId());
         String hql;
         List<FilterParam> params = new ArrayList<>();
         if (filterParam.getSucursalId() == null) {
@@ -107,21 +133,21 @@ public class SaleServiceImpl extends FilterService<Invoice> implements SaleServi
             if(filterParam.isValidityStatus()){
                 hql =
                         "JOIN c.documentoComercial d " +
-                        "JOIN c.sucursal s " +
-                        "WHERE (s.id) = ('" + filterParam.getSucursalId() + "') " +
-                        "AND (d.presupuesto) = true " +
-                        "AND LOWER(c.vencido) LIKE LOWER('%vigente%') " +
-                        "AND LOWER(c.fechaEmision) LIKE LOWER('%" + filterParam.getFechaEmision() + "%')" +
-                        "AND LOWER(c.numeroCbte) LIKE LOWER('%" + filterParam.getNumeroComprobante() + "%')";
+                                "JOIN c.sucursal s " +
+                                "WHERE (s.id) = ('" + filterParam.getSucursalId() + "') " +
+                                "AND (d.presupuesto) = true " +
+                                "AND LOWER(c.vencido) LIKE LOWER('%vigente%') " +
+                                "AND LOWER(c.fechaEmision) LIKE LOWER('%" + filterParam.getFechaEmision() + "%')" +
+                                "AND LOWER(c.numeroCbte) LIKE LOWER('%" + filterParam.getNumeroComprobante() + "%')";
             }else{
                 hql =
                         "JOIN c.documentoComercial d " +
-                        "JOIN c.sucursal s " +
-                        "WHERE (s.id) = ('" + filterParam.getSucursalId() + "') " +
-                        "AND (d.presupuesto) = true " +
-                        "AND LOWER(c.vencido) LIKE LOWER('%vencido%') " +
-                        "AND LOWER(c.fechaEmision) LIKE LOWER('%" + filterParam.getFechaEmision() + "%')" +
-                        "AND LOWER(c.numeroCbte) LIKE LOWER('%" + filterParam.getNumeroComprobante() + "%')";
+                                "JOIN c.sucursal s " +
+                                "WHERE (s.id) = ('" + filterParam.getSucursalId() + "') " +
+                                "AND (d.presupuesto) = true " +
+                                "AND LOWER(c.vencido) LIKE LOWER('%vencido%') " +
+                                "AND LOWER(c.fechaEmision) LIKE LOWER('%" + filterParam.getFechaEmision() + "%')" +
+                                "AND LOWER(c.numeroCbte) LIKE LOWER('%" + filterParam.getNumeroComprobante() + "%')";
             }
         }
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);

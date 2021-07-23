@@ -16,6 +16,7 @@ public class Invoice implements Serializable {
     private String letra;
     @Column(name = "numero_cbte", nullable = false)
     private String numeroCbte;
+    private String correlativoComprobante;
     private String fechaEmision;
     private String fechaVto;
     private Boolean condicionVenta;
@@ -384,12 +385,21 @@ public class Invoice implements Serializable {
         this.vencido = vencido;
     }
 
+    public String getCorrelativoComprobante() {
+        return correlativoComprobante;
+    }
+
+    public void setCorrelativoComprobante(String correlativoComprobante) {
+        this.correlativoComprobante = correlativoComprobante;
+    }
+
     @Override
     public String toString() {
         return "Invoice{" +
                 "id=" + id +
                 ", letra='" + letra + '\'' +
                 ", numeroCbte='" + numeroCbte + '\'' +
+                ", correlativoComprobante='" + correlativoComprobante + '\'' +
                 ", fechaEmision='" + fechaEmision + '\'' +
                 ", fechaVto='" + fechaVto + '\'' +
                 ", condicionVenta=" + condicionVenta +

@@ -11,6 +11,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -126,5 +127,10 @@ public class SaleController {
     @PostMapping(value = "/getUniqueDateSales")
     Page<Invoice> getUniqueDateSales(@RequestBody SaleFilter filterParam) {
         return service.getUniqueDateSales(filterParam);
+    }
+
+    @GetMapping(value = "/getPreviousCorrelativeDocumentNumber/{sucursalId}/{codigoDocumento}")
+    String getPreviousCorrelativeDocumentNumber(@PathVariable Long sucursalId, @PathVariable String codigoDocumento) {
+        return service.getPreviousCorrelativeDocumentNumber(sucursalId, codigoDocumento);
     }
 }
