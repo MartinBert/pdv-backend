@@ -10,6 +10,7 @@ public class DetailOfPaymentMethodsForPrintInZClosure implements Serializable {
     private Double totalIva21;
     private Double totalIva10;
     private Double totalIva27;
+    private Double cantidadComprobantes;
 
     public String getPaymentMethodName() {
         return paymentMethodName;
@@ -59,6 +60,14 @@ public class DetailOfPaymentMethodsForPrintInZClosure implements Serializable {
         this.totalIva27 = totalIva27;
     }
 
+    public Double getCantidadComprobantes() {
+        return cantidadComprobantes;
+    }
+
+    public void setCantidadComprobantes(Double cantidadComprobantes) {
+        this.cantidadComprobantes = cantidadComprobantes;
+    }
+
     @Override
     public String toString() {
         return "DetailOfPaymentMethodsForPrintInZClosure{" +
@@ -68,6 +77,7 @@ public class DetailOfPaymentMethodsForPrintInZClosure implements Serializable {
                 ", totalIva21=" + totalIva21 +
                 ", totalIva10=" + totalIva10 +
                 ", totalIva27=" + totalIva27 +
+                ", cantidadComprobantes=" + cantidadComprobantes +
                 '}';
     }
 }

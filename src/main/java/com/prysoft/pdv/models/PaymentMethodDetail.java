@@ -17,6 +17,8 @@ public class PaymentMethodDetail implements Serializable {
     private Double totalIva21;
     private Double totalIva10;
     private Double totalIva27;
+    @Column(name = "cantidad_comprobantes", columnDefinition = "Decimal(10,2) default 0.00")
+    private Double cantidadComprobantes;
 
     public Long getId() {
         return id;
@@ -74,6 +76,14 @@ public class PaymentMethodDetail implements Serializable {
         this.totalIva27 = totalIva27;
     }
 
+    public Double getCantidadComprobantes() {
+        return cantidadComprobantes;
+    }
+
+    public void setCantidadComprobantes(Double cantidadComprobantes) {
+        this.cantidadComprobantes = cantidadComprobantes;
+    }
+
     @Override
     public String toString() {
         return "PaymentMethodDetail{" +
@@ -84,6 +94,7 @@ public class PaymentMethodDetail implements Serializable {
                 ", totalIva21=" + totalIva21 +
                 ", totalIva10=" + totalIva10 +
                 ", totalIva27=" + totalIva27 +
+                ", cantidadComprobantes=" + cantidadComprobantes +
                 '}';
     }
 }

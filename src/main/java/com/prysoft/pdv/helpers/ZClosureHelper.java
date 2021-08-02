@@ -26,6 +26,7 @@ public class ZClosureHelper implements Serializable {
             detail.setTotalIva10(paymentMethodDetail.getTotalIva10());
             detail.setTotalIva21(paymentMethodDetail.getTotalIva21());
             detail.setTotalIva27(paymentMethodDetail.getTotalIva27());
+            detail.setCantidadComprobantes(paymentMethodDetail.getCantidadComprobantes());
             paymentMethodsDetail.add(detail);
         }
 
