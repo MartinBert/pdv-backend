@@ -33,15 +33,22 @@ public class SaleServiceImpl extends FilterService<Invoice> implements SaleServi
         } else {
             if (filterParam.getBlackReceiptFilter() != null && filterParam.getBlackReceiptFilter() == 999999999) {
                 hql =
-                        "WHERE (c.sucursal.id) = ('" + filterParam.getSucursalId() + "') " +
-                        "AND (LOWER(c.documentoComercial.letra) LIKE LOWER('x%') " +
-                        "OR LOWER(c.documentoComercial.letra) LIKE LOWER('nx%'))" +
+                        "JOIN c.sucursal s " +
+                        "JOIN c.documentoComercial d " +
+                        "WHERE (s.id) = ('" + filterParam.getSucursalId() + "') " +
+                        "AND (LOWER(d.letra) LIKE LOWER('x%') " +
+                        "OR LOWER(d.letra) LIKE LOWER('nx%'))" +
+                        "AND LOWER(d.letra) <> ('p') " +
                         "AND (c.fechaEmision) LIKE ('" + filterParam.getFechaEmision() + "%') " +
                         "AND LOWER(c.numeroCbte) LIKE LOWER('" + filterParam.getNumeroComprobante() + "%')";
             } else {
                 hql =
-                        "WHERE (c.sucursal.id) = ('" + filterParam.getSucursalId() + "') " +
-                        "AND LOWER(c.documentoComercial.letra) NOT IN ('%x%', '%nx%') " +
+                        "JOIN c.sucursal s " +
+                        "JOIN c.documentoComercial d " +
+                        "WHERE (s.id) = ('" + filterParam.getSucursalId() + "') " +
+                        "AND LOWER(d.letra) <> ('x') " +
+                        "AND LOWER(d.letra) <> ('nx') " +
+                        "AND LOWER(d.letra) <> ('p') " +
                         "AND LOWER(c.fechaEmision) LIKE LOWER('%" + filterParam.getFechaEmision() + "%')" +
                         "AND LOWER(c.numeroCbte) LIKE LOWER('%" + filterParam.getNumeroComprobante() + "%')";
             }

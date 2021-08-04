@@ -1,6 +1,7 @@
 package com.prysoft.pdv.helpers;
 
 import com.prysoft.pdv.models.Invoice;
+import com.prysoft.pdv.models.PaymentPlan;
 import com.prysoft.pdv.models.PrintComprobante;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,7 @@ public class InvoicePrintHelper implements Serializable {
         Double totalRecargoGlobal = streamMontoRecargos.sum();
         Double totalDescuentoGlobal = streamMontoDescuentos.sum();
         PrintComprobante comprobante = new PrintComprobante();
+        String planPago = receipt.getPlanesPago().iterator().next().getNombre();
 
         if(receipt.getFechaVencimiento() != null){
             fechaVencimientoPresupuesto = format.format(receipt.getFechaVencimiento());
@@ -45,6 +47,7 @@ public class InvoicePrintHelper implements Serializable {
         comprobante.setClienteDireccion(receipt.getCliente().getDireccion());
         comprobante.setClienteRazonSocial(receipt.getCliente().getRazonSocial());
         comprobante.setCondicionVenta(receipt.getCondicionVenta());
+        comprobante.setPlanPago(planPago);
         comprobante.setNumeroCbte(receipt.getNumeroCbte());
         comprobante.setIdPuntoVenta(receipt.getPuntoVenta().getIdFiscal());
         comprobante.setEmpresaCondicionIva(receipt.getSucursal().getCondicionIva().getNombre());

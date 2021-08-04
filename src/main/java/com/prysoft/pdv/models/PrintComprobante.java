@@ -16,6 +16,7 @@ public class PrintComprobante implements Serializable {
     private String clienteLocalidad;
     private String clienteRazonSocial;
     private boolean condicionVenta;
+    private String planPago;
     private String letra;
     private String logoUrl;
     private String numeroCbte;
@@ -321,6 +322,14 @@ public class PrintComprobante implements Serializable {
         this.fechaVencimientoPresupuesto = fechaVencimientoPresupuesto;
     }
 
+    public String getPlanPago() {
+        return planPago;
+    }
+
+    public void setPlanPago(String planPago) {
+        this.planPago = planPago;
+    }
+
     @Override
     public String toString() {
         return "PrintComprobante{" +
@@ -335,6 +344,7 @@ public class PrintComprobante implements Serializable {
                 ", clienteLocalidad='" + clienteLocalidad + '\'' +
                 ", clienteRazonSocial='" + clienteRazonSocial + '\'' +
                 ", condicionVenta=" + condicionVenta +
+                ", planPago='" + planPago + '\'' +
                 ", letra='" + letra + '\'' +
                 ", logoUrl='" + logoUrl + '\'' +
                 ", numeroCbte='" + numeroCbte + '\'' +
