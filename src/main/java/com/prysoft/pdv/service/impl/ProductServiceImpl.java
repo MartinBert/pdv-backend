@@ -83,7 +83,7 @@ public class ProductServiceImpl extends FilterService<Product> implements Produc
     public Page<Product> filter(ProductFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
         String hql;
-        if (filterParam.getProductoEstado() > 0) {
+        if (filterParam.getProductoEstado() != 1) {
             hql =
                     "WHERE (c.estado) != 1 " +
                             "AND LOWER(c.nombre) LIKE LOWER('" + filterParam.getProductoName() + "%') " +
