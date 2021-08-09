@@ -67,7 +67,7 @@ public class SaleServiceImpl extends FilterService<Invoice> implements SaleServi
                     if (isNotNull(sucursalId)) {
                         if (passNotCloseReceiptValidations(comprobante, sucursalId)) {
                             comprobante.getMediosPago().forEach((PaymentMethod medio) -> {
-                                if (medio.isSumaEnCierreDeCaja()) {
+                                if (medio.isSumaEnCierreDeCaja() && !comprobante.getLetra().equals("P")) {
                                     filteredReceipts.add(comprobante);
                                 }
                             });
