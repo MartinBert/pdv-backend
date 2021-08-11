@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/{tenantid}/api/stock")
@@ -35,6 +37,16 @@ public class StockController {
     @GetMapping(value = "/{id}")
     Stock findById(@PathVariable long id) {
         return service.findById(id);
+    }
+
+    @GetMapping(value = "/items/{codeBar}/{sucursalId}")
+    Optional<Stock> findByProductCodeBarInDefaultDeposit(@PathVariable String codeBar, @PathVariable Long sucursalId) {
+        return service.findByProductCodeBarInDefaultDeposit(codeBar, sucursalId);
+    }
+
+    @GetMapping(value = "/items/any/{codeBar}/{sucursalId}")
+    List<Stock> findByProductCodeBar(@PathVariable String codeBar, @PathVariable Long sucursalId) {
+        return service.findByProductCodeBarInAnyDeposit(codeBar, sucursalId);
     }
 
     @PostMapping
@@ -64,6 +76,7 @@ public class StockController {
     Page<Stock> filter(@RequestBody StockFilter filterParam) {
         return service.filter(filterParam);
     }
+
 
     @PostMapping(value = "/filterStockForDepositId")
     Page<Stock> filterStockForDepositId(@RequestBody StockFilter filterParam) {

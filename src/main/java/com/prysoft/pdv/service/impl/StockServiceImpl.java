@@ -32,6 +32,16 @@ public class StockServiceImpl extends FilterService<Stock> implements StockServi
     }
 
     @Override
+    public Optional<Stock> findByProductCodeBarInDefaultDeposit(String codeBar, Long sucursalId){
+        return dao.findByProductoCodigoBarraAndSucursalIdAndDepositoDefaultDeposit(codeBar, sucursalId, "1");
+    }
+
+    @Override
+    public List<Stock> findByProductCodeBarInAnyDeposit(String codeBar, Long sucursalId){
+        return dao.findByProductoCodigoBarraAndSucursalId(codeBar, sucursalId);
+    }
+
+    @Override
     public Page<Stock> findAll(Pageable page) {
         return dao.findAll(page);
     }
@@ -115,6 +125,8 @@ public class StockServiceImpl extends FilterService<Stock> implements StockServi
         }
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
+
+
 
     @Override
     public void delete(Long id) {

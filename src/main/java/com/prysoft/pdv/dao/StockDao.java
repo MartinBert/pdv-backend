@@ -4,6 +4,7 @@ import com.prysoft.pdv.models.CommercialBranch;
 import com.prysoft.pdv.models.Stock;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface StockDao extends PagingAndSortingRepository<Stock, Long> {
@@ -12,4 +13,8 @@ public interface StockDao extends PagingAndSortingRepository<Stock, Long> {
     Iterable<Stock> findBySucursal(CommercialBranch sucursal);
 
     Optional<Stock> findByProductoId(Long p);
+
+    Optional<Stock> findByProductoCodigoBarraAndSucursalIdAndDepositoDefaultDeposit(String codeBar, Long sucursalId, String defaultDeposit);
+
+    List<Stock> findByProductoCodigoBarraAndSucursalId(String codeBar, Long sucursalId);
 }
