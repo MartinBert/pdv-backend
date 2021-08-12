@@ -31,8 +31,9 @@ public class ZClosureController {
     Page<ZClosure> findAll(Pageable page) {
         return service.findAll(page);
     }
-    @GetMapping
-    int getLastCorrelativeNumber(Long sucursalId) {
+
+    @GetMapping("/correlative/{sucursalId}")
+    int getLastCorrelativeNumber(@PathVariable Long sucursalId) {
         return service.getLastCorrelativeNumber(sucursalId);
     }
 
