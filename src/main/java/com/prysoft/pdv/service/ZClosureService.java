@@ -10,6 +10,8 @@ import java.util.ArrayList;
 public interface ZClosureService {
     ZClosure findById(Long id);
 
+    int getLastCorrelativeNumber(Long sucursalId);
+
     Page<ZClosure> findAll(Pageable page);
 
     ZClosure saveOrUpdate(ZClosure entity);

@@ -40,6 +40,7 @@ public class ZClosure implements Serializable {
     @Column(name = "total_iva_27", columnDefinition = "Decimal(10,2) default 0.00")
     private Double totalIva27;
     private Date fecha;
+    private int numeroCorrelativo;
 
     public Long getId() {
         return id;
@@ -137,6 +138,15 @@ public class ZClosure implements Serializable {
         this.detalleMediosPago = detalleMediosPago;
     }
 
+     public int getNumeroCorrelativo() {
+        return numeroCorrelativo;
+    }
+
+    public void setNumeroCorrelativo(int numeroCorrelativo) {
+        this.numeroCorrelativo = numeroCorrelativo;
+    }
+
+
     @Override
     public String toString() {
         return "ZClosure{" +
@@ -151,6 +161,7 @@ public class ZClosure implements Serializable {
                 ", totalIva21=" + totalIva21 +
                 ", totalIva10=" + totalIva10 +
                 ", totalIva27=" + totalIva27 +
+                ", numeroCorrelativo=" + numeroCorrelativo +
                 ", fecha=" + fecha +
                 '}';
     }

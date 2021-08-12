@@ -31,6 +31,16 @@ public class ZClosureServiceImpl extends FilterService<ZClosure> implements ZClo
         return optional.get();
     }
 
+        @Override
+        public int findById(Long sucursalId) {
+        Optional<ZClosure> optional = dao.findLastBySucursalId(sucursalId);
+       if(optional.isPresent()){
+           return optional.get().getNumeroCorrelativo();
+       } else{
+           return 0 ; 
+       }
+    }
+
     @Override
     public Page<ZClosure> findAll(Pageable page) {
         return dao.findAll(page);

@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ZClosureDao extends PagingAndSortingRepository<ZClosure, Long> {
+    Optional<ZClosure> findLastBySucursalId(Long sucursalId);
 }
