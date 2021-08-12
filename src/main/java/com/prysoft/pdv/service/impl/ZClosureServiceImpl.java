@@ -32,7 +32,7 @@ public class ZClosureServiceImpl extends FilterService<ZClosure> implements ZClo
     }
 
         @Override
-        public int findById(Long sucursalId) {
+        public int getLastCorrelativeNumber(Long sucursalId) {
         Optional<ZClosure> optional = dao.findLastBySucursalId(sucursalId);
        if(optional.isPresent()){
            return optional.get().getNumeroCorrelativo();
