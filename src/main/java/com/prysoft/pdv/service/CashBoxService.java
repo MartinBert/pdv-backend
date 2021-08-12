@@ -8,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 public interface CashBoxService {
     CashBox findById(Long id);
 
+    int findLastBySucursalId(Long id);
+
     Page<CashBox> findAll(Pageable page);
 
     CashBox saveOrUpdate(CashBox entity);

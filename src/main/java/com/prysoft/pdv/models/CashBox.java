@@ -17,6 +17,8 @@ public class CashBox implements Serializable {
     private double salidasNoContabilizadas;
     private double montoFacturado;
     private double diferencia;
+    @Column(name = "numero_correlativo", columnDefinition = "int default 0")
+    private int numeroCorrelativo;
     @OneToOne
     private CommercialBranch sucursal;
 
@@ -92,6 +94,14 @@ public class CashBox implements Serializable {
         this.fecha = fecha;
     }
 
+    public int getNumeroCorrelativo() {
+        return numeroCorrelativo;
+    }
+
+    public void setNumeroCorrelativo(int numeroCorrelativo) {
+        this.numeroCorrelativo = numeroCorrelativo;
+    }
+
     @Override
     public String toString() {
         return "CashBox{" +
@@ -103,6 +113,7 @@ public class CashBox implements Serializable {
                 ", salidasNoContabilizadas=" + salidasNoContabilizadas +
                 ", montoFacturado=" + montoFacturado +
                 ", diferencia=" + diferencia +
+                ", numeroCorrelativo=" + numeroCorrelativo +
                 ", sucursal=" + sucursal +
                 '}';
     }

@@ -32,6 +32,16 @@ public class CashBoxServiceImpl extends FilterService<CashBox> implements CashBo
     }
 
     @Override
+    public int findLastBySucursalId(Long sucursalId){
+        Optional<CashBox> optional = dao.findLastBySucursalId(sucursalId);
+        if(optional.isPresent()){
+            return optional.get().getNumeroCorrelativo();
+        }else{
+            return 0;
+        }
+    }
+
+    @Override
     public Page<CashBox> findAll(Pageable page) {
         return dao.findAll(page);
     }
