@@ -40,6 +40,7 @@ public class ZClosure implements Serializable {
     @Column(name = "total_iva_27", columnDefinition = "Decimal(10,2) default 0.00")
     private Double totalIva27;
     private Date fecha;
+    @Column(name = "numero_correlativo", columnDefinition = "int default 0")
     private int numeroCorrelativo;
 
     public Long getId() {
