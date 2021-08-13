@@ -68,7 +68,7 @@ public class ZClosureServiceImpl extends FilterService<ZClosure> implements ZClo
             if(filterParam.getSucursalId() == null){
                 hql = "WHERE c.fecha = '" + filterParam.getDate() + "' ORDER BY c.fecha DESC";
             }else{
-                hql = "WHERE c.sucursal = '"+filterParam.getSucursalId()+"' AND c.fecha = '" + filterParam.getDate() + "'GROUP BY c.numeroCorrelativo ORDER BY c.numeroCorrelativo DESC";
+                hql = "WHERE c.sucursal = '"+filterParam.getSucursalId()+"' AND c.fecha = '" + filterParam.getDate() + "'GROUP BY c.numeroCorrelativo ORDER BY c.numeroCorrelativo DESC'";
             }
         }
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
