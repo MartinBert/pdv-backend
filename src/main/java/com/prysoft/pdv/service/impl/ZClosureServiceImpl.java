@@ -33,12 +33,13 @@ public class ZClosureServiceImpl extends FilterService<ZClosure> implements ZClo
 
     @Override
     public int getLastCorrelativeNumber(Long sucursalId) {
-        Optional<ZClosure> optional = dao.findLastBySucursalId(sucursalId);
-        if(optional.isPresent()){
-            return optional.get().getNumeroCorrelativo();
-        } else{
-            return 0 ;
-        }
+        List<FilterParam> params = new ArrayList<>();
+        String hql =
+                "WHERE (c.sucursal.id) = ('" + sucursalId + "') " +
+                        "GROUP BY c.id " +
+                        "ORDER BY c.id DESC";
+
+        return getPage(hql, 0, 1, params).getContent().iterator().next().getNumeroCorrelativo();
     }
 
     @Override
