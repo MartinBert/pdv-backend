@@ -32,6 +32,16 @@ public class CashBoxServiceImpl extends FilterService<CashBox> implements CashBo
     }
 
     @Override
+    public int findLastBySucursalId(Long sucursalId){
+        Optional<CashBox> optional = dao.findLastBySucursalId(sucursalId);
+        if(optional.isPresent()){
+            return optional.get().getNumeroCorrelativo();
+        }else{
+            return 0;
+        }
+    }
+
+    @Override
     public Page<CashBox> findAll(Pageable page) {
         return dao.findAll(page);
     }
@@ -53,7 +63,10 @@ public class CashBoxServiceImpl extends FilterService<CashBox> implements CashBo
         if (filterParam.getSucursalId() == null) {
             hql = "";
         } else {
-            hql = "WHERE (c.sucursal.id) = ('" + filterParam.getSucursalId() + "')";
+            hql =
+                "WHERE (c.sucursal.id) = ('" + filterParam.getSucursalId() + "') " +
+                "GROUP BY c.id " +
+                "ORDER BY c.numeroCorrelativo DESC";
         }
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }

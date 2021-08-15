@@ -27,6 +27,7 @@ public class CommercialBranch  implements Serializable {
     private String nombreContacto;
     private String provincia;
     private String ciudad;
+    private String logo;
     @Column(name = "fecha_inicio_act")
     private Date fechaInicioAct;
     @Column(name = "ing_bruto")
@@ -191,6 +192,14 @@ public class CommercialBranch  implements Serializable {
         this.variacionGanancia = variacionGanancia;
     }
 
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
     @Override
     public String toString() {
         return "CommercialBranch{" +
@@ -204,6 +213,7 @@ public class CommercialBranch  implements Serializable {
                 ", nombreContacto='" + nombreContacto + '\'' +
                 ", provincia='" + provincia + '\'' +
                 ", ciudad='" + ciudad + '\'' +
+                ", logo='" + logo + '\'' +
                 ", fechaInicioAct=" + fechaInicioAct +
                 ", ingBruto=" + ingBruto +
                 ", razonSocial='" + razonSocial + '\'' +

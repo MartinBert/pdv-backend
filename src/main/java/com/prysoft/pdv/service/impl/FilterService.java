@@ -32,8 +32,19 @@ public class FilterService<T> {
             }
         }
 
-        Long totalObjectsL = queryTotalObjects.getResultList().get(0);
-        Integer totalObjects = totalObjectsL.intValue();
+        Long totalObjectsL;
+        if(queryTotalObjects.getResultList().isEmpty()){
+            totalObjectsL = null;
+        }else{
+            totalObjectsL = queryTotalObjects.getResultList().get(0);
+        }
+
+        Integer totalObjects;
+        if(totalObjectsL != null){
+            totalObjects = totalObjectsL.intValue();
+        }else{
+            totalObjects = 0;
+        }
 
         // Get Real page
         String hqlSelectPage = "SELECT DISTINCT c FROM " + getGenericClass().getSimpleName() + " c " + HQL;

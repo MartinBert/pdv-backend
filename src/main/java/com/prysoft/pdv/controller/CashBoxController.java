@@ -32,6 +32,11 @@ public class CashBoxController {
         return service.findById(id);
     }
 
+    @GetMapping(value = "/correlative/{sucursalId}")
+    int findLastNumeroCorrelativo(@PathVariable Long sucursalId) {
+        return service.findLastBySucursalId(sucursalId);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     CashBox save(@RequestBody CashBox entity) {

@@ -5,6 +5,7 @@ public class SaleFilter extends CommercialBranchFilter {
     private String comprobanteCerrado;
     private String numeroComprobante;
     private Long blackReceiptFilter;
+    private boolean validityStatus;
     private double totalVenta;
 
     public String getFechaEmision() {
@@ -47,6 +48,14 @@ public class SaleFilter extends CommercialBranchFilter {
         this.blackReceiptFilter = blackReceiptFilter;
     }
 
+    public boolean isValidityStatus() {
+        return validityStatus;
+    }
+
+    public void setValidityStatus(boolean validityStatus) {
+        this.validityStatus = validityStatus;
+    }
+
     @Override
     public Long getSucursalId() {
         return super.getSucursalId();
@@ -74,11 +83,12 @@ public class SaleFilter extends CommercialBranchFilter {
 
     @Override
     public String toString() {
-        return "VentaFilter{" +
+        return "SaleFilter{" +
                 "fechaEmision='" + fechaEmision + '\'' +
                 ", comprobanteCerrado='" + comprobanteCerrado + '\'' +
                 ", numeroComprobante='" + numeroComprobante + '\'' +
                 ", blackReceiptFilter=" + blackReceiptFilter +
+                ", validityStatus=" + validityStatus +
                 ", totalVenta=" + totalVenta +
                 '}';
     }

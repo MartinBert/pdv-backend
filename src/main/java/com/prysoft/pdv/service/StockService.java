@@ -6,9 +6,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public interface StockService {
     Stock findById(Long id);
+
+    Optional<Stock> findByProductCodeBarInDefaultDeposit(String codeBar, Long sucursalId);
+
+    List<Stock> findByProductCodeBarInAnyDeposit(String codeBar, Long sucursalId);
 
     Page<Stock> findAll(Pageable page);
 

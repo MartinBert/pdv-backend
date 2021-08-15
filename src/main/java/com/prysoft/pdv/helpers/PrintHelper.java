@@ -1,10 +1,7 @@
 package com.prysoft.pdv.helpers;
 
 import com.prysoft.pdv.models.PrintComprobante;
-import com.prysoft.pdv.print.PrintProductsLabels;
-import com.prysoft.pdv.print.PrintSalesReport;
-import com.prysoft.pdv.print.PrintWithProductDetails;
-import com.prysoft.pdv.print.QuantityProductsSold;
+import com.prysoft.pdv.print.*;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
@@ -83,6 +80,18 @@ public class PrintHelper implements Serializable {
         return null;
     }
     /***** PRODUCTS *****/
+
+    /***** Z CLOSURE *****/
+    public JasperPrint printZClosure(InputStream stream, ArrayList<PrintZCLosure> data, HashMap<String, Object> params, HttpServletResponse response) throws JRException, IOException {
+        JRBeanCollectionDataSource datasource = new JRBeanCollectionDataSource(data);
+        JasperReport report = (JasperReport) JRLoader.loadObject(stream);
+        JasperPrint print = JasperFillManager.fillReport(report, params, datasource);
+        final ServletOutputStream output = response.getOutputStream();
+        JasperExportManager.exportReportToPdfStream(print, output);
+
+        return null;
+    }
+    /***** Z CLOSURE *****/
 
     /***** GENERIC *****/
     public JasperPrint printWithDatabaseConnection(String tenant, InputStream stream, HashMap<String, Object> params, HttpServletResponse response) throws SQLException, JRException, IOException {

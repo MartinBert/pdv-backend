@@ -9,27 +9,23 @@ import java.util.Set;
 @Table(name = "empresas")
 public class Business implements Serializable {
     private static final long serialVersionUID = 999999999999999999L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Date fechaInicioAct;
-
     @Column(name = "ing_bruto", unique = true, nullable = false)
     private int ingBruto;
-
     @OneToOne
     private FiscalCondition condicionIva; //1-Responsable Inscripto, 2-Monotributista
-
     @OneToMany(mappedBy = "empresa")
     private Set<CommercialBranch> sucursales;
-
     private String alias;
-
     @Column(name = "razon_social", unique = true, nullable = false)
     private String razonSocial;
-
     @Column(name = "cuit", unique = true, nullable = false)
     private String cuit;
+    private String logo;
 
     public Long getId() {
         return id;
@@ -95,6 +91,14 @@ public class Business implements Serializable {
         this.cuit = cuit;
     }
 
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
     @Override
     public String toString() {
         return "Business{" +
@@ -106,6 +110,7 @@ public class Business implements Serializable {
                 ", alias='" + alias + '\'' +
                 ", razonSocial='" + razonSocial + '\'' +
                 ", cuit='" + cuit + '\'' +
+                ", logo='" + logo + '\'' +
                 '}';
     }
 }

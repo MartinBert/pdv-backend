@@ -9,12 +9,16 @@ public class PrintComprobante implements Serializable {
     private String cae;
     private String fechaEmision;
     private String fechaVto;
+    private String fechaVencimientoPresupuesto;
     private String clienteCondicionIva;
     private String clienteCuit;
     private String clienteDireccion;
+    private String clienteLocalidad;
     private String clienteRazonSocial;
     private boolean condicionVenta;
+    private String planPago;
     private String letra;
+    private String logoUrl;
     private String numeroCbte;
     private int idPuntoVenta;
     private String empresaCondicionIva;
@@ -24,11 +28,19 @@ public class PrintComprobante implements Serializable {
     private String empresaFechaInicioAct;
     private int empresaIngBruto;
     private String empresaTelefono;
-
     private ArrayList<PrintComprobanteDetail> productos;
-
     private Double totalVenta;
     private String nombreDocumento;
+    private String codigoDocumento;
+    private Double totalDescuentoGlobal;
+    private Double porcentajeDescuentoGlobal;
+    private Double totalRecargoGlobal;
+    private Double porcentajeRecargoGlobal;
+    private Double totalIva;
+    private Double totalIva21;
+    private Double totalIva10;
+    private Double totalIva27;
+    private Double subTotal;
 
     public String getBarCode() {
         return barCode;
@@ -206,31 +218,157 @@ public class PrintComprobante implements Serializable {
         this.nombreDocumento = nombreDocumento;
     }
 
+    public String getClienteLocalidad() {
+        return clienteLocalidad;
+    }
+
+    public void setClienteLocalidad(String clienteLocalidad) {
+        this.clienteLocalidad = clienteLocalidad;
+    }
+
+    public String getCodigoDocumento() {
+        return codigoDocumento;
+    }
+
+    public void setCodigoDocumento(String codigoDocumento) {
+        this.codigoDocumento = codigoDocumento;
+    }
+
+    public Double getTotalDescuentoGlobal() {
+        return totalDescuentoGlobal;
+    }
+
+    public void setTotalDescuentoGlobal(Double totalDescuentoGlobal) {
+        this.totalDescuentoGlobal = totalDescuentoGlobal;
+    }
+
+    public Double getTotalIva() {
+        return totalIva;
+    }
+
+    public void setTotalIva(Double totalIva) {
+        this.totalIva = totalIva;
+    }
+
+    public Double getSubTotal() {
+        return subTotal;
+    }
+
+    public void setSubTotal(Double subTotal) {
+        this.subTotal = subTotal;
+    }
+
+    public Double getTotalIva21() {
+        return totalIva21;
+    }
+
+    public void setTotalIva21(Double totalIva21) {
+        this.totalIva21 = totalIva21;
+    }
+
+    public Double getTotalIva10() {
+        return totalIva10;
+    }
+
+    public void setTotalIva10(Double totalIva10) {
+        this.totalIva10 = totalIva10;
+    }
+
+    public Double getTotalIva27() {
+        return totalIva27;
+    }
+
+    public void setTotalIva27(Double totalIva27) {
+        this.totalIva27 = totalIva27;
+    }
+
+    public Double getPorcentajeDescuentoGlobal() {
+        return porcentajeDescuentoGlobal;
+    }
+
+    public void setPorcentajeDescuentoGlobal(Double porcentajeDescuentoGlobal) {
+        this.porcentajeDescuentoGlobal = porcentajeDescuentoGlobal;
+    }
+
+    public Double getTotalRecargoGlobal() {
+        return totalRecargoGlobal;
+    }
+
+    public void setTotalRecargoGlobal(Double totalRecargoGlobal) {
+        this.totalRecargoGlobal = totalRecargoGlobal;
+    }
+
+    public Double getPorcentajeRecargoGlobal() {
+        return porcentajeRecargoGlobal;
+    }
+
+    public void setPorcentajeRecargoGlobal(Double porcentajeRecargoGlobal) {
+        this.porcentajeRecargoGlobal = porcentajeRecargoGlobal;
+    }
+
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
+    }
+
+    public String getFechaVencimientoPresupuesto() {
+        return fechaVencimientoPresupuesto;
+    }
+
+    public void setFechaVencimientoPresupuesto(String fechaVencimientoPresupuesto) {
+        this.fechaVencimientoPresupuesto = fechaVencimientoPresupuesto;
+    }
+
+    public String getPlanPago() {
+        return planPago;
+    }
+
+    public void setPlanPago(String planPago) {
+        this.planPago = planPago;
+    }
+
     @Override
     public String toString() {
-        return "InvoicePrinting{" +
-            "barCode='" + barCode + '\'' +
-            ", cae='" + cae + '\'' +
-            ", fechaEmision='" + fechaEmision + '\'' +
-            ", fechaVto='" + fechaVto + '\'' +
-            ", clienteCondicionIva='" + clienteCondicionIva + '\'' +
-            ", clienteCuit='" + clienteCuit + '\'' +
-            ", clienteDireccion='" + clienteDireccion + '\'' +
-            ", clienteRazonSocial='" + clienteRazonSocial + '\'' +
-            ", condicionVenta=" + condicionVenta +
-            ", letra='" + letra + '\'' +
-            ", numeroCbte='" + numeroCbte + '\'' +
-            ", idPuntoVenta=" + idPuntoVenta +
-            ", empresaCondicionIva='" + empresaCondicionIva + '\'' +
-            ", empresaCuit='" + empresaCuit + '\'' +
-            ", empresaDireccion='" + empresaDireccion + '\'' +
-            ", empresaRazonSocial='" + empresaRazonSocial + '\'' +
-            ", empresaFechaInicioAct='" + empresaFechaInicioAct + '\'' +
-            ", empresaIngBruto=" + empresaIngBruto +
-            ", empresaTelefono='" + empresaTelefono + '\'' +
-            ", productos=" + productos +
-            ", totalVenta=" + totalVenta +
-            ", nombreDocumento='" + nombreDocumento + '\'' +
-            '}';
+        return "PrintComprobante{" +
+                "barCode='" + barCode + '\'' +
+                ", cae='" + cae + '\'' +
+                ", fechaEmision='" + fechaEmision + '\'' +
+                ", fechaVto='" + fechaVto + '\'' +
+                ", fechaVencimientoPresupuesto='" + fechaVencimientoPresupuesto + '\'' +
+                ", clienteCondicionIva='" + clienteCondicionIva + '\'' +
+                ", clienteCuit='" + clienteCuit + '\'' +
+                ", clienteDireccion='" + clienteDireccion + '\'' +
+                ", clienteLocalidad='" + clienteLocalidad + '\'' +
+                ", clienteRazonSocial='" + clienteRazonSocial + '\'' +
+                ", condicionVenta=" + condicionVenta +
+                ", planPago='" + planPago + '\'' +
+                ", letra='" + letra + '\'' +
+                ", logoUrl='" + logoUrl + '\'' +
+                ", numeroCbte='" + numeroCbte + '\'' +
+                ", idPuntoVenta=" + idPuntoVenta +
+                ", empresaCondicionIva='" + empresaCondicionIva + '\'' +
+                ", empresaCuit='" + empresaCuit + '\'' +
+                ", empresaDireccion='" + empresaDireccion + '\'' +
+                ", empresaRazonSocial='" + empresaRazonSocial + '\'' +
+                ", empresaFechaInicioAct='" + empresaFechaInicioAct + '\'' +
+                ", empresaIngBruto=" + empresaIngBruto +
+                ", empresaTelefono='" + empresaTelefono + '\'' +
+                ", productos=" + productos +
+                ", totalVenta=" + totalVenta +
+                ", nombreDocumento='" + nombreDocumento + '\'' +
+                ", codigoDocumento='" + codigoDocumento + '\'' +
+                ", totalDescuentoGlobal=" + totalDescuentoGlobal +
+                ", porcentajeDescuentoGlobal=" + porcentajeDescuentoGlobal +
+                ", totalRecargoGlobal=" + totalRecargoGlobal +
+                ", porcentajeRecargoGlobal=" + porcentajeRecargoGlobal +
+                ", totalIva=" + totalIva +
+                ", totalIva21=" + totalIva21 +
+                ", totalIva10=" + totalIva10 +
+                ", totalIva27=" + totalIva27 +
+                ", subTotal=" + subTotal +
+                '}';
     }
 }
