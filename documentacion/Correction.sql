@@ -1,2 +1,2 @@
-INSERT INTO "public"."modulos" (id,nombre) VALUES (25,'modulos');
-INSERT INTO "public"."perfiles_modulos" (perfil_id, modulos_id) VALUES (1, 25);
+INSERT INTO "public"."documentos_comerciales" (id,nombre,codigo_documento,letra,tipo,ticket,presupuesto,iva_cat,activo)
+VALUES (30,false,'PR',4,'P','Presupuesto',false,false,true);
