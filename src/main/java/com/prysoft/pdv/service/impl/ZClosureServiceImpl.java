@@ -31,14 +31,14 @@ public class ZClosureServiceImpl extends FilterService<ZClosure> implements ZClo
         return optional.get();
     }
 
-        @Override
-        public int getLastCorrelativeNumber(Long sucursalId) {
+    @Override
+    public int getLastCorrelativeNumber(Long sucursalId) {
         Optional<ZClosure> optional = dao.findLastBySucursalId(sucursalId);
-       if(optional.isPresent()){
-           return optional.get().getNumeroCorrelativo();
-       } else{
-           return 0 ; 
-       }
+        if(optional.isPresent()){
+            return optional.get().getNumeroCorrelativo();
+        } else{
+            return 0 ;
+        }
     }
 
     @Override
@@ -62,13 +62,22 @@ public class ZClosureServiceImpl extends FilterService<ZClosure> implements ZClo
             if(filterParam.getSucursalId() == null){
                 hql = "";
             }else{
-                hql = "WHERE c.sucursal = '"+filterParam.getSucursalId()+"'";
+                hql =
+                    "WHERE c.sucursal = '"+filterParam.getSucursalId()+"' " +
+                    "GROUP BY c.id " +
+                    "ORDER BY c.numeroCorrelativo DESC";
             }
         }else{
             if(filterParam.getSucursalId() == null){
-                hql = "WHERE c.fecha = '" + filterParam.getDate() + "' ORDER BY c.fecha DESC";
+                hql =
+                    "WHERE c.fecha = '" + filterParam.getDate() + "' " +
+                    "ORDER BY c.fecha DESC";
             }else{
-                hql = "WHERE c.sucursal = '"+filterParam.getSucursalId()+"' AND c.fecha = '" + filterParam.getDate() + "'GROUP BY c.numeroCorrelativo ORDER BY c.numeroCorrelativo DESC'";
+                hql =
+                    "WHERE c.sucursal = '" + filterParam.getSucursalId() + "' " +
+                    "AND c.fecha = '" + filterParam.getDate() + "' " +
+                    "GROUP BY c.id " +
+                    "ORDER BY c.numeroCorrelativo DESC";
             }
         }
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);

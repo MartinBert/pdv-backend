@@ -63,7 +63,10 @@ public class CashBoxServiceImpl extends FilterService<CashBox> implements CashBo
         if (filterParam.getSucursalId() == null) {
             hql = "";
         } else {
-            hql = "WHERE (c.sucursal.id) = ('" + filterParam.getSucursalId() + "')";
+            hql =
+                "WHERE (c.sucursal.id) = ('" + filterParam.getSucursalId() + "') " +
+                "GROUP BY c.id " +
+                "ORDER BY c.numeroCorrelativo DESC";
         }
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
