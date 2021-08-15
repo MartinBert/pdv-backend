@@ -17,7 +17,6 @@ import java.util.List;
 @Service
 @Transactional
 public class SaleServiceImpl extends FilterService<Invoice> implements SaleService {
-
     @Autowired
     private InvoiceDao dao;
 
@@ -40,7 +39,8 @@ public class SaleServiceImpl extends FilterService<Invoice> implements SaleServi
                         "OR LOWER(d.letra) LIKE LOWER('nx%'))" +
                         "AND LOWER(d.letra) <> ('p') " +
                         "AND (c.fechaEmision) LIKE ('" + filterParam.getFechaEmision() + "%') " +
-                        "AND LOWER(c.numeroCbte) LIKE LOWER('" + filterParam.getNumeroComprobante() + "%')";
+                        "AND LOWER(c.numeroCbte) LIKE LOWER('" + filterParam.getNumeroComprobante() + "%') " +
+                        "GROUP BY c.id ORDER BY c.id DESC";
             } else {
                 hql =
                         "JOIN c.sucursal s " +
@@ -50,7 +50,8 @@ public class SaleServiceImpl extends FilterService<Invoice> implements SaleServi
                         "AND LOWER(d.letra) <> ('nx') " +
                         "AND LOWER(d.letra) <> ('p') " +
                         "AND LOWER(c.fechaEmision) LIKE LOWER('%" + filterParam.getFechaEmision() + "%')" +
-                        "AND LOWER(c.numeroCbte) LIKE LOWER('%" + filterParam.getNumeroComprobante() + "%')";
+                        "AND LOWER(c.numeroCbte) LIKE LOWER('%" + filterParam.getNumeroComprobante() + "%') " +
+                        "GROUP BY c.id ORDER BY c.id DESC";
             }
         }
 
@@ -145,7 +146,8 @@ public class SaleServiceImpl extends FilterService<Invoice> implements SaleServi
                                 "AND (d.presupuesto) = true " +
                                 "AND LOWER(c.vencido) LIKE LOWER('%vigente%') " +
                                 "AND LOWER(c.fechaEmision) LIKE LOWER('%" + filterParam.getFechaEmision() + "%')" +
-                                "AND LOWER(c.numeroCbte) LIKE LOWER('%" + filterParam.getNumeroComprobante() + "%')";
+                                "AND LOWER(c.numeroCbte) LIKE LOWER('%" + filterParam.getNumeroComprobante() + "%') " +
+                                "GROUP BY c.id ORDER BY c.id DESC";
             }else{
                 hql =
                         "JOIN c.documentoComercial d " +
@@ -154,7 +156,8 @@ public class SaleServiceImpl extends FilterService<Invoice> implements SaleServi
                                 "AND (d.presupuesto) = true " +
                                 "AND LOWER(c.vencido) LIKE LOWER('%vencido%') " +
                                 "AND LOWER(c.fechaEmision) LIKE LOWER('%" + filterParam.getFechaEmision() + "%')" +
-                                "AND LOWER(c.numeroCbte) LIKE LOWER('%" + filterParam.getNumeroComprobante() + "%')";
+                                "AND LOWER(c.numeroCbte) LIKE LOWER('%" + filterParam.getNumeroComprobante() + "%') " +
+                                "GROUP BY c.id ORDER BY c.id DESC";
             }
         }
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);

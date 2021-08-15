@@ -71,14 +71,15 @@ public class InvoiceServiceImpl extends FilterService<Invoice> implements Invoic
                     "WHERE LOWER(c.letra) LIKE LOWER('" + filterParam.getComprobanteFiscalLetra() + "') " +
                     "AND LOWER(c.fechaEmision) LIKE LOWER('" + filterParam.getComprobanteFiscalFechaEmision() + "%') " +
                     "AND LOWER(c.numeroCbte) LIKE LOWER('" + filterParam.getComprobanteFiscalNumeroCbte() + "%') " +
-                    "AND LOWER(c.nombreDocumento) LIKE LOWER('" + filterParam.getComprobanteFiscalNombreDocumento() + "%') ";
+                    "AND LOWER(c.nombreDocumento) LIKE LOWER('" + filterParam.getComprobanteFiscalNombreDocumento() + "%')";
         } else {
             hql =
                     "WHERE (c.sucursal.id) = ('" + filterParam.getSucursalId() + "') " +
                     "AND LOWER(c.letra) LIKE LOWER('" + filterParam.getComprobanteFiscalLetra() + "') " +
                     "AND LOWER(c.fechaEmision) LIKE LOWER('" + filterParam.getComprobanteFiscalFechaEmision() + "%') " +
                     "AND LOWER(c.numeroCbte) LIKE LOWER('" + filterParam.getComprobanteFiscalNumeroCbte() + "%') " +
-                    "AND LOWER(c.nombreDocumento) LIKE LOWER('" + filterParam.getComprobanteFiscalNombreDocumento() + "%') ";
+                    "AND LOWER(c.nombreDocumento) LIKE LOWER('" + filterParam.getComprobanteFiscalNombreDocumento() + "%') " +
+                    "GROUP BY c.id ORDER BY c.id DESC";
         }
         return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
     }

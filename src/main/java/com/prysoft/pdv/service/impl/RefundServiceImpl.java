@@ -51,7 +51,10 @@ public class RefundServiceImpl extends FilterService<Refund> implements RefundSe
             if (filterParam.getBlackReceiptFilter() != null && filterParam.getBlackReceiptFilter() == 999999999) {
                 hql = "WHERE c.sucursal.id = ('" + filterParam.getSucursalId() + "')";
             } else {
-                hql = "WHERE c.sucursal.id = ('" + filterParam.getSucursalId() + "') AND LOWER(c.comprobante.letra) NOT LIKE LOWER('nx')";
+                hql =
+                    "WHERE c.sucursal.id = ('" + filterParam.getSucursalId() + "') " +
+                    "AND LOWER(c.comprobante.letra) NOT LIKE LOWER('nx') " +
+                    "GROUP BY c.id ORDER BY c.id DESC";
             }
         }
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
