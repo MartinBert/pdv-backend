@@ -39,7 +39,12 @@ public class ZClosureServiceImpl extends FilterService<ZClosure> implements ZClo
                         "GROUP BY c.id " +
                         "ORDER BY c.id DESC";
 
-        return getPage(hql, 0, 1, params).getContent().iterator().next().getNumeroCorrelativo();
+        List<ZClosure> result =  getPage(hql, 0, 1, params).getContent();
+        if(result.isEmpty()){
+            return 0;
+        }else{
+            return result.iterator().next().getNumeroCorrelativo();
+        }
     }
 
     @Override

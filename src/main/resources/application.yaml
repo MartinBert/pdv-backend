@@ -3,7 +3,7 @@ spring:
   datasource:
     jdbcUrl: jdbc:postgresql://localhost:5432/pdv2
     username: postgres
-    password: 12345
+    password: prysoft
     driverClassName: org.postgresql.Driver
   jackson:
     time-zone: America/Argentina/Buenos_Aires
@@ -48,11 +48,11 @@ tenants:
       driverClassName: org.postgresql.Driver
       username: postgres
       password: 12345
-    pdv:
+    pdv2:
       jdbcUrl: jdbc:postgresql://localhost:5432/pdv
       driverClassName: org.postgresql.Driver
       username: postgres
-      password: 12345
+      password: prysoft
     fragancias2:
       jdbcUrl: jdbc:postgresql://localhost:5432/fragancias2
       driverClassName: org.postgresql.Driver
@@ -79,4 +79,4 @@ tenants:
       username: postgres
       password: 12345
 server:
-  port: 8000
+  port: 8030
