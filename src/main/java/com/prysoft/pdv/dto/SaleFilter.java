@@ -6,6 +6,9 @@ public class SaleFilter extends CommercialBranchFilter {
     private String numeroComprobante;
     private Long blackReceiptFilter;
     private boolean validityStatus;
+    private boolean facturaA;
+    private boolean facturaB;
+    private boolean facturaC;
     private double totalVenta;
 
     public String getFechaEmision() {
@@ -56,6 +59,30 @@ public class SaleFilter extends CommercialBranchFilter {
         this.validityStatus = validityStatus;
     }
 
+    public boolean isFacturaA() {
+        return facturaA;
+    }
+
+    public void setFacturaA(boolean facturaA) {
+        this.facturaA = facturaA;
+    }
+
+    public boolean isFacturaB() {
+        return facturaB;
+    }
+
+    public void setFacturaB(boolean facturaB) {
+        this.facturaB = facturaB;
+    }
+
+    public boolean isFacturaC() {
+        return facturaC;
+    }
+
+    public void setFacturaC(boolean facturaC) {
+        this.facturaC = facturaC;
+    }
+
     @Override
     public Long getSucursalId() {
         return super.getSucursalId();
@@ -89,6 +116,9 @@ public class SaleFilter extends CommercialBranchFilter {
                 ", numeroComprobante='" + numeroComprobante + '\'' +
                 ", blackReceiptFilter=" + blackReceiptFilter +
                 ", validityStatus=" + validityStatus +
+                ", facturaA=" + facturaA +
+                ", facturaB=" + facturaB +
+                ", facturaC=" + facturaC +
                 ", totalVenta=" + totalVenta +
                 '}';
     }
