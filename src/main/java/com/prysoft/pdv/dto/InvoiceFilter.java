@@ -5,37 +5,31 @@ public class InvoiceFilter extends CommercialBranchFilter {
     private String comprobanteFiscalNumeroCbte;
     private String comprobanteFiscalFechaEmision;
     private String comprobanteFiscalNombreDocumento;
+    private double fechaDesde;
+    private double fechaHasta;
 
     public String getComprobanteFiscalLetra() {
         return comprobanteFiscalLetra;
-    }
-
-    public void setComprobanteFiscalLetra(String comprobanteFiscalLetra) {
-        this.comprobanteFiscalLetra = comprobanteFiscalLetra;
     }
 
     public String getComprobanteFiscalNumeroCbte() {
         return comprobanteFiscalNumeroCbte;
     }
 
-    public void setComprobanteFiscalNumeroCbte(String comprobanteFiscalNumeroCbte) {
-        this.comprobanteFiscalNumeroCbte = comprobanteFiscalNumeroCbte;
-    }
-
     public String getComprobanteFiscalFechaEmision() {
         return comprobanteFiscalFechaEmision;
-    }
-
-    public void setComprobanteFiscalFechaEmision(String comprobanteFiscalFechaEmision) {
-        this.comprobanteFiscalFechaEmision = comprobanteFiscalFechaEmision;
     }
 
     public String getComprobanteFiscalNombreDocumento() {
         return comprobanteFiscalNombreDocumento;
     }
 
-    public void setComprobanteFiscalNombreDocumento(String comprobanteFiscalNombreDocumento) {
-        this.comprobanteFiscalNombreDocumento = comprobanteFiscalNombreDocumento;
+    public double getFechaDesde() {
+        return fechaDesde;
+    }
+
+    public double getFechaHasta() {
+        return fechaHasta;
     }
 
     @Override
@@ -55,11 +49,13 @@ public class InvoiceFilter extends CommercialBranchFilter {
 
     @Override
     public String toString() {
-        return "ComprobanteFiscalFilter{" +
+        return "InvoiceFilter{" +
                 "comprobanteFiscalLetra='" + comprobanteFiscalLetra + '\'' +
                 ", comprobanteFiscalNumeroCbte='" + comprobanteFiscalNumeroCbte + '\'' +
                 ", comprobanteFiscalFechaEmision='" + comprobanteFiscalFechaEmision + '\'' +
                 ", comprobanteFiscalNombreDocumento='" + comprobanteFiscalNombreDocumento + '\'' +
+                ", fechaDesde=" + fechaDesde +
+                ", fechaHasta=" + fechaHasta +
                 '}';
     }
 }

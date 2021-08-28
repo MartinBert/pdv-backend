@@ -3,6 +3,7 @@ package com.prysoft.pdv.service.impl;
 import com.prysoft.pdv.dao.InvoiceDao;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.InvoiceFilter;
+import com.prysoft.pdv.helpers.DateHelper;
 import com.prysoft.pdv.models.Invoice;
 import com.prysoft.pdv.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Transactional
@@ -22,6 +21,9 @@ public class InvoiceServiceImpl extends FilterService<Invoice> implements Invoic
 
     @Autowired
     private InvoiceDao dao;
+
+    @Autowired
+    private DateHelper dateHelper;
 
     @Override
     public Invoice findById(Long id) {
@@ -82,6 +84,24 @@ public class InvoiceServiceImpl extends FilterService<Invoice> implements Invoic
                     "GROUP BY c.id ORDER BY c.id DESC";
         }
         return getPage(hql, filterParam.getPage(), filterParam.getSize(), params);
+    }
+
+    @Override
+    public  List<Invoice> getInvoicesForDateRange(InvoiceFilter filterParams){
+        List<Invoice> invoices = dao.findBySucursalId(filterParams.getSucursalId());
+        List<Invoice> filteredInvoices = new ArrayList<>();
+        for(Invoice invoice: invoices){
+            Double dateOfInvoice = dateHelper.stringDateToDoubleConvertion(invoice.getFechaEmision());
+            if(dateOfInvoice >= filterParams.getFechaDesde() && dateOfInvoice <= filterParams.getFechaHasta()){
+                if(invoice.getNombreDocumento().equals("FACTURAS A") || invoice.getNombreDocumento().equals("FACTURAS B") || invoice.getNombreDocumento().equals("FACTURAS C")){
+                    filteredInvoices.add(invoice);
+                }
+            }
+        }
+
+        filteredInvoices.sort(Comparator.comparing(Invoice::getIntegerDate).reversed());
+
+        return filteredInvoices;
     }
 }
 

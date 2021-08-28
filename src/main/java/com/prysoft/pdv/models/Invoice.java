@@ -1,5 +1,8 @@
 package com.prysoft.pdv.models;
 
+import com.prysoft.pdv.helpers.DateHelper;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -391,6 +394,12 @@ public class Invoice implements Serializable {
 
     public void setCorrelativoComprobante(String correlativoComprobante) {
         this.correlativoComprobante = correlativoComprobante;
+    }
+
+    public Double getIntegerDate(){
+        DateHelper dateHelper = new DateHelper();
+        String fechaEmision = this.fechaEmision;
+        return dateHelper.stringDateToDoubleConvertion(fechaEmision);
     }
 
     @Override

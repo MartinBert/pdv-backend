@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface InvoiceService {
 
@@ -18,6 +19,8 @@ public interface InvoiceService {
     Invoice saveOrUpdate(Invoice entity);
 
     Page<Invoice> filter(InvoiceFilter filterParam);
+
+    List<Invoice> getInvoicesForDateRange(InvoiceFilter filterParam);
 
     void delete(Long id);
 

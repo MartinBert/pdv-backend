@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/{tenantid}/api/comprobantesFiscales")
@@ -59,5 +60,10 @@ public class InvoiceController {
     @PostMapping(value = "/filter")
     public Page<Invoice> filter(@RequestBody InvoiceFilter filterParam) {
         return service.filter(filterParam);
+    }
+
+    @PostMapping(value = "/getInvoicesForDateRange")
+    public List<Invoice> getInvoicesForDateRange(@RequestBody InvoiceFilter filterParam) {
+        return service.getInvoicesForDateRange(filterParam);
     }
 }
