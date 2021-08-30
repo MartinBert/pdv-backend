@@ -84,4 +84,4 @@ tenants:
       username: postgres
       password: 12345
 server:
-  port: 8000
+  port: 8002
