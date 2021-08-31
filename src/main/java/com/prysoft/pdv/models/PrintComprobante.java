@@ -40,6 +40,8 @@ public class PrintComprobante implements Serializable {
     private Double totalIva21;
     private Double totalIva10;
     private Double totalIva27;
+    private Double totalDescuentos;
+    private Double totalRecargos;
     private Double subTotal;
 
     public String getBarCode() {
@@ -330,6 +332,22 @@ public class PrintComprobante implements Serializable {
         this.planPago = planPago;
     }
 
+    public Double getTotalDescuentos() {
+        return totalDescuentos;
+    }
+
+    public void setTotalDescuentos(Double totalDescuentos) {
+        this.totalDescuentos = totalDescuentos;
+    }
+
+    public Double getTotalRecargos() {
+        return totalRecargos;
+    }
+
+    public void setTotalRecargos(Double totalRecargos) {
+        this.totalRecargos = totalRecargos;
+    }
+
     @Override
     public String toString() {
         return "PrintComprobante{" +
@@ -368,6 +386,8 @@ public class PrintComprobante implements Serializable {
                 ", totalIva21=" + totalIva21 +
                 ", totalIva10=" + totalIva10 +
                 ", totalIva27=" + totalIva27 +
+                ", totalDescuentos=" + totalDescuentos +
+                ", totalRecargos=" + totalRecargos +
                 ", subTotal=" + subTotal +
                 '}';
     }

@@ -70,6 +70,8 @@ public class InvoicePrintHelper implements Serializable {
         comprobante.setPorcentajeDescuentoGlobal(totalPorcentajeDescuento);
         comprobante.setTotalRecargoGlobal(totalRecargoGlobal);
         comprobante.setPorcentajeRecargoGlobal(totalPorcentajeRecargo);
+        comprobante.setTotalDescuentos(receipt.getTotalDescuentos());
+        comprobante.setTotalRecargos(receipt.getTotalRecargos());
         comprobante.setSubTotal(receipt.getSubTotal());
         comprobante.setTotalIva(totalIva);
         comprobante.setFechaVencimientoPresupuesto(fechaVencimientoPresupuesto);

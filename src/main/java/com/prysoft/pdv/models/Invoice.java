@@ -54,6 +54,10 @@ public class Invoice implements Serializable {
     private Double porcentajeDescuentoPlan;
     @Column(name = "total_descuento_plan", columnDefinition = "Decimal(10,2) default 0.00")
     private Double totalDescuentoPlan;
+    @Column(name = "total_descuentos", columnDefinition = "Decimal(10,2) default 0.00")
+    private Double totalDescuentos;
+    @Column(name = "total_recargos", columnDefinition = "Decimal(10,2) default 0.00")
+    private Double totalRecargos;
     private double ingresosBrutos;
     private String nombreDocumento;
     @ManyToMany
@@ -396,6 +400,22 @@ public class Invoice implements Serializable {
         this.correlativoComprobante = correlativoComprobante;
     }
 
+    public Double getTotalDescuentos() {
+        return totalDescuentos;
+    }
+
+    public void setTotalDescuentos(Double totalDescuentos) {
+        this.totalDescuentos = totalDescuentos;
+    }
+
+    public Double getTotalRecargos() {
+        return totalRecargos;
+    }
+
+    public void setTotalRecargos(Double totalRecargos) {
+        this.totalRecargos = totalRecargos;
+    }
+
     public Double getIntegerDate(){
         DateHelper dateHelper = new DateHelper();
         String fechaEmision = this.fechaEmision;
@@ -431,6 +451,8 @@ public class Invoice implements Serializable {
                 ", totalRecargoPlan=" + totalRecargoPlan +
                 ", porcentajeDescuentoPlan=" + porcentajeDescuentoPlan +
                 ", totalDescuentoPlan=" + totalDescuentoPlan +
+                ", totalDescuentos=" + totalDescuentos +
+                ", totalRecargos=" + totalRecargos +
                 ", ingresosBrutos=" + ingresosBrutos +
                 ", nombreDocumento='" + nombreDocumento + '\'' +
                 ", mediosPago=" + mediosPago +
