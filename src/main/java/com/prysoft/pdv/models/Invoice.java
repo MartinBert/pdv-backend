@@ -46,6 +46,8 @@ public class Invoice implements Serializable {
     private Double totalIva10;
     @Column(name = "total_iva_27", columnDefinition = "Decimal(10,2) default 0.00")
     private Double totalIva27;
+    @Column(name = "total_ivas", columnDefinition = "Decimal(10,2) default 0.00")
+    private Double totalIvas;
     @Column(name = "porcentaje_recargo_plan", columnDefinition = "Decimal(10,2) default 0.00")
     private Double porcentajeRecargoPlan;
     @Column(name = "total_recargo_plan", columnDefinition = "Decimal(10,2) default 0.00")
@@ -416,6 +418,14 @@ public class Invoice implements Serializable {
         this.totalRecargos = totalRecargos;
     }
 
+    public Double getTotalIvas() {
+        return totalIvas;
+    }
+
+    public void setTotalIvas(Double totalIvas) {
+        this.totalIvas = totalIvas;
+    }
+
     public Double getIntegerDate(){
         DateHelper dateHelper = new DateHelper();
         String fechaEmision = this.fechaEmision;
@@ -447,6 +457,7 @@ public class Invoice implements Serializable {
                 ", totalIva21=" + totalIva21 +
                 ", totalIva10=" + totalIva10 +
                 ", totalIva27=" + totalIva27 +
+                ", totalIvas=" + totalIvas +
                 ", porcentajeRecargoPlan=" + porcentajeRecargoPlan +
                 ", totalRecargoPlan=" + totalRecargoPlan +
                 ", porcentajeDescuentoPlan=" + porcentajeDescuentoPlan +
