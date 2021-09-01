@@ -41,7 +41,7 @@ public class SaleServiceImpl extends FilterService<Invoice> implements SaleServi
                         "AND (c.fechaEmision) LIKE ('" + filterParam.getFechaEmision() + "%') " +
                         "AND LOWER(c.numeroCbte) LIKE LOWER('" + filterParam.getNumeroComprobante() + "%')";
             } else {
-                if(!filterParam.isFacturaA() && !filterParam.isFacturaB() && !filterParam.isFacturaC()){
+                if(filterParam.isFacturaA() == false && filterParam.isFacturaB() == false && filterParam.isFacturaC() == false){
                     hql =
                             "JOIN c.sucursal s " +
                             "JOIN c.documentoComercial d " +
@@ -52,7 +52,6 @@ public class SaleServiceImpl extends FilterService<Invoice> implements SaleServi
                             "AND LOWER(c.fechaEmision) LIKE LOWER('%" + filterParam.getFechaEmision() + "%') " +
                             "AND LOWER(c.numeroCbte) LIKE LOWER('%" + filterParam.getNumeroComprobante() + "%')";
                 }else{
-
                     hql =
                             "JOIN c.sucursal s " +
                             "WHERE (s.id) = ('" + filterParam.getSucursalId() + "') " +

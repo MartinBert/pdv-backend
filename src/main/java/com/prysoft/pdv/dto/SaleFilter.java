@@ -110,16 +110,18 @@ public class SaleFilter extends CommercialBranchFilter {
 
     @Override
     public String toString() {
-        return "SaleFilter{" +
-                "fechaEmision='" + fechaEmision + '\'' +
-                ", comprobanteCerrado='" + comprobanteCerrado + '\'' +
-                ", numeroComprobante='" + numeroComprobante + '\'' +
-                ", blackReceiptFilter=" + blackReceiptFilter +
-                ", validityStatus=" + validityStatus +
-                ", facturaA=" + facturaA +
-                ", facturaB=" + facturaB +
-                ", facturaC=" + facturaC +
-                ", totalVenta=" + totalVenta +
-                '}';
+        final StringBuffer sb = new StringBuffer("SaleFilter{");
+        sb.append("fechaEmision='").append(fechaEmision).append('\'');
+        sb.append(", comprobanteCerrado='").append(comprobanteCerrado).append('\'');
+        sb.append(", numeroComprobante='").append(numeroComprobante).append('\'');
+        sb.append(", blackReceiptFilter=").append(blackReceiptFilter);
+        sb.append(", validityStatus=").append(validityStatus);
+        sb.append(", facturaA=").append(facturaA);
+        sb.append(", facturaB=").append(facturaB);
+        sb.append(", facturaC=").append(facturaC);
+        sb.append(", totalVenta=").append(totalVenta);
+        sb.append("} AND PARENT OBJECT ");
+        sb.append(super.toString());
+        return sb.toString();
     }
 }
