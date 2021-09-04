@@ -12,6 +12,8 @@ import java.util.Optional;
 public interface StockService {
     Stock findById(Long id);
 
+    Optional<Stock> findByAlgorim(Long sucursalId, String algorim);
+
     Optional<Stock> findByProductCodeBarInDefaultDeposit(String codeBar, Long sucursalId);
 
     List<Stock> findByProductCodeBarInAnyDeposit(String codeBar, Long sucursalId);

@@ -32,6 +32,11 @@ public class StockServiceImpl extends FilterService<Stock> implements StockServi
     }
 
     @Override
+    public Optional<Stock> findByAlgorim(Long sucursalId, String algorim){
+        return dao.findBySucursalIdAndAlgorim(sucursalId, algorim);
+    }
+
+    @Override
     public Optional<Stock> findByProductCodeBarInDefaultDeposit(String codeBar, Long sucursalId){
         return dao.findByProductoCodigoBarraAndSucursalIdAndDepositoDefaultDeposit(codeBar, sucursalId, "1");
     }
@@ -70,9 +75,13 @@ public class StockServiceImpl extends FilterService<Stock> implements StockServi
         for (Stock stock : entities) {
             Optional<Stock> obj = dao.findByAlgorim(stock.getAlgorim());
             if (obj.isPresent()) {
-                stock.setId(obj.get().getId());
-                stock.setCantidad(stock.getCantidad() + obj.get().getCantidad());
-                dao.save(stock);
+                if(obj.get().isActivo()){
+                    stock.setId(obj.get().getId());
+                    stock.setCantidad(stock.getCantidad() + obj.get().getCantidad());
+                    dao.save(stock);
+                }else{
+                    dao.save(stock);
+                }
             } else {
                 dao.save(stock);
             }
@@ -90,6 +99,7 @@ public class StockServiceImpl extends FilterService<Stock> implements StockServi
         } else {
             if (filterParam.getProductoPrimerAtributoName().isEmpty()) {
                 hql = "WHERE (c.sucursal.id) = ('" + filterParam.getSucursalId() + "') " +
+                        "AND c.activo = TRUE " +
                         "AND LOWER(c.producto.nombre) LIKE LOWER('" + filterParam.getProductoName() + "%') " +
                         "AND LOWER(c.producto.codigoBarra) LIKE LOWER('" + filterParam.getProductoCodigoBarras() + "%') " +
                         "AND LOWER(c.producto.codigoProducto) LIKE LOWER('" + filterParam.getProductoCodigo() + "%') " +
@@ -97,6 +107,7 @@ public class StockServiceImpl extends FilterService<Stock> implements StockServi
             } else {
                 hql = "JOIN c.producto.atributos a WHERE LOWER(a.valor) LIKE LOWER('" + filterParam.getProductoPrimerAtributoName() + "%') " +
                         "AND (c.sucursal.id) = ('" + filterParam.getSucursalId() + "') " +
+                        "AND c.activo = TRUE " +
                         "AND LOWER(c.producto.codigoBarra) LIKE LOWER('" + filterParam.getProductoCodigoBarras() + "%') " +
                         "AND LOWER(c.producto.nombre) LIKE LOWER('" + filterParam.getProductoName() + "%') " +
                         "AND LOWER(c.producto.codigoProducto) LIKE LOWER('" + filterParam.getProductoCodigo() + "%') " +
@@ -115,9 +126,9 @@ public class StockServiceImpl extends FilterService<Stock> implements StockServi
                     "AND LOWER(c.producto.nombre) LIKE LOWER('" + filterParam.getProductoName() + "%') " +
                     "AND LOWER(c.producto.marca.nombre) LIKE LOWER('" + filterParam.getProductoMarcaName() + "%')";
         } else {
-            System.out.println(filterParam.getProductoCodigoBarras());
             hql = "WHERE (c.sucursal.id) = ('" + filterParam.getSucursalId() + "') " +
                     "AND (c.deposito.id) = ('" + filterParam.getStockDepositoId() + "') " +
+                    "AND c.activo = TRUE " +
                     "AND LOWER(c.producto.nombre) LIKE LOWER('" + filterParam.getProductoName() + "%') " +
                     "AND LOWER(c.producto.codigoBarra) LIKE LOWER('" + filterParam.getProductoCodigoBarras() + "%') " +
                     "AND LOWER(c.producto.codigoProducto) LIKE LOWER('" + filterParam.getProductoCodigo() + "%') " +
@@ -126,11 +137,12 @@ public class StockServiceImpl extends FilterService<Stock> implements StockServi
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 
-
-
     @Override
     public void delete(Long id) {
-        dao.deleteById(id);
+        Optional<Stock> stock = dao.findById(id);
+        if(stock.isPresent()){
+            stock.get().setActivo(false);
+        }
     }
 
 }

@@ -39,6 +39,11 @@ public class StockController {
         return service.findById(id);
     }
 
+    @GetMapping(value = "/item/{sucursalId}/{algorim}")
+    Optional<Stock> findByAlgorim(@PathVariable Long sucursalId, @PathVariable String algorim) {
+        return service.findByAlgorim(sucursalId, algorim);
+    }
+
     @GetMapping(value = "/items/{codeBar}/{sucursalId}")
     Optional<Stock> findByProductCodeBarInDefaultDeposit(@PathVariable String codeBar, @PathVariable Long sucursalId) {
         return service.findByProductCodeBarInDefaultDeposit(codeBar, sucursalId);

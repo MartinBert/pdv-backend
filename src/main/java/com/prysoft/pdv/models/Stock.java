@@ -19,8 +19,10 @@ public class Stock implements Serializable {
     CommercialBranch sucursal;
     private double cantidad;
     private String algorim;
-    @Column(name = "cantidad_minima", nullable = true)
+    @Column(name = "cantidad_minima")
     private String cantidadMinima;
+    @Column(name = "activo", columnDefinition = "boolean default true")
+    private boolean activo;
 
     public Long getId() {
         return id;
@@ -78,16 +80,26 @@ public class Stock implements Serializable {
         this.cantidadMinima = cantidadMinima;
     }
 
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
     @Override
     public String toString() {
-        return "Stock{" +
-                "id=" + id +
-                ", producto=" + producto +
-                ", deposito=" + deposito +
-                ", sucursal=" + sucursal +
-                ", cantidad=" + cantidad +
-                ", algorim='" + algorim + '\'' +
-                ", cantidadMinima='" + cantidadMinima + '\'' +
-                '}';
+        final StringBuffer sb = new StringBuffer("Stock{");
+        sb.append("id=").append(id);
+        sb.append(", producto=").append(producto);
+        sb.append(", deposito=").append(deposito);
+        sb.append(", sucursal=").append(sucursal);
+        sb.append(", cantidad=").append(cantidad);
+        sb.append(", algorim='").append(algorim).append('\'');
+        sb.append(", cantidadMinima='").append(cantidadMinima).append('\'');
+        sb.append(", activo=").append(activo);
+        sb.append('}');
+        return sb.toString();
     }
 }

@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface StockDao extends PagingAndSortingRepository<Stock, Long> {
+    Optional<Stock> findBySucursalIdAndAlgorim(Long sucursalId, String algorim);
+
     Optional<Stock> findByAlgorim(String algorim);
 
     Iterable<Stock> findBySucursal(CommercialBranch sucursal);
