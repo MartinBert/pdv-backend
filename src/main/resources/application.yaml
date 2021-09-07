@@ -73,8 +73,8 @@ tenants:
       driverClassName: org.postgresql.Driver
       username: postgres
       password: 12345
-    avellanedaaromas:
-      jdbcUrl: jdbc:postgresql://localhost:5432/avellanedaaromas
+    aromasavda:
+      jdbcUrl: jdbc:postgresql://localhost:5432/aromasavda
       driverClassName: org.postgresql.Driver
       username: postgres
       password: 12345
