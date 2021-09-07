@@ -28,11 +28,6 @@ tenants:
       driverClassName: org.postgresql.Driver
       username: postgres
       password: 12345
-    sprosario:
-      jdbcUrl: jdbc:postgresql://localhost:5432/sprosario
-      driverClassName: org.postgresql.Driver
-      username: postgres
-      password: 12345
     lanteriservice:
       jdbcUrl: jdbc:postgresql://localhost:5432/lanteriservice
       driverClassName: org.postgresql.Driver
@@ -40,11 +35,6 @@ tenants:
       password: 12345
     casanaranja:
       jdbcUrl: jdbc:postgresql://localhost:5432/casanaranja
-      driverClassName: org.postgresql.Driver
-      username: postgres
-      password: 12345
-    casasonia:
-      jdbcUrl: jdbc:postgresql://localhost:5432/casasonia
       driverClassName: org.postgresql.Driver
       username: postgres
       password: 12345
