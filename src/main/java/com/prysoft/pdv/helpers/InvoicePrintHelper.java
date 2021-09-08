@@ -36,6 +36,7 @@ public class InvoicePrintHelper implements Serializable {
             fechaVencimientoPresupuesto = format.format(receipt.getFechaVencimiento());
         }
 
+        System.out.println(receipt.getSubTotal());
         comprobante.setBarCode(receipt.getBarCode());
         comprobante.setCae(receipt.getCae());
         comprobante.setFechaEmision(receipt.getFechaEmision());
