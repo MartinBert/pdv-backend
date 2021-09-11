@@ -10,6 +10,8 @@ public class SaleFilter extends CommercialBranchFilter {
     private boolean facturaB;
     private boolean facturaC;
     private double totalVenta;
+    private String fechaDesdeString;
+    private String fechaHastaString;
 
     public String getFechaEmision() {
         return fechaEmision;
@@ -83,6 +85,22 @@ public class SaleFilter extends CommercialBranchFilter {
         this.facturaC = facturaC;
     }
 
+    public String getFechaDesdeString() {
+        return fechaDesdeString;
+    }
+
+    public void setFechaDesdeString(String fechaDesdeString) {
+        this.fechaDesdeString = fechaDesdeString;
+    }
+
+    public String getFechaHastaString() {
+        return fechaHastaString;
+    }
+
+    public void setFechaHastaString(String fechaHastaString) {
+        this.fechaHastaString = fechaHastaString;
+    }
+
     @Override
     public Long getSucursalId() {
         return super.getSucursalId();
@@ -120,8 +138,9 @@ public class SaleFilter extends CommercialBranchFilter {
         sb.append(", facturaB=").append(facturaB);
         sb.append(", facturaC=").append(facturaC);
         sb.append(", totalVenta=").append(totalVenta);
-        sb.append("} AND PARENT OBJECT ");
-        sb.append(super.toString());
+        sb.append(", fechaDesdeString='").append(fechaDesdeString).append('\'');
+        sb.append(", fechaHastaString='").append(fechaHastaString).append('\'');
+        sb.append('}');
         return sb.toString();
     }
 }

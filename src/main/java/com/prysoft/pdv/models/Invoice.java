@@ -1,7 +1,6 @@
 package com.prysoft.pdv.models;
 
 import com.prysoft.pdv.helpers.DateHelper;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.io.Serializable;

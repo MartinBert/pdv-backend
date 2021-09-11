@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,24 +40,15 @@ public class SaleServiceImpl extends FilterService<Invoice> implements SaleServi
                         "AND (c.fechaEmision) LIKE ('" + filterParam.getFechaEmision() + "%') " +
                         "AND LOWER(c.numeroCbte) LIKE LOWER('" + filterParam.getNumeroComprobante() + "%')";
             } else {
-                if(!filterParam.isFacturaA() && !filterParam.isFacturaB() && !filterParam.isFacturaC()){
-                    hql =
-                            "JOIN c.sucursal s " +
-                            "JOIN c.documentoComercial d " +
-                            "WHERE (s.id) = ('" + filterParam.getSucursalId() + "') " +
-                            "AND LOWER(d.letra) <> ('x') " +
-                            "AND LOWER(d.letra) <> ('nx') " +
-                            "AND LOWER(d.letra) <> ('p') " +
-                            "AND LOWER(c.fechaEmision) LIKE LOWER('%" + filterParam.getFechaEmision() + "%') " +
-                            "AND LOWER(c.numeroCbte) LIKE LOWER('%" + filterParam.getNumeroComprobante() + "%')";
-                }else{
-                    hql =
-                            "JOIN c.sucursal s " +
-                            "WHERE (s.id) = ('" + filterParam.getSucursalId() + "') " +
-                            "AND LOWER(c.fechaEmision) LIKE LOWER('%" + filterParam.getFechaEmision() + "%') " +
-                            "AND LOWER(c.numeroCbte) LIKE LOWER('%" + filterParam.getNumeroComprobante() + "%') " +
-                            buildHql(filterParam.isFacturaA(), filterParam.isFacturaB(), filterParam.isFacturaC());
-                }
+                hql =
+                        "JOIN c.sucursal s " +
+                        "JOIN c.documentoComercial d " +
+                        "WHERE (s.id) = ('" + filterParam.getSucursalId() + "') " +
+                        "AND LOWER(d.letra) <> ('x') " +
+                        "AND LOWER(d.letra) <> ('nx') " +
+                        "AND LOWER(d.letra) <> ('p') " +
+                        "AND LOWER(c.fechaEmision) LIKE LOWER('%" + filterParam.getFechaEmision() + "%') " +
+                        "AND LOWER(c.numeroCbte) LIKE LOWER('%" + filterParam.getNumeroComprobante() + "%')";
 
             }
         }
@@ -179,37 +169,6 @@ public class SaleServiceImpl extends FilterService<Invoice> implements SaleServi
     private boolean isNotNull(Long value) {
         if (value == null) return false;
         return !value.equals("");
-    }
-
-    private String buildHql (boolean facturaA, boolean facturaB, boolean facturaC) {
-        String stringForFacturaA = "AND (c.nombreDocumento = 'FACTURAS A') ";
-        String stringForFacturaB = "AND (c.nombreDocumento = 'FACTURAS B') ";
-        String stringForFacturaC = "AND (c.nombreDocumento = 'FACTURAS C') ";
-
-        StringBuilder stringToHql = new StringBuilder();
-        if(facturaA) stringToHql.append(stringForFacturaA);
-        if(facturaB) stringToHql.append(stringForFacturaB);
-        if(facturaC) stringToHql.append(stringForFacturaC);
-
-        String formattedString = stringToHql.toString();
-        List<String> list = List.of(formattedString.split(" "));
-
-        int count = 0;
-        for(String l: list){
-            if(l.equals("AND")){
-                count++;
-            }
-        }
-
-        if(count > 1){
-            String firstReplacedString = formattedString.replaceAll("AND", "OR");
-            String secondReplacedString = firstReplacedString.replaceFirst("OR", "AND");
-            String thirdReplacedString = secondReplacedString.replaceFirst("AND ", "AND (") + ")";
-            System.err.println(thirdReplacedString);
-            return thirdReplacedString;
-        }
-
-        return formattedString;
     }
 }
 

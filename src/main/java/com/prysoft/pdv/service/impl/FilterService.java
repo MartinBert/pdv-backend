@@ -23,8 +23,21 @@ public class FilterService<T> {
 
     protected Page<T> getPage(String HQL, Integer page, Integer size, List<FilterParam> params) {
         Pageable pageable = PageRequest.of(page, size);
-        String hqlTotalObjects = "SELECT COUNT(c) FROM " + getGenericClass().getSimpleName() + " c ";
-        String hqlSelectTotalObjects = hqlTotalObjects + HQL;
+        String hqlTotalObjects;
+        if(HQL.contains("SELECT")){
+            hqlTotalObjects = HQL;
+        }else{
+            hqlTotalObjects = "SELECT COUNT(c) FROM " + getGenericClass().getSimpleName() + " c ";
+        }
+
+        String hqlSelectTotalObjects = null;
+
+        if(HQL.contains("SELECT")){
+            hqlSelectTotalObjects = HQL;
+        }else{
+            hqlSelectTotalObjects = hqlTotalObjects + HQL;
+        }
+
         TypedQuery<Long> queryTotalObjects = entityManager.createQuery(hqlSelectTotalObjects, Long.class);
         if (params != null) {
             for (FilterParam param : params) {

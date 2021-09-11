@@ -8,6 +8,7 @@ public class InvoiceFilter extends CommercialBranchFilter {
     private double fechaDesde;
     private double fechaHasta;
 
+
     public String getComprobanteFiscalLetra() {
         return comprobanteFiscalLetra;
     }
@@ -32,6 +33,8 @@ public class InvoiceFilter extends CommercialBranchFilter {
         return fechaHasta;
     }
 
+
+
     @Override
     public Long getSucursalId() {
         return super.getSucursalId();
@@ -49,13 +52,14 @@ public class InvoiceFilter extends CommercialBranchFilter {
 
     @Override
     public String toString() {
-        return "InvoiceFilter{" +
-                "comprobanteFiscalLetra='" + comprobanteFiscalLetra + '\'' +
-                ", comprobanteFiscalNumeroCbte='" + comprobanteFiscalNumeroCbte + '\'' +
-                ", comprobanteFiscalFechaEmision='" + comprobanteFiscalFechaEmision + '\'' +
-                ", comprobanteFiscalNombreDocumento='" + comprobanteFiscalNombreDocumento + '\'' +
-                ", fechaDesde=" + fechaDesde +
-                ", fechaHasta=" + fechaHasta +
-                '}';
+        final StringBuffer sb = new StringBuffer("InvoiceFilter{");
+        sb.append("comprobanteFiscalLetra='").append(comprobanteFiscalLetra).append('\'');
+        sb.append(", comprobanteFiscalNumeroCbte='").append(comprobanteFiscalNumeroCbte).append('\'');
+        sb.append(", comprobanteFiscalFechaEmision='").append(comprobanteFiscalFechaEmision).append('\'');
+        sb.append(", comprobanteFiscalNombreDocumento='").append(comprobanteFiscalNombreDocumento).append('\'');
+        sb.append(", fechaDesde=").append(fechaDesde);
+        sb.append(", fechaHasta=").append(fechaHasta);
+        sb.append('}');
+        return sb.toString();
     }
 }
