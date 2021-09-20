@@ -1,6 +1,16 @@
 package com.prysoft.pdv.dto;
 
 public class CashBoxFilter extends CommercialBranchFilter {
+    private String fecha;
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
     @Override
     public Long getSucursalId() {
         return super.getSucursalId();
@@ -14,5 +24,12 @@ public class CashBoxFilter extends CommercialBranchFilter {
     @Override
     public int getSize() {
         return super.getSize();
+    }
+
+    @Override
+    public String toString() {
+        return "CashBoxFilter{" +
+                "fecha='" + fecha + '\'' +
+                '}';
     }
 }

@@ -39,7 +39,13 @@ public class CashBoxServiceImpl extends FilterService<CashBox> implements CashBo
                     "GROUP BY c.id " +
                     "ORDER BY c.id DESC";
 
-        return getPage(hql, 0, 1, params).getContent().iterator().next().getNumeroCorrelativo();
+        List<CashBox> result = getPage(hql, 0, 1, params).getContent();
+
+        if(result.isEmpty()){
+            return 0;
+        }else{
+            return result.iterator().next().getNumeroCorrelativo();
+        }
     }
 
     @Override
@@ -66,6 +72,7 @@ public class CashBoxServiceImpl extends FilterService<CashBox> implements CashBo
         } else {
             hql =
                 "WHERE (c.sucursal.id) = ('" + filterParam.getSucursalId() + "') " +
+                "AND LOWER(c.fecha) LIKE LOWER('%"+filterParam.getFecha()+"%') " +
                 "GROUP BY c.id " +
                 "ORDER BY c.numeroCorrelativo DESC";
         }
