@@ -64,7 +64,7 @@ public class IvaBookServiceImpl extends FilterService<Invoice> implements IvaBoo
                 HqlBuilder.append("' AND '");
                 HqlBuilder.append(fechaHasta);
                 HqlBuilder.append("' ");
-                HqlBuilder.append("ORDER BY trim(trailing '0' from c.numeroCbte) ASC");
+                HqlBuilder.append("ORDER BY trim(trailing '0' from c.numeroCbte) DESC");
                 String HQL = HqlBuilder.toString();
                 return getPaginateDateRangeResults(HQL, filterParams.getPage() - 1, filterParams.getSize());
             }catch (Exception err){
