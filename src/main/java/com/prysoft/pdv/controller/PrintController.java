@@ -24,10 +24,10 @@ public class PrintController {
         return service.findAll(page);
     }
 
-    @GetMapping(value = "/{id}")
-    Print findById(@PathVariable long id) {
-        return service.findById(id);
-    }
+    //@GetMapping(value = "/{id}")
+    //Print findById(@PathVariable long id) {
+       // return service.findById(id);
+    //}
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
