@@ -36,6 +36,12 @@ public class PrintController implements Serializable {
         return service.saveOrUpdate(entity);
     }
 
+    @PostMapping(value = "/saveAll")
+    @ResponseStatus(HttpStatus.CREATED)
+    Iterable<Print> saveAll(@RequestBody Iterable<Print> entities) {
+        return service.saveAll(entities);
+    }
+
     @PutMapping
     Print update(@RequestBody Print entity) {
         return service.saveOrUpdate(entity);

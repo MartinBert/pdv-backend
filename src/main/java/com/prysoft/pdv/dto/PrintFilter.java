@@ -3,12 +3,11 @@ package com.prysoft.pdv.dto;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PrintFilter extends PageFilter{
+public class PrintFilter extends CommercialBranchFilter{
 
     private Long id;
     private String valor;
     private String nombreImpresora;
-
 
     public Long getId() {
         return id;

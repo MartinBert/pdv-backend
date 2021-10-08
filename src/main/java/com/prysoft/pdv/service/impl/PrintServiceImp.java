@@ -1,16 +1,9 @@
 package com.prysoft.pdv.service.impl;
 
-
-
-import com.prysoft.pdv.dao.NoteDao;
 import com.prysoft.pdv.dao.PrintDao;
 import com.prysoft.pdv.dto.FilterParam;
-import com.prysoft.pdv.dto.NoteFilter;
-import com.prysoft.pdv.dto.PageFilter;
 import com.prysoft.pdv.dto.PrintFilter;
-import com.prysoft.pdv.models.Note;
 import com.prysoft.pdv.models.Print;
-import com.prysoft.pdv.service.NoteService;
 import com.prysoft.pdv.service.PrintService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -50,16 +43,25 @@ public class PrintServiceImp extends FilterService<Print> implements PrintServic
     }
 
     @Override
+    public Iterable<Print> saveAll(Iterable<Print> entities) {
+        return dao.saveAll(entities);
+    }
+
+    @Override
     public void delete(Long id) {
         dao.deleteById(id);
     }
 
     @Override
     public Page<Print> filter(PrintFilter filterParam) {
-        String hql = "WHERE LOWER(c.name) LIKE LOWER('" + filterParam.getNombreImpresora() + "%')OR (c.details) LIKE LOWER('" + filterParam.getValor() + "%')";
+        String hql = "";
+        if(filterParam.getSucursalId() != null){
+            hql =
+                "WHERE c.sucursal.id = ('"+filterParam.getSucursalId()+"')" +
+                "AND LOWER(c.nombreImpresora) LIKE LOWER('" + filterParam.getNombreImpresora() + "%') " +
+                "OR (c.valor) LIKE LOWER('" + filterParam.getValor() + "%')";
+        }
         List<FilterParam> params = new ArrayList<>();
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
-
-
 }
