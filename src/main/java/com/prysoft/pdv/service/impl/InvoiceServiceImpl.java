@@ -93,7 +93,10 @@ public class InvoiceServiceImpl extends FilterService<Invoice> implements Invoic
         for(Invoice invoice: invoices){
             Double dateOfInvoice = dateHelper.stringDateToDoubleConvertion(invoice.getFechaEmision());
             if(dateOfInvoice >= filterParams.getFechaDesde() && dateOfInvoice <= filterParams.getFechaHasta()){
-                if(invoice.getNombreDocumento().equals("FACTURAS A") || invoice.getNombreDocumento().equals("FACTURAS B") || invoice.getNombreDocumento().equals("FACTURAS C")){
+                if(invoice.getNombreDocumento().equals("FACTURAS A") || invoice.getNombreDocumento().equals("FACTURAS B")
+                        || invoice.getNombreDocumento().equals("FACTURAS C") || invoice.getNombreDocumento().equals("NOTAS DE CREDITO A")
+                        || invoice.getNombreDocumento().equals("NOTAS DE DEBITO A") || invoice.getNombreDocumento().equals("NOTAS DE CREDITO B")
+                        || invoice.getNombreDocumento().equals("NOTAS DE DEBITO B")){
                     filteredInvoices.add(invoice);
                 }
             }
