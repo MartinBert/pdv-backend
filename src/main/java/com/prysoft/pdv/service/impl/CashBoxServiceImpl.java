@@ -71,7 +71,7 @@ public class CashBoxServiceImpl extends FilterService<CashBox> implements CashBo
         if (filterParam.getSucursalId() == null) {
             hql=
                 "WHERE c.fecha = '" + filterParam.getFecha() + "' " +
-                "ORDER BY c.fecha DESC" + "GROUP BY c.fecha";
+                "ORDER BY c.fecha DESC "+ "' " + " GROUP BY c.fecha";
         } else {
             hql =
                     "WHERE (c.sucursal.id) = ('" + filterParam.getSucursalId() + "') " +
