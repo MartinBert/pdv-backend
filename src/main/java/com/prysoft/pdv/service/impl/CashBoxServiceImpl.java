@@ -74,9 +74,9 @@ public class CashBoxServiceImpl extends FilterService<CashBox> implements CashBo
                 "ORDER BY c.fecha DESC" ;
         } else {
             hql =
-                "WHERE (c.sucursal.id) = ('" + filterParam.getSucursalId() + "') " +
-                "AND LOWER(c.fecha) LIKE LOWER('%"+filterParam.getFecha()+"%') " +
-                        "GROUP BY c.id " ;
+                    "WHERE (c.sucursal.id) = ('" + filterParam.getSucursalId() + "') " +
+                    "GROUP BY c.id " +
+                    "ORDER BY c.numeroCorrelativo DESC";
         }
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
