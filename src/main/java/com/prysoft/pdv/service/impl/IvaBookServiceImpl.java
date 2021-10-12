@@ -31,8 +31,8 @@ public class IvaBookServiceImpl extends FilterService<Invoice> implements IvaBoo
         if(
             filterParams.getFechaDesdeString() == null ||
             filterParams.getFechaHastaString() == null ||
-            filterParams.getFechaHastaString() == "" ||
-            filterParams.getFechaHastaString() == ""
+            filterParams.getFechaDesdeString().equals("") ||
+            filterParams.getFechaHastaString().equals("")
         ){
             List<FilterParam> params = new ArrayList<>();
             StringBuilder hql = new StringBuilder();
@@ -42,7 +42,15 @@ public class IvaBookServiceImpl extends FilterService<Invoice> implements IvaBoo
             hql.append("AND d.letra <> 'X'");
             hql.append("AND d.letra <> 'NX'");
             hql.append("AND d.letra <> 'P'");
-            hql.append(buildHql(filterParams.isFacturaA(), filterParams.isFacturaB(), filterParams.isFacturaC()));
+            hql.append(buildHql(
+                    filterParams.isFacturaA(),
+                    filterParams.isFacturaB(),
+                    filterParams.isFacturaC(),
+                    filterParams.isNotaCreditoA(),
+                    filterParams.isNotaCreditoB(),
+                    filterParams.isNotaDebitoA(),
+                    filterParams.isNotaDebitoB()
+            ));
             return getPage(hql.toString(), filterParams.getPage() - 1, filterParams.getSize(), params);
         }else{
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -58,7 +66,15 @@ public class IvaBookServiceImpl extends FilterService<Invoice> implements IvaBoo
                 HqlBuilder.append("AND d.letra <> 'X' ");
                 HqlBuilder.append("AND d.letra <> 'NX' ");
                 HqlBuilder.append("AND d.letra <> 'P' ");
-                HqlBuilder.append(buildHql(filterParams.isFacturaA(), filterParams.isFacturaB(), filterParams.isFacturaC()));
+                HqlBuilder.append(buildHql(
+                        filterParams.isFacturaA(),
+                        filterParams.isFacturaB(),
+                        filterParams.isFacturaC(),
+                        filterParams.isNotaCreditoA(),
+                        filterParams.isNotaCreditoB(),
+                        filterParams.isNotaDebitoA(),
+                        filterParams.isNotaDebitoB()
+                ));
                 HqlBuilder.append("AND to_date(c.fechaEmision, 'dd/MM/yyyy') BETWEEN '");
                 HqlBuilder.append(fechaDesde);
                 HqlBuilder.append("' AND '");
@@ -74,15 +90,33 @@ public class IvaBookServiceImpl extends FilterService<Invoice> implements IvaBoo
         }
     }
 
-    private String buildHql (boolean facturaA, boolean facturaB, boolean facturaC) {
+    private String buildHql (boolean facturaA,
+                             boolean facturaB,
+                             boolean facturaC,
+                             boolean notaCreditoA,
+                             boolean notaCreditoB,
+                             boolean notaDebitoA,
+                             boolean notaDebitoB
+                             )
+    {
         String stringForFacturaA = "AND (c.nombreDocumento = 'FACTURAS A') ";
         String stringForFacturaB = "AND (c.nombreDocumento = 'FACTURAS B') ";
         String stringForFacturaC = "AND (c.nombreDocumento = 'FACTURAS C') ";
+        String stringForNotaDeCreditoA = "AND (c.nombreDocumento = 'NOTAS DE CREDITO A') ";
+        String stringForNotaDeCreditoB = "AND (c.nombreDocumento = 'NOTAS DE CREDITO B') ";
+        String stringForNotaDeDebitoA = "AND (c.nombreDocumento = 'NOTAS DE DEBITO A') ";
+        String stringForNotaDeDebitoB = "AND (c.nombreDocumento = 'NOTAS DE DEBITO B') ";
+
         StringBuilder stringToHql = new StringBuilder();
         if(facturaA) stringToHql.append(stringForFacturaA);
         if(facturaB) stringToHql.append(stringForFacturaB);
         if(facturaC) stringToHql.append(stringForFacturaC);
+        if(notaCreditoA) stringToHql.append(stringForNotaDeCreditoA);
+        if(notaCreditoB) stringToHql.append(stringForNotaDeCreditoB);
+        if(notaDebitoA) stringToHql.append(stringForNotaDeDebitoA);
+        if(notaDebitoB) stringToHql.append(stringForNotaDeDebitoB);
         String formattedString = stringToHql.toString();
+
         List<String> list = List.of(formattedString.split(" "));
         int count = 0;
         for(String l: list){

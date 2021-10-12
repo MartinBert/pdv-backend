@@ -6,11 +6,17 @@ import java.io.Serializable;
 @Entity
 @Table(name="print")
 public class Print implements Serializable {
+    private final static long serialVersionUID = 999999999999999999L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String valor;
     private String nombreImpresora;
+    private boolean impresoraPredeterminada;
+
+    @OneToOne
+    private CommercialBranch sucursal;
 
     public Long getId() {
         return id;
@@ -36,13 +42,31 @@ public class Print implements Serializable {
         this.nombreImpresora = nombreImpresora;
     }
 
+    public boolean isImpresoraPredeterminada() {
+        return impresoraPredeterminada;
+    }
+
+    public void setImpresoraPredeterminada(boolean impresoraPredeterminada) {
+        this.impresoraPredeterminada = impresoraPredeterminada;
+    }
+
+    public CommercialBranch getSucursal() {
+        return sucursal;
+    }
+
+    public void setSucursal(CommercialBranch sucursal) {
+        this.sucursal = sucursal;
+    }
 
     @Override
     public String toString() {
-        return "Print{" +
-                "id=" + id +
-                ", valor='" + valor + '\'' +
-                ", nombreImpresora='" + nombreImpresora + '\'' +
-                '}';
+        final StringBuffer sb = new StringBuffer("Print{");
+        sb.append("id=").append(id);
+        sb.append(", valor='").append(valor).append('\'');
+        sb.append(", nombreImpresora='").append(nombreImpresora).append('\'');
+        sb.append(", impresoraPredeterminada=").append(impresoraPredeterminada);
+        sb.append(", sucursal=").append(sucursal);
+        sb.append('}');
+        return sb.toString();
     }
 }
