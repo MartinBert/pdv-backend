@@ -37,7 +37,8 @@ public class CashBoxServiceImpl extends FilterService<CashBox> implements CashBo
         String hql =
                     "WHERE (c.sucursal.id) = ('" + sucursalId + "') " +
                     "GROUP BY c.id " +
-                    "ORDER BY c.id DESC";
+                    "ORDER BY c.id ASC";
+
 
         List<CashBox> result = getPage(hql, 0, 1, params).getContent();
 
@@ -68,7 +69,9 @@ public class CashBoxServiceImpl extends FilterService<CashBox> implements CashBo
         String hql;
         List<FilterParam> params = new ArrayList<>();
         if (filterParam.getSucursalId() == null) {
-            hql = "";
+            hql=
+                "WHERE c.fecha = '" + filterParam.getFecha() + "' " +
+                "ORDER BY c.fecha ASC" ;
         } else {
             hql =
                 "WHERE (c.sucursal.id) = ('" + filterParam.getSucursalId() + "') " +
