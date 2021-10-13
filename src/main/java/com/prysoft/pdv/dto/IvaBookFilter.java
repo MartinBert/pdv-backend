@@ -4,6 +4,10 @@ public class IvaBookFilter extends CommercialBranchFilter {
     private boolean facturaA;
     private boolean facturaB;
     private boolean facturaC;
+    private boolean notaDebitoA;
+    private boolean notaDebitoB;
+    private boolean notaCreditoA;
+    private boolean notaCreditoB;
     private String fechaDesdeString;
     private String fechaHastaString;
 
@@ -25,6 +29,38 @@ public class IvaBookFilter extends CommercialBranchFilter {
 
     public boolean isFacturaC() {
         return facturaC;
+    }
+
+    public boolean isNotaDebitoA() {
+        return notaDebitoA;
+    }
+
+    public void setNotaDebitoA(boolean notaDebitoA) {
+        this.notaDebitoA = notaDebitoA;
+    }
+
+    public boolean isNotaDebitoB() {
+        return notaDebitoB;
+    }
+
+    public void setNotaDebitoB(boolean notaDebitoB) {
+        this.notaDebitoB = notaDebitoB;
+    }
+
+    public boolean isNotaCreditoA() {
+        return notaCreditoA;
+    }
+
+    public void setNotaCreditoA(boolean notaCreditoA) {
+        this.notaCreditoA = notaCreditoA;
+    }
+
+    public boolean isNotaCreditoB() {
+        return notaCreditoB;
+    }
+
+    public void setNotaCreditoB(boolean notaCreditoB) {
+        this.notaCreditoB = notaCreditoB;
     }
 
     public void setFacturaC(boolean facturaC) {
@@ -53,6 +89,10 @@ public class IvaBookFilter extends CommercialBranchFilter {
         sb.append("facturaA=").append(facturaA);
         sb.append(", facturaB=").append(facturaB);
         sb.append(", facturaC=").append(facturaC);
+        sb.append(", notaDebitoA=").append(notaDebitoA);
+        sb.append(", notaDebitoB=").append(notaDebitoB);
+        sb.append(", notaCreditoA=").append(notaCreditoA);
+        sb.append(", notaCreditoB=").append(notaCreditoB);
         sb.append(", fechaDesdeString='").append(fechaDesdeString).append('\'');
         sb.append(", fechaHastaString='").append(fechaHastaString).append('\'');
         sb.append('}');
