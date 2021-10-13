@@ -48,13 +48,23 @@ public class BrandServiceImpl extends FilterService<Brand> implements BrandServi
 
     @Override
     public void delete(Long id) {
-        dao.deleteById(id);
+        try{
+            Optional<Brand> brand = dao.findById(id);
+            if(brand.isPresent()){
+                brand.get().setEstado(false);
+                dao.save(brand.get());
+            }
+        }catch (Exception err){
+            err.printStackTrace();
+        }
     }
 
     @Override
     public Page<Brand> filter(MarcaFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
-        String hql = "WHERE LOWER(c.nombre) LIKE LOWER ('" + filterParam.getMarcaName() + "%')";
+        String hql =
+                "WHERE LOWER(c.nombre) LIKE LOWER ('" + filterParam.getMarcaName() + "%') " +
+                "AND c.estado IS TRUE";
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 }

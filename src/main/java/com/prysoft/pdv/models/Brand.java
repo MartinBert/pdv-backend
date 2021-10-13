@@ -12,6 +12,8 @@ public class Brand implements Serializable {
     private Long id;
     @Column(name = "nombre", unique = true, nullable = false)
     private String nombre;
+    @Column(name = "estado", columnDefinition = "boolean default true")
+    private Boolean estado;
 
     public Long getId() {
         return id;
@@ -29,11 +31,21 @@ public class Brand implements Serializable {
         this.nombre = nombre;
     }
 
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
+
     @Override
     public String toString() {
-        return "Brand{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                '}';
+        final StringBuffer sb = new StringBuffer("Brand{");
+        sb.append("id=").append(id);
+        sb.append(", nombre='").append(nombre).append('\'');
+        sb.append(", estado=").append(estado);
+        sb.append('}');
+        return sb.toString();
     }
 }
