@@ -6,6 +6,15 @@ public class PersonaFilter extends CommercialBranchFilter {
     private String personaCuit;
     private String personaDirection;
     private String personaContactName;
+    private String personaRegion;
+
+    public String getPersonaRegion() {
+        return personaRegion;
+    }
+
+    public void setPersonaRegion(String personaRegion) {
+        this.personaRegion = personaRegion;
+    }
 
     public String getPersonaSocialReason() {
         return personaSocialReason;
@@ -145,6 +154,7 @@ public class PersonaFilter extends CommercialBranchFilter {
                 ", personaCuit='" + personaCuit + '\'' +
                 ", personaDirection='" + personaDirection + '\'' +
                 ", personaContactName='" + personaContactName + '\'' +
+                ", personaRegion='" + personaRegion + '\'' +
                 '}';
     }
 }
