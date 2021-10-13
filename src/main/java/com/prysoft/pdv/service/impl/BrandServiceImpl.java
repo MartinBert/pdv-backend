@@ -63,7 +63,8 @@ public class BrandServiceImpl extends FilterService<Brand> implements BrandServi
     public Page<Brand> filter(MarcaFilter filterParam) {
         List<FilterParam> params = new ArrayList<>();
         String hql =
-                "WHERE LOWER(c.nombre) LIKE LOWER ('" + filterParam.getMarcaName() + "%') ";
+                "WHERE LOWER(c.nombre) LIKE LOWER ('" + filterParam.getMarcaName() + "%') " +
+                "AND c.estado IS TRUE";
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 }
