@@ -12,6 +12,16 @@ public class Attribute implements Serializable {
     private Long id;
     private String valor;
     private double valorNumerico;
+    @Column(name = "estado", columnDefinition = "boolean default true")
+    private boolean estado;
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
 
     public Long getId() {
         return id;
@@ -43,6 +53,7 @@ public class Attribute implements Serializable {
                 "id=" + id +
                 ", valor='" + valor + '\'' +
                 ", valorNumerico=" + valorNumerico +
+                ", estado=" + estado +
                 '}';
     }
 }

@@ -4,6 +4,7 @@ import com.prysoft.pdv.dao.AttributeDao;
 import com.prysoft.pdv.dto.AttributeFilter;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.models.Attribute;
+import com.prysoft.pdv.models.Brand;
 import com.prysoft.pdv.service.AtributoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -59,14 +60,23 @@ public class AtributoServiceImpl extends FilterService<Attribute> implements Atr
 
     @Override
     public void delete(Long id) {
-        dao.deleteById(id);
+        try{
+            Optional<Attribute> attribute = dao.findById(id);
+            if(attribute.isPresent()){
+                attribute.get().setEstado(false);
+                dao.save(attribute.get());
+            }
+        }catch (Exception err){
+            err.printStackTrace();
+        }
     }
 
     @Override
     public Page<Attribute> filter(AttributeFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        hql = "WHERE LOWER(c.valor) LIKE LOWER('" + filterParam.getAtributoValor() + "%')";
+        hql = "WHERE LOWER(c.valor) LIKE LOWER('" + filterParam.getAtributoValor() + "%')"+
+              "AND c.estado IS TRUE";
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 
