@@ -32,8 +32,8 @@ public class Brand implements Serializable {
     }
 
     public Boolean getEstado() {
-       return estado;
-    }
+      return estado;
+   }
 
     public void setEstado(Boolean estado) {
         this.estado = estado;
