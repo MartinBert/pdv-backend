@@ -19,10 +19,6 @@ public class Attribute implements Serializable {
         return estado;
     }
 
-    public Boolean isEstado() {
-        return estado;
-    }
-
     public void setEstado(Boolean estado) {
         this.estado = estado;
     }
