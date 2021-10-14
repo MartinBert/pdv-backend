@@ -13,6 +13,16 @@ public class Heading implements Serializable {
 
     @Column(name = "nombre", unique = true, nullable = false)
     private String nombre;
+    @Column(name = "estado", columnDefinition = "boolean default true")
+    private boolean estado;
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
 
     public Long getId() {
         return id;

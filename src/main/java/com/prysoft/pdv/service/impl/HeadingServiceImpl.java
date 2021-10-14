@@ -3,6 +3,7 @@ package com.prysoft.pdv.service.impl;
 import com.prysoft.pdv.dao.HeadingDao;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.HeadingFilter;
+import com.prysoft.pdv.models.Brand;
 import com.prysoft.pdv.models.Heading;
 import com.prysoft.pdv.service.HeadingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,13 +49,23 @@ public class HeadingServiceImpl extends FilterService<Heading> implements Headin
 
     @Override
     public void delete(Long id) {
-        dao.deleteById(id);
+        try{
+            Optional<Heading> heading = dao.findById(id);
+            if(heading.isPresent()){
+                heading.get().setEstado(false);
+                dao.save(heading.get());
+            }
+        }catch (Exception err){
+            err.printStackTrace();
+        }
     }
 
     @Override
     public Page<Heading> filter(HeadingFilter filterParams) {
         List<FilterParam> params = new ArrayList<>();
-        String hql = "WHERE LOWER(c.nombre) LIKE LOWER ('" + filterParams.getRubroName() + "%')";
+        String hql = "WHERE LOWER(c.nombre) LIKE LOWER ('" + filterParams.getRubroName() + "%')"+
+                      "AND c.estado IS TRUE";
+
         return getPage(hql, filterParams.getPage() - 1, filterParams.getSize(), params);
     }
 }
