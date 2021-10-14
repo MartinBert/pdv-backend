@@ -48,15 +48,15 @@ public class BrandServiceImpl extends FilterService<Brand> implements BrandServi
 
     @Override
     public void delete(Long id) {
-        try{
-            Optional<Brand> brand = dao.findById(id);
-            if(brand.isPresent()){
-                brand.get().setEstado(false);
-                dao.save(brand.get());
-            }
-        }catch (Exception err){
-            err.printStackTrace();
-        }
+       // try{
+           // Optional<Brand> brand = dao.findById(id);
+            //if(brand.isPresent()){
+               // brand.get().setEstado(false);
+                //dao.save(brand.get());
+           // }
+        //}catch (Exception err){
+            //err.printStackTrace();
+        //}
     }
 
     @Override
