@@ -44,7 +44,7 @@ public class Brand implements Serializable {
         final StringBuffer sb = new StringBuffer("Brand{");
         sb.append("id=").append(id);
         sb.append(", nombre='").append(nombre).append('\'');
-        //sb.append(", estado=").append(estado);
+        sb.append(", estado=").append(estado);
         sb.append('}');
         return sb.toString();
     }

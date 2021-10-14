@@ -13,13 +13,17 @@ public class Attribute implements Serializable {
     private String valor;
     private double valorNumerico;
     @Column(name = "estado", columnDefinition = "boolean default true")
-    private boolean estado;
+    private Boolean estado;
 
-    public boolean isEstado() {
+    public Boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public Boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
         this.estado = estado;
     }
 
