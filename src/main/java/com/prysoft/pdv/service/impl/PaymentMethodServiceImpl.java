@@ -69,12 +69,10 @@ public class PaymentMethodServiceImpl extends FilterService<PaymentMethod> imple
         String hql;
         List<FilterParam> params = new ArrayList<>();
         if (filterParam.getSucursalId() == null) {
-            hql = "WHERE LOWER(c.nombre) LIKE LOWER('" + filterParam.getMedioPagoName() + "%') GROUP BY c.id ORDER BY c.id ASC"+
-                  "AND c.estado IS TRUE";
+            hql = "WHERE LOWER(c.nombre) LIKE LOWER('" + filterParam.getMedioPagoName() + "%') GROUP BY c.id ORDER BY c.id ASC";
         } else {
             hql = "WHERE (c.sucursal.id) = ('" + filterParam.getSucursalId() + "') " +
-                            "AND LOWER(c.nombre) LIKE LOWER('" + filterParam.getMedioPagoName() + "%') GROUP BY c.id ORDER BY c.id ASC" +
-                            "AND c.estado IS TRUE";
+                            "AND LOWER(c.nombre) LIKE LOWER('" + filterParam.getMedioPagoName() + "%') GROUP BY c.id ORDER BY c.id ASC";
         }
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
