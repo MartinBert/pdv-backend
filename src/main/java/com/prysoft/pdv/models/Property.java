@@ -20,6 +20,17 @@ public class Property implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "id_atributo"))
     private Set<Attribute> atributos;
 
+    @Column(name = "estado", columnDefinition = "boolean default true")
+    private boolean estado;
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
     public Long getId() {
         return id;
     }

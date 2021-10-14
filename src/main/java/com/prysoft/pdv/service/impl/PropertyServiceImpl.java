@@ -3,6 +3,7 @@ package com.prysoft.pdv.service.impl;
 import com.prysoft.pdv.dao.PropertyDao;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.PropertyFilter;
+import com.prysoft.pdv.models.Heading;
 import com.prysoft.pdv.models.Property;
 import com.prysoft.pdv.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,14 +44,23 @@ public class PropertyServiceImpl extends FilterService<Property> implements Prop
 
     @Override
     public void delete(Long id) {
-        dao.deleteById(id);
+        try{
+            Optional<Property> property = dao.findById(id);
+            if(property.isPresent()){
+                property.get().setEstado(false);
+                dao.save(property.get());
+            }
+        }catch (Exception err){
+            err.printStackTrace();
+        }
     }
 
     @Override
     public Page<Property> filter(PropertyFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        hql = "WHERE LOWER(c.nombre) LIKE LOWER('" + filterParam.getPropiedadName() + "%')";
+        hql = "WHERE LOWER(c.nombre) LIKE LOWER('" + filterParam.getPropiedadName() + "%')" +
+              "AND c.estado IS TRUE";
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 }
