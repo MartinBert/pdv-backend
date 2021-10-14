@@ -21,6 +21,17 @@ public class PaymentMethod implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "id_plan"))
     private Set<PaymentPlan> planPago;
 
+    @Column(name = "estado", columnDefinition = "boolean default true")
+    private boolean estado;
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
     @OneToOne
     private CommercialBranch sucursal;
 

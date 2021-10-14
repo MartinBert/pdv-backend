@@ -6,6 +6,7 @@ import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.PaymentMethodFilter;
 import com.prysoft.pdv.models.PaymentMethod;
 import com.prysoft.pdv.models.PaymentMethodDetail;
+import com.prysoft.pdv.models.Property;
 import com.prysoft.pdv.service.PaymentMethodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -52,7 +53,15 @@ public class PaymentMethodServiceImpl extends FilterService<PaymentMethod> imple
 
     @Override
     public void delete(Long id) {
-        dao.deleteById(id);
+        try{
+            Optional<PaymentMethod> paymentMethod = dao.findById(id);
+            if(paymentMethod.isPresent()){
+                paymentMethod.get().setEstado(false);
+                dao.save(paymentMethod.get());
+            }
+        }catch (Exception err){
+            err.printStackTrace();
+        }
     }
 
     @Override
@@ -63,7 +72,8 @@ public class PaymentMethodServiceImpl extends FilterService<PaymentMethod> imple
             hql = "WHERE LOWER(c.nombre) LIKE LOWER('" + filterParam.getMedioPagoName() + "%') GROUP BY c.id ORDER BY c.id ASC";
         } else {
             hql = "WHERE (c.sucursal.id) = ('" + filterParam.getSucursalId() + "') " +
-                            "AND LOWER(c.nombre) LIKE LOWER('" + filterParam.getMedioPagoName() + "%') GROUP BY c.id ORDER BY c.id ASC";
+                            "AND LOWER(c.nombre) LIKE LOWER('" + filterParam.getMedioPagoName() + "%') GROUP BY c.id ORDER BY c.id ASC" +
+                            "AND c.estado IS TRUE";
         }
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
