@@ -75,8 +75,7 @@ public class AtributoServiceImpl extends FilterService<Attribute> implements Atr
     public Page<Attribute> filter(AttributeFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        hql = "WHERE LOWER(c.valor) LIKE LOWER('" + filterParam.getAtributoValor() + "%')"+
-              "AND c.estado IS TRUE";
+        hql = "WHERE LOWER(c.valor) LIKE LOWER('" + filterParam.getAtributoValor() + "%')";
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 
