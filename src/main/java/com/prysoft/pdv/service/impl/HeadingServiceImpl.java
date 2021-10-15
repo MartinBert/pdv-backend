@@ -63,8 +63,7 @@ public class HeadingServiceImpl extends FilterService<Heading> implements Headin
     @Override
     public Page<Heading> filter(HeadingFilter filterParams) {
         List<FilterParam> params = new ArrayList<>();
-        String hql = "WHERE LOWER(c.nombre) LIKE LOWER ('" + filterParams.getRubroName() + "%')"+
-                      "AND c.estado IS TRUE";
+        String hql = "WHERE LOWER(c.nombre) LIKE LOWER ('" + filterParams.getRubroName() + "%')";
 
         return getPage(hql, filterParams.getPage() - 1, filterParams.getSize(), params);
     }
