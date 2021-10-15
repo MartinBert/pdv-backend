@@ -3,6 +3,7 @@ package com.prysoft.pdv.service.impl;
 import com.prysoft.pdv.dao.PrintDao;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.PrintFilter;
+import com.prysoft.pdv.models.Brand;
 import com.prysoft.pdv.models.Print;
 import com.prysoft.pdv.service.PrintService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,15 @@ public class PrintServiceImp extends FilterService<Print> implements PrintServic
 
     @Override
     public void delete(Long id) {
-        dao.deleteById(id);
+        try{
+            Optional<Print> print = dao.findById(id);
+            if(print.isPresent()){
+                print.get().setEstado(false);
+                dao.save(print.get());
+            }
+        }catch (Exception err){
+            err.printStackTrace();
+        }
     }
 
     @Override
@@ -59,7 +68,8 @@ public class PrintServiceImp extends FilterService<Print> implements PrintServic
             hql =
                 "WHERE c.sucursal.id = ('"+filterParam.getSucursalId()+"')" +
                 "AND LOWER(c.nombreImpresora) LIKE LOWER('" + filterParam.getNombreImpresora() + "%') " +
-                "OR (c.valor) LIKE LOWER('" + filterParam.getValor() + "%')";
+                "OR (c.valor) LIKE LOWER('" + filterParam.getValor() + "%')"+
+                "AND c.estado IS TRUE";
         }
         List<FilterParam> params = new ArrayList<>();
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
