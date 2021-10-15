@@ -59,7 +59,6 @@ public class ClientServiceImpl extends FilterService<Client> implements ClientSe
                             "AND LOWER(c.nombre) LIKE LOWER('" + filterParam.getPersonaName() + "%') " +
                             "AND LOWER(c.direccion) LIKE LOWER('" + filterParam.getPersonaDirection() + "%') " +
                             "AND LOWER(c.nombreContacto) LIKE LOWER('" + filterParam.getPersonaContactName() + "%') " +
-                            "AND LOWER(c.region) LIKE LOWER('" + filterParam.getPersonaRegion() + "%') " +
                             "AND LOWER(c.cuit) LIKE LOWER('" + filterParam.getPersonaCuit() + "%'))";
         } else {
             hql =
@@ -67,8 +66,7 @@ public class ClientServiceImpl extends FilterService<Client> implements ClientSe
                             "AND (LOWER(c.razonSocial) LIKE LOWER('" + filterParam.getPersonaSocialReason() + "%') " +
                             "AND LOWER(c.nombre) LIKE LOWER('" + filterParam.getPersonaName() + "%') " +
                             "AND LOWER(c.direccion) LIKE LOWER('" + filterParam.getPersonaDirection() + "%') " +
-                            "AND LOWER(c.nombreContacto) LIKE LOWER('" + filterParam.getPersonaContactName() + "%') " +
-                            "AND LOWER(c.region) LIKE LOWER('" + filterParam.getPersonaRegion() + "%') " +
+                            "AND LOWER(c.nombreContacto) LIKE LOWER('" + filterParam.getPersonaContactName() + "%') "+
                             "AND LOWER(c.cuit) LIKE LOWER('" + filterParam.getPersonaCuit() + "%'))";
         }
 
