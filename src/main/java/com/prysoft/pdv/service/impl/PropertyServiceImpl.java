@@ -59,8 +59,7 @@ public class PropertyServiceImpl extends FilterService<Property> implements Prop
     public Page<Property> filter(PropertyFilter filterParam) {
         String hql;
         List<FilterParam> params = new ArrayList<>();
-        hql = "WHERE LOWER(c.nombre) LIKE LOWER('" + filterParam.getPropiedadName() + "%')" +
-              "AND c.estado IS TRUE";
+        hql = "WHERE LOWER(c.nombre) LIKE LOWER('" + filterParam.getPropiedadName() + "%')";
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
 }
