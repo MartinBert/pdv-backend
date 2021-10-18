@@ -32,7 +32,7 @@ public class Product implements Serializable {
     private double precioTotal;
     @Column(name = "editable", columnDefinition = "boolean default false")
     private boolean editable;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private Brand marca;
     @OneToOne
     private Iva ivaComprasObject;
