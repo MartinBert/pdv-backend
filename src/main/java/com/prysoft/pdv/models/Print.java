@@ -71,13 +71,13 @@ public class Print implements Serializable {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Print{");
-        sb.append("id=").append(id);
-        sb.append(", valor='").append(valor).append('\'');
-        sb.append(", nombreImpresora='").append(nombreImpresora).append('\'');
-        sb.append(", impresoraPredeterminada=").append(impresoraPredeterminada);
-        sb.append(", sucursal=").append(sucursal);
-        sb.append('}');
-        return sb.toString();
+        return "Print{" +
+                "id=" + id +
+                ", valor='" + valor + '\'' +
+                ", nombreImpresora='" + nombreImpresora + '\'' +
+                ", impresoraPredeterminada=" + impresoraPredeterminada +
+                ", estado=" + estado +
+                ", sucursal=" + sucursal +
+                '}';
     }
 }
