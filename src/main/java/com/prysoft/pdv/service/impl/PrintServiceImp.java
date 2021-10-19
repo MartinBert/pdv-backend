@@ -3,7 +3,6 @@ package com.prysoft.pdv.service.impl;
 import com.prysoft.pdv.dao.PrintDao;
 import com.prysoft.pdv.dto.FilterParam;
 import com.prysoft.pdv.dto.PrintFilter;
-import com.prysoft.pdv.models.Brand;
 import com.prysoft.pdv.models.Print;
 import com.prysoft.pdv.service.PrintService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,12 +62,15 @@ public class PrintServiceImp extends FilterService<Print> implements PrintServic
 
     @Override
     public Page<Print> filter(PrintFilter filterParam) {
+        System.out.println(filterParam.getSucursalId());
         String hql = "";
         if(filterParam.getSucursalId() != null){
             hql =
-                "WHERE c.sucursal.id = ('"+filterParam.getSucursalId()+"')" +
-                "AND LOWER(c.nombreImpresora) LIKE LOWER('" + filterParam.getNombreImpresora() + "%') " +
-                "OR (c.valor) LIKE LOWER('" + filterParam.getValor() + "%')"+
+                "JOIN c.sucursal AS s " +
+                "ON s.id = ('"+filterParam.getSucursalId()+"')" +
+                "WHERE s.id = ('"+filterParam.getSucursalId()+"') " +
+                "AND (LOWER(c.nombreImpresora) LIKE LOWER('" + filterParam.getNombreImpresora() + "%') " +
+                "OR (c.valor) LIKE LOWER('" + filterParam.getValor() + "%'))"+
                 "AND c.estado IS TRUE";
         }
         List<FilterParam> params = new ArrayList<>();
