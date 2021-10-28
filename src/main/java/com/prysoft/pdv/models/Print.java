@@ -14,6 +14,29 @@ public class Print implements Serializable {
     private String valor;
     private String nombreImpresora;
     private boolean impresoraPredeterminada;
+    private boolean ticket;
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public boolean isTicket() {
+        return ticket;
+    }
+
+    public void setTicket(boolean ticket) {
+        this.ticket = ticket;
+    }
+
+    public boolean isEtiqueta() {
+        return etiqueta;
+    }
+
+    public void setEtiqueta(boolean etiqueta) {
+        this.etiqueta = etiqueta;
+    }
+
+    private boolean etiqueta;
 
     public boolean isEstado() {
         return estado;
@@ -76,6 +99,8 @@ public class Print implements Serializable {
                 ", valor='" + valor + '\'' +
                 ", nombreImpresora='" + nombreImpresora + '\'' +
                 ", impresoraPredeterminada=" + impresoraPredeterminada +
+                ", ticket=" + ticket +
+                ", etiqueta=" + etiqueta +
                 ", estado=" + estado +
                 ", sucursal=" + sucursal +
                 '}';
