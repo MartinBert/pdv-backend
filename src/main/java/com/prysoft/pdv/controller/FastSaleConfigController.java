@@ -53,5 +53,10 @@ public class FastSaleConfigController {
     public Page<FastSaleConfig> filter(@RequestBody FastSaleConfigFilter filterParam) {
         return service.filter(filterParam);
     }
+
+    @GetMapping(value = "/getSelected/{sucursalId}")
+    public FastSaleConfig getSelected(@PathVariable Long sucursalId){
+        return service.filterBySucursalAndSeleccionado(sucursalId);
+    }
 }
 

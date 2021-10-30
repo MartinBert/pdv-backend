@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Transactional
 @Service
+@Transactional
 public class FastSaleConfigServiceImpl extends FilterService<FastSaleConfig> implements FastSaleConfigService {
     @Autowired
     private FastSaleConfigDao dao;
@@ -64,10 +64,22 @@ public class FastSaleConfigServiceImpl extends FilterService<FastSaleConfig> imp
             hql =
                 "JOIN c.clientePorDefecto cl " +
                 "JOIN c.documentoPorDefecto d " +
-                "WHERE LOWER(d.nombre) LIKE LOWER('%"+filterParam.getDocumentName()+"%') " +
+                "JOIN c.sucursal s " +
+                "WHERE s.id = ('"+filterParam.getSucursalId()+"')" +
+                "AND LOWER(d.nombre) LIKE LOWER('%"+filterParam.getDocumentName()+"%') " +
                 "AND LOWER(cl.nombre) LIKE LOWER('%"+filterParam.getClientName()+"%')";
         }
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
+    }
+
+    @Override
+    public FastSaleConfig filterBySucursalAndSeleccionado(Long sucursalId) {
+        Optional<FastSaleConfig> optional = dao.findBySucursalIdAndSeleccionado(sucursalId, true);
+        if(optional.isPresent()){
+            return optional.get();
+        }else{
+            return null;
+        }
     }
 
     @Override

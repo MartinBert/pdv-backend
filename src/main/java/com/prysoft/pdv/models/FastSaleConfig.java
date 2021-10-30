@@ -17,6 +17,9 @@ public class FastSaleConfig implements Serializable {
     private CommercialDocument documentoPorDefecto;
     @OneToOne
     private CommercialBranch sucursal;
+    @Column(name = "seleccionado", columnDefinition = "boolean default false")
+    private boolean seleccionado;
+    @Column(name = "estado", columnDefinition = "boolean default false")
     private boolean estado;
 
     public Client getClientePorDefecto() {
@@ -51,6 +54,14 @@ public class FastSaleConfig implements Serializable {
         this.sucursal = sucursal;
     }
 
+    public boolean isSeleccionado() {
+        return seleccionado;
+    }
+
+    public void setSeleccionado(boolean seleccionado) {
+        this.seleccionado = seleccionado;
+    }
+
     public boolean isEstado() {
         return estado;
     }
@@ -66,6 +77,7 @@ public class FastSaleConfig implements Serializable {
                 ", clientePorDefecto=" + clientePorDefecto +
                 ", documentoPorDefecto=" + documentoPorDefecto +
                 ", sucursal=" + sucursal +
+                ", seleccionado=" + seleccionado +
                 ", estado=" + estado +
                 '}';
     }

@@ -19,4 +19,6 @@ public interface FastSaleConfigService {
     Iterable<FastSaleConfig> saveOrUpdateAll(ArrayList<FastSaleConfig> entities);
 
     Page<FastSaleConfig> filter(FastSaleConfigFilter filterParam);
+
+    FastSaleConfig filterBySucursalAndSeleccionado(Long sucursalId);
 }
