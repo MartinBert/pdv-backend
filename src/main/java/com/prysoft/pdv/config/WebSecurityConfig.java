@@ -92,7 +92,6 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
         config.addAllowedOrigin("*");
         config.addExposedHeader("Authorization, x-xsrf-token, Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, " + "Content-Type, Access-Control-Request-Method");
         config.addAllowedHeader("*");
