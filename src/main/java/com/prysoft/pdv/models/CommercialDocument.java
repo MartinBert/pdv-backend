@@ -20,7 +20,18 @@ public class CommercialDocument implements Serializable {
     private boolean ticket;
     @Column(name = "presupuesto", columnDefinition = "boolean default false")
     private boolean presupuesto;
+    @Column(name="cuentacorriente", columnDefinition = "boolean default false")
+    private boolean cuentacorriente;
     private int ivaCat;
+
+    public boolean isCuentacorriente() {
+        return cuentacorriente;
+    }
+
+    public void setCuentacorriente(boolean cuentacorriente) {
+        this.cuentacorriente = cuentacorriente;
+    }
+
     private boolean activo;
 
     public Long getId() {
@@ -105,6 +116,7 @@ public class CommercialDocument implements Serializable {
                 ", tipo=" + tipo +
                 ", ticket=" + ticket +
                 ", presupuesto=" + presupuesto +
+                ", cuentacorriente=" + cuentacorriente +
                 ", ivaCat=" + ivaCat +
                 ", activo=" + activo +
                 '}';

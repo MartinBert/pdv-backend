@@ -31,11 +31,9 @@ public class Print implements Serializable {
     public boolean isEtiqueta() {
         return etiqueta;
     }
-
     public void setEtiqueta(boolean etiqueta) {
         this.etiqueta = etiqueta;
     }
-
     private boolean etiqueta;
 
     public boolean isEstado() {
