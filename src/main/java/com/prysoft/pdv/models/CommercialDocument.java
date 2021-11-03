@@ -31,9 +31,6 @@ public class CommercialDocument implements Serializable {
         this.remito = remito;
     }
 
-    @Column(name="cuentacorriente", columnDefinition = "boolean default false")
-    private boolean cuentacorriente;
-
     private int ivaCat;
 
     private boolean activo;
@@ -121,7 +118,6 @@ public class CommercialDocument implements Serializable {
                 ", ticket=" + ticket +
                 ", presupuesto=" + presupuesto +
                 ", remito=" + remito +
-                ", cuentacorriente=" + cuentacorriente +
                 ", ivaCat=" + ivaCat +
                 ", activo=" + activo +
                 '}';
