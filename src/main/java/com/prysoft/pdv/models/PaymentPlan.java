@@ -16,6 +16,15 @@ public class PaymentPlan implements Serializable {
 
     private int cuotas;
     private double porcentaje;
+    private String cuentacorriente;
+
+    public String getCuentacorriente() {
+        return cuentacorriente;
+    }
+
+    public void setCuentacorriente(String cuentacorriente) {
+        this.cuentacorriente = cuentacorriente;
+    }
 
     @OneToOne
     private CommercialBranch sucursal;
@@ -67,6 +76,7 @@ public class PaymentPlan implements Serializable {
                 ", nombre='" + nombre + '\'' +
                 ", cuotas=" + cuotas +
                 ", porcentaje=" + porcentaje +
+                ", cuentacorriente='" + cuentacorriente + '\'' +
                 ", sucursal=" + sucursal +
                 '}';
     }

@@ -14,6 +14,7 @@ public class Print implements Serializable {
     private String valor;
     private String nombreImpresora;
     private boolean impresoraPredeterminada;
+    @Column(name = "ticket", columnDefinition = "boolean default true")
     private boolean ticket;
 
     public static long getSerialVersionUID() {
@@ -34,6 +35,7 @@ public class Print implements Serializable {
     public void setEtiqueta(boolean etiqueta) {
         this.etiqueta = etiqueta;
     }
+    @Column(name = "etiqueta", columnDefinition = "boolean default true")
     private boolean etiqueta;
 
     public boolean isEstado() {
