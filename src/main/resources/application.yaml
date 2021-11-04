@@ -68,6 +68,11 @@ tenants:
       driverClassName: org.postgresql.Driver
       username: postgres
       password: 12345
+    mixpintureria:
+      jdbcUrl: jdbc:postgresql://localhost:5432/mixpintureria
+      driverClassName: org.postgresql.Driver
+      username: postgres
+      password: 12345
     prysoft:
       jdbcUrl: jdbc:postgresql://localhost:5432/prysoft
       driverClassName: org.postgresql.Driver
