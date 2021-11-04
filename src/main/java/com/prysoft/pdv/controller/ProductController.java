@@ -38,7 +38,7 @@ public class ProductController {
         return service.findById(id);
     }
 
-    @GetMapping(value = "/codb/{codigoBarra}")
+    @GetMapping(value = "/findByBarCode/{codigoBarra}")
     Product findByCodigoBarra(@PathVariable String codigoBarra) {
         return service.findByCodigoBarra(codigoBarra);
     }

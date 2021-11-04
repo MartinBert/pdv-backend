@@ -20,7 +20,19 @@ public class CommercialDocument implements Serializable {
     private boolean ticket;
     @Column(name = "presupuesto", columnDefinition = "boolean default false")
     private boolean presupuesto;
+    @Column(name="remito", columnDefinition = "boolean default false")
+    private boolean remito;
+
+    public boolean isRemito() {
+        return remito;
+    }
+
+    public void setRemito(boolean remito) {
+        this.remito = remito;
+    }
+
     private int ivaCat;
+
     private boolean activo;
 
     public Long getId() {
@@ -105,6 +117,7 @@ public class CommercialDocument implements Serializable {
                 ", tipo=" + tipo +
                 ", ticket=" + ticket +
                 ", presupuesto=" + presupuesto +
+                ", remito=" + remito +
                 ", ivaCat=" + ivaCat +
                 ", activo=" + activo +
                 '}';
