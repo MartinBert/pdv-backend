@@ -42,7 +42,7 @@ tenants:
       jdbcUrl: jdbc:postgresql://localhost:5432/pdv
       driverClassName: org.postgresql.Driver
       username: postgres
-      password: 12345
+      password: prysoft
     fragancias2:
       jdbcUrl: jdbc:postgresql://localhost:5432/fragancias2
       driverClassName: org.postgresql.Driver
@@ -65,6 +65,11 @@ tenants:
       password: 12345
     aromasavda:
       jdbcUrl: jdbc:postgresql://localhost:5432/aromasavda
+      driverClassName: org.postgresql.Driver
+      username: postgres
+      password: 12345
+    mixpintureria:
+      jdbcUrl: jdbc:postgresql://localhost:5432/mixpintureria
       driverClassName: org.postgresql.Driver
       username: postgres
       password: 12345

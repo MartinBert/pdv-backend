@@ -24,6 +24,16 @@ public class PaymentMethod implements Serializable {
     @Column(name = "estado", columnDefinition = "boolean default true")
     private boolean estado;
 
+    public String getCuentacorriente() {
+        return cuentacorriente;
+    }
+
+    public void setCuentacorriente(String cuentacorriente) {
+        this.cuentacorriente = cuentacorriente;
+    }
+
+    private String cuentacorriente;
+
     public boolean isEstado() {
         return estado;
     }
@@ -95,6 +105,8 @@ public class PaymentMethod implements Serializable {
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", planPago=" + planPago +
+                ", estado=" + estado +
+                ", cuentacorriente='" + cuentacorriente + '\'' +
                 ", sucursal=" + sucursal +
                 ", sumaEnCierreDeCaja=" + sumaEnCierreDeCaja +
                 ", aplicaCierreZ=" + aplicaCierreZ +
