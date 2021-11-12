@@ -19,8 +19,6 @@ public interface PaymentMethodService {
 
     Page<PaymentMethod> filter(PaymentMethodFilter filterParam);
 
-    Page<PaymentMethod> getCuentascorrientes(PaymentMethodFilter filterParam);
-
     void delete(Long id);
 
 }

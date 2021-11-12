@@ -2,6 +2,17 @@ package com.prysoft.pdv.dto;
 
 public class PaymentMethodFilter extends CommercialBranchFilter {
     private String medioPagoName;
+    private boolean cuentacorriente;
+
+    @Override
+    public boolean isCuentacorriente() {
+        return cuentacorriente;
+    }
+
+    @Override
+    public void setCuentacorriente(boolean cuentacorriente) {
+        this.cuentacorriente = cuentacorriente;
+    }
 
     public String getMedioPagoName() {
         return medioPagoName;
@@ -28,8 +39,9 @@ public class PaymentMethodFilter extends CommercialBranchFilter {
 
     @Override
     public String toString() {
-        return "MedioPagoFilter{" +
+        return "PaymentMethodFilter{" +
                 "medioPagoName='" + medioPagoName + '\'' +
+                ", cuentacorriente=" + cuentacorriente +
                 '}';
     }
 }
