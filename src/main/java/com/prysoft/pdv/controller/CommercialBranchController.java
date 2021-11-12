@@ -46,4 +46,5 @@ public class CommercialBranchController {
     public Page<CommercialBranch> filter(@RequestBody CommercialBranchFilter filterParam) {
         return service.filter(filterParam);
     }
+
 }

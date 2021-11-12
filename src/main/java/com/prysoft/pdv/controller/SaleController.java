@@ -1,10 +1,12 @@
 package com.prysoft.pdv.controller;
 
 import com.prysoft.pdv.dto.SaleFilter;
+import com.prysoft.pdv.models.CommercialDocument;
 import com.prysoft.pdv.models.Invoice;
 import com.prysoft.pdv.print.PrintSaleForSelectedProductAndDate;
 import com.prysoft.pdv.print.SearchFilterInProductsSold;
 import com.prysoft.pdv.reports.SalesReport;
+import com.prysoft.pdv.service.CommercialDocumentService;
 import com.prysoft.pdv.service.SaleService;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -122,6 +124,11 @@ public class SaleController {
     @PostMapping(value = "/getPresupuestos")
     Page<Invoice> getPresupuestos(@RequestBody SaleFilter filterParam) {
         return service.getPresupuestos(filterParam);
+    }
+
+    @PostMapping(value = "/getRemitos")
+    Page<Invoice>getRemitos(@RequestBody SaleFilter filterParam){
+        return service.getRemitos(filterParam);
     }
 
     @PostMapping(value = "/getUniqueDateSales")

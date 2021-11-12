@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class CommercialBranchServiceImpl extends FilterService<CommercialBranch> implements CommercialBranchService {
+public class CommercialBranchServiceImpl extends FilterService<CommercialBranch> implements CommercialBranchService{
 
     @Autowired
     private CommercialBranchDao dao;
@@ -55,12 +55,15 @@ public class CommercialBranchServiceImpl extends FilterService<CommercialBranch>
             hql = "WHERE LOWER(c.nombre) LIKE LOWER('" + filterParam.getSucursalName() + "%') " +
                     "AND LOWER(c.direccion) LIKE LOWER('" + filterParam.getSucursalDirection() + "%') " +
                     "AND LOWER(c.razonSocial) LIKE LOWER('" + filterParam.getSucursalSocialReason() + "%')";
+
         } else {
             hql = "WHERE (c.id) = ('" + filterParam.getSucursalId() + "') " +
                     "AND LOWER(c.nombre) LIKE LOWER('" + filterParam.getSucursalName() + "%') " +
                     "AND LOWER(c.razonSocial) LIKE LOWER('" + filterParam.getSucursalSocialReason() + "%') " +
+                    "AND (c.cuentacorriente) = true " +
                     "AND LOWER(c.direccion) LIKE LOWER('" + filterParam.getSucursalDirection() + "%')";
         }
         return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
     }
+
 }

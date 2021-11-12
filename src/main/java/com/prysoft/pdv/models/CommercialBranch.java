@@ -27,6 +27,17 @@ public class CommercialBranch  implements Serializable {
     private String nombreContacto;
     private String provincia;
     private String ciudad;
+    @Column(name="cuentacorriente" , columnDefinition = "boolean default false")
+    private boolean cuentacorriente;
+
+    public boolean isCuentacorriente() {
+        return cuentacorriente;
+    }
+
+    public void setCuentacorriente(boolean cuentacorriente) {
+        this.cuentacorriente = cuentacorriente;
+    }
+
     private String logo;
     @Column(name = "fecha_inicio_act")
     private Date fechaInicioAct;
@@ -213,6 +224,7 @@ public class CommercialBranch  implements Serializable {
                 ", nombreContacto='" + nombreContacto + '\'' +
                 ", provincia='" + provincia + '\'' +
                 ", ciudad='" + ciudad + '\'' +
+                ", cuentacorriente=" + cuentacorriente +
                 ", logo='" + logo + '\'' +
                 ", fechaInicioAct=" + fechaInicioAct +
                 ", ingBruto=" + ingBruto +

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Filter;
 
 @Service
 @Transactional
@@ -59,6 +60,7 @@ public class SaleServiceImpl extends FilterService<Invoice> implements SaleServi
     @Override
     public ArrayList<Invoice> filterNotCloseReceipts(SaleFilter filterParam) {
         Iterable<Invoice> comprobantes = dao.findAll();
+        System.out.print(comprobantes.iterator().next().getSubTotal());
         ArrayList<Invoice> filteredReceipts = new ArrayList<>();
         Long sucursalId = filterParam.getSucursalId();
         comprobantes.forEach((Invoice comprobante) ->
@@ -128,6 +130,36 @@ public class SaleServiceImpl extends FilterService<Invoice> implements SaleServi
             }
         }
     }
+
+   @Override
+   public Page<Invoice>getRemitos(SaleFilter filterParam){
+        String hql;
+        List<FilterParam>params = new ArrayList<>();
+        if(filterParam.getSucursalId()==null){
+            hql="";
+        }else{
+            if(filterParam.isValidityStatus()){
+                hql=
+                        "JOIN c.documentoComercial d" +
+                                "JOIN c.sucursal s "  +
+                                "WHERE (s.id) = ('" + filterParam.getSucursalId()+ "')"+
+                                "AND (d.remito) = true" +
+                                "AND LOWER(c.fechaEmision)LIKE LOWER('%" + filterParam.getFechaEmision() + "%')" +
+                                "AND LOWER(c.numeroCbte) LIKE LOWER ('%" + filterParam.getNumeroComprobante() + "%')"+
+                                "GROUP BY c.id ORDER BY c.id DESC";
+            }else{
+                hql =
+                        "JOIN c.documentoComercial d " +
+                                "JOIN c.sucursal s " +
+                                "WHERE (s.id) = ('" + filterParam.getSucursalId() + "') " +
+                                "AND (d.remito) = true " +
+                                "AND LOWER(c.fechaEmision) LIKE LOWER('%" + filterParam.getFechaEmision() + "%')" +
+                                "AND LOWER(c.numeroCbte) LIKE LOWER('%" + filterParam.getNumeroComprobante() + "%') " +
+                                "GROUP BY c.id ORDER BY c.id DESC";
+            }
+        }
+       return getPage(hql, filterParam.getPage() - 1, filterParam.getSize(), params);
+   }
 
     @Override
     public Page<Invoice> getPresupuestos(SaleFilter filterParam) {

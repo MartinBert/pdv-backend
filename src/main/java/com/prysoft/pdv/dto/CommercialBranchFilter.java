@@ -6,6 +6,15 @@ public class CommercialBranchFilter extends BusinessFilter {
     private String sucursalSocialReason;
     private String sucursalCuit;
     private String sucursalDirection;
+    private boolean cuentacorriente;
+
+    public boolean isCuentacorriente() {
+        return cuentacorriente;
+    }
+
+    public void setCuentacorriente(boolean cuentacorriente) {
+        this.cuentacorriente = cuentacorriente;
+    }
 
     public Long getSucursalId() {
         return sucursalId;
@@ -99,11 +108,13 @@ public class CommercialBranchFilter extends BusinessFilter {
 
     @Override
     public String toString() {
-        return "SucursalFilter{" +
+        return "CommercialBranchFilter{" +
                 "sucursalId=" + sucursalId +
                 ", sucursalName='" + sucursalName + '\'' +
                 ", sucursalSocialReason='" + sucursalSocialReason + '\'' +
                 ", sucursalCuit='" + sucursalCuit + '\'' +
+                ", sucursalDirection='" + sucursalDirection + '\'' +
+                ", cuentacorriente=" + cuentacorriente +
                 '}';
     }
 }

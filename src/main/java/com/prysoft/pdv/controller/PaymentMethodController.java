@@ -54,4 +54,9 @@ public class PaymentMethodController {
     public Page<PaymentMethod> filter(@RequestBody PaymentMethodFilter filterParam) {
         return service.filter(filterParam);
     }
+
+    @PostMapping(value="/getCuentacorrientes")
+    public Page<PaymentMethod> getCuentascorrientes (@RequestBody PaymentMethodFilter filterParam){
+        return service.getCuentascorrientes(filterParam);
+    }
 }

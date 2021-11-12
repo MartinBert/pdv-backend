@@ -61,6 +61,8 @@ public class Invoice implements Serializable {
     private Double totalRecargos;
     private double ingresosBrutos;
     private String nombreDocumento;
+    @Column(name="remito", columnDefinition = "boolean defaul false")
+    private boolean remito;
     @ManyToMany
     @JoinTable(name = "comprobantes_medios",
             joinColumns = @JoinColumn(name = "id_comprobante"),
@@ -431,6 +433,14 @@ public class Invoice implements Serializable {
         return dateHelper.stringDateToDoubleConvertion(fechaEmision);
     }
 
+    public boolean isRemito() {
+        return remito;
+    }
+
+    public void setRemito(boolean remito) {
+        this.remito = remito;
+    }
+
     @Override
     public String toString() {
         return "Invoice{" +
@@ -465,6 +475,7 @@ public class Invoice implements Serializable {
                 ", totalRecargos=" + totalRecargos +
                 ", ingresosBrutos=" + ingresosBrutos +
                 ", nombreDocumento='" + nombreDocumento + '\'' +
+                ", remito=" + remito +
                 ", mediosPago=" + mediosPago +
                 ", planesPago=" + planesPago +
                 ", puntoVenta=" + puntoVenta +

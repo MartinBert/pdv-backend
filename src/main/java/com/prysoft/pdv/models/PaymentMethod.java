@@ -12,6 +12,17 @@ public class PaymentMethod implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name="cuentacorriente", columnDefinition = "boolean default false")
+    private boolean cuentacorriente;
+
+    public boolean isCuentacorriente() {
+        return cuentacorriente;
+    }
+
+    public void setCuentacorriente(boolean cuentacorriente) {
+        this.cuentacorriente = cuentacorriente;
+    }
+
     @Column(name = "nombre", nullable = false)
     private String nombre;
 
@@ -23,16 +34,6 @@ public class PaymentMethod implements Serializable {
 
     @Column(name = "estado", columnDefinition = "boolean default true")
     private boolean estado;
-
-    public String getCuentacorriente() {
-        return cuentacorriente;
-    }
-
-    public void setCuentacorriente(String cuentacorriente) {
-        this.cuentacorriente = cuentacorriente;
-    }
-
-    private String cuentacorriente;
 
     public boolean isEstado() {
         return estado;

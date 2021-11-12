@@ -45,6 +45,7 @@ public class Heading implements Serializable {
         return "Heading{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
+                ", estado=" + estado +
                 '}';
     }
 }
