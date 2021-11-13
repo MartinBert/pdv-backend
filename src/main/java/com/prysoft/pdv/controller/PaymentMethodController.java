@@ -2,7 +2,6 @@ package com.prysoft.pdv.controller;
 
 import com.prysoft.pdv.dto.PaymentMethodFilter;
 import com.prysoft.pdv.models.PaymentMethod;
-import com.prysoft.pdv.models.PaymentMethodDetail;
 import com.prysoft.pdv.service.PaymentMethodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -53,10 +52,5 @@ public class PaymentMethodController {
     @PostMapping(value = "/filter")
     public Page<PaymentMethod> filter(@RequestBody PaymentMethodFilter filterParam) {
         return service.filter(filterParam);
-    }
-
-    @PostMapping(value="/getCuentacorrientes")
-    public Page<PaymentMethod> getCuentascorrientes (@RequestBody PaymentMethodFilter filterParam){
-        return service.getCuentascorrientes(filterParam);
     }
 }
