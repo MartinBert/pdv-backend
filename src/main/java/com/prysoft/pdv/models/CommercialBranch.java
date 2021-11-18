@@ -218,9 +218,6 @@ public class CommercialBranch  implements Serializable {
                 ", ingBruto=" + ingBruto +
                 ", razonSocial='" + razonSocial + '\'' +
                 ", cuit='" + cuit + '\'' +
-                ", puntosVenta=" + puntosVenta +
-                ", depositos=" + depositos +
-                ", empresa=" + empresa +
                 ", variacionGanancia=" + variacionGanancia +
                 '}';
     }
